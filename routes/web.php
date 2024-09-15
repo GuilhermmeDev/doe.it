@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'welcome']);
-Route::get('/home', [MainController::class, 'home']);
+Route::get('/home', [MainController::class, 'home'])->middleware('auth');
+
+Route::get('/campaign', [CampaignController::class, 'create'])->middleware('auth');
+Route::post('/campaign', [CampaignController::class, 'store'])->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
