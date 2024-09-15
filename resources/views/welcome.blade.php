@@ -7,6 +7,10 @@
     <title>Welcome</title>
 </head>
 <body>
+    <nav>
+        <a href="/register">Registrar</a>
+        <a href="/login">Login</a>
+    </nav>
     <h1>Aqui será a landing page</h1>
 </body>
 </html>
