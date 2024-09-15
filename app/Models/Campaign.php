@@ -9,4 +9,8 @@ use Malico\LaravelNanoid\HasNanoids;
 class Campaign extends Model
 {
     use HasFactory, HasNanoids;
+
+    public function address() {
+        return $this->belongsTo(Address::class);
+    }
 }

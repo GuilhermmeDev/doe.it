@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campaign;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -17,6 +18,8 @@ class MainController extends Controller
 
 
     public function home() {
-        return view('home');
+        $campaigns = Campaign::all();
+
+        return view('home', ['campaigns' => $campaigns]);
     }
 }

@@ -47,4 +47,16 @@ class CampaignController extends Controller
 
         return redirect('/home')->with('Sucess', 'Campanha criada com sucesso!');
     }
+
+    public function show($id) {
+        $campaign = Campaign::findOrFail($id);
+        $address = Address::findOrFail($campaign->address_id);
+
+        if ($campaign && $address) {
+            return view('campaigns.show', ['campaign' => $campaign, 'address' => $address]);
+        }
+
+
+        return redirect('/home')->with('Error', 'Campanha não encontrada.');
+    }
 }

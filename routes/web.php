@@ -9,6 +9,7 @@ Route::get('/', [MainController::class, 'welcome']);
 Route::get('/home', [MainController::class, 'home'])->middleware('auth');
 
 Route::get('/campaign', [CampaignController::class, 'create'])->middleware('auth');
+Route::get('/campaign/{id}', [CampaignController::class, 'show'])->middleware('auth');
 Route::post('/campaign', [CampaignController::class, 'store'])->middleware('auth');
 
 Route::get('/dashboard', function () {
