@@ -9,8 +9,10 @@
 <body>
     <p>Antes de doar, entenda como funciona o nosso sistema <a href="/info">aqui</a></p>
     <h1>Doar para a campanha {{$campaign->Title}}</h1>
-    <p>A meta dessa campanha é {{$campaign->meta['target']}} kg e ela já arrecadou {{$campaign->meta['current']}} kg de comida</p>
-    <p>Ajude-os a alcançar!</p>
+    @if ($campaign->meta)
+        <p>A meta dessa campanha é {{$campaign->meta['target']}} kg e ela já arrecadou {{$campaign->meta['current']}} kg de comida</p>
+        <p>Ajude-os a alcançar!</p>
+    @endif
     <form action="/donation/{{$campaign->id}}" method="POST">
         @csrf
         <label for="Quantity">Quantos kg de comida você pretende doar?</label>

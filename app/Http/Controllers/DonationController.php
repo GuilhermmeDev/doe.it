@@ -29,6 +29,8 @@ class DonationController extends Controller
             $donation->Description = $request->Description;
         }
 
+        $donation->save();
+
         $url = url('/confirm/' . $donation->id);
 
         $qrcode = QrCode::format('png')->size(200)->generate($url);
@@ -37,11 +39,11 @@ class DonationController extends Controller
 
         $donation->save();
 
-        return DonationController::show($donation->id);
+        return redirect('/donation/' . $donation->campaign_id);
 
     }
     public function show($id) {
-        $donation = Donation::findOrFail($id);
+        $donation = Donation::where('campaign_id', $id)->first();
 
         return view('donations.show', compact('donation'));
     }

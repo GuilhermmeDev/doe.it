@@ -8,5 +8,9 @@
 </head>
 <body>
     <img src="data:image/png;base64, {{$donation->qr_code}}" alt="qr code">
+    @if ($donation->Description)
+        <p><strong>Descrição:</strong></p>
+        <p>{{$donation->Description}}</p>
+    @endif
 </body>
 </html>

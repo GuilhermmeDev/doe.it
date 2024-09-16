@@ -60,9 +60,20 @@ class CampaignController extends Controller
 
     public function show($id) {
         $campaign = Campaign::findOrFail($id);
-        $target = $campaign->meta['target'];
-        $current = $campaign->meta['current'];
-        $progress = $target > 0 ? ($current / $target) * 100 : 0;
+        if (!$campaign)
+        {
+        return redirect('/home')->with('Error', 'Campanha não encontrada.');
+        }
+
+        if ($campaign->meta)
+        {
+            $target = $campaign->meta['target'];
+            $current = $campaign->meta['current'];
+            $progress = $target > 0 ? ($current / $target) * 100 : 0;
+        }
+        else {
+            $progress = null;
+        }
         $address = Address::findOrFail($campaign->address_id);
 
         $donation = Donation::where('campaign_id', $campaign->id)->first();
@@ -71,6 +82,5 @@ class CampaignController extends Controller
             return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation'));
         }
 
-        return redirect('/home')->with('Error', 'Campanha não encontrada.');
     }
 }

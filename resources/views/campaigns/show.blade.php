@@ -39,18 +39,21 @@
     <p>Rua: {{$address->Street}}</p>
     <p>Num: {{$address->Number}}</p>
     <p>Dia de coleta: {{$address->Collection_date}}</p>
+    @if ($progress)
+        <p>Meta: {{$campaign->meta['target']}}</p>
+        <p>Arrecadado: {{$campaign->meta['current']}}</p>
 
-    <p>Meta: {{$campaign->meta['target']}}</p>
-    <p>Arrecadado: {{$campaign->meta['current']}}</p>
-
-    <div class="container_bar">
-        <div class="total_bar">
-            <div class="progress_bar" style="width: {{$progress}}%;"></div>
+        <div class="container_bar">
+            <div class="total_bar">
+                <div class="progress_bar" style="width: {{$progress}}%;"></div>
+            </div>
         </div>
-    </div>
-    <p>{{$progress}}%</p>
+        <p>{{$progress}}%</p>
+    @else 
+        <p>Essa campanha não possui meta.</p>
+    @endif
     @if ($donation)
-        <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
+        <p>Veja o qr code de sua doação <a href="/donation/{{$campaign->id}}">aqui</a></p>
     @else
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
     @endif
