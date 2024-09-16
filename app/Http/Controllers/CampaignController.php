@@ -48,7 +48,7 @@ class CampaignController extends Controller
         if ($request->meta)
         {
             $campaign->meta = [
-                'target' => $request->meta,
+                'target' => intval($request->meta),
                 'current' => 0,
             ];
         }
@@ -64,14 +64,11 @@ class CampaignController extends Controller
         {
         return redirect('/home')->with('Error', 'Campanha não encontrada.');
         }
-
-        if ($campaign->meta)
-        {
+        if ($campaign->meta != null) {
             $target = $campaign->meta['target'];
             $current = $campaign->meta['current'];
-            $progress = $target > 0 ? ($current / $target) * 100 : 0;
-        }
-        else {
+            $progress = ($current / $target) * 100;
+        } else {
             $progress = null;
         }
         $address = Address::findOrFail($campaign->address_id);

@@ -39,7 +39,7 @@
     <p>Rua: {{$address->Street}}</p>
     <p>Num: {{$address->Number}}</p>
     <p>Dia de coleta: {{$address->Collection_date}}</p>
-    @if ($progress)
+    @if ($progress !== null || $progress === 0)
         <p>Meta: {{$campaign->meta['target']}}</p>
         <p>Arrecadado: {{$campaign->meta['current']}}</p>
 
