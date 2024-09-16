@@ -9,7 +9,11 @@ use Malico\LaravelNanoid\HasNanoids;
 class Campaign extends Model
 {
     use HasFactory, HasNanoids;
-
+    
+    protected $casts = [
+        'meta' => 'array',
+    ];
+    
     public function address() {
         return $this->belongsTo(Address::class);
     }

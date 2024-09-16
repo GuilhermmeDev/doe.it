@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'welcome']);
-Route::get('/home', [MainController::class, 'home'])->middleware('auth');
+Route::get('/home', [MainController::class, 'home'])->middleware('auth')->name('home');
 
 Route::get('/campaign', [CampaignController::class, 'create'])->middleware('auth');
 Route::get('/campaign/{id}', [CampaignController::class, 'show'])->middleware('auth');

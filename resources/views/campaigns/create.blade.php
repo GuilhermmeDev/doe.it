@@ -36,17 +36,11 @@
         <label for="Data">Data:</label>
         <input type="datetime-local" name="Data" id="Data">
 
+        <h1>Sua Campanha possui alguma meta de arrecadação de alimentos?</h1>
+        <p>Se sim, informe:</p>
+        <input type="number" name="meta" id="meta" placeholder="meta (kg)">
+
         <button type="submit">Enviar</button>
     </form>
-
-    <button id="act">Clique</button>
-
-    <script>
-        const button = document.querySelector('#act');
-        button.addEventListener('click', (e) => {
-            const input = document.querySelector('#Data');
-            console.log(input.value)
-        })
-    </script>
 </body>
 </html>

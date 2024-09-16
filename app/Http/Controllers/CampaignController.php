@@ -43,6 +43,14 @@ class CampaignController extends Controller
 
         $campaign->Description = $request->Description;
 
+        if ($request->meta)
+        {
+            $campaign->meta = [
+                'target' => $request->meta,
+                'current' => 23,
+            ];
+        }
+
         $campaign->save();
 
         return redirect('/home')->with('Sucess', 'Campanha criada com sucesso!');
@@ -50,12 +58,14 @@ class CampaignController extends Controller
 
     public function show($id) {
         $campaign = Campaign::findOrFail($id);
+        $target = $campaign->meta['target'];
+        $current = $campaign->meta['current'];
+        $progress = $target > 0 ? ($current / $target) * 100 : 0;
         $address = Address::findOrFail($campaign->address_id);
 
         if ($campaign && $address) {
-            return view('campaigns.show', ['campaign' => $campaign, 'address' => $address]);
+            return view('campaigns.show', compact('campaign', 'progress', 'address'));
         }
-
 
         return redirect('/home')->with('Error', 'Campanha não encontrada.');
     }
