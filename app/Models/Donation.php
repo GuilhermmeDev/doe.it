@@ -9,4 +9,8 @@ use Malico\LaravelNanoid\HasNanoids;
 class Donation extends Model
 {
     use HasFactory, HasNanoids;
+
+    public function campaign() {
+        return $this->belongsTo(Campaign::class);
+    }
 }
