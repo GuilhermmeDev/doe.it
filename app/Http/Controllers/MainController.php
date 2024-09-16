@@ -22,4 +22,8 @@ class MainController extends Controller
 
         return view('home', ['campaigns' => $campaigns]);
     }
+
+    public function info() {
+        return view('info');
+    }
 }

@@ -49,5 +49,10 @@
         </div>
     </div>
     <p>{{$progress}}%</p>
+    @if ($donation)
+        <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
+    @else
+        <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
+    @endif
 </body>
 </html>

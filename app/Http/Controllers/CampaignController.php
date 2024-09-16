@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Campaign;
+use App\Models\Donation;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
@@ -47,7 +49,7 @@ class CampaignController extends Controller
         {
             $campaign->meta = [
                 'target' => $request->meta,
-                'current' => 23,
+                'current' => 0,
             ];
         }
 
@@ -63,8 +65,10 @@ class CampaignController extends Controller
         $progress = $target > 0 ? ($current / $target) * 100 : 0;
         $address = Address::findOrFail($campaign->address_id);
 
+        $donation = Donation::where('campaign_id', $campaign->id)->first();
+
         if ($campaign && $address) {
-            return view('campaigns.show', compact('campaign', 'progress', 'address'));
+            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation'));
         }
 
         return redirect('/home')->with('Error', 'Campanha não encontrada.');
