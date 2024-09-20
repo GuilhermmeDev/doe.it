@@ -24,10 +24,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/campaign', [CampaignController::class, 'create']);
     Route::get('/campaign/{id}', [CampaignController::class, 'show']);
     Route::post('/campaign', [CampaignController::class, 'store']);
+    Route::delete('/campaign/{id}', [CampaignController::class, 'delete']);
+    Route::get('/campaign/edit/{id}', [CampaignController::class, 'edit']);
+    Route::put('/campaign/update/{id}', [CampaignController::class, 'update']);
 
     Route::get('/donate/{id}', [DonationController::class, 'donate']);
     Route::post('/donation/{id}', [DonationController::class, 'store']);
     Route::get('/donation/{id}', [DonationController::class, 'show']);
+    Route::delete('/donation/{id}', [DonationController::class, 'delete']);
 
 });
 

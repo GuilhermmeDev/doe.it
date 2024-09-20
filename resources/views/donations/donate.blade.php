@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$campaign->Title}}</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+        }
+    </style>
 </head>
 <body>
     <p>Antes de doar, entenda como funciona o nosso sistema <a href="/info">aqui</a></p>

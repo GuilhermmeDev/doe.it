@@ -39,12 +39,18 @@ class DonationController extends Controller
 
         $donation->save();
 
-        return redirect('/donation/' . $donation->campaign_id);
+        return redirect('/donation/' . $donation->id);
 
     }
     public function show($id) {
-        $donation = Donation::where('campaign_id', $id)->first();
+        $donation = Donation::findOrFail($id);
 
         return view('donations.show', compact('donation'));
+    }
+
+    public function delete($id) {
+        $donation = Donation::findOrFail($id)->delete();
+
+        return redirect('/home')->with('Success', 'Doação cancelada com sucesso!');
     }
 }

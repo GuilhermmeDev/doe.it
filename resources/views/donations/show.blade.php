@@ -12,5 +12,10 @@
         <p><strong>Descrição:</strong></p>
         <p>{{$donation->Description}}</p>
     @endif
+    <form action="/donation/{{$donation->id}}" method="POST">
+        @csrf 
+        @method('DELETE')
+        <button type="submit">Cancelar Doação</button>
+    </form>
 </body>
 </html>

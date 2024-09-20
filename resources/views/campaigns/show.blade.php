@@ -53,9 +53,18 @@
         <p>Essa campanha não possui meta.</p>
     @endif
     @if ($donation)
-        <p>Veja o qr code de sua doação <a href="/donation/{{$campaign->id}}">aqui</a></p>
+        <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
     @else
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
+    @endif
+    @if(auth()->user()->id === $campaign->user_id)
+        <form action="/campaign/{{$campaign->id}}" method="post">
+            @csrf 
+            @method('DELETE')
+
+            <button type="submit">Deletar Campanha</button>
+        </form>
+        <a href="/campaign/edit/{{$campaign->id}}">Editar Campanha</a>
     @endif
 </body>
 </html>

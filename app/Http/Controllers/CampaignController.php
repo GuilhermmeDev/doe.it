@@ -55,15 +55,11 @@ class CampaignController extends Controller
 
         $campaign->save();
 
-        return redirect('/home')->with('Sucess', 'Campanha criada com sucesso!');
+        return redirect('/home')->with('Success', 'Campanha criada com sucesso!');
     }
 
     public function show($id) {
         $campaign = Campaign::findOrFail($id);
-        if (!$campaign)
-        {
-        return redirect('/home')->with('Error', 'Campanha não encontrada.');
-        }
         if ($campaign->meta != null) {
             $target = $campaign->meta['target'];
             $current = $campaign->meta['current'];
@@ -79,5 +75,31 @@ class CampaignController extends Controller
             return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation'));
         }
 
+    }
+
+    public function delete($id) {
+        $campaign = Campaign::findOrFail($id)->delete();
+
+        return redirect('/home')->with('Success', 'Doação cancelada com sucesso!');
+    }
+
+
+    public function edit($id) {
+        $campaign = Campaign::where('id', $id)->first();
+
+        return view('campaigns.edit', compact('campaign'));
+    }
+
+    public function update($id, Request $request) {
+
+        $campaign = Campaign::findOrFail($id);
+
+        $campaign->Title = $request->Title;
+
+        $campaign->Description = $request->Description;
+
+        $campaign->save();
+
+        return redirect()->route('home')->with('success', 'Campanha editada com sucesso!');
     }
 }
