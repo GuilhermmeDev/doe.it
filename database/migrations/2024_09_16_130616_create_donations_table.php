@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('campaign_id');
             $table->unsignedInteger('user_id');
             $table->integer('Quantity');
-            $table->string('Description', 255);
+            $table->string('Description', 255)->nullable();
             $table->datetime('Confirmed_at')->nullable();
             $table->tinyText('Status')->default('pending');
             $table->timestamps();

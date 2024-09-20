@@ -54,9 +54,10 @@
     @endif
     @if ($donation && $donation->campaign_id === $campaign->id)
         <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
-    @else
+    @elseif($campaign->user_id !== auth()->user()->id)
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
     @endif
+
     @if(auth()->user()->id === $campaign->user_id)
         <form action="/campaign/{{$campaign->id}}" method="post">
             @csrf 
