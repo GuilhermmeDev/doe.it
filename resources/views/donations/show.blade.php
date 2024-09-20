@@ -7,6 +7,7 @@
     <title>Qr code</title>
 </head>
 <body>
+    @vite('resources/js/app.js')
     <img src="data:image/png;base64, {{$donation->qr_code}}" alt="qr code">
     @if ($donation->Description)
         <p><strong>Descrição:</strong></p>
@@ -17,5 +18,15 @@
         @method('DELETE')
         <button type="submit">Cancelar Doação</button>
     </form>
+
+    <script>
+        window.onload=function() {
+            const donationId = "{{$donation->id}}"
+            Echo.channel(`donation.${donationId}`)
+            .listen('.confirm.created', (e) => {
+                console.log('deu certo por aqui!');
+            });
+        }
+    </script>
 </body>
 </html>
