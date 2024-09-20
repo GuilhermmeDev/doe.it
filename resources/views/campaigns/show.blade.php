@@ -52,7 +52,7 @@
     @else 
         <p>Essa campanha não possui meta.</p>
     @endif
-    @if ($donation)
+    @if ($donation && $donation->campaign_id === $campaign->id)
         <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
     @else
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>

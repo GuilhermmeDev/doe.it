@@ -64,6 +64,7 @@ class CampaignController extends Controller
             $target = $campaign->meta['target'];
             $current = $campaign->meta['current'];
             $progress = ($current / $target) * 100;
+            $progress = round($progress, 1);
         } else {
             $progress = null;
         }

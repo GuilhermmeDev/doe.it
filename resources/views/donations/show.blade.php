@@ -24,8 +24,7 @@
             const donationId = "{{$donation->id}}";
             Echo.channel(`testChannel`)
             .listen('ConfirmDonation', (e) => {
-                console.log(e);
-                console.log('deu certo, nao acreditoooo');
+                window.location.reload(true);
             });
         }
     </script>

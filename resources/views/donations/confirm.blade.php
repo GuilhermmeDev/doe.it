@@ -15,7 +15,7 @@
         <p>Quantidade doada: <strong>{{$donation->Quantity}}</strong></p>
     </div>
 
-    <form action="/donation/confirm/{{$donation->id}}" method="post">
+    <form action="/confirm/{{$donation->id}}" method="post">
         @csrf 
         <h3>Você tem certeza que quer confirmar essa doação?</h3>
         <p>Ao clicar em "Confirmar Doação" você confirma que recebeu tal doação.</p>

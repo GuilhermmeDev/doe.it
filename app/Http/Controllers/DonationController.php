@@ -46,8 +46,12 @@ class DonationController extends Controller
     }
     public function show($id) {
         $donation = Donation::findOrFail($id);
+        if ($donation->Status !== 'confirmed')
+        {
+            return view('donations.show', compact('donation'));
+        }
 
-        return view('donations.show', compact('donation'));
+        return view('donations.confirmed', compact('donation'));
     }
 
     public function delete($id) {
@@ -58,12 +62,13 @@ class DonationController extends Controller
 
     public function verify($id) {
         $donation = Donation::findOrFail($id);
-        event(new ConfirmDonation($donation));
 
         return view('donations.confirm', compact('donation'));
     }
 
     public function confirm($id) {
+
+        // confirmando a doação no BD
         $donation = Donation::findOrFail($id);
 
         $donation->Status = 'confirmed';
@@ -72,6 +77,17 @@ class DonationController extends Controller
 
         $donation->save();
 
+        // adicionando quantidade doada a quantidade recebida pela campanha
+        $campaign = Campaign::where('id', $donation->campaign_id)->first();
+
+        $meta = $campaign->meta;
+
+        $meta['current'] += $donation->Quantity;
+
+        $campaign->meta = $meta;
+
+        $campaign->save();
+        event(new ConfirmDonation($donation));
 
         return redirect('/home')->with('success', 'Doação confirmada com sucesso.');
     }
