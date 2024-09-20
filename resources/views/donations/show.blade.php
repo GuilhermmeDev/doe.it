@@ -21,10 +21,11 @@
 
     <script>
         window.onload=function() {
-            const donationId = "{{$donation->id}}"
-            Echo.channel(`donation.${donationId}`)
-            .listen('.confirm.created', (e) => {
-                console.log('deu certo por aqui!');
+            const donationId = "{{$donation->id}}";
+            Echo.channel(`testChannel`)
+            .listen('ConfirmDonation', (e) => {
+                console.log(e);
+                console.log('deu certo, nao acreditoooo');
             });
         }
     </script>

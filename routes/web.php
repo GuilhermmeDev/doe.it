@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/donate/{id}', [DonationController::class, 'donate']);
     Route::post('/donation/{id}', [DonationController::class, 'store']);
     Route::get('/donation/{id}', [DonationController::class, 'show']);
+    Route::get('/confirm/{id}', [DonationController::class, 'verify']);
+    Route::post('/confirm/{id}', [DonationController::class, 'confirm']);
     Route::delete('/donation/{id}', [DonationController::class, 'delete']);
 
 });

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ConfirmDonation;
 use App\Models\Campaign;
 use App\Models\Donation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -52,5 +54,25 @@ class DonationController extends Controller
         $donation = Donation::findOrFail($id)->delete();
 
         return redirect('/home')->with('Success', 'Doação cancelada com sucesso!');
+    }
+
+    public function verify($id) {
+        $donation = Donation::findOrFail($id);
+        event(new ConfirmDonation($donation));
+
+        return view('donations.confirm', compact('donation'));
+    }
+
+    public function confirm($id) {
+        $donation = Donation::findOrFail($id);
+
+        $donation->Status = 'confirmed';
+
+        $donation->Confirmed_at = Carbon::now();
+
+        $donation->save();
+
+
+        return redirect('/home')->with('success', 'Doação confirmada com sucesso.');
     }
 }

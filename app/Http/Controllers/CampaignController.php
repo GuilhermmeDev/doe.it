@@ -69,7 +69,7 @@ class CampaignController extends Controller
         }
         $address = Address::findOrFail($campaign->address_id);
 
-        $donation = Donation::where('campaign_id', $campaign->id)->first();
+        $donation = Donation::where('user_id', auth()->user()->id)->first();
 
         if ($campaign && $address) {
             return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation'));

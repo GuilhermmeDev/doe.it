@@ -18,22 +18,21 @@ class ConfirmDonation implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public function __construct( public Donation $donation, )
-    {}
+    public $donation;
+    public function __construct($donation)
+    {
+        $this->donation = $donation;
+    }
 
     /**
      * Get the channels the event should broadcast on.
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): array
+    public function broadcastOn() : array
     {
         return [
-            new Channel('donation'.$this->donation->id),
-        ];
-    }
-
-    public function broadcastAs() : string {
-        return 'confirm.created';
+            new Channel('testChannel'),
+            ] ;
     }
 }
