@@ -13,6 +13,10 @@
         </form>
     </div>
 
+    @if (session('error'))
+        {{session('error')}}<br>
+    @endif
+
     <a href="/campaign">Criar campanha</a>
     @if ($search)
         <p>Procurando campanha: {{$search}}</p>
