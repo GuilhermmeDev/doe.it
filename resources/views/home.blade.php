@@ -7,8 +7,22 @@
     <title>Home</title>
 </head>
 <body>
+    <div class="search_container">
+        <form action="/home" method="GET">
+            <input type="text" name="q" id="q" placeholder="Procure uma campanha">
+        </form>
+    </div>
+
     <a href="/campaign">Criar campanha</a>
-    <h1>Aqui será a home page</h1>
+    @if ($search)
+        <p>Procurando campanha: {{$search}}</p>
+    @else
+        <h1>Aqui será a home page</h1>
+    @endif
+
+    @if (count($campaigns) === 0)
+        <p>Campanha não encontrada</p>
+    @endif
 
     @foreach ($campaigns as $camp)
         <a href="/campaign/{{$camp->id}}">{{$camp->Title}}</a>
