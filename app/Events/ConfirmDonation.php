@@ -19,7 +19,7 @@ class ConfirmDonation implements ShouldBroadcast
      * Create a new event instance.
      */
     public $donation;
-    public function __construct($donation)
+    public function __construct(Donation $donation)
     {
         $this->donation = $donation;
     }
@@ -29,10 +29,8 @@ class ConfirmDonation implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn() : array
+    public function broadcastOn() : Channel
     {
-        return [
-            new Channel('testChannel'),
-            ] ;
+        return new Channel('testChannel');
     }
 }

@@ -21,7 +21,6 @@
 
     <script>
         window.onload=function() {
-            const donationId = "{{$donation->id}}";
             Echo.channel(`testChannel`)
             .listen('ConfirmDonation', (e) => {
                 window.location.reload(true);

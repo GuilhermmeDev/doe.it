@@ -53,9 +53,9 @@
     @else 
         <p>Essa campanha não possui meta.</p>
     @endif
-    @if ($donation && $donation->campaign_id === $campaign->id)
+    @if ($donation && $donation->campaign_id === $campaign->id && $donation->Status != 'confirmed')
         <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
-    @elseif($campaign->user_id !== auth()->user()->id)
+    @elseif($campaign->user_id !== auth()->user()->id && $campaign->meta['current'] < $campaign->meta['target'])
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
     @endif
 
