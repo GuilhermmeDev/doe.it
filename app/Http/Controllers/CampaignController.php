@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CampaignRequest;
 use App\Models\Address;
 use App\Models\Campaign;
 use App\Models\Donation;
@@ -14,22 +15,23 @@ class CampaignController extends Controller
         return view('campaigns.create');
     }
 
-    public function store(Request $request) {
+    public function store(CampaignRequest $request) {
+        $validRequest = $request->validated();
         // cadastrando o endereço
 
         $address = new Address();
 
-        $address->State = $request->State;
+        $address->State = $validRequest['State'];
 
-        $address->City = $request->City;
+        $address->City = $validRequest['City'];
 
-        $address->Street = $request->Street;
+        $address->Street = $validRequest['City'];
 
-        $address->CEP = $request->CEP;
+        $address->CEP = $validRequest['CEP'];
 
-        $address->Collection_date = $request->Data;
+        $address->Collection_date = $validRequest['Data'];
 
-        $address->Number = $request->Number;
+        $address->Number = $validRequest['Number'];
 
         $address->save();
 
@@ -41,14 +43,14 @@ class CampaignController extends Controller
 
         $campaign->address_id = $address->id;
 
-        $campaign->Title = $request->Title;
+        $campaign->Title = $validRequest['Title'];
 
-        $campaign->Description = $request->Description;
+        $campaign->Description = $validRequest['Description'];
 
-        if ($request->meta)
+        if ($validRequest['meta'])
         {
             $campaign->meta = [
-                'target' => intval($request->meta),
+                'target' => intval($validRequest['meta']),
                 'current' => 0,
             ];
         }

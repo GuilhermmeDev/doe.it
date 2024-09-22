@@ -20,10 +20,10 @@
             @csrf 
             @method('PUT')
             <label for="Title">Titulo da Campanha</label>
-            <input type="text" name="Title" id="Title" value="{{$campaign->Title}}">
+            <input type="text" name="Title" id="Title" value="{{$campaign->Title}}" required>
             
             <label for="Description">Descrição</label>
-            <input type="text" name="Description" id="Description" value="{{$campaign->Description}}">
+            <input type="text" name="Description" id="Description" value="{{$campaign->Description}}" required>
 
             <button type="submit">Atualizar</button>
         </form>
