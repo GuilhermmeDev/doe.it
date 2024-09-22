@@ -21,4 +21,8 @@ class Campaign extends Model
     public function donations() {
         return $this->hasMany(Donation::class);
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

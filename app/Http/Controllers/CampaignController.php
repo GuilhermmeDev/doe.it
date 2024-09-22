@@ -72,8 +72,10 @@ class CampaignController extends Controller
 
         $donation = Donation::where('user_id', auth()->user()->id)->first();
 
+        $donation_count = Donation::where('campaign_id', $campaign->id)->count(); 
+
         if ($campaign && $address) {
-            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation'));
+            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count'));
         }
 
     }

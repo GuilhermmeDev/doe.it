@@ -32,6 +32,7 @@
     <p>ID da campanha: {{$campaign->id}}</p>
     <p>Título: {{$campaign->Title}}</p>
     <p>Descrição: {{$campaign->Description}}</p>
+    <p>Dono da campanha: {{$campaign->user->name}}</p>
     <h2>Local da campanha</h2>
     <p>Estado: {{$address->State}}</p>
     <p>CEP: {{$address->CEP}}</p>
@@ -57,6 +58,8 @@
     @elseif($campaign->user_id !== auth()->user()->id)
         <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
     @endif
+
+    <p>Apoiadores: {{$donation_count}}</p>
 
     @if(auth()->user()->id === $campaign->user_id)
         <form action="/campaign/{{$campaign->id}}" method="post">
