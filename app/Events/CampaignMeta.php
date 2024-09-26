@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Donation;
+use App\Models\Campaign;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,17 +11,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ConfirmDonation implements ShouldBroadcast
+class CampaignMeta implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $donation;
-    public function __construct(Donation $donation)
+    public $campaign;
+    public function __construct(Campaign $campaign)
     {
-        $this->donation = $donation;
+        $this->campaign = $campaign;
     }
 
     /**
@@ -29,8 +29,12 @@ class ConfirmDonation implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn() : Channel
+    public function broadcastOn(): Channel
     {
-        return new Channel('donation'. $this->donation->id);
+        return new Channel('campaign'.$this->campaign->id);
+    }
+
+    public function broadcastWith() : array {
+        return ['message' => $this->campaign->meta];
     }
 }

@@ -26,6 +26,7 @@
             background-color: #00a900;
         }
     </style>
+    @vite('resources/js/app.js')
 </head>
 <body>
     <h2>Sobre a campanha</h2>
@@ -41,15 +42,15 @@
     <p>Num: {{$address->Number}}</p>
     <p>Dia de coleta: {{$address->Collection_date}}</p>
     @if ($progress !== null || $progress === 0)
-        <p>Meta: {{$campaign->meta['target']}}</p>
-        <p>Arrecadado: {{$campaign->meta['current']}}</p>
+        <p id="target">Meta: {{$campaign->meta['target']}}</p>
+        <p id="current">Arrecadado: {{$campaign->meta['current']}}</p>
 
         <div class="container_bar">
             <div class="total_bar">
                 <div class="progress_bar" style="width: {{$progress}}%;"></div>
             </div>
         </div>
-        <p>{{$progress}}%</p>
+        <p id="progress">{{$progress}}%</p>
     @else 
         <p>Essa campanha não possui meta.</p>
     @endif
@@ -70,5 +71,30 @@
         </form>
         <a href="/campaign/edit/{{$campaign->id}}">Editar Campanha</a>
     @endif
+
+    <script>
+        window.onload=function() {
+            Echo.channel(`testMeta`)
+            .listen('CampaignMeta', (e) => {
+                const currentText = document.querySelector('#current');
+                const targetText = document.querySelector('#target');
+
+                const currentMeta = e.meta.current;
+                const targetMeta = e.meta.target;
+
+                currentText.innerText = `Meta: ${currentMeta}`;
+                targetText.innerText = `Meta: ${targetMeta}`;
+
+                const progressText =  document.querySelector('#progress');
+
+                const percent = (currentMeta/targetMeta) * 100;
+                const progress = Math.round(percent, -1);
+                progressText.innerText = `${progress}%`;
+
+                console.log(`OK! Perc: ${progress}`);
+            }
+            );
+        }
+    </script>
 </body>
 </html>

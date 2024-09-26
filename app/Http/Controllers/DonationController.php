@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CampaignMeta;
 use App\Events\ConfirmDonation;
 use App\Models\Campaign;
 use App\Models\Donation;
@@ -88,6 +89,7 @@ class DonationController extends Controller
 
         $campaign->save();
         event(new ConfirmDonation($donation));
+        event(new CampaignMeta($campaign));
 
         return redirect('/home')->with('success', 'Doação confirmada com sucesso.');
     }
