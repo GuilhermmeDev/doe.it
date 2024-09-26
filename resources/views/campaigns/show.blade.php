@@ -82,7 +82,7 @@
                 const currentMeta = e.meta.current;
                 const targetMeta = e.meta.target;
 
-                currentText.innerText = `Meta: ${currentMeta}`;
+                currentText.innerText = `Arrecado: ${currentMeta}`;
                 targetText.innerText = `Meta: ${targetMeta}`;
 
                 const progressText =  document.querySelector('#progress');

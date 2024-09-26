@@ -15,6 +15,11 @@ class DonationController extends Controller
     public function donate($id) {
         $campaign = Campaign::findOrFail($id);
 
+        if ($campaign->meta['current'] >= $campaign->meta['target'])
+        {
+            return redirect('/campaign/'. $campaign->id);
+        }
+
         return view('donations.donate', compact('campaign'));
     }
 
