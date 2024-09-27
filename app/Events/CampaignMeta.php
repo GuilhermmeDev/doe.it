@@ -31,7 +31,7 @@ class CampaignMeta implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('campaign'.$this->campaign->id);
+        return new Channel('testMeta');
     }
 
     public function broadcastWith() : array {

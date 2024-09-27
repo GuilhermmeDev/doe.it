@@ -79,8 +79,8 @@
                 const currentText = document.querySelector('#current');
                 const targetText = document.querySelector('#target');
 
-                const currentMeta = e.meta.current;
-                const targetMeta = e.meta.target;
+                const currentMeta = e.message.current;
+                const targetMeta = e.message.target;
 
                 currentText.innerText = `Arrecado: ${currentMeta}`;
                 targetText.innerText = `Meta: ${targetMeta}`;

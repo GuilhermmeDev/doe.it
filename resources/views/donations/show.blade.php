@@ -21,7 +21,7 @@
 
     <script>
         window.onload=function() {
-            Echo.channel(`testChannel`)
+            Echo.channel(`testDonation`)
             .listen('ConfirmDonation', (e) => {
                 window.location.reload(true);
             });
