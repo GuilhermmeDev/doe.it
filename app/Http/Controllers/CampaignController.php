@@ -72,7 +72,7 @@ class CampaignController extends Controller
         }
         $address = Address::findOrFail($campaign->address_id);
 
-        $donation = Donation::where('user_id', auth()->user()->id)->where('campaign_id', $campaign->id)->first();
+        $donation = Donation::where('user_id', auth()->user()->id)->where('campaign_id', $campaign->id)->where('Status', 'pending')->first();
 
         $donation_count = Donation::where('campaign_id', $campaign->id)->count(); 
 
