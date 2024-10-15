@@ -8,6 +8,7 @@ use App\Models\Campaign;
 use App\Models\Donation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DonationController extends Controller
@@ -69,7 +70,13 @@ class DonationController extends Controller
     public function verify($id) {
         $donation = Donation::findOrFail($id);
 
-        return view('donations.confirm', compact('donation'));
+        $campaign = Campaign::find($donation->campaign_id);
+
+        if (Gate::allows('auth-donation', $campaign)) {
+            return view('donations.confirm', compact('donation'));
+        }
+
+        return redirect('/home')->with('error', 'Você não possui permissão de acessar esta página');
     }
 
     public function confirm($id) {

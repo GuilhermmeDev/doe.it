@@ -4,7 +4,6 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\CampaignOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'welcome']);
@@ -32,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/donate/{id}', [DonationController::class, 'donate'])->name('donation.donate');
     Route::post('/donation/{id}', [DonationController::class, 'store']);
     Route::get('/donation/{id}', [DonationController::class, 'show'])->name('donation.show');
-    Route::get('/confirm/{id}', [DonationController::class, 'verify'])->middleware(CampaignOwner::class)->name('donation.verify');
+    Route::get('/confirm/{id}', [DonationController::class, 'verify']);
     Route::post('/confirm/{id}', [DonationController::class, 'confirm']);
     Route::delete('/donation/{id}', [DonationController::class, 'delete']);
 
