@@ -46,6 +46,16 @@ class CampaignController extends Controller
         $campaign->Title = $validRequest['Title'];
 
         $campaign->Description = $validRequest['Description'];
+        
+        $requestImage = $validRequest['Image'];
+
+        $extension = $requestImage->extension();
+
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+
+        $requestImage->move(public_path('img/campaigns'), $imageName);
+
+        $campaign->Image = $imageName;
 
         if ($validRequest['meta'])
         {
@@ -103,8 +113,19 @@ class CampaignController extends Controller
 
         $campaign->Description = $request->Description;
 
+        $requestImage = $request->Image;
+
+        $extension = $requestImage->extension();
+
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+
+        $requestImage->move(public_path('img/campaigns'), $imageName);
+
+        $campaign->Image = $imageName;
+    
+
         $campaign->save();
 
-        return redirect()->route('home')->with('success', 'Campanha editada com sucesso!');
+        return redirect()->route('home')->with('Success', 'Campanha editada com sucesso!');
     }
 }

@@ -31,6 +31,7 @@ class CampaignRequest extends FormRequest
             'CEP' => 'required|string|regex:/^[0-9]{5}-[0-9]{3}$/', // Formato do CEP
             'Data' => 'required|date|after:now', // Data deve ser futura
             'meta' => 'nullable|integer|min:0|max:500', // Meta opcional
+            'Image' => 'required|image|mimes:jpeg,jpg,png| max:2048'
         ];
     }
 
@@ -50,6 +51,10 @@ class CampaignRequest extends FormRequest
             'meta.integer' => 'A meta deve ser um número inteiro.',
             'meta.min' => 'A meta deve ser pelo menos 0.',
             'meta.max' => 'A meta não pode exceder 500 kg.',
+            'Image.required' => 'A campanha deve possuir uma imagem.',
+            'Image.image' => 'O arquivo deve ser uma imagem.',
+            'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, gif.',
+            'Image.max' => 'A imagem não pode exceder 2MB.',
         ];
     }
 }

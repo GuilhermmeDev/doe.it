@@ -31,6 +31,7 @@
 <body>
     <h2>Sobre a campanha</h2>
     <p>ID da campanha: {{$campaign->id}}</p>
+    <img src="{{asset('img/campaigns/' . $campaign->Image)}}" alt="Imagem da Campanha">
     <p>Título: {{$campaign->Title}}</p>
     <p>Descrição: {{$campaign->Description}}</p>
     <p>Dono da campanha: {{$campaign->user->name}}</p>
