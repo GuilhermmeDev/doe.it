@@ -2,6 +2,7 @@
 /node_modules
 /public/build
 /public/hot
+/pubic/img/campaigns
 /public/storage
 /storage/*.key
 /vendor
