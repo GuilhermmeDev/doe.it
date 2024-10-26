@@ -20,20 +20,27 @@
     <a href="/campaign">Criar campanha</a>
     @if ($search)
         <p>Procurando campanha: {{$search}}</p>
+
+        @if (count($campaigns) === 0)
+            <p>Campanha não encontrada</p>
+        @endif
     @else
         <h1>Aqui será a home page</h1>
     @endif
 
     @if (count($campaigns) === 0)
-        <p>Campanha não encontrada</p>
+        <p>Nenhuma campanha disponível</p>
     @endif
 
     @foreach ($campaigns as $camp)
+    <div style="width: 200px; height: 200px; border: 1px solid black;">
+        <img src="img/campaigns/{{$camp->Image}}" alt="Imagem da campanha" style="height: 80%; width: 80%;">
         <a href="/campaign/{{$camp->id}}">{{$camp->Title}}</a>
+    </div>
     @endforeach
 
-    @if (session('Sucess'))
-        <p style="background-color: green; color: white; padding: 8px; border-radius: 16px; ">{{session('Sucess')}}</p>
+    @if (session('Success'))
+        <p style="background-color: green; color: white; padding: 8px; border-radius: 16px; ">{{session('Success')}}</p>
     @endif
 </body>
 </html>
