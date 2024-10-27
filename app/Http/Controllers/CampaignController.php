@@ -8,11 +8,16 @@ use App\Models\Campaign;
 use App\Models\Donation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CampaignController extends Controller
 {
     public function create() {
-        return view('campaigns.create');
+        if (Gate::allows('verify-cpf', auth()->user())) 
+        {
+            return view('campaigns.create');
+        }
+        return view('auth.register-cpf');
     }
 
     public function store(CampaignRequest $request) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,5 +57,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function registerCpf(Request $request) {
+        $user = User::where('id', auth()->user()->id)->first();
+
+        if (strlen($request->cpf) === 14) {
+            $user->CPF = $request->cpf;
+
+            $user->save();
+
+            return redirect()->route('campaign.create');
+        }
     }
 }

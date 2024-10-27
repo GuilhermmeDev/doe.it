@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/confirm/{id}', [DonationController::class, 'confirm']);
     Route::delete('/donation/{id}', [DonationController::class, 'delete']);
 
+    Route::patch('/cpf', [ProfileController::class, 'registerCpf']);
+
 });
 
 require __DIR__.'/auth.php';

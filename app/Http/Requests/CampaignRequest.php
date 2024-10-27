@@ -53,7 +53,7 @@ class CampaignRequest extends FormRequest
             'meta.max' => 'A meta não pode exceder 500 kg.',
             'Image.required' => 'A campanha deve possuir uma imagem.',
             'Image.image' => 'O arquivo deve ser uma imagem.',
-            'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, gif.',
+            'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg.',
             'Image.max' => 'A imagem não pode exceder 2MB.',
         ];
     }

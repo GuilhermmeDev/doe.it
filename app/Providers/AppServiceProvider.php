@@ -25,5 +25,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('auth-donation', function (User $user, Campaign $campaign){
             return $campaign->user_id === auth()->user()->id; 
         });
+
+        Gate::define('verify-cpf', function (User $user) {
+            return $user->CPF !== null;
+        });
     }
 }

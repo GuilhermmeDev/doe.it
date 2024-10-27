@@ -12,6 +12,7 @@
             <input type="text" name="q" id="q" placeholder="Procure uma campanha">
         </form>
     </div>
+    <p>Usuário: {{auth()->user()->name}}</p>
 
     @if (session('error'))
         {{session('error')}}<br>
