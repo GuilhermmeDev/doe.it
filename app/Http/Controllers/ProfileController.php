@@ -67,7 +67,7 @@ class ProfileController extends Controller
 
             $user->save();
 
-            return redirect()->route('campaign.create');
+            return redirect()->back();
         }
     }
 }
