@@ -1,0 +1,224 @@
+/* Configuração do contêiner principal */
+.cadastro-container,
+.cadastro-container * {
+    box-sizing: border-box;
+}
+
+.cadastro-container {
+    background: #ffffff;
+    height: 95vh;
+    position: relative;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+.header-logo {
+    color: var(--nverde, #5fcb69);
+    text-align: center;
+    font-family: "Righteous", sans-serif;
+    font-size: 38px;
+    font-weight: 400;
+    position: absolute;
+    left: 75px;
+    top: 37px;
+}
+
+.cadastro-section {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 150px; /* Ajustado para subir a seção de login em 100px */
+    width: 568px;
+}
+
+.cadastro-title {
+    color: #000000;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.cadastro-subtitle {
+    color: #000000;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+/* Estilo dos campos de formulário */
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-label {
+    color: #000000;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    top: -25px; /* Alinhamento vertical acima do campo */
+    left: 0; /* Alinhamento com o início do campo */
+}
+
+.form-label-senha {
+    color: #000000;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    top: -25px; /* Alinhamento vertical acima do campo */
+    left: 0; /* Alinhamento com o início do campo */
+    padding-top: 2px;
+}
+
+.input-field {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    width: 100%; /* largura máxima */
+    height: 45px; /* diminui a altura */
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #575761;
+}
+
+.submit-button {
+    background: var(--nverde, #5fcb69);
+    border-radius: 16px;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px;
+    text-align: center;
+    width: 100%; /* largura máxima */
+    max-width: 400px;
+    height: 45px;
+    border: none;
+}
+
+/* Estilo para o separador */
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 400px; /* Garantir que o separador tenha a largura dos campos */
+    margin-left: auto; /* Centraliza o separador */
+    margin-right: auto; /* Centraliza o separador */
+}
+
+.line {
+    border-top: 1px solid #000000;
+    width: 100%; /* A linha vai ocupar 100% da largura do contêiner */
+}
+
+.separator-text {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: #575761;
+    font-weight: 300;
+}
+
+/* Estilo da seção de cadastro */
+.signup-prompt {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
+    color: #575761;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.signup-link {
+    color: var(--nverde, #5fcb69);
+    text-decoration: none;
+}
+
+/* Estilo para o campo de senha */
+.input-container-senha {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Largura máxima do campo */
+}
+
+#password {
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #000000;
+    width: 100%; /* Largura máxima */
+    height: 45px; /* Altura do campo */
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #575761;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Alinha o ícone verticalmente */
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+/* Estilo do rótulo do campo de senha */
+.form-label-senha {
+    color: #000000;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 500;
+    position: absolute;
+    top: -25px; /* Alinhamento vertical acima do campo */
+    left: 0; /* Alinhamento com o início do campo */
+    padding-top: 2px;
+}
+
+span,
+.signup-link {
+    font-size: 16px;
+}
+
+@media (max-width: 755px) {
+    .header-logo {
+        position: unset;
+        margin-top: 40px;
+    }
+}
