@@ -23,7 +23,6 @@ services:
             - sail
         depends_on:
             - pgsql
-            - mysql
     pgsql:
         image: "postgres:17"
         ports:
