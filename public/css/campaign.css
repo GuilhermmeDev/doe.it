@@ -130,6 +130,15 @@ main {
     text-decoration: none;
 }
 
+.delete_button {
+    background-color: #ff2929;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 16px;
+    border: none;
+    font-family: "Poppins";
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
     main {

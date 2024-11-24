@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #5fcb69;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Linhas diagonais brancas */
+body::before,
+body::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 30px; /* Espessura das linhas */
+    background-color: white;
+    transform: rotate(45deg);
+}
+
+body::before {
+    top: -75%; /* Posição da primeira linha */
+    left: -50%;
+}
+
+body::after {
+    bottom: -75%; /* Posição da segunda linha */
+    right: -50%;
+}
+
+.container {
+    text-align: center;
+    z-index: 1; /* Coloca o conteúdo acima das linhas */
+}
+
+.heart-image {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: white;
+    font-size: 2em;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif; /* Nova fonte para o título */
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 60px; /* Aumenta o padding nas laterais */
+    font-size: 1em;
+    color: #5fcb69;
+    background-color: white;
+    border: none; /* Remove todas as bordas */
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Poppins", sans-serif; /* Nova fonte para o título */
+}
+
+button:hover {
+    background-color: #4ba354;
+    color: white;
+}

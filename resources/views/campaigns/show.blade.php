@@ -55,7 +55,7 @@
                     @csrf 
                     @method('DELETE')
 
-                    <button type="submit">Deletar Campanha</button>
+                    <button type="submit" class="delete_button">Deletar Campanha</button>
                 </form>
             @endif
           </aside>

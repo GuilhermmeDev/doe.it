@@ -107,7 +107,11 @@ class CampaignController extends Controller
     public function edit($id) {
         $campaign = Campaign::where('id', $id)->first();
 
-        return view('campaigns.edit', compact('campaign'));
+        if (auth()->user()->id === $campaign->user_id) {
+            return view('campaigns.edit', compact('campaign'));
+        }
+
+        return redirect()->route('home')->with('error', 'Você não possui permissão para acessar esta página');
     }
 
     public function update($id, Request $request) {
