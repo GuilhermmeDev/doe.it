@@ -27,7 +27,7 @@ class CampaignRequest extends FormRequest
             'State' => 'required|string',
             'City' => 'required|string',
             'Street' => 'required|string',
-            'Number' => 'required|string',
+            'Number' => 'required|integer|min:1',
             'CEP' => 'required|string|regex:/^[0-9]{5}-[0-9]{3}$/', // Formato do CEP
             'Data' => 'required|date|after:now', // Data deve ser futura
             'Hour' => 'required|date_format:H:i',
@@ -45,6 +45,7 @@ class CampaignRequest extends FormRequest
             'City.required' => 'A cidade é obrigatória.',
             'Street.required' => 'A rua é obrigatória.',
             'Number.required' => 'O número é obrigatório.',
+            'Number.min' => 'O número deve ser positivo',
             'CEP.required' => 'O CEP é obrigatório.',
             'CEP.regex' => 'O CEP deve estar no formato 00000-000.',
             'Data.required' => 'A data é obrigatória.', 

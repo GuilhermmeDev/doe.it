@@ -1,0 +1,574 @@
+:root {
+    --collection-1-cor-branca: rgba(255, 255, 255, 1);
+    --collection-1-cor-azul: rgba(32, 164, 243, 1);
+    --collection-1-cor-vermelha: rgba(219, 84, 97, 1);
+    --collection-1-cor-amarela: rgba(255, 191, 70, 1);
+    --collection-1-primaria: rgba(74, 144, 226, 1);
+    --collection-1-preto: rgba(87, 87, 97, 1);
+    --collection-1-verde-2: rgba(126, 211, 33, 1);
+    --collection-1-cinza-2: rgba(231, 226, 226, 1);
+    --collection-1-roxo-2: rgba(155, 89, 182, 1);
+    --collection-1-laranja-2: rgba(245, 166, 35, 1);
+    --collection-1-branco-2: rgba(255, 255, 255, 1);
+    --collection-1-nverde: rgba(95, 203, 105, 1);
+}
+
+body {
+    width: 100%; /* Utiliza a largura total da tela */
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    overflow-x: hidden; /* Impede rolagem horizontal */
+    height: 100vh; /* Ajuste da altura conforme necessário */
+}
+
+.frame {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.frame .div {
+    background-color: #ffffff;
+    width: 100%;
+    position: absolute;
+    top: 100px;
+}
+
+.frame .criando-sua-campanha {
+    position: absolute;
+    width: 1149px;
+    top: 190px;
+    left: 30px;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: transparent;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: normal; /* Permite quebra de linhas */
+    word-break: break-word; /* Garante que palavras longas quebrem */
+    overflow-wrap: break-word; /* Suporte adicional */
+}
+
+.frame .text-wrapper {
+    font-weight: 600;
+    color: #575761;
+}
+
+.frame .span {
+    font-family: "Poppins";
+    color: #5fcb69;
+    font-weight: 600;
+}
+
+.frame .frame-wrapper {
+    display: flex;
+    width: 463px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 1000px;
+    height: 740px;
+}
+
+/* Centralizar o formulário */
+.frame .div-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: auto;
+    width: 100%;
+    max-width: 400px; /* Limita o tamanho máximo do formulário */
+    margin: auto; /* Centraliza o formulário */
+    background-color: var(--collection-1-nverde);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: -20px;
+}
+
+/* Botão de envio */
+.submit-button {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    background-color: #575761;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-family: "Poppins", Helvetica;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: black;
+}
+
+.frame .div-3 {
+    display: flex;
+    flex-direction: column;
+    width: 336px;
+    align-items: flex-start;
+    gap: 28px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .div-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    margin-left: -3px;
+}
+
+.frame .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    text-align: left;
+}
+
+.frame .div-wrapper {
+    display: flex;
+    width: 336px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 60px 8px 8px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+.frame .text-wrapper-3 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #0000005e;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .div-5 {
+    display: flex;
+    flex-direction: column;
+    height: 66px;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    margin-left: -3px;
+}
+
+.frame .div-wrapper-2 {
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 60px 8px 8px;
+    position: relative;
+    align-self: stretch;
+    flex: 0 0 auto;
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+
+.frame .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .frame-wrapper-2 {
+    display: flex;
+    flex-direction: column;
+    width: 340px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.frame .div-6 {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.frame .text-wrapper-4 {
+    position: relative;
+    align-self: stretch;
+    margin-top: -1px;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .frame-wrapper-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.frame .div-7 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.frame .frame-wrapper-4 {
+    display: flex;
+    flex-direction: column;
+    width: 336px;
+    height: 77px;
+    align-items: flex-start;
+    position: relative;
+}
+
+.frame .text-wrapper-5 {
+    position: relative;
+    width: 336px;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    top: 5px;
+}
+
+.frame .div-wrapper-3 {
+    display: flex;
+    width: 267px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #575761;
+    border-radius: 4px;
+    margin-top: 90px;
+}
+
+.frame .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: "Poppins";
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .com-o-doe-it-voc {
+    position: absolute;
+    width: 743px;
+    top: 409px;
+    left: 30px;
+    font-family: "Poppins";
+    font-weight: 400;
+    color: var(--collection-1-preto);
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: normal; /* Permite quebra de linhas */
+    word-break: break-word; /* Garante que palavras longas quebrem */
+    overflow-wrap: break-word; /* Suporte adicional */
+}
+
+.frame .text-wrapper-7 {
+    color: #575761;
+}
+
+.frame .text-wrapper-8 {
+    font-family: "Poppins";
+    font-weight: 700;
+    color: #575761;
+}
+
+.frame .text-wrapper-9 {
+    font-family: "Poppins";
+    font-weight: 700;
+    color: #5fcb69;
+}
+
+.frame .text-wrapper-10 {
+    position: absolute;
+    top: 36px;
+    left: 75px;
+    font-family: "Righteous";
+    font-weight: 400;
+    color: var(--collection-1-nverde);
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.date {
+    width: 250px;
+}
+
+#titulo.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#Descrição.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#estado.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#cidade.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#data.date {
+    width: 318px;
+    height: 31px;
+    border: none;
+    padding: 5px; /* Ajuste conforme necessário */
+    background-color: #ffffff;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; /* Garante que padding não aumente a largura/altura */
+    margin-left: -15px;
+}
+
+#rua.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#cep.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#numero.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#meta.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+#arquivo.div-wrapper-2 {
+    width: 250px;
+    border: none;
+}
+
+input:focus {
+    outline: none; /* Remove o contorno padrão */
+    border: none; /* Remove a borda */
+    box-shadow: none; /* Remove qualquer sombra padrão */
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+    body {
+        margin: 0; /* Remove margens padrão */
+        padding: 0; /* Remove preenchimentos padrão */
+    }
+
+    #titulo.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #Descrição.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #estado.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #cidade.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #data.date {
+        width: 220px;
+    }
+
+    #rua.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #cep.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #numero.div-wrapper-2 {
+        width: 220px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #meta.div-wrapper-2 {
+        width: 220px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .frame .div-2 {
+        position: relative;
+        left: -1030px;
+        width: 350px;
+        top: 500px;
+    }
+
+    .frame .criando-sua-campanha {
+        position: relative;
+        left: 10px;
+        font-size: 40px;
+        top: 50px;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .frame .com-o-doe-it-voc {
+        position: relative;
+        text-align: left; /* Alinha o texto à direita */
+        max-width: 100%;
+        top: 50px;
+        left: 10px;
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .frame .criando-sua-campanha {
+        position: relative;
+        left: 40px;
+        top: 100px;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .frame .com-o-doe-it-voc {
+        position: absolute;
+        text-align: left; /* Alinha o texto à direita */
+        max-width: 100%;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    #titulo.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #Descrição.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #estado.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #cidade.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #data.date {
+        width: 220px;
+        margin-left: -96px;
+    }
+
+    #rua.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #cep.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #numero.div-wrapper-2 {
+        width: 220px;
+    }
+
+    #meta.div-wrapper-2 {
+        width: 220px;
+    }
+
+    .frame .div-2 {
+        top: 10px;
+        right: 780px;
+        width: 390px;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .frame .frame-wrapper {
+        top: 800px;
+        right: 100px;
+        position: absolute;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1920px) {
+}
