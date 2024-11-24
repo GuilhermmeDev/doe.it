@@ -1,0 +1,247 @@
+/* Certifique-se de que o html e body ocupem toda a página */
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilização do body */
+body {
+    flex-direction: column; /* Alinha os elementos verticalmente */
+    align-items: center; /* Opcional: Centraliza horizontalmente */
+    justify-content: center; /* Opcional: Centraliza verticalmente */
+    background-color: #f4f4f4; /* Adicione um fundo, se necessário */
+    overflow-x: hidden;
+}
+
+.rectangle-79 {
+    background: #e7e2e2;
+    width: 1920px;
+    height: 323px;
+    position: absolute;
+    top: 200px;
+}
+.rectangle-78 {
+    background-color: #5fcb69;
+    width: 1311px;
+    height: 450px;
+    position: relative;
+    left: 530px;
+    top: 380px;
+}
+.quadradoverde {
+    position: absolute;
+    left: 540px;
+    top: 523px;
+}
+.somos-os-desenvolvedores {
+    color: var(--cor-branca, #ffffff);
+    font-size: 22px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.lista {
+    color: var(--cor-branca, #ffffff);
+    padding-left: 1em;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+}
+.ol-usu-rio {
+    color: var(--cor-branca, #ffffff);
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    position: absolute;
+    left: 540px;
+    top: 476px;
+}
+
+.oadores {
+    color: var(--preto, #575761);
+    text-align: center;
+    font-size: 48px;
+    position: absolute;
+    left: 318px;
+    top: 250px;
+    width: 190px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.op-rtunidades {
+    color: var(--preto, #575761);
+    text-align: center;
+    font-size: 48px;
+    position: absolute;
+    left: 210px;
+    top: 310px;
+    width: 411px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+.engajam-nto {
+    color: var(--preto, #575761);
+    text-align: center;
+    font-size: 48px;
+    position: absolute;
+    left: 62px;
+    top: 370px;
+    width: 425px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+.perm-ir {
+    color: var(--preto, #575761);
+    text-align: center;
+    font-size: 48px;
+    position: absolute;
+    left: 75px;
+    top: 430px;
+    width: 425px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-decoration: none;
+    background: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+menu,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.highlight {
+    color: #5fcb69;
+}
+
+@media (min-width: 0px) and (max-width: 600px) {
+    menu,
+    ol,
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .somos-os-desenvolvedores {
+        font-size: 18px;
+    }
+
+    .lista {
+        font-size: 18px;
+    }
+
+    .quadradoverde {
+        left: 30px;
+        top: 420px;
+    }
+
+    .rectangle-78 {
+        top: 270px;
+        height: 700px;
+        left: 0px;
+    }
+
+    .rectangle-79 {
+        top: 110px;
+        height: 320px;
+    }
+
+    .oadores {
+        left: 150px;
+        top: 190px;
+        font-size: 38px;
+    }
+
+    .op-rtunidades {
+        left: 35px;
+        top: 230px;
+        font-size: 36px;
+    }
+
+    .engajam-nto {
+        left: -85px;
+        top: 270px;
+        font-size: 38px;
+    }
+
+    .perm-ir {
+        font-size: 38px;
+        left: -75px;
+        top: 310px;
+    }
+
+    .ol-usu-rio {
+        left: 30px;
+        top: 405px;
+        font-size: 28px;
+    }
+
+    .blocos {
+        font-size: 34px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+    body {
+        height: 130vh;
+    }
+
+    .rectangle-78 {
+        left: 5px;
+        top: 470px;
+        width: 990px;
+        height: 690px;
+    }
+
+    .ol-usu-rio {
+        left: 40px;
+        top: 560px;
+    }
+
+    .quadradoverde {
+        left: 35px;
+        top: 580px;
+    }
+
+    .op-rtunidades {
+        left: 230px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 2500px) {
+    .rectangle-78 {
+        left: 480px;
+        width: 1390px;
+        height: 500px;
+    }
+
+    .quadradoverde {
+        top: 490px;
+    }
+
+    .somos-os-desenvolvedores {
+        font-size: 24px;
+    }
+
+    .lista {
+        font-size: 24px;
+    }
+}
