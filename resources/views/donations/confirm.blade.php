@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{asset('css/confirm_qrcode.css')}}">
 </head>
 <body>
-
     <div class="container">
         <div class="left-section">
           <h2>Confirmar Doação</h2>

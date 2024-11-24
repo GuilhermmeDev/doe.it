@@ -10,6 +10,7 @@
 </head>
 <body>
     @vite('resources/js/app.js')
+    @include('layouts.navbar')
 
     <main class="container">
         <section class="campaign-info">
