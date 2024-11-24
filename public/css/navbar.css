@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px 50px;
+    width: 100vw;
+}
+
+.logo {
+    font-size: 32px;
+    color: #4caf50;
+    font-weight: regular; /* Altere para 'regular' se for necessário */
+    font-family: "Righteous", sans-serif; /* Define a fonte Righteous */
+    margin-right: 20px; /* Afastar a logo para a direita */
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: "Poppins";
+}
+
+.search-container {
+    position: relative; /* Necessário para posicionar o ícone dentro do campo */
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px; /* Ajusta a posição horizontal do ícone */
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url("https://img.icons8.com/material-outlined/20/search.png"); /* Link para um ícone de pesquisa */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.search-input {
+    width: 250px;
+    max-width: 300px;
+    padding: 8px 8px 8px 36px; /* Adiciona espaçamento à esquerda para o ícone */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: #e7e2e2;
+    font-family: "Poppins";
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+.campaign-button {
+    padding: 8px 16px;
+    background-color: #5fcb69;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Poppins";
+    text-decoration: none;
+}
+
+.campaign-button:hover {
+    background-color: #45a049;
+}
