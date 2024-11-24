@@ -4,31 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{$campaign->Title}}</title>
-    <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            width: fit-content;
-        }
+    <title>Doar para {{$campaign->Title}}</title>
+    @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/donate.css')}}">
     </style>
 </head>
 <body>
-    <p>Antes de doar, entenda como funciona o nosso sistema <a href="/info">aqui</a></p>
-    <h1>Doar para a campanha {{$campaign->Title}}</h1>
-    @if ($campaign->meta)
-        <p>A meta dessa campanha é {{$campaign->meta['target']}} kg e ela já arrecadou {{$campaign->meta['current']}} kg de comida</p>
-        <p>Ajude-os a alcançar!</p>
-    @endif
-    <form action="/donation/{{$campaign->id}}" method="POST">
+    @include('layouts.navbar')
+    <h1 class="titulo">Doar para campanha {{$campaign->Title}}</h1>
+    <p class="subtitulo">Meta: {{$campaign->meta['target']}} kg</p>
+    <p class="subtitulos">Arrecadado: {{$campaign->meta['current']}} kg</p>
+    <p class="text">Quantos kg de comida você pretende doar?</p>
+    <p class="des">Descrição</p>
+    <form action="/donation/{{$campaign->id}}" method="post">
         @csrf
-        <label for="Quantity">Quantos kg de comida você pretende doar?</label>
-        <input type="number" name="Quantity" id="Quantity" placeholder="alimentos (kg)">
 
-        <label for="Description">Descrição</label>
-        <textarea name="Description" id="Description" cols="30" rows="5" placeholder="Mande uma mensagem de apoio (opcional)"></textarea>
-
-        <button type="submit">Prometer doação</button>
+        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity"/>
+        <input type="text" class="descricao" placeholder="Descrição" name="Description" id="Description"/> 
+        
+        <p class="text2">
+          Antes de doar, entenda como funciona o nosso sistema clique<a
+            href="/info"
+            class="aqui"
+            >aqui</a
+          >
+        </p>
+    
+        <button class="botao">Prometer doação</button>
     </form>
+
+    <img src="{{asset('assets/donation_doodle2.svg')}}" class="img" />
+
 </body>
 </html>

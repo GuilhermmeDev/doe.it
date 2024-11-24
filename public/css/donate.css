@@ -1,0 +1,353 @@
+body {
+    overflow: hidden;
+}
+
+.titulo {
+    font-size: 28px;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.subtitulo {
+    font-size: 18px;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.subtitulos {
+    font-size: 18px;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text {
+    font-size: 16px;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.text2 {
+    font-size: 14px;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.aqui {
+    color: blue;
+}
+
+.kilos {
+    border: 20;
+    border-radius: 8px;
+    width: 400px;
+    height: 50px;
+}
+
+.descricao {
+    border-radius: 8px;
+    width: 400px;
+    height: 100px;
+}
+
+.des {
+    font-size: 16px;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.botao {
+    border-radius: 12px;
+    border: none;
+    width: 300px;
+    height: 50px;
+    background-color: #5fcb69;
+    color: white;
+    font-size: 14px;
+    font-family: Poppins;
+    font-weight: 700;
+    word-wrap: break-word;
+}
+
+@media (min-width: 1778px) and (max-width: 2000px) {
+    .titulo {
+        position: relative;
+        top: 100px;
+        left: 150px;
+    }
+
+    .subtitulo {
+        position: relative;
+        top: 100px;
+        left: 150px;
+    }
+
+    .subtitulos {
+        position: relative;
+        top: 80px;
+        left: 150px;
+    }
+
+    .kilos {
+        position: relative;
+        left: 150px;
+        top: 20px;
+    }
+
+    .text {
+        position: relative;
+        left: 150px;
+        top: 90px;
+    }
+
+    .descricao {
+        position: relative;
+        top: 180px;
+        left: -260px;
+    }
+
+    .text2 {
+        position: relative;
+        top: 200px;
+        left: 155px;
+    }
+
+    .botao {
+        position: relative;
+        top: 200px;
+        left: 150px;
+    }
+
+    .des {
+        position: relative;
+        top: 180px;
+        left: 150px;
+    }
+
+    .img {
+        position: relative;
+        top: -350px;
+        left: 780px;
+        width: 800px;
+    }
+
+    input::placeholder {
+        position: relative;
+        left: 5px;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1778px) {
+    .titulo {
+        position: relative;
+        top: 100px;
+        left: 120px;
+    }
+
+    .subtitulo {
+        position: relative;
+        top: 100px;
+        left: 120px;
+    }
+
+    .subtitulos {
+        position: relative;
+        top: 80px;
+        left: 120px;
+    }
+
+    .kilos {
+        position: relative;
+        left: 120px;
+        top: 20px;
+    }
+
+    .text {
+        position: relative;
+        left: 120px;
+        top: 90px;
+    }
+
+    .descricao {
+        position: relative;
+        top: 150px;
+        left: -290px;
+    }
+
+    .text2 {
+        position: relative;
+        top: 160px;
+        left: 125px;
+    }
+
+    .botao {
+        position: relative;
+        top: 170px;
+        left: 120px;
+    }
+
+    .des {
+        position: relative;
+        top: 160px;
+        left: 120px;
+    }
+
+    .img {
+        position: relative;
+        top: -250px;
+        left: 700px;
+        width: 600px;
+    }
+
+    input::placeholder {
+        position: relative;
+        left: 5px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1000px) {
+    .img {
+        width: 0px;
+    }
+
+    .titulo {
+        display: flex;
+        position: relative;
+        left: 120px;
+    }
+
+    .subtitulo {
+        display: flex;
+        position: relative;
+        left: 120px;
+    }
+
+    .subtitulos {
+        display: flex;
+        position: relative;
+        left: 120px;
+    }
+
+    .text {
+        display: flex;
+        position: relative;
+        left: 120px;
+        top: 50px;
+    }
+
+    .descricao {
+        display: flex;
+        position: relative;
+        left: 120px;
+        top: 50px;
+    }
+
+    .text2 {
+        display: flex;
+        position: relative;
+        left: 120px;
+        top: 50px;
+    }
+
+    .des {
+        display: flex;
+        position: relative;
+        left: 120px;
+        top: 120px;
+    }
+
+    .kilos {
+        display: flex;
+        position: relative;
+        left: 120px;
+    }
+
+    .botao {
+        position: relative;
+        left: 120px;
+        top: 50px;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 600px) {
+    .img {
+        width: 0px;
+    }
+
+    .titulo {
+        display: flex;
+        position: relative;
+        left: 50px;
+    }
+
+    .subtitulo {
+        display: flex;
+        position: relative;
+        left: 50px;
+    }
+
+    .subtitulos {
+        display: flex;
+        position: relative;
+        left: 50px;
+    }
+
+    .text {
+        display: flex;
+        position: relative;
+        left: 50px;
+        top: 50px;
+    }
+
+    .descricao {
+        display: flex;
+        position: relative;
+        left: 50px;
+        top: 50px;
+    }
+
+    .text2 {
+        display: flex;
+        position: relative;
+        left: 50px;
+        top: 50px;
+    }
+
+    .des {
+        display: flex;
+        position: relative;
+        left: 50px;
+        top: 120px;
+    }
+
+    .kilos {
+        display: flex;
+        position: relative;
+        left: 50px;
+    }
+
+    .botao {
+        position: relative;
+        left: 50px;
+        top: 50px;
+    }
+
+    .aqui {
+        position: relative;
+        top: 20px;
+        left: -440px;
+        display: flex;
+        justify-content: right;
+    }
+
+    .botao {
+        position: relative;
+        top: 80px;
+        left: 100px;
+    }
+}

@@ -63,12 +63,12 @@ body {
 
 .nav input:focus {
     outline: none;
-    border-color: #27ae60;
+    border-color: #5fcb69;
 }
 
 /* Botão Criar Campanha */
 .create-campaign-button {
-    background-color: #27ae60;
+    background-color: #5fcb69;
     width: auto;
     padding: 0.5rem 1rem; /* Ajusta o tamanho do botão */
     font-size: 1rem;
@@ -116,7 +116,7 @@ body {
     width: 100%;
     max-width: 300px; /* Define uma largura máxima */
     padding: 1rem;
-    background-color: #27ae60;
+    background-color: #5fcb69;
     color: white;
     border: none;
     border-radius: 16px;
@@ -126,7 +126,7 @@ body {
 }
 
 .cancel-button:hover {
-    background-color: #5fcb69;
+    background-color: #27ae60;
 }
 
 /* Placeholder QR */
@@ -134,7 +134,7 @@ body {
     width: 90%; /* Ajusta a largura */
     max-width: 418px;
     height: 300px; /* Ajusta a altura */
-    background-color: #27ae60;
+    background-color: #5fcb69;
     border-radius: 16px;
     display: flex;
     align-items: center;
