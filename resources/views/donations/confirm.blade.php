@@ -12,6 +12,7 @@
     <div class="container">
         <div class="left-section">
           <h2>Confirmar Doação</h2>
+          <p>Usuário: <strong>{{$donation->user->name}}</strong></p>
           @if ($donation->Description)
             <p>Descrição da doação</p>
             <textarea placeholder="Detalhes da doação">{{$donation->Description}}</textarea>

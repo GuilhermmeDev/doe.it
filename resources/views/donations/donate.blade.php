@@ -19,7 +19,7 @@
     <form action="/donation/{{$campaign->id}}" method="post">
         @csrf
 
-        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity"/>
+        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"/>
         <input type="text" class="descricao" placeholder="Descrição" name="Description" id="Description"/> 
         
         <p class="text2">
