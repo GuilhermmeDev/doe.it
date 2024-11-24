@@ -7,31 +7,9 @@
     @include('layouts.head')
     <link rel="stylesheet" href="{{asset('css/campaign.css')}}">
     <title>{{$campaign->Title}}</title>
-    <style>
-        .container_bar {
-            width: 20%;
-            height: 10px;
-        }
-
-        .total_bar {
-            border-radius: 16px;
-            width: 100%;
-            height: 100%;
-            margin: 10px;
-            background-color: rgb(165, 165, 165);
-        }
-
-        .progress_bar {
-            max-width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            background-color: #00a900;
-        }
-    </style>
-    @vite('resources/js/app.js')
 </head>
 <body>
-    @include('layouts.navbar')
+  @include('layouts.navbar')
     <main>
         <section class="campaign">
           <article class="campaign-content">

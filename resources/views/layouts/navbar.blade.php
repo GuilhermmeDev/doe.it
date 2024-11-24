@@ -5,7 +5,9 @@
         @if (request()->path() == 'home')
             <div class="search-container">
             <span class="search-icon"></span>
-            <input type="text" placeholder="Pesquisar" class="search-input">
+                <form action="/home" method="GET">
+                    <input type="text" placeholder="Pesquisar" name="q" id="q" class="search-input">
+                </form>
             </div>
         @endif
       <a href="/info" class="link">Sobre</a>

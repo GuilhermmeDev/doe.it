@@ -7,6 +7,7 @@
     <title>Criação de Campanha</title>
 </head>
 <body>
+    @include('layouts.navbar')
     <form action="/campaign" method="POST" enctype="multipart/form-data">
         @csrf
         <h1>Sobre sua campanha:</h1>

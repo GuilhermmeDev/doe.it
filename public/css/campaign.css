@@ -10,10 +10,6 @@ body {
     line-height: 1.6;
     background-color: #f9f9f9;
     color: #333;
-    display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    flex-direction: column;
 }
 
 main {

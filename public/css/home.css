@@ -1,0 +1,183 @@
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.container_sections {
+    margin-left: 1em;
+    margin-top: 4em;
+    height: fit-content;
+}
+
+.titulo_section {
+    margin-left: 20px;
+    font-size: 30px;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.modern_section {
+    width: fit-content;
+    background-color: #3537a3;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.swiper {
+    position: relative;
+    top: 50px;
+    margin-top: 1em;
+    width: auto;
+    height: auto;
+}
+
+.slide {
+    height: fit-content;
+    border-radius: 16px;
+    background-color: #ffffff;
+    padding: 5px 10px;
+}
+
+.swiper-wrapper {
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+.swiper-slide {
+    height: 530px;
+    width: 100%;
+    margin-right: 2em;
+}
+
+.container-slide {
+    margin: 2em;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: black;
+}
+
+.container_book {
+    color: black;
+}
+
+.img_book {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    min-width: 64px;
+    height: 18em;
+    border-radius: 16px;
+}
+
+.info_book {
+    font-family: "Poppins";
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 1em 0;
+}
+
+.title_book {
+    position: relative;
+    left: 5px;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 15px;
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+    max-width: 500px;
+}
+
+.author_book {
+    position: relative;
+    top: 10px;
+    left: 5px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+:root {
+    --swiper-navigation-size: 24px;
+}
+
+.ancor_book {
+    text-decoration: none;
+    color: none;
+}
+
+.ancor_book:hover {
+    text-decoration: none;
+    color: none;
+}
+
+.progress-container {
+    position: relative;
+    top: 10px;
+    left: 5px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.progress-text {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    height: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 25px;
+}
+
+.saibamais {
+    position: relative;
+    top: 30px;
+    font-family: "Poppins";
+    font-weight: 500;
+    border-radius: 16px;
+    width: 120px;
+    height: 45px;
+    font-size: 15px;
+    color: #ffffff;
+    border: 0px;
+    background-color: #5fcb69;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.saibamais:focus,
+.saibamais:active {
+    outline: none;
+    border: 0px;
+}
+
+.saibamais:hover {
+    background-color: #41ad4c;
+}
