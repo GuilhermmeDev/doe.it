@@ -48,9 +48,9 @@
                                     <div class="title_star">
                                         <h6 class="title_book">{{$camp->Description}}</h6>
                                             <div class="progress-container">
-                                                <span class="progress-text">{{$progress = $camp->meta['current'] / $camp->meta['target']}}%</span>
+                                                <span class="progress-text">{{$progress = round(100 * ($progress = $camp->meta['current'] / $camp->meta['target']), 1)}}%</span>
                                                 <div class="progress-bar-container">
-                                                <div class="progress-bar" style="width: {{$progress}}%;"></div>
+                                                    <div class="progress-bar" style="width: {{$progress}}%;"></div>
                                                 </div>
                                             </div>
                                             <button class="saibamais">Saiba mais</button>

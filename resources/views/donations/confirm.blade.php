@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @include('layouts.head')
     <title>Confirmar Doação</title>
+    <link rel="stylesheet" href="{{asset('css/confirm_qrcode.css')}}">
 </head>
 <body>
-    <div class="infos">
-        @if($donation->Description)
-            <p>Descrição da doação:</p>
-            <p><strong>{{$donation->Description}}</strong></p>
-        @endif
-        <p>Quantidade doada: <strong>{{$donation->Quantity}}</strong></p>
-    </div>
 
-    <form action="/confirm/{{$donation->id}}" method="post">
-        @csrf 
-        <h3>Você tem certeza que quer confirmar essa doação?</h3>
-        <p>Ao clicar em "Confirmar Doação" você confirma que recebeu tal doação.</p>
-        <h5>Essa ação não pode ser desfeita.</h5>
-        <button type="submit">Confirmar Doação</button>
-    </form>
+    <div class="container">
+        <div class="left-section">
+          <h2>Confirmar Doação</h2>
+          @if ($donation->Description)
+            <p>Descrição da doação</p>
+            <textarea placeholder="Detalhes da doação">{{$donation->Description}}</textarea>
+          @endif
+          <p class="quantity">Quantidade doada: <span>{{$donation->Quantity}}</span></p>
+          <form action="/confirm/{{$donation->id}}" method="post">
+            @csrf 
+                <p class="confirmation-text">Você tem certeza que quer confirmar essa doação?</p>
+                <button class="confirm-button" type="submit">Confirmar doação</button>
+                <p class="info-text">Ao clicar em "Confirmar doação" você afirma que recebeu tal doação</p>
+            </form>
+        </div>
+        <div class="right-section">
+          <img src="{{asset('assets/donation_doodle.png')}}" alt="Ilustração de doação" />
+        </div>
+    </div>
 </body>
 </html>
