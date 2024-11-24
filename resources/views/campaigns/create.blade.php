@@ -52,7 +52,7 @@
         @enderror
 
         <label for="Number">Número:</label>
-        <input type="text" name="Number" id="Number" required>
+        <input type="number" name="Number" id="Number" required>
         @error('Number')
             <div style="color: red;">{{ $message }}</div>
         @enderror
@@ -64,8 +64,14 @@
         @enderror
 
         <label for="Data">Data:</label>
-        <input type="datetime-local" name="Data" id="Data" required>
+        <input type="date" name="Data" id="Data" required>
         @error('Data')
+            <div style="color: red;">{{ $message }}</div>
+        @enderror
+
+        <label for="Hour">Data:</label>
+        <input type="time" name="Hour" id="Hour" required>
+        @error('Hour')
             <div style="color: red;">{{ $message }}</div>
         @enderror
         

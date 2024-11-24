@@ -39,7 +39,7 @@
               <li><strong>Rua:</strong> {{$address->Street}}</li>
               <li><strong>Cidade:</strong> {{$address->City}}</li>
               <li><strong>Número:</strong> {{$address->Number}}</li>
-              <li><strong>Dia da coleta e hora:</strong> {{$address->Collection_date}}</li>
+              <li><strong>Dia e hora da coleta:</strong> {{\Carbon\Carbon::parse($address->Collection_date)->format('d/m/Y \à\s H:i')}}</li>
             </ul>
             <div class="progress-bar">
               <div class="progress" style="width: {{$progress}}%;"></div>

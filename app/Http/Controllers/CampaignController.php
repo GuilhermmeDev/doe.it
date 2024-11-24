@@ -30,11 +30,14 @@ class CampaignController extends Controller
 
         $address->City = $validRequest['City'];
 
-        $address->Street = $validRequest['City'];
+        $address->Street = $validRequest['Street'];
 
         $address->CEP = $validRequest['CEP'];
 
-        $address->Collection_date = $validRequest['Data'];
+        $dateTime = $validRequest['Data'] . ' ' . $validRequest['Hour']; // concatenando data e hora
+        $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime); // formatando com a biblioteca Carbon
+
+        $address->Collection_date = $dateTime;
 
         $address->Number = $validRequest['Number'];
 

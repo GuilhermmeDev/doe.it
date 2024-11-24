@@ -30,6 +30,7 @@ class CampaignRequest extends FormRequest
             'Number' => 'required|string',
             'CEP' => 'required|string|regex:/^[0-9]{5}-[0-9]{3}$/', // Formato do CEP
             'Data' => 'required|date|after:now', // Data deve ser futura
+            'Hour' => 'required|date_format:H:i',
             'meta' => 'nullable|integer|min:0|max:500', // Meta opcional
             'Image' => 'required|image|mimes:jpeg,jpg,png| max:2048'
         ];
@@ -46,8 +47,9 @@ class CampaignRequest extends FormRequest
             'Number.required' => 'O número é obrigatório.',
             'CEP.required' => 'O CEP é obrigatório.',
             'CEP.regex' => 'O CEP deve estar no formato 00000-000.',
-            'Data.required' => 'A data é obrigatória.',
+            'Data.required' => 'A data é obrigatória.', 
             'Data.after' => 'A data deve ser uma data futura.',
+            'Hour.required' => 'A hora é obrigatória.',
             'meta.integer' => 'A meta deve ser um número inteiro.',
             'meta.min' => 'A meta deve ser pelo menos 0.',
             'meta.max' => 'A meta não pode exceder 500 kg.',
