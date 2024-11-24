@@ -1,0 +1,205 @@
+/* Geral */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif; /* Fonte Poppins */
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.campaign {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Espaçamento entre os blocos */
+}
+
+/* Conteúdo da campanha */
+.campaign-content,
+.campaign-details {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-content {
+    flex: 2;
+    width: 100%;
+}
+
+.campaign-image {
+    width: 95vw;
+    height: auto;
+    max-width: 520px;
+    max-height: 500px;
+    border-radius: 10px;
+}
+
+.description {
+    margin: 15px 0;
+    max-width: 500px;
+}
+
+.description-text {
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.share {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.share input {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+}
+
+.copy-button {
+    align-self: flex-start;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 16px;
+    background-color: #5fcb69;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Detalhes da campanha */
+.campaign-details {
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    height: fit-content;
+}
+
+.campaign-details ul {
+    list-style: none; /* Remove as bolinhas das listas */
+    padding: 0;
+}
+
+.campaign-details ul li {
+    margin: 5px 0; /* Espaçamento entre itens */
+    font-size: 14px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.progress {
+    height: 100%;
+    background-color: #5fcb69;
+}
+
+.help-button {
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    background-color: #5fcb69;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    main {
+        padding: 15px; /* Reduz padding */
+    }
+
+    .campaign {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .campaign-content,
+    .campaign-details {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .progress-bar {
+        height: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 10px; /* Reduz padding */
+    }
+
+    .campaign-content,
+    .campaign-details {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+
+    .share input {
+        font-size: 12px;
+    }
+
+    .copy-button {
+        font-size: 10px;
+        padding: 5px 8px;
+    }
+
+    .help-button {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+}

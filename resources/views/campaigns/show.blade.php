@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/campaign.css')}}">
     <title>{{$campaign->Title}}</title>
     <style>
         .container_bar {
@@ -29,73 +31,69 @@
     @vite('resources/js/app.js')
 </head>
 <body>
-    <h2>Sobre a campanha</h2>
-    <p>ID da campanha: {{$campaign->id}}</p>
-    <img src="{{asset('img/campaigns/' . $campaign->Image)}}" alt="Imagem da Campanha">
-    <p>Título: {{$campaign->Title}}</p>
-    <p>Descrição: {{$campaign->Description}}</p>
-    <p>Dono da campanha: {{$campaign->user->name}}</p>
-    <h2>Local da campanha</h2>
-    <p>Estado: {{$address->State}}</p>
-    <p>CEP: {{$address->CEP}}</p>
-    <p>Cidade: {{$address->City}}</p>
-    <p>Rua: {{$address->Street}}</p>
-    <p>Num: {{$address->Number}}</p>
-    <p>Dia de coleta: {{$address->Collection_date}}</p>
-    @if ($progress !== null || $progress === 0)
-        <p id="target">Meta: {{$campaign->meta['target']}}</p>
-        <p id="current">Arrecadado: {{$campaign->meta['current']}}</p>
-
-        <div class="container_bar">
-            <div class="total_bar">
-                <div class="progress_bar" style="width: {{$progress}}%;"></div>
+    @include('layouts.navbar')
+    <main>
+        <section class="campaign">
+          <article class="campaign-content">
+            <h1>{{$campaign->Title}}</h1>
+            <img src="{{asset('img/campaigns/' . $campaign->Image)}}" alt="Imagem de doação" class="campaign-image">
+            <div class="description">
+              <div class="share">
+                <label for="share-input" class="share-label">Compartilhe:</label>
+                <input id="share-input" type="text" value="{{request()->url()}}" readonly>
+                <button class="copy-button" id="copy">Copiar</button>
+              </div>                      
+              <h2>Descrição</h2>
+              <p class="description-text">{{$campaign->Description}}</p>
             </div>
-        </div>
-        <p id="progress">{{$progress}}%</p>
-    @else 
-        <p>Essa campanha não possui meta.</p>
-    @endif
-    @if ($donation)
-        <p>Veja o qr code de sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
-    @elseif($campaign->user_id !== auth()->user()->id && $campaign->meta['current'] < $campaign->meta['target'])
-        <a href="/donate/{{$campaign->id}}">Doar para essa campanha</a>
-    @endif
+          </article>
+          <aside class="campaign-details">
+            <h2 class="sobre">Sobre a campanha</h2>
+            <ul>
+              <li><strong>Dono da campanha:</strong> {{$campaign->user->name}}</li>
+              <li><strong>Arrecadados:</strong> {{$campaign->meta['current']}}</li>
+              <li><strong>Nossa meta:</strong> {{$campaign->meta['target']}}</li>
+            </ul>
+            <h2 class="local">Local da campanha</h2>
+            <ul>
+              <li><strong>CEP:</strong> {{$address->CEP}}</li>
+              <li><strong>Estado:</strong> {{$address->State}}</li>
+              <li><strong>Rua:</strong> {{$address->Street}}</li>
+              <li><strong>Cidade:</strong> {{$address->City}}</li>
+              <li><strong>Número:</strong> {{$address->Number}}</li>
+              <li><strong>Dia da coleta e hora:</strong> {{$address->Collection_date}}</li>
+            </ul>
+            <div class="progress-bar">
+              <div class="progress" style="width: {{$progress}}%;"></div>
+            </div>
+            @if ($donation)
+                <p>Veja o qr code da sua doação <a href="/donation/{{$donation->id}}">aqui</a></p>
+            @elseif($campaign->user_id !== auth()->user()->id && $campaign->meta['current'] < $campaign->meta['target'])
+                <a class="help-button" href="/donate/{{$campaign->id}}">Doar</a>
+            @endif
 
-    <p>Apoiadores: {{$donation_count}}</p>
+            @if($campaign->user_id === auth()->user()->id)
+                <form action="/campaign/{{$campaign->id}}" method="post">
+                    @csrf 
+                    @method('DELETE')
 
-    @if(auth()->user()->id === $campaign->user_id)
-        <form action="/campaign/{{$campaign->id}}" method="post">
-            @csrf 
-            @method('DELETE')
+                    <button type="submit">Deletar Campanha</button>
+                </form>
+            @endif
+          </aside>
+        </section>
+      </main>
 
-            <button type="submit">Deletar Campanha</button>
-        </form>
-        <a href="/campaign/edit/{{$campaign->id}}">Editar Campanha</a>
-    @endif
+<script>
+    const buttonCopy = document.querySelector('#copy');
+    buttonCopy.addEventListener('click', (e) => {
+        const input = document.querySelector('#share-input');
+        input.select();
+        document.execCommand('copy');
 
-    <script>
-        window.onload=function() {
-            Echo.channel(`testMeta`)
-            .listen('CampaignMeta', (e) => {
-                const currentText = document.querySelector('#current');
-                const targetText = document.querySelector('#target');
-
-                const currentMeta = e.message.current;
-                const targetMeta = e.message.target;
-
-                currentText.innerText = `Arrecado: ${currentMeta}`;
-                targetText.innerText = `Meta: ${targetMeta}`;
-
-                const progressText =  document.querySelector('#progress');
-
-                const percent = (currentMeta/targetMeta) * 100;
-                const progress = Math.round(percent, -1);
-                progressText.innerText = `${progress}%`;
-
-                console.log(`OK! Perc: ${progress}`);
-            }
-            );
-        }
-    </script>
+        buttonCopy.innerText = 'Copiado!';
+    })
+</script>
+    
 </body>
 </html>

@@ -100,7 +100,7 @@ class CampaignController extends Controller
     public function delete($id) {
         $campaign = Campaign::findOrFail($id)->delete();
 
-        return redirect('/home')->with('Success', 'Doação cancelada com sucesso!');
+        return redirect('/home')->with('Success', 'Campanha cancelada com sucesso!');
     }
 
 
