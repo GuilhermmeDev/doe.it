@@ -1,0 +1,175 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
+
+/* Container Principal */
+.container {
+    width: 100%; /* Ajusta a largura para telas menores */
+    max-width: 1200px;
+    height: 100%;
+    background-color: white;
+    padding: 2rem; /* Ajustei o padding */
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column; /* Altera o layout em telas menores */
+    gap: 2rem;
+    align-items: center;
+}
+
+/* Logo e Navegação */
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav input {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    width: 150px; /* Ajusta a largura do campo */
+}
+
+.nav input:focus {
+    outline: none;
+    border-color: #27ae60;
+}
+
+/* Botão Criar Campanha */
+.create-campaign-button {
+    background-color: #27ae60;
+    width: auto;
+    padding: 0.5rem 1rem; /* Ajusta o tamanho do botão */
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 16px;
+}
+
+/* Conteúdo Principal */
+.campaign-info {
+    width: 100%;
+    text-align: center; /* Centraliza o texto em telas menores */
+}
+
+.campaign-info h1 {
+    font-size: 1.5rem; /* Ajusta o tamanho da fonte */
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-info p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.description-box {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    resize: none;
+}
+
+/* Botão Cancelar */
+.cancel-button {
+    width: 100%;
+    max-width: 300px; /* Define uma largura máxima */
+    padding: 1rem;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+    background-color: #5fcb69;
+}
+
+/* Placeholder QR */
+.qr-placeholder {
+    width: 90%; /* Ajusta a largura */
+    max-width: 418px;
+    height: 300px; /* Ajusta a altura */
+    background-color: #27ae60;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Consultas de Mídia */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Altera para layout em linha em telas maiores */
+        justify-content: space-between;
+    }
+
+    .campaign-info {
+        text-align: left;
+    }
+
+    .qr-placeholder {
+        height: 400px; /* Restaura a altura */
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        flex-direction: column; /* Empilha os itens da navegação */
+        gap: 0.5rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .description-box {
+        font-size: 0.9rem; /* Ajusta o tamanho do texto */
+    }
+}

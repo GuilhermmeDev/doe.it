@@ -38,7 +38,7 @@
 
                 @foreach($campaigns as $camp)
                     <div class="swiper-slide slide">
-                        <a href="#" class="ancor_book">
+                        <a href="/campaign/{{$camp->id}}" class="ancor_book">
                             <div class="container_book">
                                 <div class="container_img_book">
                                     <img src="img/campaigns/{{$camp->Image}}" class="img_book">

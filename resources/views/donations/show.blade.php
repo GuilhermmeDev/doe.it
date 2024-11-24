@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Qr code</title>
+    @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/qrcode.css')}}">
 </head>
 <body>
     @vite('resources/js/app.js')
-    <img src="data:image/png;base64, {{$donation->qr_code}}" alt="qr code">
-    @if ($donation->Description)
-        <p><strong>Descrição:</strong></p>
-        <p>{{$donation->Description}}</p>
-    @endif
-    <form action="/donation/{{$donation->id}}" method="POST">
-        @csrf 
-        @method('DELETE')
-        <button type="submit">Cancelar Doação</button>
-    </form>
+
+    <main class="container">
+        <section class="campaign-info">
+            <h1>QR Code da Doação</h1>
+            <p>ID: {{$donation->id}}</p>
+            <p>Descrição</p>
+            @if ($donation->Description)
+                <textarea class="description-box" readonly >{{$donation->Description}}</textarea>
+            @endif
+            <form action="/donation/{{$donation->id}}" method="post">
+                @csrf 
+                @method('DELETE')
+
+                <button class="cancel-button" type="submit">Cancelar Doação</button>
+            </form>
+        </section>
+        
+        <div class="qr-placeholder">
+            <img src="data:image/png;base64, {{$donation->qr_code}}" alt="QR CODE">
+        </div>
+    </main>
 
     <script>
         window.onload=function() {

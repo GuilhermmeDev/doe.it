@@ -20,7 +20,7 @@
                 <label for="share-input" class="share-label">Compartilhe:</label>
                 <input id="share-input" type="text" value="{{request()->url()}}" readonly>
                 <button class="copy-button" id="copy">Copiar</button>
-              </div>                      
+              </div>
               <h2>Descrição</h2>
               <p class="description-text">{{$campaign->Description}}</p>
             </div>
