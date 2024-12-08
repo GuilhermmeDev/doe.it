@@ -82,7 +82,7 @@ Para implantar o projeto em um ambiente de produção:
 
 ## 📄 Licença
 
-Este projeto está sob a licença Creative Commons (CC BY-NC-SA 4.0) - veja o arquivo [LICENSE.md](https://github.com/GuilhermmeDev/doe.it/LICENSE.md) para detalhes.
+Este projeto está sob a licença Creative Commons (CC BY-NC-SA 4.0) - veja o arquivo [LICENSE.md](https://github.com/GuilhermmeDev/doe.it/blob/main/LICENSE) para detalhes.
 
 ## 🎁 Expressões de gratidão
 
