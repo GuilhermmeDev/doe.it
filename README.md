@@ -1,66 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# doe.it
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**doe.it** é um sistema de doações web que conecta doadores e donatários de forma ágil e segura. O sistema permite a validação de cada doação por meio de QR Codes e utiliza tecnologias modernas para garantir uma experiência fluida e intuitiva.
 
-## About Laravel
+## 🚀 Começando
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📋 Pré-requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Antes de começar, certifique-se de ter os seguintes itens instalados em sua máquina:
 
-## Learning Laravel
+-   PHP >= 8.1
+-   Composer
+-   MySQL ou outro banco de dados compatível
+-   Docker (opcional, se usar o Laravel Sail)
+-   Node.js & npm
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🔧 Instalação
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Clone o repositório:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git clone https://github.com/GuilhermmeDev/doe.it.git
+```
 
-## Laravel Sponsors
+2. Instale as dependências do projeto:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```
+composer install
+npm install && npm run build
+```
 
-### Premium Partners
+Configure o arquivo .env:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+Atualize as configurações do banco de dados no arquivo `.env`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Inicie o servidor de desenvolvimento:
 
-## Code of Conduct
+```
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. (Opcional) Utilize o Docker com o Laravel Sail:
 
-## Security Vulnerabilities
+```
+./vendor/bin/sail up -d
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📦 Implantação
 
-## License
+Para implantar o projeto em um ambiente de produção:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Certifique-se de que o servidor tenha os pré-requisitos instalados.
+2. Configure o ambiente `.env` adequadamente.
+3. Execute as _migrations_ no banco de dados de produção.
+4. Configure o sistema de cache e queue do Laravel conforme necessário.
+
+## 🛠️ Construído com
+
+-   Laravel - Framework PHP
+-   Simple QR Code - Geração de QR Codes
+-   Laravel Reverb - WebSockets para validação em tempo real
+-   Laravel Breeze - Autenticação e UI simples
+-   Laravel Sail - Ambiente de desenvolvimento com Docker
+
+## ✒️ Autores
+
+-   **Guilherme Morais** - Back-End - @GuilhermmeDev
+-   Equipe de designers e front-end:
+    -   Willian Alves - Front-End - (@willzky23)
+    -   Francisco Kauan - Designer - (@kauansiii)
+    -   Gustavo Sousa - Front-End - (@gustatxk)
+    -   Kauã Silva - Front-End - (@KauaSilvad)
+    -   André Vasconcellos - Front-End - (@adrznx)
+    -   Nicollas Ryan - Designer
+
+## 📄 Licença
+
+Este projeto está sob a licença Creative Commons (CC BY-NC-SA 4.0) - veja o arquivo [LICENSE.md](https://github.com/GuilhermmeDev/doe.it/LICENSE.md) para detalhes.
+
+## 🎁 Expressões de gratidão
+
+Compartilhe o projeto com seus amigos 📢
+Contribua com melhorias no repositório 🤝
+Um agradecimento especial à comunidade Laravel ❤️
