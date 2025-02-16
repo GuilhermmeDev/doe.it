@@ -21,10 +21,6 @@
 
     @if ($search)
         <p>Procurando campanha: {{$search}}</p>
-
-        @if (count($campaigns) === 0)
-            <p>Campanha não encontrada</p>
-        @endif
     @endif
 
     @if (count($campaigns) === 0)

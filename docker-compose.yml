@@ -1,5 +1,5 @@
 services:
-    laravel.test:
+    doe.it:
         build:
             context: ./vendor/laravel/sail/runtimes/8.3
             dockerfile: Dockerfile
@@ -23,6 +23,13 @@ services:
             - sail
         depends_on:
             - pgsql
+        command:
+            sh -c "php artisan key:generate &&
+            php artisan migrate:fresh &&
+            npm install &&
+            npm run build &&
+            php artisan serve --host=0.0.0.0 --port=80"
+
     pgsql:
         image: "postgres:17"
         ports:

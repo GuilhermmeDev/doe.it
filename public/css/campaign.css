@@ -137,6 +137,18 @@ main {
     border-radius: 16px;
     border: none;
     font-family: "Poppins";
+    cursor: pointer;
+}
+
+.update_button {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 16px;
+    text-decoration: none;
+    border: none;
+    font-family: "Poppins";
+    cursor: pointer;
 }
 
 /* Responsivo */

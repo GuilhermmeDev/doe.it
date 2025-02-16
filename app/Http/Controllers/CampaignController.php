@@ -125,16 +125,17 @@ class CampaignController extends Controller
 
         $campaign->Description = $request->Description;
 
-        $requestImage = $request->Image;
+        if ($request->Image) {
+            $requestImage = $request->Image;
 
-        $extension = $requestImage->extension();
+            $extension = $requestImage->extension();
 
-        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
-        $requestImage->move(public_path('img/campaigns'), $imageName);
+            $requestImage->move(public_path('img/campaigns'), $imageName);
 
-        $campaign->Image = $imageName;
-    
+            $campaign->Image = $imageName;
+        }
 
         $campaign->save();
 

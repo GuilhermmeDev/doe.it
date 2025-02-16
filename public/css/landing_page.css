@@ -56,6 +56,7 @@ body {
     border: 0px;
     border-radius: 12px;
     background-color: #e7e2e2;
+    cursor: pointer;
 }
 
 .criar {
@@ -68,10 +69,12 @@ body {
     background-color: #5fcb69;
     border-radius: 12px;
     border: 0px;
+    cursor: pointer;
 }
 
 .img {
     width: 550px;
+    height: 500px;
 }
 
 .quadrado {

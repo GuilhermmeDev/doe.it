@@ -51,12 +51,15 @@
             @endif
 
             @if($campaign->user_id === auth()->user()->id)
-                <form action="/campaign/{{$campaign->id}}" method="post">
-                    @csrf 
-                    @method('DELETE')
+            <div style="display: flex; flex-direction: column; gap: 10px; width: fit-content;">
+              <form action="/campaign/{{$campaign->id}}" method="post">
+                  @csrf 
+                  @method('DELETE')
 
-                    <button type="submit" class="delete_button">Deletar Campanha</button>
-                </form>
+                  <button type="submit" class="delete_button">Deletar Campanha</button>
+              </form>
+              <a href="/campaign/edit/{{$campaign->id}}" class="update_button">Editar campanha</a>
+            </div>
             @endif
           </aside>
         </section>

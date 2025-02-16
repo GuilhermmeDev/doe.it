@@ -26,7 +26,7 @@
             <input type="text" name="Description" id="Description" value="{{$campaign->Description}}" required>
 
             <label for="Image">Imagem: </label>
-            <input type="file" name="Image" id="Image" required>
+            <input type="file" name="Image" id="Image" accept=".jpeg, .jpg, .png">
 
             <img src="{{asset('img/campaigns/' . $campaign->Image)}}" alt="Imagem da campanha" style="width: 200px; height: 200px"> 
 

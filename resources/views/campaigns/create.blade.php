@@ -114,7 +114,7 @@
                       <div class="frame-wrapper-2">
                         <div class="div-6">
                             <label for="Image" class="text-wrapper-4">Imagem da sua campanha:</label>
-                            <input type="file" name="Image" id="Image" required class="div-wrapper-2">
+                            <input type="file" name="Image" id="Image" required class="div-wrapper-2" accept=".jpeg, .jpg, .png">
                             @error('Image')
                                 <div style="color: red;">{{ $message }}</div>
                             @enderror
