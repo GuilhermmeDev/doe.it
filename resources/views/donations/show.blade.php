@@ -16,6 +16,8 @@
         <section class="campaign-info">
             <h1>QR Code da Doação</h1>
             <p>ID: {{$donation->id}}</p>
+            {{$donation->created_at}}
+            {{$donation->Status}}
             <p>Descrição</p>
             @if ($donation->Description)
                 <textarea class="description-box" readonly >{{$donation->Description}}</textarea>
