@@ -37,6 +37,10 @@
                 <button type="submit" class="submit-button">Entrar</button>
             </form>
 
+            <a href="/login/google" class="google-login-button">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
+            </a>
+
             <div class="separator">
                 <hr class="line left-line">
                 <span class="separator-text">ou</span>
