@@ -32,13 +32,13 @@
             <form action="/login" method="POST">
                 @csrf
                 <label for="email">E-mail</label>
-                <input type="email" id="email" placeholder="Insira seu e-mail">
+                <input type="email" id="email" name="email" value="{{old('email')}}" placeholder="Insira seu e-mail">
                 @error('email')
                  <p>{{$message}}</p>
                 @enderror
                 <label for="password">Senha</label>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Insira sua senha">
+                    <input type="password" id="password" name="password" placeholder="Insira sua senha">
                     <span class="toggle-password"></span>
                 </div>
                 @error('password')
@@ -49,7 +49,7 @@
 
                 <button type="submit" class="btn">Entrar</button>
 
-                <p class="signup-text">Ainda não tem uma conta? <a href="#">Cadastre-se</a></p>
+                <p class="signup-text">Ainda não tem uma conta? <a href="/register">Cadastre-se</a></p>
 
                 <a class="google-login" href="{{url('/login/google')}}">
                     <img class="googlee" src="{{asset('assets/google_icon.svg')}}" alt="Google">
