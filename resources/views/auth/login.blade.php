@@ -3,70 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    @include('layouts.head')
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
+    <title>Login</title>
 </head>
 <body>
-    <main class="login-container">
-        <header class="header-logo">Doe.It</header>
-        
-        <section class="login-section">
-            <h1 class="login-title">Entrar</h1>
-            <p class="login-subtitle">Você pode entrar com seu e-mail</p>
-            
-            <form class="login-form" method="POST" action="{{route('login')}}">
-                @csrf
-                <div class="input-container">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" id="email" name="email" class="input-field" placeholder="Insira seu e-mail" required>
-                    @error('email')
-                        <p>{{$message}}</p>
-                    @enderror
-                </div>
-
-                <div class="input-container-senha">
-                    <input type="password" id="password" name="password" placeholder="Insira sua senha" required>
-                    <span class="form-label-senha">Senha</span>
-                    <img id="eyeIcon" src="{{asset('assets/oculto.svg')}}" alt="Mostrar senha" class="eye-icon">
-                    @error('password')
-                        <p>{{$message}}</p>
-                    @enderror
-                  </div>
-
-                <button type="submit" class="submit-button">Entrar</button>
-            </form>
-
-            <a href="/login/google" class="google-login-button">
-                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png">
-            </a>
-
-            <div class="separator">
-                <hr class="line left-line">
-                <span class="separator-text">ou</span>
-                <hr class="line right-line">
+    <div class="container">
+        <!-- Bloco verde -->
+        <div class="container-green">
+            <div class="icon">
+                <img class="maoo" src="{{asset('assets/mao.svg')}}" alt="Ícone de doação">
             </div>
+            <p id="carousel-text" class="quote">
+                “No <span class="highlight">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”
+            </p>
+            <p class="subtext">Junte-se a nós e faça a diferença!</p>
+        
+            <!-- Indicadores -->
+            <div class="carousel-indicators"></div>
+        </div>
+        
+        <script src="{{asset('js/login.js')}}"></script>
+        
 
-            <footer class="signup-prompt">
-                <span>Não tem uma conta? </span>
-                <a href="/register" class="signup-link">Cadastre-se</a>
-            </footer>
-        </section>
-    </main>
+        <!-- Bloco de login -->
+        <div class="container-white">
+            <img class="logo" src="{{asset('assets/logo.svg')}}" alt="Doeit"> <!-- Substitua pela sua logo -->
+            <h2>Bem Vindo de volta!</h2>
+            <form action="/login" method="POST">
+                @csrf
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Insira seu e-mail">
+                @error('email')
+                 <p>{{$message}}</p>
+                @enderror
+                <label for="password">Senha</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Insira sua senha">
+                    <span class="toggle-password"></span>
+                </div>
+                @error('password')
+                 <p>{{$message}}</p>
+                @enderror
+
+                <a href="/forgot-password" class="forgot-password">Esqueceu sua senha?</a>
+
+                <button type="submit" class="btn">Entrar</button>
+
+                <p class="signup-text">Ainda não tem uma conta? <a href="#">Cadastre-se</a></p>
+
+                <a class="google-login" href="{{url('/login/google')}}">
+                    <img class="googlee" src="{{asset('assets/google_icon.svg')}}" alt="Google">
+                </a>
+            </form>
+        
+        </div>
+    </div>
 </body>
 </html>
-
-<script>
-    document.getElementById('eyeIcon').addEventListener('click', function () {
-        const passwordField = document.getElementById('password');
-        const eyeIcon = document.getElementById('eyeIcon');
-
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text'; // Torna o campo visível
-        eyeIcon.src = '{{asset("assets/visivel.svg")}}'; // Altera para o ícone de "visível"
-    } else {
-        passwordField.type = 'password'; // Torna o campo oculto
-        eyeIcon.src = '{{asset("assets/oculto.svg")}}'; // Altera para o ícone de "oculto"
-    }
-    });
-</script>

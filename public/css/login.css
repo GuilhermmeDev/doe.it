@@ -1,224 +1,310 @@
-/* Configuração do contêiner principal */
-.login-container,
-.login-container * {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.login-container {
-    background: #ffffff;
-    height: 90vh;
-    position: relative;
-    overflow: hidden;
-    overflow-y: hidden;
-}
-
-.header-logo {
-    color: var(--nverde, #5fcb69);
-    text-align: center;
-    font-family: "Righteous", sans-serif;
-    font-size: 38px;
-    font-weight: 400;
-    position: absolute;
-    left: 75px;
-    top: 37px;
-}
-
-.login-section {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 170px; /* Ajustado para subir a seção de login em 100px */
-    width: 568px;
-}
-
-.login-title {
-    color: #000000;
-    text-align: center;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 30px;
-    font-weight: 500;
-}
-
-.login-subtitle {
-    color: #000000;
-    text-align: center;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 400;
+body {
     width: 100%;
-    padding-bottom: 20px;
+    height: 100vh;
+    background-color: #D9D9D9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: "Plus Jakarta Sans", serif;
 }
 
-/* Estilo dos campos de formulário */
-.login-form {
+.container {
+    width: 1400px;
+    height: 950px;
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: flex-end; /* Mantém os elementos organizados */
+    align-items: center;
+    padding-right: 30px;
+    margin-top: 150px;
+}
+
+.container-green {
+    position: relative;
+    left: -120px; /* Move o verde para fora do branco */
+    top: 340px; /* Mantém o verde fixo */
+    transform: translateY(-42%); /* Garante o alinhamento vertical correto */
+    background-color: #5FCB69;
+    width: 800px;
+    height: 800px; /* Mantém o tamanho do verde fixo */
+    border-radius: 18px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    align-items: center;
-}
-
-.input-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-}
-
-.form-label {
-    color: #000000;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 500;
-    position: absolute;
-    top: -25px; /* Alinhamento vertical acima do campo */
-    left: 0; /* Alinhamento com o início do campo */
-}
-
-.form-label-senha {
-    color: #000000;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    font-weight: 500;
-    position: absolute;
-    top: -25px; /* Alinhamento vertical acima do campo */
-    left: 0; /* Alinhamento com o início do campo */
-    padding-top: 2px;
-}
-
-.input-field {
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #000000;
-    width: 100%; /* largura máxima */
-    height: 45px; /* diminui a altura */
-    padding: 10px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    color: #575761;
-}
-
-.submit-button {
-    background: var(--nverde, #5fcb69);
-    border-radius: 16px;
-    color: #ffffff;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 10px;
-    text-align: center;
-    width: 100%; /* largura máxima */
-    max-width: 400px;
-    height: 45px;
-    border: none;
-}
-
-/* Estilo para o separador */
-.separator {
-    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-    width: 400px; /* Garantir que o separador tenha a largura dos campos */
-    margin-left: auto; /* Centraliza o separador */
-    margin-right: auto; /* Centraliza o separador */
-}
-
-.line {
-    border-top: 1px solid #000000;
-    width: 100%; /* A linha vai ocupar 100% da largura do contêiner */
-}
-
-.separator-text {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    color: #575761;
-    font-weight: 300;
-}
-
-/* Estilo da seção de cadastro */
-.signup-prompt {
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 20px;
-    font-weight: 400;
-    color: #575761;
+    color: white;
     text-align: center;
-    margin-top: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.signup-link {
-    color: var(--nverde, #5fcb69);
-    text-decoration: none;
+
+.icon img {
+    width: 270px;
 }
 
-/* Estilo para o campo de senha */
-.input-container-senha {
-    position: relative;
-    width: 100%;
-    max-width: 400px; /* Largura máxima do campo */
+
+.highlight {
+    color: #d1e7d6;
 }
 
-#password {
-    background: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #000000;
-    width: 100%; /* Largura máxima */
-    height: 45px; /* Altura do campo */
+.subtext {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+
+/* Estilização do bloco branco */
+.container-white {
+    width: 55%;
+    margin-top: -5px;
+    margin-left: -160px;
     padding: 10px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    color: #575761;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.eye-icon {
+.logo {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 350px;
+}
+
+label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 400px;
+    padding-right: 35px;
+    background-color: #ECECEC;
+}
+
+.toggle-password {
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%); /* Alinha o ícone verticalmente */
+    transform: translateY(-50%);
     cursor: pointer;
+}
+
+input {
+    background-color: #ECECEC;
+    width: 400px;
+    height: 45px;
+    border: none;
+    outline: none;
+
+}
+
+.forgot-password {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+    margin-bottom: 15px;
+    color: gray;
+    text-decoration: none;
+    margin-right: -40px;
+}
+
+.btn {
+    width: 120px;
+    height: 38px;
+    padding: 10px;
+    margin-left: 130px;
+    background-color: #5FCB69;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.signup-text {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-left: 45px;
+}
+
+.signup-text a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.google-login {
+    display: inline-block; /* Para que o link envolva apenas a imagem */
+    background: none; /* Remove qualquer fundo */
+    border: none;
+    padding: 0; /* Remove qualquer espaçamento extra */
+    margin-left: 190px;
+    margin-top: 10px;
+}
+
+.google-login img {
     width: 20px;
-    height: 20px;
+    margin-right: 8px;
 }
 
-/* Estilo do rótulo do campo de senha */
-.form-label-senha {
-    color: #000000;
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+#carousel-text {
     font-size: 16px;
-    font-weight: 500;
-    position: absolute;
-    top: -25px; /* Alinhamento vertical acima do campo */
-    left: 0; /* Alinhamento com o início do campo */
-    padding-top: 2px;
+    transition: 0.5s ease-in-out;
 }
 
-span,
-.signup-link {
-    font-size: 16px;
+/* Estiliza os indicadores (bolinhas) */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-@media (max-width: 755px) {
-    .header-logo {
-        position: unset;
-        margin-top: 40px;
+.carousel-indicators .dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #bbb; /* Cinza claro */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.carousel-indicators .dot.active {
+    background-color: white; /* Destaca a bolinha ativa */
+    width: 12px;
+    height: 12px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+
+    body {
+        overflow-y: hidden;
     }
+
+    .container-green {
+        width: 100%;
+        padding: 30px;
+        flex-direction: column;
+    }
+    .container-white {
+        width: 100%;
+        padding: 30px;
+    }
+
+    #carousel-text {
+        font-size: 16px;
+        margin-left: 90px;
+    }
+
+    .maoo {
+        margin-left: 90px;
+    }
+
+    .subtext {
+        margin-left: 90px;
+    }
+
+    .carousel-indicators {
+        margin-left: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        
+    }
+    .container {
+        padding: 20px;
+    }
+    .container-green {
+        display: none;
+    }
+    .container-white {
+        margin-right: 50px;
+    }
+    .btn {
+        font-size: 14px;
+    }
+
+    form {
+        margin-left: 50px;
+    }
+
+    #carousel-text {
+        margin-left: 190px;
+    }
+
+    .maoo {
+        margin-left: 190px;
+    }
+
+    .subtext {
+        margin-left: 190px;
+    }
+
+    .carousel-indicators{
+        margin-left: 160px;
+    }
+
+    input {
+        width: 350px;
+    }
+
+    .password-container input {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+    .container-green {
+        display: none;
+    }
+    .btn {
+        font-size: 12px;
+        height: 35px;
+    }
+
+   
+ 
 }
