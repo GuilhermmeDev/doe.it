@@ -23,6 +23,7 @@ fi
 php artisan serve --host=0.0.0.0 --port=80 &
 php artisan reverb:start &
 php artisan queue:work &
+php artisan schedule:work &
 
 # Aguarda que pelo menos um processo falhe antes de encerrar o contêiner
 wait
