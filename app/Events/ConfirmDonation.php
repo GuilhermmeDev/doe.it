@@ -31,6 +31,6 @@ class ConfirmDonation implements ShouldBroadcast
      */
     public function broadcastOn() : Channel
     {
-        return new Channel('testDonation');
+        return new PrivateChannel('donation.' . $this->donation->id);
     }
 }

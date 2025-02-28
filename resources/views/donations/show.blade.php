@@ -37,8 +37,9 @@
 
     <script>
         window.onload=function() {
-            Echo.channel(`testDonation`)
+            Echo.private(`donation.{{$donation->id}}`)
             .listen('ConfirmDonation', (e) => {
+                console.log("Donation confirmed");
                 window.location.reload(true);
             });
         }

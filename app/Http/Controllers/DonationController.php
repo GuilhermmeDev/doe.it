@@ -102,7 +102,7 @@ class DonationController extends Controller
         $campaign->meta = $meta;
 
         $campaign->save();
-        event(new ConfirmDonation($donation));
+        ConfirmDonation::dispatch($donation);
 
         return redirect('/home')->with('success', 'Doação confirmada com sucesso.');
     }
