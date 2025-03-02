@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('campaign_id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('Quantity');
             $table->string('Description', 255)->nullable();
             $table->datetime('Confirmed_at')->nullable();
-            $table->tinyText('Status')->default('pending');
+            $table->string('Status')->default('pending');
             $table->timestamps();
 
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
