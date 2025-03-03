@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id');
             $table->string('Title', 50);
             $table->text('Description');
-            $table->json('meta')->nullable();
+            $table->json('meta');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
