@@ -11,6 +11,9 @@
 </head>
 <body>
     @include('layouts.navbar')
+    @if (session('error'))
+        {{session('error')}}<br>
+    @endif
     <h1 class="titulo">Doar para campanha {{$campaign->Title}}</h1>
     <p class="subtitulo">Meta: {{$campaign->meta['target']}} kg</p>
     <p class="subtitulos">Arrecadado: {{$campaign->meta['current']}} kg</p>
@@ -19,7 +22,7 @@
     <form action="/donation/{{$campaign->id}}" method="post">
         @csrf
 
-        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"/>
+        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity" min="0" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"/>
         <input type="text" class="descricao" placeholder="Descrição" name="Description" id="Description"/> 
         
         <p class="text2">

@@ -33,8 +33,12 @@ class DonationController extends Controller
 
         $donation->user_id = $userid;
         $donation->campaign_id = $id;
-
-        $donation->Quantity = $request->Quantity;
+        if ($request->Quantity > 0)
+        {
+            $donation->Quantity = $request->Quantity;
+        } else {
+            return redirect()->back()->with('error', 'Quantidade inválida');
+        }
         if ($request->Description)
         {
             $donation->Description = $request->Description;
