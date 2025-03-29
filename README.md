@@ -10,7 +10,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 
 Antes de começar, certifique-se de ter os seguintes itens instalados em sua máquina:
 
--   PHP >= 8.1
+-   PHP >= 8.2
 -   Composer
 -   MySQL ou outro banco de dados compatível
 -   Docker (opcional, se usar o Laravel Sail)
