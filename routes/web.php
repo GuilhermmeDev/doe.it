@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/campaign/{id}', [CampaignController::class, 'delete'])->name('campaign.delete');
     Route::get('/campaign/edit/{id}', [CampaignController::class, 'edit'])->name('campaign.edit');
     Route::put('/campaign/update/{id}', [CampaignController::class, 'update']);
+    Route::post('/campaign/invite', [CampaignController::class, 'invite'])->name('campaign.invite');
+
 
     Route::get('/donate/{id}', [DonationController::class, 'donate'])->name('donation.donate');
     Route::post('/donation/{id}', [DonationController::class, 'store']);
