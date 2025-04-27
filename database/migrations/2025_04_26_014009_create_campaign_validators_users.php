@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('campaign_validators_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('campaign_id');
+            $table->string('campaign_id');
             $table->unsignedBigInteger('invited_by');
             $table->string('invite_email');
             $table->unsignedBigInteger('user_id')->nullable();
@@ -23,6 +23,10 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->dateTime('accepted_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
+            $table->foreign('invited_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
