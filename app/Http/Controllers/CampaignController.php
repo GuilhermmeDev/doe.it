@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CampaignRequest;
+use App\Mail\CampaignInviteMail;
 use App\Models\Address;
 use App\Models\Campaign;
 use App\Models\CampaignValidatorUser;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
@@ -144,6 +146,7 @@ class CampaignController extends Controller
         return redirect()->route('home')->with('Success', 'Campanha editada com sucesso!');
     }
 
+
     public function invite(Request $request){
         $request->validate([
             'email' => 'required|email',
@@ -162,16 +165,56 @@ class CampaignController extends Controller
                 'message' => 'Você não pode convidar a si mesmo.',
             ], 400);
         }
+        else if (CampaignValidatorUser::where('user_id', $user->id)->exists()) {
+            return response()->json([
+                'message' => 'Usuário já é um validador.',
+            ], 400);
+        }
 
         $validator_user = new CampaignValidatorUser();
         $validator_user->campaign_id = $request->campaign_id;
         $validator_user->invited_by = auth()->user()->id;
+        $validator_user->user_id = $user->id;
         $validator_user->invite_email = $email;
         $validator_user->status = 'pending';
         $validator_user->save();
 
+        Mail::to($email)->send(new CampaignInviteMail(Campaign::where('id',$request->campaign_id)->first(), $user, auth()->user()->name, $validator_user->token));
+
         return response()->json([
             'message' => 'Convite enviado com sucesso!',
         ], 200);
+    }
+
+
+    public function accept($token) {
+        $validator_user = CampaignValidatorUser::where('token', $token)->first();
+
+        if(auth()->user()->id !== $validator_user->user_id) {
+            return redirect('/home')->with('error', 'Você não tem permissão para aceitar este convite.');
+
+        }
+        else if (!$validator_user) {
+            return redirect('/home')->with('error', 'Convite inválido ou já aceito.');
+        }
+
+        $validator_user->status = 'accepted';
+        $validator_user->accepted_at = now();
+        $validator_user->save();
+
+        return redirect('/home')->with('success', 'Convite aceito com sucesso!');
+    }
+
+
+    public function decline($token) {
+        $validator_user = CampaignValidatorUser::where('token', $token)->first();
+
+        if (!$validator_user) {
+            return redirect('/home')->with('error', 'Convite inválido ou já aceito.');
+        }
+
+        $validator_user->delete();
+
+        return redirect('/home')->with('success', 'Convite recusado com sucesso!');
     }
 }
