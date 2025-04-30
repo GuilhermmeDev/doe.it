@@ -78,7 +78,7 @@ class DonationController extends Controller
 
         $campaign = Campaign::find($donation->campaign_id);
 
-        if (Gate::allows('auth-donation', $campaign)) {
+        if (Gate::forUser(auth()->user())->allows('auth-donation', $campaign)) {
             return view('donations.confirm', compact('donation'));
         }
 
