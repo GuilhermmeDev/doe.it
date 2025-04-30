@@ -78,6 +78,7 @@
           <label for="inviteEmail">Digite o e-mail</label>
           <input id="inviteEmail" type="email" name="email" placeholder="exemplo@email.com" required />
           <input type="hidden" name="campaign_id" value="{{ $campaign->id }}" />
+          <p class="alert">Só compartilhe sua campanha com pessoas de confiança</p>
           <button type="submit" style="margin-top: 10px;" class="validator_button">Enviar convite</button>
         </form>
       </div>
