@@ -20,7 +20,7 @@ class DonationController extends Controller
             {
                 return redirect('/campaign/'. $campaign->id);
             }
-    
+
             return view('donations.donate', compact('campaign'));
         }
         return view('auth.register-cpf');
@@ -78,7 +78,7 @@ class DonationController extends Controller
 
         $campaign = Campaign::find($donation->campaign_id);
 
-        if (Gate::forUser(auth()->user())->allows('auth-donation', $campaign)) {
+        if (Gate::forUser(auth()->user())->allows('auth-donation',[$campaign, $donation])) {
             return view('donations.confirm', compact('donation'));
         }
 
