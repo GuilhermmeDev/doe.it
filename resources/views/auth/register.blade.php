@@ -1,92 +1,138 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="{{asset('css/register.css')}}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <title>DoeIt</title>
 </head>
 <body>
+<main class="w-full flex">
 
-    <form action="{{route('register')}}" method="POST" class="formulario">
-        @csrf
-        <div>
-            <label class="nome" for="name">Nome</label>
-            <input class="campos campos1" placeholder="Insira seu nome" type="text" id="name" name="name" required>
-        </div>
-        @error('name')
-            <p>{{$message}}</p>
-        @enderror
-        
-        <div>
-            <label class="email" for="email">Email</label>
-            <input class="campos campos2" placeholder="Insira seu e-mail" type="email" id="email" name="email" required>
-        </div>
-        @error('email')
-            <p>{{$message}}</p>
-        @enderror
-        
-        <div>
-            <label class="password" for="password">Senha</label>
-            <input class="campos campos3" placeholder="Insira sua senha" type="password" id="password" name="password" required>
-            <img src="{{asset('assets/olho.svg')}}" alt="olho" class="olho" onclick="togglePassword('password')">
-        </div>
-        @error('password')
-            <p>{{$message}}</p>
-        @enderror
-        
-        <div>
-            <label class="password_confirmation" for="password_confirmation">Confirmação de Senha:</label>
-            <input class="campos campos4" placeholder="Confirme sua senha" type="password" id="password_confirmation" name="password_confirmation" required>
-            <img src="{{asset('assets/olho.svg')}}" alt="olho" class="olho1" onclick="togglePassword('password_confirmation')">
-        </div>
-        @error('password_confirmation')
-            <p>{{$message}}</p>
-        @enderror
-        
-        
-        <button class="button" type="submit">Cadastre-se</button>
-    </form>
-
-
-
-    <p class="junte-se">
+  <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
+    <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
+      <img src="{{asset("assets/maodoação.svg")}}" width="347" />
+      <p class="text-gray-300 text-center px-10 font-bold">
+        “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”  
         Junte-se a nós e faça a diferença!
-    </p>
-    <div class="verde">
+      </p>
+    </div>    
+  </div>
 
-        <div class="carrossel">
-        <p class="frases" id="frase"></p>
-        <div class="indicadores" id="indicadores"></div>
-         </div>
+  <div class="flex-[2] flex items-center justify-center h-screen">
+    <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+      
+      <!-- Espaço para imagem -->
+      <div class="flex justify-center mb-6">
+        <img src="assets/logo1.svg" alt="Sua imagem aqui" class="w-32 h-32 object-contain">
+      </div>
 
-</div>
+      <form onSubmit="event.preventDefault()" class="space-y-5">
+        <div>
+          <label class="font-medium">Nome</label>
+          <input
+            type="text"
+            required
+            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            placeholder="Insira seu nome"
+          />
+        </div>
+        <div>
+          <label class="font-medium">Email</label>
+          <input
+            type="email"
+            required
+            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            placeholder="Insira seu e-mail"
+          />
+        </div>
+        <div class="relative">
+          <label class="font-medium">Senha</label>
+          <input
+            placeholder="Insira sua senha"
+            id="password"
+            type="password"
+            required
+            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+          />
+          <!-- Ícone do olho -->
+          <img
+            id="eyeIcon1"
+            src="assets/oculto.svg" 
+            alt="Mostrar senha"
+            class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
+          />
+        </div>
 
+        <div class="relative">
+          <label class="font-medium">Confirmar senha</label>
+          <input
+            placeholder="Confirme sua senha"
+            id="cpassword"
+            type="password"
+            required
+            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+          />
+          <!-- Ícone do olho -->
+          <img
+            id="eyeIcon2"
+            src="assets/oculto.svg" 
+            alt="Mostrar senha"
+            class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
+          />
+        </div>
 
+        <div class="flex justify-center">
+          <button
+            class="w-2/5 mt-5 px-4 py-2 text-white font-bold bg-[#2AB036] hover:bg-green-600 active:bg-green-700 rounded-lg duration-150 text-sm"
+          >
+          Cadastrar-se
+          </button>
+        </div>
 
-    <div class="quadrado-branco"></div>
-    
-    <figure>
-        <img class="img" src="{{asset('assets/mao.svg')}}" alt="erro">
-    </figure>
+        <!-- Link alinhado ao centro -->
+        <div class="text-center">
+          <a href="/login" class="text-sm text-[#575761] hover:underline mt-1 inline-block">
+            Já possui uma conta?<span class="text-[#FF5800]"> Faça login </span>
+          </a>
+        </div>
 
+      </form>
 
+    </div>
+  </div>
+</main>
 
-    <img class="logo" src="{{asset('assets/logo.svg')}}">
-    <p class="faça-parte"> Faça parte do <span class="subdoe"> Doeit </span> agora! </p>
+<script>
+  const passwordField = document.getElementById('password');
+  const cpasswordField = document.getElementById('cpassword');
+  const eyeIcon1 = document.getElementById('eyeIcon1');
+  const eyeIcon2 = document.getElementById('eyeIcon2');
 
-    <p class="japossui">Já possuí uma conta? Faça <a class="login" href="/login">Login</a></p>
+  eyeIcon1.addEventListener('click', function () {
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      eyeIcon1.src = 'assets/visivel.svg';
+    } else {
+      passwordField.type = 'password';
+      eyeIcon1.src = 'assets/oculto.svg';
+    }
+  });
 
-
-
-    <a href="{{url('/login/google')}}">
-        <img class="logogoogle" src="{{asset('assets/google_icon.svg')}}" alt="google icon">
-    </a>
-    
-    <script src="{{asset('js/register.js')}}"></script>
+  eyeIcon2.addEventListener('click', function () {
+    if (cpasswordField.type === 'password') {
+      cpasswordField.type = 'text';
+      eyeIcon2.src = 'assets/visivel.svg';
+    } else {
+      cpasswordField.type = 'password';
+      eyeIcon2.src = 'assets/oculto.svg';
+    }
+  });
+</script>
 </body>
 </html>
+
