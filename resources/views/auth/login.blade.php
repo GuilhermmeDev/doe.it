@@ -11,23 +11,23 @@
   <title>Login - Doeit</title>
 </head>
 <body>
-<main class="w-full flex"> 
+<main class="w-full flex">
 
-  
+
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
       <img src="assets/maodoação.svg" width="347" />
       <p class="text-gray-300 text-center px-10 font-bold">
-        “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”  
+        “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”
         Junte-se a nós e faça a diferença!
       </p>
-    </div>    
+    </div>
   </div>
 
 
   <div class="flex-[2] flex items-center justify-center h-screen">
     <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-      
+
       <!-- Espaço para imagem -->
       <div class="flex justify-center mb-6">
         <img src="assets/logo1.svg
@@ -66,33 +66,33 @@
           <!-- Ícone do olho -->
           <img
             id="eyeIcon"
-            src="assets/oculto.svg" 
+            src="assets/oculto.svg"
             alt="Mostrar senha"
             class="w-5 h-5 absolute top-11 right-2 cursor-pointer"
           />
 
           <a href="/forgot-password" class="text-gray-500 text-sm mt-2 block text-right">Esqueceu sua senha?</a>
         </div>
-        
+
         <div class="flex flex-col items-center">
           <button
             class="w-2/5 mt-3 px-4 py-2 text-white font-bold bg-[#2AB036] hover:bg-green-600 active:bg-green-700 rounded-lg duration-150 text-sm"
           >
             Entrar
-          </button> 
-        
+          </button>
+
           <a href="/register" class="text-sm text-[#575761] hover:underline mt-4 text-center">
             Ainda não tem uma conta?<span class="text-[#FF5800]"> Cadastre-se</span>
           </a>
         </div>
-        
-        
-    
+
+
+
         <!-- Ícone do Google abaixo do botão -->
         <div class="flex justify-center mt-4">
           <a class="flex items-center justify-center p-2 border rounded-full hover:bg-gray-50 duration-150 active:bg-gray-100" href="{{ url('/login/google') }}">
             <img
-              src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
+              src="{{asset('assets/google-logo.png')}}"
               alt="Google"
               class="w-6 h-6"
             />

@@ -18,15 +18,15 @@
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
       <img src="{{asset("assets/maodoação.svg")}}" width="347" />
       <p class="text-gray-300 text-center px-10 font-bold">
-        “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”  
+        “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”
         Junte-se a nós e faça a diferença!
       </p>
-    </div>    
+    </div>
   </div>
 
   <div class="flex-[2] flex items-center justify-center h-screen">
     <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-      
+
       <!-- Espaço para imagem -->
       <div class="flex justify-center mb-6">
         <img src="assets/logo1.svg" alt="Sua imagem aqui" class="w-32 h-32 object-contain">
@@ -73,7 +73,7 @@
           <!-- Ícone do olho -->
           <img
             id="eyeIcon1"
-            src="assets/oculto.svg" 
+            src="assets/oculto.svg"
             alt="Mostrar senha"
             class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
           />
@@ -95,7 +95,7 @@
           <!-- Ícone do olho -->
           <img
             id="eyeIcon2"
-            src="assets/oculto.svg" 
+            src="assets/oculto.svg"
             alt="Mostrar senha"
             class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
           />
@@ -116,7 +116,7 @@
         <div class="flex justify-center mt-4">
           <a class="flex items-center justify-center p-2 border rounded-full hover:bg-gray-50 duration-150 active:bg-gray-100" href="{{ url('/login/google') }}">
             <img
-              src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
+              src="{{asset('assets/google-logo.png')}}"
               alt="Google"
               class="w-6 h-6"
             />
