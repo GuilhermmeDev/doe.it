@@ -89,7 +89,7 @@
           <!-- Logotipo -->
           <div class="flex-shrink-0">
             <a href="/" class="flex">
-              <img class="w-auto ml-5 h-8" src="assets/logo1.svg" alt="" />
+              <img class="w-auto ml-5 h-8" src="{{asset('assets/logo1.svg')}}" alt="" />
             </a>
           </div>
 
@@ -112,8 +112,8 @@
                 @endif
             <!-- Botão de alternância de tema visível apenas em telas pequenas -->
             <button id="theme-toggle" class="block md:hidden">
-              <img src="assets/sol.svg" id="sol" class="w-6 h-6">
-              <img src="assets/lua.svg" id="lua" class="w-6 h-6">
+              <img src="{{asset('assets/sol.svg')}}" id="sol" class="w-6 h-6">
+              <img src="{{asset('assets/lua.svg')}}" id="lua" class="w-6 h-6">
             </button>
           </div>
         </div>
