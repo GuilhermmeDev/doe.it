@@ -7,6 +7,8 @@
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
 
     <link rel="stylesheet" href="{{asset('css/home.css')}}">
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Home</title>
     @include('layouts.head')
 </head>
@@ -17,7 +19,7 @@
     @endif
 
     @if (session('Success'))
-        <p style="background-color: green; color: white; padding: 8px; border-radius: 16px; ">{{session('Success')}}</p>
+        @include('layouts.success')
     @endif
 
 
@@ -58,7 +60,7 @@
                         </a>
                     </div>
                 @endforeach
-                
+
                 <div class="swiper-pagination"></div>
             </div>
         </div>
