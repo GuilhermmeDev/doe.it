@@ -7,82 +7,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style>
-        body {
-        transition: background-color 0.3s, color 0.3s; /* Animação suave ao trocar o tema */
-        font-family: "Poppins", sans-serif; /* Fonte personalizada */
-        font-weight: 500;
-        font-style: normal;
-
-        }
-    
-        /* Tema claro */
-        .light-theme {
-        background-color: #ffffff;
-        color: #000000;
-        }
-    
-        /* Tema escuro */
-        .dark-theme {
-        background-color: #1b1b1b;
-        color: #ffffff;
-        }
-    
-        /* Estilização do menu mobile flutuante */
-        #mobile-menu {
-        position: absolute;
-        left: 50%; /* Centralizado horizontalmente */
-        top: -10%; /* Inicia fora da tela (oculto) */
-        padding: 20px 30px;
-        border-radius: 12px;
-        border: 1px solid #cfcfcf; /* Borda leve */
-        background-color: #ffffff; /* Fundo branco padrão */
-        color: #1b1b1b; /* Texto escuro */
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Sombra */
-        max-width: 90%; /* Largura máxima */
-        backdrop-filter: blur(10px); /* Efeito de vidro fosco */
-        transition: all 0.3s ease-in-out; /* Suavidade na transição */
-        }
-    
-        /* Garante que o botão do menu fique acima do restante */
-        #menunav {
-        position: relative;
-        z-index: 5;
-        }
-    
-        /* Botão de alternância de tema */
-        #theme-toggle {
-        all: unset; /* Remove todos os estilos padrões */
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        left: -23.5%; /* Posição personalizada para alinhar com layout */
-        }
-    
-        /* Ajusta a posição do botão em tablets */
-        @media (min-width: 629px) and (max-width: 767px) {
-        #theme-toggle {
-            margin-left: 450px;
-        }
-        }
-    
-        /* Ajusta a posição do botão em celulares */
-        @media (min-width: 0px) and (max-width: 629px) {
-        #theme-toggle {
-            left: 70%;
-        }
-        }
-    
-        /* Botão de menu hambúrguer em dispositivos móveis */
-        #menu-toggle {
-        position: relative;
-        left: 85%;
-        top: -47px; /* Sobe o botão para alinhar com cabeçalho */
-        }
-    
-      </style>
 </head>
 <body class="light-theme duration-200">
     @include('layouts.secondary_navbar')
@@ -139,7 +63,7 @@
             <div>
               <label class="font-medium">Descrição</label>
               <textarea
-                required
+
                 name="Description"
                 class="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               ></textarea>

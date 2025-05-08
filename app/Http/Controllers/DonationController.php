@@ -108,6 +108,6 @@ class DonationController extends Controller
         $campaign->save();
         ConfirmDonation::dispatch($donation);
 
-        return redirect('/home')->with('success', 'Doação confirmada com sucesso.');
+        return redirect('/home')->with('Success', 'Doação confirmada com sucesso.');
     }
 }
