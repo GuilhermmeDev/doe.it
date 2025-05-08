@@ -98,65 +98,7 @@
         </div>
       </div>
     </section>
-         <!-- Scripts para interatividade -->
-         <script>
-            // Seletores dos elementos
-            const themeToggleButton = document.getElementById('theme-toggle');
-            const body = document.body;
-            const sol = document.getElementById('sol'); // ícone do sol (modo escuro)
-            const lua = document.getElementById('lua'); // ícone da lua (modo claro)
-        
-            // Define o tamanho dos ícones
-            const imageSize = "25px";
-            sol.style.width = imageSize;
-            sol.style.height = imageSize;
-            lua.style.width = imageSize;
-            lua.style.height = imageSize;
-        
-            // Exibe o ícone da lua (modo claro) inicialmente
-            sol.style.display = "none";
-            lua.style.display = "inline-block";
-        
-            // Alterna entre temas claro e escuro ao clicar no botão
-            themeToggleButton.addEventListener('click', () => {
-            if (body.classList.contains('light-theme')) {
-                // Ativa o tema escuro
-                body.classList.remove('light-theme');
-                body.classList.add('dark-theme');
-        
-                // Mostra o ícone do sol, esconde o da lua
-                sol.style.display = "inline-block";
-                lua.style.display = "none";
-            } else {
-                // Volta ao tema claro
-                body.classList.remove('dark-theme');
-                body.classList.add('light-theme');
-        
-                // Mostra o ícone da lua, esconde o do sol
-                sol.style.display = "none";
-                lua.style.display = "inline-block";
-            }
-            });
-        
-            // Lógica do botão hamburguer (abre/fecha o menu mobile)
-            document.getElementById("menu-toggle").addEventListener("click", function(event) {
-            var menu = document.getElementById("mobile-menu");
-            menu.classList.toggle("hidden"); // Adiciona ou remove a classe 'hidden'
-            event.stopPropagation(); // Evita que o clique feche o menu imediatamente
-            });
-        
-            // Fecha o menu mobile ao clicar fora dele
-            document.addEventListener("click", function(event) {
-            var menu = document.getElementById("mobile-menu");
-            var toggleButton = document.getElementById("menu-toggle");
-        
-            // Se o clique não foi dentro do menu nem no botão, esconde o menu
-            if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
-                menu.classList.add("hidden");
-            }
-            });
-        
-          </script>
+
   </body>
 </html>
 
