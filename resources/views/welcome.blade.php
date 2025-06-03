@@ -6,12 +6,11 @@
   <title>Doeit - Sistema de Doação</title>
   <link rel="stylesheet" href="{{asset('css/landing_page.css')}}">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
     </style>
 </head>
-<body class="light-theme duration-200">
+<body class="light-theme duration-200 overflow-x-hidden">
 
     @include('layouts.secondary_navbar')
 
@@ -182,7 +181,7 @@
             <div class="flex flex-col">
               <label for="data" class="text-gray-800 text-sm font-semibold mb-2">Data</label>
               <input type="date" id="data" name="data" readonly
-                class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-Lnone text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
             </div>
 
             <!-- Descrição -->

@@ -7,8 +7,7 @@
 <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{asset('css/home.css')}}">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -27,7 +26,7 @@
           <!-- Logotipo -->
           <div class="flex-shrink-0">
             <a href="/home" class="flex">
-              <img class="w-auto ml-5 h-8" src="{{asset('assets/logo1.svg')}}" alt="" />
+              <img class="w-auto ml-5 h-8" src="{{asset('assets/logo1.svg')}}" alt="Doeit Logo" />
             </a>
           </div>
 
@@ -45,24 +44,16 @@
 
             <!-- Links visíveis apenas em telas médias e grandes -->
             <div id="meutext" class="hidden md:flex ml-auto items-center justify-center space-x-6 lg:space-x-10">
-              <form onSubmit="event.preventDefault();" class="max-w-md px-4 mx-auto mt-12">
-
-            </form>
-
-
               <a href="/info" id="texts" class="text-base font-semibold transition-all duration-100">Sobre</a>
-
               <!-- Separador -->
               <div class="w-px h-5"></div>
-
-              <!-- Botão Entrar -->
               <a href="/campaign" class="inline-flex items-center justify-center px-5 ml-10 py-2.5 text-base font-semibold border-2 transition-all duration-100" role="button">Criar Campanha</a>
             </div>
 
             <!-- Botão de alternância de tema visível apenas em telas pequenas -->
             <button id="theme-toggle" class="block md:hidden">
-              <img src="assets/sol.svg" id="sol" class="w-6 h-6">
-              <img src="assets/lua.svg" id="lua" class="w-6 h-6">
+              <img src="{{asset('assets/sol.svg')}}" id="sol" class="w-6 h-6">
+              <img src="{{asset('assets/lua.svg')}}" id="lua" class="w-6 h-6">
             </button>
           </div>
         </div>
@@ -71,7 +62,6 @@
 
     <!-- Navbar mobile com botão hamburguer -->
     <div id="menunav" class="container mx-auto flex justify-between items-center">
-
       <!-- Botão para abrir o menu mobile -->
       <button id="menu-toggle" class="md:hidden focus:outline-none">
         <svg class="w-8 h-8" fill="white" viewBox="0 0 24 24">
@@ -80,14 +70,12 @@
       </button>
 
       <!-- Menu que aparece ao clicar no botão (invisível inicialmente) -->
-      <div id="mobile-menu" class="hidden absolute top-16 left-4 text-center shadow-lg rounded-lg p-3 w-48 md:hidden">
-
+      <div id="mobile-menu" class="hidden absolute top-16 left-4 text-center shadow-lg rounded-lg p-3 w-48 md:hidden bg-white dark:bg-gray-800 z-50">
         <a href="#secao4" id="infor" class="block py-2">Sobre</a>
         <a
-        href="#" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold border-2 border-black hover:border-gray-800 transition-all duration-100" role="button">
+        href="/campaign" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold border-2 border-black hover:border-gray-800 transition-all duration-100" role="button">
         Criar Campanha
-      </a>
-
+        </a>
       </div>
     </div>
 
@@ -117,19 +105,27 @@
                   <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit">
                     <div class="flex flex-col text-black">
                       <div class="w-full h-[18em] overflow-hidden rounded-xl">
-                        <img src="img/campaigns/{{$camp->Image}}" class="w-full h-full object-cover rounded-xl" />
+                        <img src="{{ asset('img/campaigns/' . $camp->Image) }}" class="w-full h-full object-cover rounded-xl" alt="Imagem da Campanha: {{ $camp->Title }}" />
                       </div>
                       <div class="flex flex-col mt-4 space-y-2">
                         <p class="text-lg font-semibold ml-1">{{$camp->Title}}</p>
                         <h6 class="text-sm ml-1 line-clamp-3">
                             {{$camp->Description}}
                         </h6>
-                        <div class="flex items-center ml-1 mt-2 w-full">
-                          <span class="text-sm font-bold mr-2">{{$progress = round(100 * ($progress = $camp->meta['current'] / $camp->meta['target']), 1)}}%</span>
-                          <div class="flex-1 bg-gray-300 rounded-full h-5">
-                            <div class="bg-green-500 h-5 rounded-full" style="width: {{$progress}}%;"></div>
-                          </div>
-                        </div>
+                        @if(isset($camp->meta) && is_array($camp->meta) && isset($camp->meta['current']) && isset($camp->meta['target']))
+                            <div class="flex items-center ml-1 mt-2 w-full">
+                              @php
+                                  $current = $camp->meta['current'] ?? 0;
+                                  $target = $camp->meta['target'] ?? 0;
+                                  $progress = ($target > 0) ? round(100 * ($current / $target), 1) : 0;
+                                  $progress = min($progress, 100);
+                              @endphp
+                              <span class="text-sm font-bold mr-2">{{ $progress }}%</span>
+                              <div class="flex-1 bg-gray-300 rounded-full h-5">
+                                <div class="bg-green-500 h-5 rounded-full" style="width: {{ $progress }}%;"></div>
+                              </div>
+                            </div>
+                        @endif
                         <button class="mt-5 top-3 relative ml-1 w-[120px] h-[45px] text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-xl text-sm font-medium">Saiba mais</button>
                       </div>
                     </div>
@@ -179,58 +175,61 @@
 
 
     <script>
-        // Lógica para alternar o tema
       const themeToggleButton = document.getElementById('theme-toggle');
       const body = document.body;
       const sol = document.getElementById('sol');
       const lua = document.getElementById('lua');
 
-        // Tamanho fixo inicial
+      if(themeToggleButton && sol && lua) {
         const imageSize = "25px";
         sol.style.width = imageSize;
         sol.style.height = imageSize;
         lua.style.width = imageSize;
         lua.style.height = imageSize;
 
-        // Exibe o ícone correto baseado no tema inicial
-        sol.style.display = "none";
-        lua.style.display = "inline-block";
+        if (body.classList.contains('dark-theme')) {
+            sol.style.display = "inline-block";
+            lua.style.display = "none";
+        } else {
+            sol.style.display = "none";
+            lua.style.display = "inline-block";
+        }
 
         themeToggleButton.addEventListener('click', () => {
-          if (body.classList.contains('light-theme')) {
-            body.classList.remove('light-theme');
-            body.classList.add('dark-theme');
+          body.classList.toggle('light-theme');
+          body.classList.toggle('dark-theme');
 
-
+          if (body.classList.contains('dark-theme')) {
             sol.style.display = "inline-block";
             lua.style.display = "none";
           } else {
-            body.classList.remove('dark-theme');
-            body.classList.add('light-theme');
-
             sol.style.display = "none";
             lua.style.display = "inline-block";
           }
         });
+      }
 
-        // Lógica para alternar a visibilidade do menu
-        document.getElementById("menu-toggle").addEventListener("click", function(event) {
-        var menu = document.getElementById("mobile-menu");
-        menu.classList.toggle("hidden"); // Abre/fecha o menu
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function(event) {
+        mobileMenu.classList.toggle("hidden");
         event.stopPropagation();
         });
+      }
 
-    // Fecha o menu ao clicar fora dele
     document.addEventListener("click", function(event) {
-        var menu = document.getElementById("mobile-menu");
-        var toggleButton = document.getElementById("menu-toggle");
+        const currentMobileMenu = document.getElementById("mobile-menu");
+        const currentMenuToggle = document.getElementById("menu-toggle");
 
-        if (!menu.contains(event.target) && !toggleButton.contains(event.target)) {
-            menu.classList.add("hidden"); // Fecha o menu
+        if (currentMobileMenu && currentMenuToggle && !currentMobileMenu.classList.contains("hidden")) {
+            if (!currentMobileMenu.contains(event.target) && !currentMenuToggle.contains(event.target)) {
+                currentMobileMenu.classList.add("hidden");
+            }
         }
-
-        });
-      </script>
+    });
+    </script>
 
 </body>
 </html>

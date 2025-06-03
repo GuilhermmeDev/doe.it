@@ -1,15 +1,14 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   <title>Registro - Doeit</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
 <main class="w-full flex">
@@ -24,15 +23,14 @@
     </div>
   </div>
 
-  <div class="flex-[2] flex items-center justify-center h-screen">
-    <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+  <div class="flex-[2] flex items-center justify-center h-screen py-8">
+    <div class="w-full max-w-md space-y-6 px-4 bg-white text-gray-600 sm:px-0">
 
-      <!-- Espaço para imagem -->
-      <div class="flex justify-center mb-6">
-        <img src="assets/logo1.svg" alt="Sua imagem aqui" class="w-32 h-32 object-contain">
+      <div class="flex justify-center mb-4">
+        <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-24 h-24 object-contain">
       </div>
 
-      <form onSubmit="/register" class="space-y-5" method="POST">
+      <form action="{{ route('register') }}" class="space-y-4" method="POST">
         @csrf
         <div>
           <label class="font-medium">Nome</label>
@@ -40,11 +38,12 @@
             type="text"
             name="name"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             placeholder="Insira seu nome"
+            value="{{ old('name') }}"
           />
           @error('name')
-            @include('layouts.error_popup')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
         </div>
         <div>
@@ -53,11 +52,12 @@
             type="email"
             name="email"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             placeholder="Insira seu e-mail"
+            value="{{ old('email') }}"
           />
           @error('email')
-            @include('layouts.error_popup')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
         </div>
         <div class="relative">
@@ -68,17 +68,18 @@
             name="password"
             type="password"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
           />
-          <!-- Ícone do olho -->
           <img
             id="eyeIcon1"
-            src="assets/oculto.svg"
+            src="{{ asset('assets/oculto.svg') }}"
+            data-visivel-src="{{ asset('assets/visivel.svg') }}"
+            data-oculto-src="{{ asset('assets/oculto.svg') }}"
             alt="Mostrar senha"
-            class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
+            class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
           />
           @error('password')
-            @include('layouts.error_popup')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
         </div>
 
@@ -90,30 +91,31 @@
             name="password_confirmation"
             type="password"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
           />
-          <!-- Ícone do olho -->
           <img
             id="eyeIcon2"
-            src="assets/oculto.svg"
+            src="{{ asset('assets/oculto.svg') }}"
+            data-visivel-src="{{ asset('assets/visivel.svg') }}"
+            data-oculto-src="{{ asset('assets/oculto.svg') }}"
             alt="Mostrar senha"
-            class="w-5 h-5 absolute top-10 right-3 cursor-pointer"
+            class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
           />
           @error('password_confirmation')
-            @include('layouts.error_popup')
+             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
         </div>
 
         <div class="flex justify-center">
           <button
-            class="w-2/5 mt-5 px-4 py-2 text-white font-bold bg-[#2AB036] hover:bg-green-600 active:bg-green-700 rounded-lg duration-150 text-sm"
+            type="submit"
+            class="w-2/5 mt-3 px-4 py-2 text-white font-bold bg-[#2AB036] hover:bg-green-600 active:bg-green-700 rounded-lg duration-150 text-sm"
           >
           Cadastrar-se
           </button>
         </div>
 
-        <!-- Ícone do Google abaixo do botão -->
-        <div class="flex justify-center mt-4">
+        <div class="flex justify-center mt-3">
           <a class="flex items-center justify-center p-2 border rounded-full hover:bg-gray-50 duration-150 active:bg-gray-100" href="{{ url('/login/google') }}">
             <img
               src="{{asset('assets/google-logo.png')}}"
@@ -123,45 +125,42 @@
           </a>
         </div>
 
-        <!-- Link alinhado ao centro -->
-        <div class="text-center">
-          <a href="/login" class="text-sm text-[#575761] hover:underline mt-1 inline-block">
-            Já possui uma conta?<span class="text-[#FF5800]"> Faça login </span>
+        <div class="text-center mt-3">
+          <a href="{{ route('login') }}" class="text-sm text-[#575761] hover:underline inline-block">
+            Já possui uma conta?<span class="text-[#FF5800]"> Faça login</span>
           </a>
         </div>
 
       </form>
-
     </div>
   </div>
 </main>
 
 <script>
-  const passwordField = document.getElementById('password');
-  const cpasswordField = document.getElementById('cpassword');
-  const eyeIcon1 = document.getElementById('eyeIcon1');
-  const eyeIcon2 = document.getElementById('eyeIcon2');
+  document.addEventListener('DOMContentLoaded', function () {
+    function setupPasswordToggle(passwordFieldId, eyeIconId) {
+      const passwordField = document.getElementById(passwordFieldId);
+      const eyeIcon = document.getElementById(eyeIconId);
 
-  eyeIcon1.addEventListener('click', function () {
-    if (passwordField.type === 'password') {
-      passwordField.type = 'text';
-      eyeIcon1.src = 'assets/visivel.svg';
-    } else {
-      passwordField.type = 'password';
-      eyeIcon1.src = 'assets/oculto.svg';
-    }
-  });
+      if (passwordField && eyeIcon) {
+        const visivelSrc = eyeIcon.dataset.visivelSrc;
+        const ocultoSrc = eyeIcon.dataset.ocultoSrc;
 
-  eyeIcon2.addEventListener('click', function () {
-    if (cpasswordField.type === 'password') {
-      cpasswordField.type = 'text';
-      eyeIcon2.src = 'assets/visivel.svg';
-    } else {
-      cpasswordField.type = 'password';
-      eyeIcon2.src = 'assets/oculto.svg';
+        eyeIcon.addEventListener('click', function () {
+          if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.src = visivelSrc;
+          } else {
+            passwordField.type = 'password';
+            eyeIcon.src = ocultoSrc;
+          }
+        });
+      }
     }
+
+    setupPasswordToggle('password', 'eyeIcon1');
+    setupPasswordToggle('cpassword', 'eyeIcon2');
   });
 </script>
 </body>
 </html>
-

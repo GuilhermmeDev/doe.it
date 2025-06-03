@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campanha</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="light-theme duration-200">
     @include('layouts.secondary_navbar')
-    
+
 
   <div class="">
     <div class="max-w-screen-xl mx-auto px-4  md:px-8">
@@ -20,7 +19,7 @@
         <div class="max-w-lg space-y-3">
           <br><br>
           <p class="text-[#2AB036] text-3xl font-semibold sm:text-4xl">
-            Doar para a campanha 
+            Doar para a campanha
           </p>
           <p class=" font-semibold">
             Meta: {{$campaign->meta['target']}}
@@ -31,6 +30,7 @@
           <br>
           <img src="{{asset('assets/doodle_group.svg')}}" alt="">
           <div>
+            {{-- This section requires 'contactMethods' to be defined in an Alpine.js x-data scope --}}
             <ul class="mt-6 flex flex-wrap gap-x-10 gap-y-6 items-center">
               <template
                 x-for="(item, index) in contactMethods"
@@ -59,7 +59,7 @@
                 name="Quantity" id="Quantity" min="0" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"
               />
             </div>
-          
+
             <div>
               <label class="font-medium">Descrição</label>
               <textarea
@@ -84,6 +84,6 @@
       </div>
     </div>
   </div>
-  
+
      </body>
 </html>
