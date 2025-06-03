@@ -15,25 +15,24 @@
 
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      {{-- Sugestão: usar asset() para todas as imagens --}}
-      <img src="{{ asset('internet_lock_locked_padlock_password_secure_security_icon_127100 1.svg') }}" width="347" alt="Ícone de cadeado"/>
+      <img src="{{asset('assets/shield.svg')}}" width="347" />
       <p class="text-gray-300 text-center px-10">
         <span style="color: #FF5800;">Use uma senha forte:</span> Combine letras maiúsculas, minúsculas, números e caracteres especiais.
       </p>
-    </div>    
+    </div>
   </div>
 
   <div class="flex-[2] flex items-center justify-center h-screen">
     <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-      
+
+      <!-- Espaço para imagem -->
       <div class="flex justify-center mb-6">
-        <img src="{{ asset('logo1.svg') }}" alt="Logo DoeIt" class="w-32 h-32 object-contain">
+        <img src="{{asset('assets/logo1.svg')}}" alt="Sua imagem aqui" class="w-32 h-32 object-contain">
       </div>
 
-      {{-- Ajuste a action do formulário para a rota correta de redefinição de senha --}}
-      <form action="{{ route('password.update') }}" class="space-y-5" method="POST"> {{-- Exemplo de rota --}}
+      <form action="{{route('password.store')}}" class="space-y-5" method="POST">
+        <input type="hidden" name="token" value="{{ request()->route('token') }}">
         @csrf
-        {{-- Adicione os campos ocultos necessários para redefinição de senha, como o token --}}
         {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
 
         <div>
@@ -53,7 +52,7 @@
             {{-- @include("layouts.error_popup") --}}
           @enderror
         </div>
-        
+
         <div class="relative">
           <label for="password" class="font-medium">Senha</label>
           <input
@@ -113,7 +112,7 @@
           >
             Redefinir Senha
           </button>
-        </div>  
+        </div>
       </form>
     </div>
   </div>
