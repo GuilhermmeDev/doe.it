@@ -1,12 +1,15 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import flowbitePlugin from 'flowbite/plugin'; // Adicionar para Flowbite
 
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
+        './storage/framework/views/*.php', // O Laravel usa isso para o JIT em desenvolvimento, pode manter
         './resources/views/**/*.blade.php',
+        './resources/js/**/*.js', // Para Vue/React/Alpine ou JS puro
+        './node_modules/flowbite/**/*.js' // Adicionar para Flowbite
     ],
 
     theme: {
@@ -17,5 +20,8 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        flowbitePlugin 
+    ],
 };

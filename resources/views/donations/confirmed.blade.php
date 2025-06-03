@@ -1,14 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Agradecimento/sucesso</title>
-  <link rel="stylesheet" href="styles/output.css" />
-  <link rel="stylesheet" href="styles/style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
   <style>
+    /* This font import might be better in your resources/css/app.css */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
   </style>
 </head>
@@ -57,12 +55,14 @@
 
   <!-- Animação manual se não estiver usando plugin -->
   <script>
+    // This script could also be moved to resources/js/app.js
     document.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector(".animate-fade-in");
-      el.classList.remove("opacity-0", "translate-y-8");
-      el.classList.add("opacity-100", "translate-y-0");
+      if (el) { // Good practice to check if element exists
+        el.classList.remove("opacity-0", "translate-y-8");
+        el.classList.add("opacity-100", "translate-y-0");
+      }
     });
   </script>
 </body>
 </html>
-
