@@ -76,7 +76,7 @@
             data-visivel-src="{{ asset('assets/visivel.svg') }}"
             data-oculto-src="{{ asset('assets/oculto.svg') }}"
             alt="Mostrar senha"
-            class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
+            class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
           />
           @error('password')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -85,22 +85,22 @@
 
         <div class="relative">
           <label class="font-medium">Confirmar senha</label>
-          <input
-            placeholder="Confirme sua senha"
-            id="cpassword"
-            name="password_confirmation"
-            type="password"
-            required
-            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
-          />
-          <img
-            id="eyeIcon2"
-            src="{{ asset('assets/oculto.svg') }}"
-            data-visivel-src="{{ asset('assets/visivel.svg') }}"
-            data-oculto-src="{{ asset('assets/oculto.svg') }}"
-            alt="Mostrar senha"
-            class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
-          />
+            <input
+              placeholder="Confirme sua senha"
+              id="cpassword"
+              name="password_confirmation"
+              type="password"
+              required
+              class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+            />
+            <img
+              id="eyeIcon2"
+              src="{{ asset('assets/oculto.svg') }}"
+              data-visivel-src="{{ asset('assets/visivel.svg') }}"
+              data-oculto-src="{{ asset('assets/oculto.svg') }}"
+              alt="Mostrar senha"
+              class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
+            />
           @error('password_confirmation')
              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
