@@ -20,6 +20,7 @@ else
 fi
 
 # Inicia os serviços em paralelo
+php artisan storage:link &
 php artisan serve --host=0.0.0.0 --port=8000 &
 php artisan reverb:start &
 php artisan queue:work &
