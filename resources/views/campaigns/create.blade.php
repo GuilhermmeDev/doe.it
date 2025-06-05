@@ -95,13 +95,14 @@
           </div>
           <div>
             <label for="Image" class="block text-gray-600 font-medium mb-1">Imagem da Campanha:</label>
-            <input type="file" name="Image" id="Image" class="w-full text-sm text-gray-500
+            <input type="file" name="Image" id="Image" accept=".jpeg,.png,.jpg,.svg" class="w-full text-sm text-gray-500 bg-white rounded-lg
               file:mr-4 file:py-2 file:px-4
               file:rounded-md file:border-0
               file:text-sm file:font-semibold
               file:bg-green-50 file:text-green-700
               hover:file:bg-green-100 cursor-pointer
-            "/>
+            "
+            value="{{ old('Image') }}"/>
             @error("Image")
                 <p class="validation-error">{{ $message }}</p>
             @enderror
@@ -153,13 +154,6 @@
             @enderror
           </div>
           <div>
-            <label for="CEP" class="block text-gray-600 font-medium mb-1">CEP:</label>
-            <input type="text" name="CEP" id="CEP" value="{{ old('CEP') }}" placeholder="00000-000" maxlength="9" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500" required>
-            @error("CEP")
-                <p class="validation-error">{{ $message }}</p>
-            @enderror
-          </div>
-          <div>
             <label for="Data" class="block font-medium mb-1 text-gray-600">Data da Coleta:</label>
             <input type="date" name="Data" id="Data" value="{{ old('Data') }}" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500" required>
             @error("Data")
@@ -178,13 +172,13 @@
         <!-- Etapa 3 -->
         <div id="step3" class="step hidden flex flex-col gap-4">
           <div>
-            <label for="tipo_arrecadacao" class="block font-medium mb-1 text-gray-600">Tipo da Arrecadação:</label>
-            <select name="tipo_arrecadacao" id="tipo_arrecadacao" class="bg-white w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500">
-                <option value="" {{ old('tipo_arrecadacao') == '' ? 'selected' : '' }} disabled>Selecione o tipo</option>
-                <option value="food" {{ old('tipo_arrecadacao') == 'food' ? 'selected' : '' }}>Comida</option>
-                <option value="clothes" {{ old('tipo_arrecadacao') == 'clothes' ? 'selected' : '' }}>Roupa</option>
+            <label for="Type" class="block font-medium mb-1 text-gray-600">Tipo da Arrecadação:</label>
+            <select name="Type" id="tipo_arrecadacao" class="bg-white w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500">
+                <option value="" {{ old('Type') == '' ? 'selected' : '' }} disabled>Selecione o tipo</option>
+                <option value="food" {{ old('Type') == 'food' ? 'selected' : '' }}>Comida</option>
+                <option value="clothes" {{ old('Type') == 'clothes' ? 'selected' : '' }}>Roupa</option>
             </select>
-            @error("tipo_arrecadacao")
+            @error("Type")
                  <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>

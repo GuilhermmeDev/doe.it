@@ -73,7 +73,7 @@
       <div id="mobile-menu" class="hidden absolute top-16 left-4 text-center shadow-lg rounded-lg p-3 w-48 md:hidden bg-white dark:bg-gray-800 z-50">
         <a href="#secao4" id="infor" class="block py-2">Sobre</a>
         <a
-        href="/campaign" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold border-2 border-black hover:border-gray-800 transition-all duration-100" role="button">
+        href="/campaign" class="mr-4 inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold border-2 border-black hover:border-gray-800 transition-all duration-100" role="button">
         Criar Campanha
         </a>
       </div>
@@ -105,10 +105,10 @@
                   <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit">
                     <div class="flex flex-col text-black">
                       <div class="w-full h-[18em] overflow-hidden rounded-xl">
-                        <img src="{{ asset('img/campaigns/' . $camp->Image) }}" class="w-full h-full object-cover rounded-xl" alt="Imagem da Campanha: {{ $camp->Title }}" />
+                        <img src="{{ asset('storage/' . $camp->Image) }}" class="w-full h-full object-cover rounded-xl" alt="Imagem da Campanha: {{ $camp->Title }}" />
                       </div>
                       <div class="flex flex-col mt-4 space-y-2">
-                        <p class="text-lg font-semibold ml-1">{{$camp->Title}}</p>
+                        <p class="text-lg font-semibold ml-1">{{$camp->Title}}</p>      
                         <h6 class="text-sm ml-1 line-clamp-3">
                             {{$camp->Description}}
                         </h6>

@@ -16,7 +16,7 @@
     <section class="campaign">
       <article class="campaign-content">
         <h1>{{$campaign->Title}}</h1>
-        <img src="{{asset('img/campaigns/' . $campaign->Image)}}" alt="Imagem de doação" class="campaign-image">
+        <img src="{{asset('storage/' . $campaign->Image)}}" alt="Imagem de doação" class="campaign-image">
         <div class="description">
           <div class="share">
             <label for="share-input" class="share-label">Compartilhe:</label>

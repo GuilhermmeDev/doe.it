@@ -36,8 +36,6 @@ class CampaignController extends Controller
 
         $address->Street = $validRequest['Street'];
 
-        $address->CEP = $validRequest['CEP'];
-
         $dateTime = $validRequest['Data'] . ' ' . $validRequest['Hour']; // concatenando data e hora
         $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime); // formatando com a biblioteca Carbon
 
@@ -65,9 +63,9 @@ class CampaignController extends Controller
 
         $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
-        $requestImage->move(public_path('img/campaigns'), $imageName);
-
-        $campaign->Image = $imageName;
+        $imagePath = $requestImage->storeAs('campaigns', $imageName, 'public');
+        
+        $campaign->Image = $imagePath; // salva o caminho relativo, ex: campaigns/abc123.jpg
 
         $campaign->Type = $validRequest['Type'];
 
