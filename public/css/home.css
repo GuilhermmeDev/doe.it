@@ -3,22 +3,22 @@ body {
     font-family: "Poppins", sans-serif; /* Fonte personalizada */
     font-weight: 500;
     font-style: normal;
-    }
+}
 
-    /* Tema claro */
-    .light-theme {
+/* Tema claro */
+.light-theme {
     background-color: #ffffff;
     color: #000000;
-    }
+}
 
-    /* Tema escuro */
-    .dark-theme {
+/* Tema escuro */
+.dark-theme {
     background-color: #1b1b1b;
     color: #ffffff;
-    }
+}
 
-    /* Estilização do menu mobile flutuante */
-    #mobile-menu {
+/* Estilização do menu mobile flutuante */
+#mobile-menu {
     position: absolute;
     left: 50%; /* Centralizado horizontalmente */
     top: -10%; /* Inicia fora da tela (oculto) */
@@ -31,16 +31,16 @@ body {
     max-width: 90%; /* Largura máxima */
     backdrop-filter: blur(10px); /* Efeito de vidro fosco */
     transition: all 0.3s ease-in-out; /* Suavidade na transição */
-    }
+}
 
-    /* Garante que o botão do menu fique acima do restante */
-    #menunav {
+/* Garante que o botão do menu fique acima do restante */
+#menunav {
     position: relative;
     z-index: 5;
-    }
+}
 
-    /* Botão de alternância de tema */
-    #theme-toggle {
+/* Botão de alternância de tema */
+#theme-toggle {
     all: unset; /* Remove todos os estilos padrões */
     cursor: pointer;
     display: inline-flex;
@@ -48,38 +48,38 @@ body {
     justify-content: center;
     position: relative;
     left: -28%; /* Posição personalizada para alinhar com layout */
+}
+
+/* Ajusta a posição do botão em tablets */
+@media (min-width: 629px) and (max-width: 905px) {
+    #pesquisa {
+        width: 100%;
     }
 
-    /* Ajusta a posição do botão em tablets */
-    @media (min-width: 629px) and (max-width: 905px) {
-        #pesquisa{
-            width: 100%;
-        }
-
-        #theme-toggle{
-            left: -34%;
-        }
+    #theme-toggle {
+        left: -34%;
     }
+}
 
-    /* Ajusta a posição do botão em celulares */
-    @media (min-width: 0px) and (max-width: 629px) {
+/* Ajusta a posição do botão em celulares */
+@media (min-width: 0px) and (max-width: 629px) {
     #theme-toggle {
         left: -80px;
     }
 
-    #pesquisa{
+    #pesquisa {
         margin-left: 20%;
         width: 60%;
     }
 
-    #lupa{
-        margin-left: 20%
+    #lupa {
+        margin-left: 20%;
     }
-    }
+}
 
-    /* Botão de menu hambúrguer em dispositivos móveis */
-    #menu-toggle {
+/* Botão de menu hambúrguer em dispositivos móveis */
+#menu-toggle {
     position: relative;
     left: 85%;
     top: -47px; /* Sobe o botão para alinhar com cabeçalho */
-    }
+}
