@@ -69,6 +69,8 @@ class CampaignController extends Controller
 
         $campaign->Image = $imageName;
 
+        $campaign->Type = $validRequest['Type'];
+
         if ($validRequest['meta'])
         {
             $campaign->meta = [
