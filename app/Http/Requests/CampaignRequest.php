@@ -33,7 +33,7 @@ class CampaignRequest extends FormRequest
             'Hour' => 'required|date_format:H:i',
             'meta' => 'required|integer|min:1|max:500',
             'Image' => 'required|image|mimes:jpeg,jpg,png,svg| max:2048',
-            'Type' => ['required', Rule::in(['Roupa', 'Comida'])]
+            'Type' => ['required', Rule::in(['food', 'clothes'])], // 'food' ou 'clothes'
         ];
     }
 
