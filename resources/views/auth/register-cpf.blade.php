@@ -16,41 +16,26 @@
     }
   </style>
 </head>
-<body>
-    <header class="absolute top-10 left-10">
-        <a href="{{ url('/home') }}"> {{-- Link para home, se aplicável --}}
-            <img src="{{asset('assets/logo1.svg')}}" alt="Logo DoeIt" class="h-8 w-auto">
-        </a>
-    </header>
+<body class="overflow-hidden bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
+    @include('layouts.secondary_navbar') {{-- Incluído navbar secundária --}}
 
 <main class="w-full flex">
-  {{--  Considerar adicionar uma parte visual à esquerda como nas outras telas, se desejar consistência  --}}
-  {{--  Exemplo:
-  <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
-    <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{ asset('caminho/para/imagem_ilustrativa.svg') }}" width="347" alt="Ilustração CPF"/>
-      <p class="text-gray-300 text-center px-10">
-        Seu CPF é importante para a segurança e validação das suas ações na plataforma.
-      </p>
-    </div>
-  </div>
-  --}}
 
   <div class="flex-1 flex items-center justify-center h-screen"> 
-    <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+    <div class="w-full max-w-md space-y-8 px-4 bg-white dark:bg-neutral-800 text-gray-600 dark:text-gray-100 sm:px-0">
 
         <div class="flex justify-center mb-2">
-            <p class="text-[30px] text-center" style="font-family: 'Poppins', sans-serif;">CPF</p>
+            <p class="text-[30px] text-center text-gray-900 dark:text-gray-100" style="font-family: 'Poppins', sans-serif;">CPF</p>
         </div>
         <div class="flex justify-center mb-6">
-            <p class="text-[16px] text-center" style="font-family: 'Poppins', sans-serif;">Insira seu CPF para o cadastro</p>
+            <p class="text-[16px] text-center text-gray-700 dark:text-gray-300" style="font-family: 'Poppins', sans-serif;">Insira seu CPF para o cadastro</p>
         </div>
 
       <form action="/cpf" method="POST" class="space-y-5">
         @csrf
         @method('PATCH') {{-- Mantido PATCH conforme seu código original --}}
         <div>
-            <label for="cpf" class="font-medium">CPF</label>
+            <label for="cpf" class="font-medium text-gray-900 dark:text-gray-100">CPF</label>
             <input
               type="text"
               required
@@ -58,7 +43,7 @@
               id="cpf"
               name="cpf"
               value="{{ old('cpf') }}" {{-- Adicionado old() para repopular --}}
-              class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
               placeholder="000.000.000-00" {{-- Placeholder ajustado para formato com máscara --}}
             />
             @error('cpf')
@@ -71,12 +56,12 @@
         <div class="flex flex-col items-center pt-2"> {{-- Adicionado pt-2 para espaçamento --}}
           <button
             type="submit"
-            class="w-2/5 px-4 py-2 text-white font-medium bg-[#2AB036] hover:bg-green-700 active:bg-green-800 rounded-lg duration-150 text-sm" {{-- Ajustado hover/active --}}
+            class="w-2/5 px-4 py-2 text-white font-medium bg-[#2AB036] hover:bg-green-700 active:bg-green-800 rounded-lg duration-150 text-sm"
           >
             Salvar CPF {{-- Texto do botão ajustado para clareza --}}
           </button>
 
-          <p class="text-sm text-[#575761] mt-4 text-center">
+          <p class="text-sm text-[#575761] dark:text-gray-400 mt-4 text-center">
             Para continuar é necessário seu CPF.
           </p>
         </div>
