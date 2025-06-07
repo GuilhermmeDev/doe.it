@@ -69,5 +69,7 @@ class ProfileController extends Controller
 
             return redirect()->back();
         }
+
+        return redirect()->back()->withErrors(['cpf' => 'Digite um CPF válido.']);
     }
 }

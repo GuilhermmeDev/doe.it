@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('Number',6);
             $table->string('City',50);
             $table->string('State',100);
-            $table->string('CEP',9);
             $table->dateTime('Collection_date');
             $table->timestamps();
         });

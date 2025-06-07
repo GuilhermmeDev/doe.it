@@ -107,7 +107,7 @@ main {
 }
 
 .progress-bar {
-    height: 8px;
+    height: 16px;
     background: #ddd;
     border-radius: 10px;
     overflow: hidden;
@@ -155,64 +155,6 @@ main {
     cursor: pointer;
 }
 
-.validator_button {
-    display: flex;
-    gap: 10px;
-    background-color: #5fcb69;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 16px;
-    text-decoration: none;
-    border: none;
-    font-family: "Poppins";
-    cursor: pointer;
-    font-size: 16px;
-}
-
-#invite_modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    z-index: 1000;
-    min-width: 300px;
-}
-
-#inviteEmail {
-    width: 100%;
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-family: "Poppins";
-    font-size: 16px;
-}
-
-.alert{
-    background-color: #fff3cd;
-    color: #856404;
-    border: 1px solid #ffeeba;
-    border-radius: 4px;
-    padding: 10px 15px;
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.close_modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-}
 
 /* Responsivo */
 @media (max-width: 768px) {
