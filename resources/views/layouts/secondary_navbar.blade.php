@@ -33,6 +33,8 @@
                   class="w-full px-4 py-2 text-sm border border-gray-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-neutral-800 text-gray-900 dark:text-white transition-all duration-300"
                 />
               </form>
+
+              <a href="/campaign" class="p-2 border-gray-600 border-solid border-2 rounded-lg text-gray-500 dark:text-white">Criar Campanha</a>
             </div>
           @endif
 
