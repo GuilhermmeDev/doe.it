@@ -6,15 +6,17 @@
   <title>Doeit - Sistema de Doação</title>
   <link rel="stylesheet" href="{{asset('css/landing_page.css')}}">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-    </style>
+  </style>
 </head>
-<body class="light-theme duration-200 overflow-x-hidden">
+<body class="light-theme dark:bg-neutral-900 dark:text-white duration-200 overflow-x-hidden">
 
     @include('layouts.secondary_navbar')
 
-<div id="fullsecao">
+    <div id="fullsecao">
       <section class="2xl:py-24 2xl:mt-[-25px] xl:mt-[50px] lg:mt-[80px] md:mt-[80px] sm:mt-[80px] mt-[80px] px-4 sm:px-6 lg:px-8">
         <div id="secao" class="mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8 rounded-[20px]">
           <div class="py-10 sm:py-16 lg:py-24 2xl:pl-24">
@@ -27,9 +29,6 @@
                   <a id="vamos" href="/register" title="" class="flex w-40 h-10" role="button">
                     <button id="buttonvamos" class="flex items-center justify-center w-full text-center rounded-[40px]">Vamos</button>
                   </a>
-
-
-
                 </div>
               </div>
 
@@ -46,8 +45,6 @@
       </section id="secao2">
 
 
-
-
       <section id="modsecao2" class="pt-15 mt-[60px] overflow-hidden md:pt-40 sm:pt-16 2xl:pt-16">
         <div class="px-4 mx-auto sm:px-6 relative h-[600px] lg:px-8 max-w-7xl">
             <div class="grid items-center grid-cols-1 md:grid-cols-2">
@@ -62,7 +59,7 @@
 
                     <br>
                     <h3 class="text-[18px] translate-x-10 leading-tight sm:text-4xl lg:text-[22px]">Precisa de ajuda com alimentação?</h3>
-                    <p id="textinfor" class="max-w-lg mt-3 translate-x-10 text-xl leading-relaxed md:mt-8">No <span id="doeitext"> <b> DoeIT</b></span>,
+                    <p id="textinfor" class="max-w-lg mt-3 translate-x-10 text-xl leading-relaxed md:mt-8 dark:text-gray-400">No <span id="doeitext"> <b> DoeIT</b></span>,
                       conectamos você a quem pode oferecer o apoio que você precisa. Nossa missão é
                       garantir que ninguém fique sem o essencial. Seja para receber doações de alimentos
                       ou para contribuir com aqueles que precisam.
@@ -90,7 +87,7 @@
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div class="max-w-2xl mx-auto text-center">
               <h2 class="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Como funciona?</h2>
-              <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Conectar doadores e organizações nunca foi tão fácil. No doe.it, cada etapa garante segurança, transparência e simplicidade na doação.</p>
+              <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600 dark:text-gray-300">Conectar doadores e organizações nunca foi tão fácil. No doe.it, cada etapa garante segurança, transparência e simplicidade na doação.</p>
           </div>
 
           <div class="relative mt-12 lg:mt-20">
@@ -104,7 +101,7 @@
                     <span class="text-xl font-semibold text-white">1</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Crie sua conta gratuita</h3>
-                  <p class="mt-4 text-base text-gray-600">Cadastre-se rapidamente e personalize seu perfil. Escolha se deseja doar, criar campanhas ou receber doações. Nossa plataforma garante a segurança dos seus dados com tecnologia de ponta.</p>
+                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Cadastre-se rapidamente e personalize seu perfil. Escolha se deseja doar, criar campanhas ou receber doações. Nossa plataforma garante a segurança dos seus dados com tecnologia de ponta.</p>
                 </div>
 
                 <div>
@@ -112,7 +109,7 @@
                     <span class="text-xl font-semibold text-white">2</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Crie campanhas ou doe diretamente</h3>
-                  <p class="mt-4 text-base text-gray-600">Inicie uma campanha de arrecadação ou navegue pelas campanhas existentes. Cada transação gera um QR Code seguro, que valida a autenticidade da doação e conecta você diretamente à causa escolhida.</p>
+                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Inicie uma campanha de arrecadação ou navegue pelas campanhas existentes. Cada transação gera um QR Code seguro, que valida a autenticidade da doação e conecta você diretamente à causa escolhida.</p>
                 </div>
 
                 <div>
@@ -120,7 +117,7 @@
                     <span class="text-xl font-semibold text-white">3</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Acompanhe e compartilhe seu impacto</h3>
-                  <p class="mt-4 text-base text-gray-600">Visualize seu histórico de doações e acompanhe como sua contribuição está fazendo a diferença. Receba relatórios de impacto e ajude a espalhar solidariedade de forma simples e confiável.</p>
+                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Visualize seu histórico de doações e acompanhe como sua contribuição está fazendo a diferença. Receba relatórios de impacto e ajude a espalhar solidariedade de forma simples e confiável.</p>
                 </div>
               </div>
 
@@ -234,88 +231,6 @@
     </footer>
   </div>
 
-
-
-    <style>
-      .svg-icon path,
-      .svg-icon polygon,
-      .svg-icon rect {
-        fill: currentColor;
-      }
-    </style>
-
-    <script>
-      function footerComponent() {
-        return {
-          footerNavs: [
-            {
-              label: "Sobre",
-              items: [
-                {
-                  href: "/register",
-                  name: "Saiba mais sobre",
-                },
-                {
-                  href: "/register",
-                  name: "Membros",
-                },
-                {
-                  href: "/register",
-                  name: "Contato",
-                },
-                {
-                  href: "/register",
-                  name: "Doe agora",
-                },
-              ],
-            },
-            {
-              label: "Valores",
-              items: [
-                {
-                  href: "/register",
-                  name: "Meio ambiente",
-                },
-                {
-                  href: "/register",
-                  name: "Acessibilidade",
-                },
-                {
-                  href: "/register",
-                  name: "Segurança online",
-                },
-                {
-                  href: "/register",
-                  name: "Diversidade, equidade e inclusão",
-                },
-              ],
-            },
-            {
-              label: "Contato",
-              items: [
-                {
-                  href: "/register",
-                  name: "contato@doeit",
-                },
-                {
-                  href: "/register",
-                  name: "@Doeit",
-                },
-                {
-                  href: "/register",
-                  name: "ㅤ",
-                },
-                {
-                  href: "/register",
-                  name: "ㅤ",
-                },
-              ],
-            },
-          ],
-        };
-      }
-    </script>
-  </div>
 </div>
 </body>
 </html>
