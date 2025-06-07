@@ -20,5 +20,7 @@ export default {
         },
     },
 
+    darkMode: "class", // Usar 'class' para dark mode
+
     plugins: [forms, flowbitePlugin],
 };
