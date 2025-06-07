@@ -22,8 +22,8 @@ importers:
         specifier: ^10.4.21
         version: 10.4.21(postcss@8.5.4)
       axios:
-        specifier: ^1.7.4
-        version: 1.8.1
+        specifier: ^1.8.2
+        version: 1.8.2
       laravel-echo:
         specifier: ^1.19.0
         version: 1.19.0
@@ -258,6 +258,7 @@ packages:
       rollup:
         optional: true
 
+
   '@rollup/rollup-android-arm-eabi@4.41.1':
     resolution: {integrity: sha512-NELNvyEWZ6R9QMkiytB4/L4zSEaBC03KIXEghptLGLZWJ6VPrL63ooZQCOnlx36aQPGhzuOMwDerC1Eb2VmrLw==}
     cpu: [arm]
@@ -363,8 +364,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20 || >= 4.0.0-beta.1'
 
-  '@types/estree@1.0.6':
-    resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
+  '@types/estree@1.0.7':
+    resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
@@ -417,8 +418,8 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  axios@1.8.1:
-    resolution: {integrity: sha512-NN+fvwH/kV01dYUQ3PTOZns4LWtWhOFCAhQ/pHb88WQ1hNe5V/dvFwc4VJcDL11LT9xSX0QtsR8sWUuyOuOq7g==}
+  axios@1.8.2:
+    resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -1109,6 +1110,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+
   '@popperjs/core@2.11.8': {}
 
   '@rollup/plugin-node-resolve@15.3.1(rollup@4.41.1)':
@@ -1128,6 +1130,7 @@ snapshots:
       picomatch: 4.0.2
     optionalDependencies:
       rollup: 4.41.1
+
 
   '@rollup/rollup-android-arm-eabi@4.41.1':
     optional: true
@@ -1194,7 +1197,7 @@ snapshots:
       mini-svg-data-uri: 1.4.4
       tailwindcss: 3.4.17
 
-  '@types/estree@1.0.6': {}
+  '@types/estree@1.0.7': {}
 
   '@types/estree@1.0.7': {}
 
@@ -1241,7 +1244,7 @@ snapshots:
       postcss: 8.5.4
       postcss-value-parser: 4.2.0
 
-  axios@1.8.1:
+  axios@1.8.2:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.2
