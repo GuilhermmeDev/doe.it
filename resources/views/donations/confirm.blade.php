@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link rel="icon" href="assets/logo1 (1).svg" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <title>Confirmar Doação</title>
   @vite(['resources/css/app.css', 'resources/js/app.js']) {{-- Vite directive added here --}}
 </head>
-<body class="light-theme duration-200">
+<body class="bg-white dark:bg-neutral-900 overflow-x-hidden">
 
 @include('layouts.secondary_navbar')
 
@@ -17,21 +17,20 @@
 <div class="flex justify-between items-start mt-25">
   <main class="flex-1 w-full max-w-full px-4">
 
-    <h1 class="text-xl font-semibold mb-2 ml-7">Confirmar Doação</h1>
+    <h1 class="text-xl font-semibold mb-2 ml-7 text-gray-900 dark:text-gray-100">Confirmar Doação</h1>
 
     @if ($donation->Description)
-    <p class="text-gray-600 mb-4 ml-7">Descrição do produto</p>
-
+    <p class="text-gray-600 dark:text-gray-300 mb-4 ml-7">Descrição do produto</p>
 
     <div class="max-w-md">
 
       <label for="Notes">
         <div
-          class="relative mt-0.5 overflow-hidden rounded border border-gray-300 shadow-sm focus-within:ring focus-within:ring-blue-600 mb-3 ml-7"
+          class="relative mt-0.5 overflow-hidden rounded border border-gray-300 dark:border-neutral-600 shadow-sm focus-within:ring focus-within:ring-blue-600 mb-3 ml-7 bg-white dark:bg-neutral-800"
         >
           <textarea
             id="Notes"
-            class="w-full border-none focus:ring-0 focus:outline-none sm:text-sm p-4"
+            class="w-full border-none focus:ring-0 focus:outline-none sm:text-sm p-4 bg-white dark:bg-neutral-800 text-gray-500 dark:text-gray-300"
             rows="6"
           >{{$donation->Description}}</textarea>
         </div>
@@ -39,11 +38,11 @@
     </div>
     @endif
 
-    <p class="mb-4 text-gray-600 text-sm font-semibold ml-7">Quantidade Doada: {{$donation->Quantity}}</p>
+    <p class="mb-4 text-gray-600 dark:text-gray-300 text-sm font-semibold ml-7">Quantidade Doada: {{$donation->Quantity}}</p>
 
-    <p class="mb-4 text-gray-600 text-sm font-semibold ml-7">Doador: {{$donation->user->name}}</p>
+    <p class="mb-4 text-gray-600 dark:text-gray-300 text-sm font-semibold ml-7">Doador: {{$donation->user->name}}</p>
 
-    <p class="text-gray-600 font-semibold mb-3 ml-7">Você tem certeza que quer confirmar essa doação?</p>
+    <p class="text-gray-600 dark:text-gray-300 font-semibold mb-3 ml-7">Você tem certeza que quer confirmar essa doação?</p>
 
     <form class="flex gap-4 mb-4 ml-7" method="POST" action="/confirm/{{$donation->id}}">
     @csrf
@@ -60,7 +59,7 @@
 
     </form>
 
-    <p class="text-gray-600 text-sm ml-7">
+    <p class="text-gray-600 dark:text-gray-300 text-sm ml-7">
       Ao clicar em "<span class="italic">Confirmar Doação</span>" você afirma que recebeu tal doação
     </p>
   </main>
@@ -69,7 +68,6 @@
   <div class="hidden md:block flex-shrink-0 mt-6 lg:mt-0 lg:ml-7">
     <img src="{{asset('assets/doodle_group.svg')}}" alt="Confirmação" class="w-full max-w-xs lg:max-w-[380px] h-auto mx-auto lg:mx-15"/>
   </div>
-
 
   </div>
 
