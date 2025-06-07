@@ -23,7 +23,7 @@
           @endif
 
           <!-- Campo de pesquisa visível apenas na rota /home -->
-          @if(request()->path() == 'home' || auth()->check() == true)
+          @if(request()->path() == 'home' || auth()->check() == true && request()->path() == '/')
             <div class="flex items-center space-x-2">
               <form action="/home" method="get">
                 <input 
