@@ -10,6 +10,7 @@ if [ ! -f "$FLAG_FILE" ]; then
     php artisan key:generate
     php artisan migrate:fresh --seed
     php artisan reverb:install
+    php artisan storage:link &
     npm install
     npm run build
 
@@ -20,7 +21,6 @@ else
 fi
 
 # Inicia os serviços em paralelo
-php artisan storage:link &
 php artisan serve --host=0.0.0.0 --port=8000 &
 php artisan reverb:start &
 php artisan queue:work &
