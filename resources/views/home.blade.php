@@ -9,7 +9,7 @@
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
-<body class="bg-white dark:bg-black text-black dark:text-white">
+<body class="bg-white dark:bg-neutral-900 text-black dark:text-white overflow-x-hidden">
   @include('layouts.secondary_navbar')
 
     @if (session('error'))
@@ -33,7 +33,7 @@
         <div class="swiper mySwiper mt-4 px-2">
           <div class="swiper-wrapper">
             @foreach($campaigns as $camp)
-                <div class="swiper-slide rounded-xl p-3 h-[530px] bg-[#f0f0f0] dark:bg-gray-800">
+                <div class="swiper-slide rounded-xl p-4 h-[530px] bg-[#f0f0f0] dark:bg-neutral-800">
                   <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit">
                     <div class="flex flex-col text-black dark:text-white">
                       <div class="w-full h-[18em] overflow-hidden rounded-xl">
@@ -58,7 +58,7 @@
                               </div>
                             </div>
                         @endif
-                        <button class="mt-5 top-3 relative ml-1 w-[120px] h-[45px] text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-xl text-sm font-medium">Saiba mais</button>
+                        <button class="mt-5 top-3 relative ml-1 w-[120px] h-[45px] text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-xl text-sm font-bold">Saiba mais</button>
                       </div>
                     </div>
                   </a>
