@@ -23,14 +23,14 @@
           @endif
 
           <!-- Campo de pesquisa visível apenas na rota /home -->
-          @if(request()->path() == 'home')
+          @if(request()->path() == 'home' || auth()->check() == true)
             <div class="flex items-center space-x-2">
               <form action="/home" method="get">
                 <input 
                   type="text" 
                   name="q" 
                   placeholder="Buscar..." 
-                  class="w-1/4 px-4 py-2 text-sm border border-gray-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-neutral-800 text-gray-900 dark:text-white transition-all duration-300"
+                  class="w-full px-4 py-2 text-sm border border-gray-300 dark:border-neutral-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-neutral-800 text-gray-900 dark:text-white transition-all duration-300"
                 />
               </form>
             </div>
@@ -62,29 +62,36 @@
     lua.style.width = imageSize;
     lua.style.height = imageSize;
 
-    // Exibe o ícone da lua (modo claro) inicialmente
-    sol.style.display = "none";
-    lua.style.display = "inline-block";
+    // Função para aplicar tema
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        body.classList.remove('light');
+        body.classList.add('dark');
+        sol.style.display = "inline-block";
+        lua.style.display = "none";
+      } else {
+        body.classList.remove('dark');
+        body.classList.add('light');
+        sol.style.display = "none";
+        lua.style.display = "inline-block";
+      }
+    }
+
+    // Checa o localStorage ao carregar a página
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      applyTheme(savedTheme);
+    } else {
+      // Tema padrão: claro
+      applyTheme('light');
+    }
 
     // Alterna entre temas claro e escuro ao clicar no botão
     themeToggleButton.addEventListener('click', () => {
-      if (body.classList.contains('dark')) {
-        // Ativa o tema claro
-        body.classList.remove('dark');
-        body.classList.add('light');
-
-        // Mostra o ícone da lua, esconde o do sol
-        sol.style.display = "none";
-        lua.style.display = "inline-block";
-      } else {
-        // Ativa o tema escuro
-        body.classList.remove('light');
-        body.classList.add('dark');
-
-        // Mostra o ícone do sol, esconde o da lua
-        sol.style.display = "inline-block";
-        lua.style.display = "none";
-      }
+      const isDark = body.classList.contains('dark');
+      const newTheme = isDark ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
     });
   </script>
 </head>
