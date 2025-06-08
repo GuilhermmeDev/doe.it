@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 class CampaignController extends Controller
 {
     public function create() {
-        if (Gate::allows('verify-cpf', auth()->user()))
+        if (Gate::allows('verify-cpf', auth()->user())) 
         {
             return view('campaigns.create');
         }
@@ -35,6 +35,8 @@ class CampaignController extends Controller
         $address->City = $validRequest['City'];
 
         $address->Street = $validRequest['Street'];
+
+        $address->CEP = $validRequest['CEP'];
 
         $dateTime = $validRequest['Data'] . ' ' . $validRequest['Hour']; // concatenando data e hora
         $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime); // formatando com a biblioteca Carbon
@@ -56,18 +58,16 @@ class CampaignController extends Controller
         $campaign->Title = $validRequest['Title'];
 
         $campaign->Description = $validRequest['Description'];
-
+        
         $requestImage = $validRequest['Image'];
 
         $extension = $requestImage->extension();
 
         $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
 
-        $imagePath = $requestImage->storeAs('campaigns', $imageName, 'public');
-        
-        $campaign->Image = $imagePath; // salva o caminho relativo, ex: campaigns/abc123.jpg
+        $requestImage->move(public_path('img/campaigns'), $imageName);
 
-        $campaign->Type = $validRequest['Type'];
+        $campaign->Image = $imageName;
 
         if ($validRequest['meta'])
         {
@@ -83,26 +83,37 @@ class CampaignController extends Controller
     }
 
     public function show($id) {
-        $campaign = Campaign::findOrFail($id);
-        if ($campaign->meta != null) {
-            $target = $campaign->meta['target'];
-            $current = $campaign->meta['current'];
-            $progress = ($current / $target) * 100;
-            $progress = round($progress, 1);
-        } else {
-            $progress = null;
-        }
-        $address = Address::findOrFail($campaign->address_id);
+    $campaign = Campaign::with(['user', 'validatorUsers'])->findOrFail($id);
 
-        $donation = Donation::where('user_id', auth()->user()->id)->where('campaign_id', $campaign->id)->where('Status', 'pending')->first();
-
-        $donation_count = Donation::where('campaign_id', $campaign->id)->count();
-
-        if ($campaign && $address) {
-            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count'));
-        }
-
+    if ($campaign->meta != null) {
+        $target = $campaign->meta['target'];
+        $current = $campaign->meta['current'];
+        $progress = ($current / $target) * 100;
+        $progress = round($progress, 1);
+    } else {
+        $progress = null;
     }
+
+    $address = Address::findOrFail($campaign->address_id);
+
+    $donation = Donation::where('user_id', auth()->user()->id)
+        ->where('campaign_id', $campaign->id)
+        ->where('Status', 'pending')
+        ->first();
+
+    $donation_count = Donation::where('campaign_id', $campaign->id)->count();
+    $validators = $campaign->validatorUsers->pluck('user');
+    $validators = collect([$campaign->user])->merge($campaign->validatorUsers->pluck('user'))->unique('id');
+
+    return view('campaigns.show', compact(
+        'campaign',
+        'progress',
+        'address',
+        'donation',
+        'donation_count',
+        'validators'
+    ));
+}
 
     public function delete($id) {
         $campaign = Campaign::findOrFail($id)->delete();
@@ -150,24 +161,22 @@ class CampaignController extends Controller
     public function invite(Request $request){
         $request->validate([
             'email' => 'required|email',
-            'campaign_id' => 'required',
         ]);
 
         $email = $request->email;
-        $campaign_id = $request->campaign_id;
         $user = User::where('email', $email)->first();
 
         if (!$user) {
             return response()->json([
                 'message' => 'Usuário não encontrado. Certifique-se de que o e-mail está correto.',
             ], 404);
-        }
+        } 
         else if ($user->id === auth()->user()->id) {
             return response()->json([
                 'message' => 'Você não pode convidar a si mesmo.',
             ], 400);
         }
-        else if (CampaignValidatorUser::where([['user_id', $user->id],['campaign_id', $campaign_id]])->exists()) {
+        else if (CampaignValidatorUser::where('user_id', $user->id)->exists()) {
             return response()->json([
                 'message' => 'Usuário já é um validador.',
             ], 400);
@@ -219,4 +228,23 @@ class CampaignController extends Controller
 
         return redirect('/home')->with('success', 'Convite recusado com sucesso!');
     }
+    
+    public function removeValidator(Campaign $campaign, User $user)
+    {
+        if (auth()->id() !== $campaign->user_id) {
+            abort(403);
+        }
+
+        if ($user->id === $campaign->user_id) {
+            return redirect()->back()->with('error', 'Você não pode remover o dono da campanha.');
+        }
+
+        CampaignValidatorUser::where('campaign_id', $campaign->id)
+            ->where('user_id', $user->id)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Validador removido com sucesso.');
+    }
+
+
 }
