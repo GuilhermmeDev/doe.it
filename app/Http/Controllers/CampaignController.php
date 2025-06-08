@@ -83,26 +83,37 @@ class CampaignController extends Controller
     }
 
     public function show($id) {
-        $campaign = Campaign::findOrFail($id);
-        if ($campaign->meta != null) {
-            $target = $campaign->meta['target'];
-            $current = $campaign->meta['current'];
-            $progress = ($current / $target) * 100;
-            $progress = round($progress, 1);
-        } else {
-            $progress = null;
-        }
-        $address = Address::findOrFail($campaign->address_id);
+    $campaign = Campaign::with(['user', 'validatorUsers'])->findOrFail($id);
 
-        $donation = Donation::where('user_id', auth()->user()->id)->where('campaign_id', $campaign->id)->where('Status', 'pending')->first();
-
-        $donation_count = Donation::where('campaign_id', $campaign->id)->count(); 
-
-        if ($campaign && $address) {
-            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count'));
-        }
-
+    if ($campaign->meta != null) {
+        $target = $campaign->meta['target'];
+        $current = $campaign->meta['current'];
+        $progress = ($current / $target) * 100;
+        $progress = round($progress, 1);
+    } else {
+        $progress = null;
     }
+
+    $address = Address::findOrFail($campaign->address_id);
+
+    $donation = Donation::where('user_id', auth()->user()->id)
+        ->where('campaign_id', $campaign->id)
+        ->where('Status', 'pending')
+        ->first();
+
+    $donation_count = Donation::where('campaign_id', $campaign->id)->count();
+    $validators = $campaign->validatorUsers->pluck('user');
+    $validators = collect([$campaign->user])->merge($campaign->validatorUsers->pluck('user'))->unique('id');
+
+    return view('campaigns.show', compact(
+        'campaign',
+        'progress',
+        'address',
+        'donation',
+        'donation_count',
+        'validators'
+    ));
+}
 
     public function delete($id) {
         $campaign = Campaign::findOrFail($id)->delete();
@@ -217,4 +228,23 @@ class CampaignController extends Controller
 
         return redirect('/home')->with('success', 'Convite recusado com sucesso!');
     }
+    
+    public function removeValidator(Campaign $campaign, User $user)
+    {
+        if (auth()->id() !== $campaign->user_id) {
+            abort(403);
+        }
+
+        if ($user->id === $campaign->user_id) {
+            return redirect()->back()->with('error', 'Você não pode remover o dono da campanha.');
+        }
+
+        CampaignValidatorUser::where('campaign_id', $campaign->id)
+            ->where('user_id', $user->id)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Validador removido com sucesso.');
+    }
+
+
 }

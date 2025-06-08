@@ -1,42 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Doar para {{$campaign->Title}}</title>
-    @include('layouts.head')
-    <link rel="stylesheet" href="{{asset('css/donate.css')}}">
-    </style>
+    <title>Campanha</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
-    @include('layouts.navbar')
-    @if (session('error'))
-        {{session('error')}}<br>
-    @endif
-    <h1 class="titulo">Doar para campanha {{$campaign->Title}}</h1>
-    <p class="subtitulo">Meta: {{$campaign->meta['target']}} kg</p>
-    <p class="subtitulos">Arrecadado: {{$campaign->meta['current']}} kg</p>
-    <p class="text">Quantos kg de comida você pretende doar?</p>
-    <p class="des">Descrição</p>
-    <form action="/donation/{{$campaign->id}}" method="post">
-        @csrf
+<body class=" bg-white dark:bg-neutral-900 overflow-x-hidden">
+    @include('layouts.secondary_navbar')
 
-        <input type="number" class="kilos" placeholder="Kilos de comida" name="Quantity" id="Quantity" min="0" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"/>
-        <input type="text" class="descricao" placeholder="Descrição" name="Description" id="Description"/> 
-        
-        <p class="text2">
-          Antes de doar, entenda como funciona o nosso sistema clique<a
-            href="/info"
-            class="aqui"
-            >aqui</a
-          >
-        </p>
-    
-        <button class="botao">Prometer doação</button>
-    </form>
+  <div class="bg-white dark:bg-neutral-900">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-8">
+      <div class="max-w-lg mx-auto gap-12 justify-between lg:flex lg:max-w-none">
+        <div class="max-w-lg space-y-3 bg-white dark:bg-neutral-800 rounded-lg p-6">
+          <br><br>
+          <p class="text-[#2AB036] text-3xl font-semibold sm:text-4xl">
+            Doar para a campanha
+          </p>
+          <p class="font-semibold text-gray-900 dark:text-gray-100">
+            Meta: {{$campaign->meta['target']}}
+          </p>
+          <p class="font-semibold text-gray-900 dark:text-gray-100">
+            Arrecadado: {{$campaign->meta['current']}}
+          </p>
+          <br>
+          <img src="{{asset('assets/doodle_group.svg')}}" alt="">
+          <div>
+            <ul class="mt-6 flex flex-wrap gap-x-10 gap-y-6 items-center">
+              <template x-for="(item, index) in contactMethods" :key="index">
+                <li class="flex items-center gap-x-3">
+                  <div class="flex-none text-gray-400 dark:text-gray-300" x-html="item.icon"></div>
+                  <p class="text-gray-500 dark:text-gray-300" x-text="item.contact"></p>
+                </li>
+              </template>
+            </ul>
+          </div>
+        </div>
+        <div class="flex-1 mt-12 sm:max-w-lg lg:max-w-md bg-white dark:bg-neutral-800 rounded-lg p-6">
+            <form method="POST" action="/donation/{{$campaign->id}}" class="space-y-8">
+            @csrf
+            <div class="mb-10 mt-8">
+              <label class="font-medium text-gray-900 dark:text-gray-100"> Quantos kg de comida você pretende doar? </label>
+              <input
+                type="number"
+                required
+                class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
+                name="Quantity" id="Quantity" min="0" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"
+              />
+            </div>
 
-    <img src="{{asset('assets/donation_doodle2.svg')}}" class="img" />
+            <div>
+              <label class="font-medium text-gray-900 dark:text-gray-100">Descrição</label>
+              <textarea
+                name="Description"
+                class="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg text-gray-500 dark:text-gray-300"
+              ></textarea>
+            </div>
+            <div class="text-sm text-center text-gray-500 dark:text-gray-300">
+            </div>
+            <div class="pb-5">
+            <button
+            type="submit"
+              class="w-full px-4 py-2 text-white font-medium bg-[#5FCB69] hover:bg-[#357E3C] active:bg-indigo-600 rounded-lg duration-150"
+            >
+              Fazer Doação
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
