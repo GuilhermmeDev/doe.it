@@ -219,4 +219,22 @@ class CampaignController extends Controller
 
         return redirect('/home')->with('success', 'Convite recusado com sucesso!');
     }
+    
+    public function removeValidator(Campaign $campaign, User $user)
+    {
+        if (auth()->id() !== $campaign->user_id) {
+            abort(403);
+        }
+
+        if ($user->id === $campaign->user_id) {
+            return redirect()->back()->with('error', 'Você não pode remover o dono da campanha.');
+        }
+
+        CampaignValidatorUser::where('campaign_id', $campaign->id)
+            ->where('user_id', $user->id)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Validador removido com sucesso.');
+    }
+
 }
