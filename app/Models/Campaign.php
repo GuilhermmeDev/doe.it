@@ -25,4 +25,14 @@ class Campaign extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+        public function validatorUsers()
+    {
+        return $this->hasMany(CampaignValidatorUser::class);
+    }
+
+    public function allValidatorsIncludingOwner()
+    {
+        $validators = User::whereIn('id', $this->validatorUsers()->pluck('user_id'))->get();
+        return $validators->prepend($this->user);
+    }
 }

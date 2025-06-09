@@ -23,13 +23,13 @@
                 <textarea class="description-box" readonly >{{$donation->Description}}</textarea>
             @endif
             <form action="/donation/{{$donation->id}}" method="post">
-                @csrf 
+                @csrf
                 @method('DELETE')
 
                 <button class="cancel-button" type="submit">Cancelar Doação</button>
             </form>
         </section>
-        
+
         <div class="qr-placeholder">
             <img src="data:image/png;base64, {{$donation->qr_code}}" alt="QR CODE">
         </div>

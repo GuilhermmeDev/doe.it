@@ -10,6 +10,7 @@ if [ ! -f "$FLAG_FILE" ]; then
     php artisan key:generate
     php artisan migrate:fresh --seed
     php artisan reverb:install
+    php artisan storage:link &
     npm install
     npm run build
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CampaignRequest extends FormRequest
 {
@@ -28,11 +29,11 @@ class CampaignRequest extends FormRequest
             'City' => 'required|string',
             'Street' => 'required|string',
             'Number' => 'required|integer|min:1',
-            'CEP' => 'required|string|regex:/^[0-9]{5}-[0-9]{3}$/', // Formato do CEP
             'Data' => 'required|date|after:now', // Data deve ser futura
             'Hour' => 'required|date_format:H:i',
             'meta' => 'required|integer|min:1|max:500',
-            'Image' => 'required|image|mimes:jpeg,jpg,png,svg| max:2048'
+            'Image' => 'required|image|mimes:jpeg,jpg,png,svg| max:2048',
+            'Type' => ['required', Rule::in(['food', 'clothes'])], // 'food' ou 'clothes'
         ];
     }
 
@@ -57,8 +58,10 @@ class CampaignRequest extends FormRequest
             'meta.max' => 'A meta não pode exceder 500 kg.',
             'Image.required' => 'A campanha deve possuir uma imagem.',
             'Image.image' => 'O arquivo deve ser uma imagem.',
-            'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg.',
+            'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, svg.',
             'Image.max' => 'A imagem não pode exceder 2MB.',
+            'Type.required' => 'O tipo é obrigatório.',
+            'Type.in' => 'O tipo deve ser Roupa ou Comida.'
         ];
     }
 }
