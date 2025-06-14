@@ -206,7 +206,7 @@ class CampaignController extends Controller
         $validator_user->accepted_at = now();
         $validator_user->save();
 
-        return redirect('/home')->with('success', 'Convite aceito com sucesso!');
+        return redirect('/home')->with('Success', 'Convite aceito com sucesso!');
     }
 
 
@@ -219,7 +219,7 @@ class CampaignController extends Controller
 
         $validator_user->delete();
 
-        return redirect('/home')->with('success', 'Convite recusado com sucesso!');
+        return redirect('/home')->with('Success', 'Convite recusado com sucesso!');
     }
     
     public function removeValidator(Campaign $campaign, User $user)
@@ -236,7 +236,7 @@ class CampaignController extends Controller
             ->where('user_id', $user->id)
             ->delete();
 
-        return redirect()->back()->with('success', 'Validador removido com sucesso.');
+        return redirect()->back()->with('Success', 'Validador removido com sucesso.');
     }
 
 }
