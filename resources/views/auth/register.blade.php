@@ -36,7 +36,7 @@
   </div>
 
   <div class="flex-[2] flex items-center justify-center h-screen py-8">
-    <div class="w-full max-w-md space-y-6 px-4 bg-white dark:bg-neutral-800 text-gray-600 dark:text-gray-100 sm:px-0">
+    <div class="w-full max-w-md space-y-6 px-4 bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100 sm:px-0">
 
       <div class="flex justify-center mb-4">
         <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-24 h-24 object-contain">
