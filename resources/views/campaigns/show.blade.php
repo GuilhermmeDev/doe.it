@@ -98,9 +98,42 @@
           <div class="border-t pt-6">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Sobre a campanha</h2>
             <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 mb-6">
-              <li><strong>Dono da campanha:</strong> {{$campaign->user->name}}</li>
-              <li><strong>Arrecadados:</strong> {{$campaign->meta['current']}}</li>
-              <li><strong>Nossa meta:</strong> {{$campaign->meta['target']}}</li>
+              <ul>
+              @if ($validators->count())
+                <li>
+                  <strong>Validadores:</strong>
+                  <ul style="margin-top: 5px; padding-left: 15px;">
+                    @foreach ($validators as $validator)
+                      <li style="display: flex; align-items: center; justify-content: space-between; padding: 4px 0;">
+                        <span>{{ $validator->name }}</span>
+
+                        @if (auth()->id() === $campaign->user_id && $validator->id !== $campaign->user_id)
+                          <form action="{{ route('campaigns.removeValidator', [$campaign->id, $validator->id]) }}" method="POST" style="margin: 0;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" style="
+                              background-color: #ffdddd;
+                              color: #d00;
+                              border: 1px solid #d00;
+                              border-radius: 4px;
+                              padding: 2px 6px;
+                              font-size: 12px;
+                              cursor: pointer;
+                              transition: background-color 0.2s;"
+                              onmouseover="this.style.backgroundColor='#ffcccc'"
+                              onmouseout="this.style.backgroundColor='#ffdddd'">
+                              Remover
+                            </button>
+                          </form>
+                        @endif
+                      </li>
+                    @endforeach
+                  </ul>
+                </li>
+              @endif
+
+              <li><strong>Arrecadados:</strong> {{ $campaign->meta['current'] }}</li>
+              <li><strong>Nossa meta:</strong> {{ $campaign->meta['target'] }}</li>
             </ul>
 
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Local da campanha</h2>

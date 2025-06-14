@@ -25,7 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/campaign/invite', [CampaignController::class, 'invite'])->name('campaign.invite');
     Route::get('/campaign/accept/{token}', [CampaignController::class, 'accept'])->name('campaign.accept');
     Route::get('/campaign/decline/{token}', [CampaignController::class, 'decline'])->name('campaign.decline');
-
+    Route::delete('/campaign/{campaign}/validator/{user}', [CampaignController::class, 'removeValidator'])
+    ->name('campaigns.removeValidator')
+    ->middleware('auth');
 
     Route::get('/donate/{id}', [DonationController::class, 'donate'])->name('donation.donate');
     Route::post('/donation/{id}', [DonationController::class, 'store']);
