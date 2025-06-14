@@ -10,7 +10,7 @@
   <title>Login - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
 <main class="w-full flex">
 
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
@@ -24,7 +24,7 @@
   </div>
 
   <div class="flex-[2] flex items-center justify-center h-screen">
-    <div class="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
+    <div class="w-full max-w-md space-y-8 px-4 bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100 sm:px-0">
 
       <div class="flex justify-center mb-6">
         <img src="{{ asset('assets/logo1.svg') }}" alt="Sua imagem aqui" class="w-32 h-32 object-contain">
@@ -33,12 +33,12 @@
       <form action="{{ route('login') }}" class="space-y-5" method="POST">
         @csrf
         <div>
-          <label class="font-medium">Email</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Email</label>
           <input
             type="email"
             name="email"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
             placeholder="Insira seu e-mail"
             value="{{ old('email') }}"
           />
@@ -47,13 +47,13 @@
           @enderror
         </div>
         <div class="relative">
-          <label class="font-medium">Senha</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
           <input
             id="password"
             type="password"
             name="password"
             required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+            class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
             placeholder="Insira sua senha"
           />
           @error('password')
@@ -67,7 +67,7 @@
             alt="Mostrar senha"
             class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-1"
           />
-          <a href="{{ route('password.request') }}" class="text-gray-500 text-sm mt-2 block text-right">Esqueceu sua senha?</a>
+          <a href="{{ route('password.request') }}" class="text-gray-500 dark:text-gray-300 text-sm mt-2 block text-right">Esqueceu sua senha?</a>
         </div>
 
         <div class="flex flex-col items-center">
@@ -77,13 +77,13 @@
           >
             Entrar
           </button>
-          <a href="{{ route('register') }}" class="text-sm text-[#575761] hover:underline mt-4 text-center">
+          <a href="{{ route('register') }}" class="text-sm text-[#575761] dark:text-gray-400 hover:underline mt-4 text-center">
             Ainda não tem uma conta?<span class="text-[#FF5800]"> Cadastre-se</span>
           </a>
         </div>
 
         <div class="flex justify-center mt-4">
-          <a class="flex items-center justify-center p-2 border rounded-full hover:bg-gray-50 duration-150 active:bg-gray-100" href="{{ url('/login/google') }}">
+          <a class="flex items-center justify-center p-2 border border-gray-300 dark:border-neutral-600 rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 duration-150 active:bg-gray-100 dark:active:bg-neutral-800" href="{{ url('/login/google') }}">
             <img
               src="{{asset('assets/google-logo.png')}}"
               alt="Google"
@@ -97,6 +97,18 @@
 </main>
 </body>
 </html>
+
+<script>
+  // Garante que o tema seja aplicado antes do carregamento visual
+  (function() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+</script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
