@@ -98,8 +98,10 @@ class CampaignController extends Controller
 
         $donation_count = Donation::where('campaign_id', $campaign->id)->count();
 
+        $validators = $campaign->allValidatorsIncludingOwner();
+
         if ($campaign && $address) {
-            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count'));
+            return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count', 'validators'));
         }
 
     }
