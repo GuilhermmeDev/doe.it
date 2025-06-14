@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash; // Adicione esta linha para usar Hash::check
 
 class ProfileController extends Controller
 {
@@ -43,11 +44,16 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+
         $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+            'password_confirmation' => ['required', 'string'],
         ]);
 
         $user = $request->user();
+
+        if (! Hash::check($request->password_confirmation, $user->password)) {
+            return Redirect::back()->withErrors(['password_confirmation' => 'A senha fornecida está incorreta.'], 'userDeletion');
+        }
 
         Auth::logout();
 
@@ -56,7 +62,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')->with('status', 'Sua conta foi excluída com sucesso.');
     }
 
     public function registerCpf(Request $request) {
