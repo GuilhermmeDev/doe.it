@@ -9,8 +9,20 @@
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   <title>Registro - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+  <script>
+    // Aplica o tema salvo no localStorage antes do carregamento visual
+    (function() {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body>
+<body class="bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
 <main class="w-full flex">
 
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
@@ -24,7 +36,7 @@
   </div>
 
   <div class="flex-[2] flex items-center justify-center h-screen py-8">
-    <div class="w-full max-w-md space-y-6 px-4 bg-white text-gray-600 sm:px-0">
+    <div class="w-full max-w-md space-y-6 px-4 bg-white dark:bg-neutral-800 text-gray-600 dark:text-gray-100 sm:px-0">
 
       <div class="flex justify-center mb-4">
         <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-24 h-24 object-contain">
@@ -33,12 +45,12 @@
       <form action="{{ route('register') }}" class="space-y-4" method="POST">
         @csrf
         <div>
-          <label class="font-medium">Nome</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Nome</label>
           <input
             type="text"
             name="name"
             required
-            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
             placeholder="Insira seu nome"
             value="{{ old('name') }}"
           />
@@ -47,12 +59,12 @@
           @enderror
         </div>
         <div>
-          <label class="font-medium">Email</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Email</label>
           <input
             type="email"
             name="email"
             required
-            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
             placeholder="Insira seu e-mail"
             value="{{ old('email') }}"
           />
@@ -61,14 +73,14 @@
           @enderror
         </div>
         <div class="relative">
-          <label class="font-medium">Senha</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
           <input
             placeholder="Insira sua senha"
             id="password"
             name="password"
             type="password"
             required
-            class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+            class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
           />
           <img
             id="eyeIcon1"
@@ -76,7 +88,7 @@
             data-visivel-src="{{ asset('assets/visivel.svg') }}"
             data-oculto-src="{{ asset('assets/oculto.svg') }}"
             alt="Mostrar senha"
-            class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
+            class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5"
           />
           @error('password')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -84,14 +96,14 @@
         </div>
 
         <div class="relative">
-          <label class="font-medium">Confirmar senha</label>
+          <label class="font-medium text-gray-900 dark:text-gray-100">Confirmar senha</label>
             <input
               placeholder="Confirme sua senha"
               id="cpassword"
               name="password_confirmation"
               type="password"
               required
-              class="w-full mt-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+              class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
             />
             <img
               id="eyeIcon2"
@@ -99,7 +111,7 @@
               data-visivel-src="{{ asset('assets/visivel.svg') }}"
               data-oculto-src="{{ asset('assets/oculto.svg') }}"
               alt="Mostrar senha"
-              class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5" {{-- Ajuste mt se necessário --}}
+              class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5"
             />
           @error('password_confirmation')
              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -116,7 +128,7 @@
         </div>
 
         <div class="flex justify-center mt-3">
-          <a class="flex items-center justify-center p-2 border rounded-full hover:bg-gray-50 duration-150 active:bg-gray-100" href="{{ url('/login/google') }}">
+          <a class="flex items-center justify-center p-2 border border-gray-300 dark:border-neutral-600 rounded-full hover:bg-gray-50 dark:hover:bg-neutral-700 duration-150 active:bg-gray-100 dark:active:bg-neutral-800" href="{{ url('/login/google') }}">
             <img
               src="{{asset('assets/google-logo.png')}}"
               alt="Google"
@@ -126,7 +138,7 @@
         </div>
 
         <div class="text-center mt-3">
-          <a href="{{ route('login') }}" class="text-sm text-[#575761] hover:underline inline-block">
+          <a href="{{ route('login') }}" class="text-sm text-[#575761] dark:text-gray-400 hover:underline inline-block">
             Já possui uma conta?<span class="text-[#FF5800]"> Faça login</span>
           </a>
         </div>
