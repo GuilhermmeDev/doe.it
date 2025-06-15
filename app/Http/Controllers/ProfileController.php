@@ -7,9 +7,11 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Hash; // Adicione esta linha para usar Hash::check
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class ProfileController extends Controller
 {
@@ -28,15 +30,48 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
         }
 
-        $request->user()->save();
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('status',
+            $user->wasChanged('email')
+                ? 'Um e-mail de verificação foi enviado para seu novo endereço.'
+                : 'Perfil atualizado com sucesso!');
+    }
+
+    /**
+     * Send password reset link
+     */
+    public function sendResetLink(Request $request): RedirectResponse
+    {
+        // Certifica-se de que o usuário está logado
+        if (!Auth::check()) {
+            return back()->with([
+                'reset_status' => false,
+                'reset_message' => 'Você precisa estar logado para redefinir sua senha.'
+            ]);
+        }
+
+        // Pega o e-mail do usuário autenticado diretamente
+        $email = Auth::user()->email;
+
+        // Tenta enviar o link de redefinição
+        $status = Password::sendResetLink(
+            ['email' => $email] // Passa o e-mail como um array associativo
+        );
+
+        // Retorna com a mensagem de status apropriada
+        return back()->with([
+            'reset_status' => $status === Password::RESET_LINK_SENT,
+            'reset_message' => __($status)
+        ]);
     }
 
     /**
@@ -44,19 +79,12 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-
         $request->validateWithBag('userDeletion', [
-            'password_confirmation' => ['required', 'string'],
+            'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();
-
-        if (! Hash::check($request->password_confirmation, $user->password)) {
-            return Redirect::back()->withErrors(['password_confirmation' => 'A senha fornecida está incorreta.'], 'userDeletion');
-        }
-
         Auth::logout();
-
         $user->delete();
 
         $request->session()->invalidate();
@@ -65,17 +93,19 @@ class ProfileController extends Controller
         return Redirect::to('/')->with('status', 'Sua conta foi excluída com sucesso.');
     }
 
-    public function registerCpf(Request $request) {
-        $user = User::where('id', auth()->user()->id)->first();
+    /**
+     * Register/update CPF
+     */
+    public function registerCpf(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'cpf' => ['required', 'string', 'size:14']
+        ]);
 
-        if (strlen($request->cpf) === 14) {
-            $user->CPF = $request->cpf;
+        $user = $request->user();
+        $user->CPF = $request->cpf;
+        $user->save();
 
-            $user->save();
-
-            return redirect()->back();
-        }
-
-        return redirect()->back()->withErrors(['cpf' => 'Digite um CPF válido.']);
+        return redirect()->back()->with('status', 'CPF atualizado com sucesso!');
     }
 }
