@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {{-- Vite cuida do CSS (incluindo Tailwind) e JS (incluindo seus scripts personalizados) --}}
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
 
@@ -15,10 +16,8 @@
   
   <main class="max-w-7xl mx-auto px-4 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Main Content -->
       <div class="lg:col-span-2">
         <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden">
-          <!-- Campaign Image -->
           <div class="relative">
             <img src="{{asset('storage/' . $campaign->Image)}}" 
                  alt="Imagem de doação" 
@@ -26,10 +25,8 @@
           </div>
           
           <div class="p-6">
-            <!-- Campaign Title -->
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">{{$campaign->Title}}</h1>
             
-            <!-- Share Section -->
             <div class="bg-gray-50 dark:bg-neutral-700 rounded-lg p-4 mb-6">
               <label for="share-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Compartilhe:</label>
               <div class="flex space-x-2">
@@ -44,7 +41,6 @@
               </div>
             </div>
 
-            <!-- Description -->
             <div>
               <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Descrição</h2>
               <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{$campaign->Description}}</p>
@@ -53,10 +49,8 @@
         </div>
       </div>
 
-      <!-- Sidebar -->
       <div class="lg:col-span-1">
         <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm p-6 sticky top-8">
-          <!-- Campaign Stats -->
           <div class="text-center mb-6">
             <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Arrecadado</div>
             <div class="text-3xl font-bold text-green-500 dark:text-green-400 mb-4">{{$campaign->meta['current']}}
@@ -76,13 +70,11 @@
               @endif
             </div>
             
-            <!-- Progress Bar -->
             <div class="progress-bar">
               <div class="progress" style="width: {{ $progress }}%;"></div>
             </div>
           </div>
 
-          <!-- Donation Actions -->
           @if ($donation)
             <p class="text-center text-sm text-gray-600 dark:text-gray-400 mb-4">
               Veja o qr code da sua doação <a href="/donation/{{$donation->id}}" class="text-blue-500 hover:underline dark:text-blue-400">aqui</a>
@@ -94,7 +86,6 @@
             </a>
           @endif
 
-          <!-- Campaign Details -->
           <div class="border-t pt-6">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Sobre a campanha</h2>
             <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 mb-6">
@@ -147,7 +138,6 @@
             </ul>
           </div>
 
-          <!-- Owner Actions -->
           @if($campaign->user_id === auth()->user()->id)
             <div class="border-t pt-6 space-y-3">
               <form action="/campaign/{{$campaign->id}}" method="post">
@@ -177,7 +167,6 @@
       </div>
     </div>
 
-    <!-- Invite Modal -->
     <div id="invite_modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;">
       <div class="bg-white dark:bg-neutral-800 rounded-lg p-6 w-full max-w-md mx-4">
         <div class="flex justify-between items-center mb-4">
@@ -214,48 +203,6 @@
     </div>
   </main>
 
-  <script>
-    const buttonCopy = document.querySelector('#copy');
-    buttonCopy.addEventListener('click', (e) => {
-      const input = document.querySelector('#share-input');
-      input.select();
-      document.execCommand('copy');
-      
-      buttonCopy.innerText = 'Copiado!';
-      setTimeout(() => {
-        buttonCopy.innerText = 'Copiar';
-      }, 2000);
-    });
-
-    function closeModal() {
-      document.getElementById('invite_modal').style.display = 'none';
-    }
-
-    function openInviteModal() {
-      document.getElementById('invite_modal').style.display = 'flex';
-    }
-
-    document.getElementById('invite_form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-
-      fetch('{{ route("campaign.invite") }}', {
-          method: 'POST',
-          headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-          },
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          alert(data.message);
-          closeModal();
-        })
-        .catch(error => {
-          console.error('Erro:', error);
-        });
-    });
-  </script>
+  {{-- O bloco <script> foi movido para resources/js/app.js --}}
 </body>
 </html>
