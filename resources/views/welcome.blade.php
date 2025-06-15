@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doeit - Sistema de Doação</title>
   <link rel="stylesheet" href="{{asset('css/landing_page.css')}}">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <style>
@@ -130,17 +129,13 @@
   <section id="secao4" class="text-gray-400 body-font relative min-h-screen flex items-center justify-center">
     <div class="container px-5 py-24 mx-auto flex flex-col items-center justify-center relative z-10">
 
-      <!-- Quadrado Principal -->
       <div class="w-full md:w-[90%] lg:w-4/5 bg-[#2AB036] shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden p-8">
 
-        <!-- Lado Esquerdo (título + mapa) -->
         <div class="w-full md:w-1/2 p-4 flex flex-col">
-          <!-- Título acima do mapa -->
           <h2 class="text-white text-2xl md:text-4xl font-bold mb-6">
             Como criar a sua<br class="hidden md:block"> campanha online no <br> DoeIT
           </h2>
 
-          <!-- Mapa -->
           <div class="bg-white rounded-lg overflow-hidden h-96">
             <iframe
               title="map"
@@ -156,32 +151,27 @@
           </div>
         </div>
 
-        <!-- Dentro do quadrado do formulário (lado direito) -->
         <div class="w-full md:w-1/2 p-4">
           <div class="bg-white rounded-lg p-8 h-auto flex flex-col justify-center gap-4">
 
-            <!-- Título -->
             <div class="flex flex-col">
               <label for="titulo" class="text-gray-800 text-sm font-semibold mb-2">Título</label>
               <input id="inpudefeituoso" type="text" id="titulo" name="titulo"
                 class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out" readonly>
             </div>
 
-            <!-- Estado -->
             <div class="flex flex-col">
               <label for="estado" class="text-gray-800 text-sm font-semibold mb-2">Estado</label>
               <input type="text" id="estado" name="estado" readonly
                 class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
             </div>
 
-            <!-- Data -->
             <div class="flex flex-col">
               <label for="data" class="text-gray-800 text-sm font-semibold mb-2">Data</label>
               <input type="date" id="data" name="data" readonly
                 class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-Lnone text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
             </div>
 
-            <!-- Descrição -->
             <div class="flex flex-col">
               <label for="descricao" class="text-gray-800 text-sm font-semibold mb-2">Descrição</label>
               <textarea id="descricao" name="descricao" readonly
@@ -191,22 +181,17 @@
             <a href="/register" class="text-white flex items-center justify-center bg-orange-500 border-0 py-1 px-4 focus:outline-none hover:bg-orange-600 rounded text-sm h-10 w-32">
               Enviar
             </a>
-
-
           </div>
         </div>
       </div>
     </div>
   </section>
 
-
-
   <div class="mt-10" x-data="footerComponent()">
     <footer class=" px-4 py-5 max-w-full mx-auto md:px-8">
       <div class="gap-6 justify-between md:flex">
         <div class="flex-1">
           <div class="max-w-xs">
-            <!-- SVG Logo placement -->
             <img src="assets/logo1.svg" class="w-20" />
           </div>
         </div>
@@ -225,12 +210,9 @@
       </div>
       <div class="mt-8 py-6 border-t items-center justify-between sm:flex w-full">
         <div class="mt-6 sm:mt-0 w-full">
-          <!-- Aqui você pode adicionar mais conteúdo se necessário -->
-        </div>
+          </div>
       </div>
     </footer>
   </div>
-
-</div>
 </body>
 </html>

@@ -4,17 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doe.it - Criar Campanha</title>
-
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
   <link rel="icon" href="{{asset('assets/logo1.svg')}}" type="image/x-icon"/>
-  <!-- Google Fonts - Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
     }
-    .validation-error { /* Mantendo o estilo de erro que você aprovou antes */
+    .validation-error {
       color: red;
       background-color: #fee2e2;
       padding: 0.25rem 0.5rem;
@@ -22,14 +19,14 @@
       font-size: 0.75rem;
       margin-top: 0.25rem;
     }
-    /* Estilos para os novos selects se as classes Tailwind não forem suficientes ou se 'div-wrapper-2' tiver estilos específicos */
+    
     .div-wrapper-2 {
         width: 100%;
         border-radius: 0.375rem; /* rounded-md */
         border: 1px solid #D1D5DB; /* border-gray-300 */
         padding: 0.5rem; /* p-2 */
         font-size: 0.875rem; /* text-sm */
-        background-color: white; /* Adicionado para garantir fundo branco */
+        background-color: white; /* Fundo branco para light mode */
     }
     .div-wrapper-2:focus {
         outline: 2px solid transparent;
@@ -50,12 +47,8 @@
 <body class="bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 overflow-hidden">
 
   @include('layouts.secondary_navbar')
-  <!-- Navbar secundária -->
-
-  <!-- Conteúdo principal -->
   <main class="h-full flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-20 lg:py-8 max-w-7xl mx-auto">
 
-    <!-- Texto Esquerdo -->
     <div class="w-full lg:w-1/2 text-center lg:text-left">
       <h2 class="text-4xl lg:text-5xl font-bold leading-tight text-gray-800 dark:text-gray-100">
         Criando sua campanha<br> no <span class="text-green-600">doeit</span>
@@ -65,11 +58,9 @@
       </p>
     </div>
 
-    <!-- Formulário Direita -->
     <div class="w-full lg:w-1/2 max-w-md bg-green-500 dark:bg-orange-500 rounded-xl p-6 shadow-xl">
       <form id="multiStepForm" action="/campaign" method="POST" enctype="multipart/form-data" class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
         @csrf
-        <!-- Etapa 1 -->
         <div id="step1" class="step flex flex-col gap-4">
           <div>
             <label for="Title" class="block text-gray-600 dark:text-gray-300 font-medium mb-1">Título:</label>
@@ -101,13 +92,17 @@
           </div>
         </div>
 
-        <!-- Etapa 2 -->
         <div id="step2" class="step hidden flex flex-col gap-4">
-          {{-- CAMPOS DE ESTADO E CIDADE SUBSTITUÍDOS --}}
-          <div class="frame-wrapper-2"> {{-- Mantendo sua estrutura de div --}}
+          {{-- CAMPOS DE ESTADO E CIDADE --}}
+          <div class="frame-wrapper-2">
             <div class="div-6">
-                <label for="State" class="text-wrapper-4 dark:text-gray-300">Estado:</label>
-                <select id="State" name="State" required class="div-wrapper-2 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-neutral-600">
+                {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
+                <label for="State" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Estado:</label>
+                {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
+                <select id="State" name="State" required
+                        class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
+                               bg-white text-gray-800
+                               dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
                     <option value="">Selecione o Estado</option>
                     <option value="Ceará" {{ old('State') == 'Ceará' ? 'selected' : '' }}>Ceará</option>
                     <option value="Rio Grande do Norte" {{ old('State') == 'Rio Grande do Norte' ? 'selected' : '' }}>Rio Grande do Norte</option>
@@ -117,10 +112,15 @@
                 @enderror
             </div>
           </div>
-          <div class="frame-wrapper-3"> {{-- Mantendo sua estrutura de div --}}
+          <div class="frame-wrapper-3">
             <div class="div-6">
-                <label for="City" class="text-wrapper-4 dark:text-gray-300">Cidade:</label>
-                <select name="City" id="City" required class="div-wrapper-2 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-neutral-600">
+                {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
+                <label for="City" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Cidade:</label>
+                {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
+                <select name="City" id="City" required
+                        class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
+                               bg-white text-gray-800
+                               dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
                     <option value="">Selecione a Cidade</option>
                     <option value="Pereiro" {{ old('City') == 'Pereiro' ? 'selected' : '' }}>Pereiro</option>
                     <option value="São Miguel" {{ old('City') == 'São Miguel' ? 'selected' : '' }}>São Miguel</option>
@@ -161,11 +161,13 @@
           </div>
         </div>
 
-        <!-- Etapa 3 -->
         <div id="step3" class="step hidden flex flex-col gap-4">
           <div>
             <label for="Type" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Tipo da Arrecadação:</label>
-            <select name="Type" id="tipo_arrecadacao" class="bg-white dark:bg-neutral-900 w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 text-gray-800 dark:text-gray-100">
+            <select name="Type" id="tipo_arrecadacao"
+                    class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
+                           bg-white text-gray-800
+                           dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
                 <option value="" {{ old('Type') == '' ? 'selected' : '' }} disabled>Selecione o tipo</option>
                 <option value="food" {{ old('Type') == 'food' ? 'selected' : '' }}>Comida</option>
                 <option value="clothes" {{ old('Type') == 'clothes' ? 'selected' : '' }}>Roupa</option>
@@ -184,7 +186,6 @@
           </div>
         </div>
 
-        <!-- Botões -->
         <div class="pt-4 flex justify-between">
           <button type="button" id="prevBtn" class="bg-gray-600 dark:bg-neutral-700 text-white px-4 py-2 rounded-md font-medium hidden hover:bg-gray-700 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-neutral-600 focus:ring-opacity-50">Voltar</button>
           <button type="button" id="nextBtn" class="bg-gray-800 dark:bg-neutral-900 text-white px-4 py-2 rounded-md font-medium hover:bg-gray-900 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-gray-700 dark:focus:ring-neutral-600 focus:ring-opacity-50">Próximo</button>
@@ -193,12 +194,9 @@
     </div>
   </main>
 
-  <!-- jQuery (necessário para a máscara e o script que você forneceu) -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- jQuery Mask Plugin (necessário para $('#CEP').mask(...)) -->
+  {{-- Script JavaScript para a lógica de múltiplos passos --}}
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-
-  <!-- Script de Navegação e Lógica Adicional -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const steps = document.querySelectorAll('.step');
@@ -212,58 +210,70 @@
           step.classList.toggle('hidden', index !== currentStep);
         });
 
-        if(prevBtn) prevBtn.classList.toggle('hidden', currentStep === 0);
-        if(nextBtn) nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
-        if(submitBtn) submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
+        if (prevBtn) prevBtn.classList.toggle('hidden', currentStep === 0);
+        if (nextBtn) nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
+        if (submitBtn) submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
       }
 
       if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-          if (currentStep < steps.length - 1) {
+          console.log('Botão Próximo clicado! Etapa atual:', currentStep);
+          // Adicione validação aqui se desejar que os campos sejam preenchidos antes de avançar
+          // Exemplo simples de validação (pode ser expandido):
+          let canAdvance = true;
+          const currentStepFields = steps[currentStep].querySelectorAll('input[required], textarea[required], select[required]');
+          currentStepFields.forEach(field => {
+              if (!field.value.trim()) {
+                  canAdvance = false;
+                  field.reportValidity(); // Mostra a mensagem de erro do navegador para campos obrigatórios
+              }
+          });
+
+          if (canAdvance && currentStep < steps.length - 1) {
             currentStep++;
             updateButtonVisibility();
+          } else if (!canAdvance) {
+              alert('Por favor, preencha todos os campos obrigatórios nesta etapa.'); // Mensagem de alerta mais amigável
           }
         });
       }
 
       if (prevBtn) {
         prevBtn.addEventListener('click', () => {
+          console.log('Botão Voltar clicado! Etapa atual:', currentStep);
           if (currentStep > 0) {
             currentStep--;
             updateButtonVisibility();
           }
         });
       }
-      updateButtonVisibility(); // Inicializa
-    });
 
-    // Script jQuery que você forneceu (máscara de CEP e lógica de cidade/estado)
-    $(document).ready(function() {
-        $('#CEP').mask('00000-000');
-    });
+      // Inicializa a visibilidade dos botões e passos quando a página carrega
+      updateButtonVisibility();
 
-    $(document).ready(function() { // Você pode combinar os $(document).ready
-        $('#City').change(function() {
-            if ($(this).val() == "São Miguel") {
-                $('#State').val('Rio Grande do Norte');
-            } else if ($(this).val() == "Pereiro") {
-                $('#State').val('Ceará');
-            } else {
-                // Opcional: Limpar o estado se nenhuma cidade correspondente for selecionada
-                // $('#State').val('');
-            }
-        });
+      // Lógica de interdependência Cidade/Estado com jQuery
+      // Certifique-se de que os selects existem no HTML antes de tentar acessá-los.
+      if (typeof $ !== 'undefined') { // Garante que jQuery está carregado
+          $(document).ready(function() {
+              $('#City').change(function() {
+                  if ($(this).val() == "São Miguel") {
+                      $('#State').val('Rio Grande do Norte');
+                  } else if ($(this).val() == "Pereiro") {
+                      $('#State').val('Ceará');
+                  }
+              });
 
-        $('#State').change(function() {
-            if ($(this).val() == "Rio Grande do Norte") {
-                $('#City').val('São Miguel');
-            } else if ($(this).val() == "Ceará") {
-                $('#City').val('Pereiro');
-            } else {
-                // Opcional: Limpar a cidade se nenhum estado correspondente for selecionado
-                // $('#City').val('');
-            }
-        });
+              $('#State').change(function() {
+                  if ($(this).val() == "Rio Grande do Norte") {
+                      $('#City').val('São Miguel');
+                  } else if ($(this).val() == "Ceará") {
+                      $('#City').val('Pereiro');
+                  }
+              });
+          });
+      } else {
+          console.warn('jQuery não está carregado. A lógica de cidade/estado pode não funcionar.');
+      }
     });
   </script>
 </body>
