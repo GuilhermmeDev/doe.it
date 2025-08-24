@@ -44,7 +44,7 @@
     }
   </style>
 </head>
-<body class="bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 overflow-hidden">
+<body class="bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 overflow-x-hidden">
 
   @include('layouts.secondary_navbar')
   <main class="h-full flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-20 lg:py-8 max-w-7xl mx-auto">
