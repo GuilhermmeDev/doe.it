@@ -23,7 +23,8 @@ services:
         networks:
             - sail
         depends_on:
-            - pgsql
+            pgsql:
+                condition: service_healthy
         command: sh -c "./docker/init.sh"
 
     pgsql:

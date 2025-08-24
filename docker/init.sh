@@ -5,6 +5,12 @@ FLAG_FILE=/var/www/html/storage/docker_setup_done
 
 # Se o arquivo de flag não existir, executa os comandos de setup
 if [ ! -f "$FLAG_FILE" ]; then
+
+    echo "⏳ Aguardando o PostgreSQL iniciar..."
+    until pg_isready -h pgsql -p 5432 -U "$DB_USERNAME"; do
+    sleep 2
+    done
+    
     echo "Executando configuração inicial do Laravel..."
 
     php artisan key:generate
