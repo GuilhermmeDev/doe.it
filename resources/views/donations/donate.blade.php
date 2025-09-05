@@ -41,7 +41,7 @@
             <form method="POST" action="/donation/{{$campaign->id}}" class="space-y-8">
             @csrf
             <div class="mb-10 mt-8">
-              <label class="font-medium text-gray-900 dark:text-gray-100"> Quantos kg de comida você pretende doar? </label>
+              <label class="font-medium text-gray-900 dark:text-gray-100"> Quantos kg de comida ou roupa você pretende doar? </label>
               <input
                 type="number"
                 required

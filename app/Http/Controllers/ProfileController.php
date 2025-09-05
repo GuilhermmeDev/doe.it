@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\RegisterCpfRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,8 +21,8 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        return view("profile.edit", [
+            "user" => $request->user(),
         ]);
     }
 
@@ -33,17 +34,19 @@ class ProfileController extends Controller
         $user = $request->user();
         $user->fill($request->validated());
 
-        if ($user->isDirty('email')) {
+        if ($user->isDirty("email")) {
             $user->email_verified_at = null;
             $user->sendEmailVerificationNotification();
         }
 
         $user->save();
 
-        return Redirect::route('profile.edit')->with('status',
-            $user->wasChanged('email')
-                ? 'Um e-mail de verificação foi enviado para seu novo endereço.'
-                : 'Perfil atualizado com sucesso!');
+        return Redirect::route("profile.edit")->with(
+            "status",
+            $user->wasChanged("email")
+                ? "Um e-mail de verificação foi enviado para seu novo endereço."
+                : "Perfil atualizado com sucesso!",
+        );
     }
 
     /**
@@ -54,8 +57,9 @@ class ProfileController extends Controller
         // Certifica-se de que o usuário está logado
         if (!Auth::check()) {
             return back()->with([
-                'reset_status' => false,
-                'reset_message' => 'Você precisa estar logado para redefinir sua senha.'
+                "reset_status" => false,
+                "reset_message" =>
+                    "Você precisa estar logado para redefinir sua senha.",
             ]);
         }
 
@@ -64,13 +68,13 @@ class ProfileController extends Controller
 
         // Tenta enviar o link de redefinição
         $status = Password::sendResetLink(
-            ['email' => $email] // Passa o e-mail como um array associativo
+            ["email" => $email], // Passa o e-mail como um array associativo
         );
 
         // Retorna com a mensagem de status apropriada
         return back()->with([
-            'reset_status' => $status === Password::RESET_LINK_SENT,
-            'reset_message' => __($status)
+            "reset_status" => $status === Password::RESET_LINK_SENT,
+            "reset_message" => __($status),
         ]);
     }
 
@@ -79,8 +83,8 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $request->validateWithBag("userDeletion", [
+            "password" => ["required", "current_password"],
         ]);
 
         $user = $request->user();
@@ -90,22 +94,23 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/')->with('status', 'Sua conta foi excluída com sucesso.');
+        return Redirect::to("/")->with(
+            "status",
+            "Sua conta foi excluída com sucesso.",
+        );
     }
 
     /**
      * Register/update CPF
      */
-    public function registerCpf(Request $request): RedirectResponse
+    public function registerCpf(RegisterCpfRequest $request): RedirectResponse
     {
-        $request->validate([
-            'cpf' => ['required', 'string', 'size:14']
-        ]);
-
         $user = $request->user();
         $user->CPF = $request->cpf;
         $user->save();
 
-        return redirect()->back()->with('status', 'CPF atualizado com sucesso!');
+        return redirect()
+            ->back()
+            ->with("status", "CPF atualizado com sucesso!");
     }
 }

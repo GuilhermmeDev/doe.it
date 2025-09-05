@@ -13,27 +13,27 @@
 
 <body class="bg-gray-50 dark:bg-neutral-900 min-h-screen overflow-x-hidden">
   @include('layouts.secondary_navbar')
-  
+
   <main class="max-w-7xl mx-auto px-4 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-sm overflow-hidden">
           <div class="relative">
-            <img src="{{asset('storage/' . $campaign->Image)}}" 
-                 alt="Imagem de doação" 
+            <img src="{{asset('storage/' . $campaign->Image)}}"
+                 alt="Imagem de doação"
                  class="w-full h-64 sm:h-80 object-cover">
           </div>
-          
+
           <div class="p-6">
             <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">{{$campaign->Title}}</h1>
-            
+
             <div class="bg-gray-50 dark:bg-neutral-700 rounded-lg p-4 mb-6">
               <label for="share-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Compartilhe:</label>
               <div class="flex space-x-2">
-                <input id="share-input" 
-                       type="text" 
-                       value="{{request()->url()}}" 
-                       readonly 
+                <input id="share-input"
+                       type="text"
+                       value="{{request()->url()}}"
+                       readonly
                        class="flex-1 px-3 py-2 border border-gray-300 dark:border-neutral-600 rounded-md text-sm bg-white dark:bg-neutral-800 text-gray-900 dark:text-white">
                 <button class="copy-button px-4 py-2 bg-gray-600 dark:bg-gray-400 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-500 text-sm transition-colors" id="copy">
                   Copiar
@@ -60,7 +60,7 @@
                 <span class="text-sm text-gray-600 dark:text-gray-300">Unidades</span>
               @endif
             </div>
-            
+
             <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">Meta</div>
             <div class="text-lg text-gray-700 dark:text-gray-300 mb-4">{{$campaign->meta['target']}}
               @if($campaign->Type === "food")
@@ -69,7 +69,7 @@
                 <span class="text-sm text-gray-600 dark:text-gray-400">Unidades</span>
               @endif
             </div>
-            
+
             <div class="progress-bar">
               <div class="progress" style="width: {{ $progress }}%;"></div>
             </div>
@@ -80,7 +80,7 @@
               Veja o qr code da sua doação <a href="/donation/{{$donation->id}}" class="text-blue-500 hover:underline dark:text-blue-400">aqui</a>
             </p>
           @elseif($campaign->user_id !== auth()->user()->id && $campaign->meta['current'] < $campaign->meta['target'])
-            <a class="help-button w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg text-lg mb-6 transition-colors block text-center" 
+            <a class="help-button w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg text-lg mb-6 transition-colors block text-center"
                href="/donate/{{$campaign->id}}">
               Quero Ajudar
             </a>
@@ -129,7 +129,6 @@
 
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Local da campanha</h2>
             <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-2 mb-6">
-              <li><strong>CEP:</strong> {{$address->CEP}}</li>
               <li><strong>Estado:</strong> {{$address->State}}</li>
               <li><strong>Rua:</strong> {{$address->Street}}</li>
               <li><strong>Cidade:</strong> {{$address->City}}</li>
@@ -143,18 +142,18 @@
               <form action="/campaign/{{$campaign->id}}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit" 
+                <button type="submit"
                         class="delete_button w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors">
                   Deletar Campanha
                 </button>
               </form>
-              
-              <a href="/campaign/edit/{{$campaign->id}}" 
+
+              <a href="/campaign/edit/{{$campaign->id}}"
                  class="update_button w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors block text-center">
                 Editar campanha
               </a>
 
-              <button class="validator_button w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center" 
+              <button class="validator_button w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
                       onclick="openInviteModal()">
                 Convidar para campanha
                 <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -175,26 +174,26 @@
             ×
           </button>
         </div>
-        
+
         <form id="invite_form">
           @csrf
           <div class="mb-4">
             <label for="inviteEmail" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Digite o e-mail</label>
-            <input id="inviteEmail" 
-                   type="email" 
-                   name="email" 
-                   placeholder="exemplo@email.com" 
-                   required 
+            <input id="inviteEmail"
+                   type="email"
+                   name="email"
+                   placeholder="exemplo@email.com"
+                   required
                    class="w-full px-3 py-2 border border-gray-300 dark:border-neutral-600 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white dark:bg-neutral-800 text-gray-900 dark:text-white" />
           </div>
-          
+
           <input type="hidden" name="campaign_id" value="{{ $campaign->id }}" />
-          
+
           <p class="alert text-sm text-amber-600 bg-amber-50 dark:bg-amber-900 p-3 rounded-md mb-4">
             Só compartilhe sua campanha com pessoas de confiança
           </p>
-          
-          <button type="submit" 
+
+          <button type="submit"
                   class="validator_button w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md font-medium transition-colors">
             Enviar convite
           </button>
