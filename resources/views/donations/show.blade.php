@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Qr code</title>
     @include('layouts.head')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="{{asset('css/qrcode.css')}}">
 </head>
 <body>
     @vite('resources/js/app.js')
-    @include('layouts.navbar')
+    @include('layouts.secondary_navbar')
 
     <main class="container">
         <section class="campaign-info">

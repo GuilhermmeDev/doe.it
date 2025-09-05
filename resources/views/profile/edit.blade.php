@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body class="h-full bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 flex flex-col">
+<body class="h-full bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100 flex flex-col overflow-x-hidden">
 
     @include('layouts.secondary_navbar', ['hideUserProfile' => true])
 
