@@ -31,19 +31,19 @@
 
     @include('layouts.secondary_navbar', ['hideUserProfile' => true])
 
-    <main class="w-full flex-grow flex flex-col justify-center items-center px-4 py-6 sm:px-6 md:px-8 content-area">
-        <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="flex flex-col justify-center">
-                <h1 class="text-3xl font-bold sm:text-4xl text-gray-900 dark:text-gray-100">Atualizar Perfil</h1>
-                <p class="mt-3 text-base sm:text-md max-w-md text-gray-700 dark:text-gray-300">
+    <main class="w-full flex-grow flex flex-col items-center px-4 py-6 sm:px-6 md:px-8  content-area">
+        <div class="max-w-lg md:max-w-5xl w-full flex flex-col md:flex-row gap-8">
+            <div class="flex-1 flex flex-col justify-center">
+                <h1 class="text-3xl font-bold sm:text-4xl text-gray-900 dark:text-gray-100 md:text-left text-center">Atualizar Perfil</h1>
+                <p class="mt-3 text-base sm:text-md  text-gray-700 dark:text-gray-300 md:text-left text-center">
                     Gerencie suas informações pessoais para manter seu perfil sempre atualizado.
                 </p>
                 <img class="mt-6 hidden md:block w-2/3 curve-image"
-                     src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line.svg"
-                     alt="Decorative curve" />
+                    src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line.svg"
+                    alt="Decorative curve" />
             </div>
 
-            <div class="bg-white dark:bg-neutral-800 p-6 sm:p-8 rounded-2xl shadow-xl w-full mb-20">
+            <div class="flex-1 bg-white dark:bg-neutral-800 p-6 sm:p-8 rounded-2xl shadow-xl w-full mb-20">
                 @if (session('status'))
                     <div class="mb-4 p-4 rounded-md bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300">
                         {{ session('status') }}
