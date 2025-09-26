@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Agradecimento/sucesso</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <style>
-    /* This font import might be better in your resources/css/app.css */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
 </head>
 
 <body class="bg-white font-[Poppins]">

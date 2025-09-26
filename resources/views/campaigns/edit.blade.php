@@ -18,13 +18,8 @@
           <p class="mt-3 text-base sm:text-md max-w-md text-gray-700 dark:text-gray-300">
             Mantenha suas campanhas atualizadas e maximize o impacto de suas ações.
           </p>
-          <img
-            class="mt-6 hidden md:block w-2/3"
-            src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line.svg"
-            alt="Curva decorativa"
-          />
+          <img src="{{ asset('assets/curve-line.svg') }}" alt="Curva decorativa" class="mt-6 hidden md:block w-2/3" />
         </div>
-
         <div class="bg-white dark:bg-neutral-800 text-black dark:text-gray-100 p-6 sm:p-8 rounded-2xl shadow-xl w-full mb-20">
             <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Editar Detalhes da Campanha</h3>
               <form method="POST" action="/campaign/update/{{$campaign->id}}" enctype="multipart/form-data">

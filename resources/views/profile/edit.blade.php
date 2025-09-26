@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Atualizar Perfil</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://unpkg.com/alpinejs" defer></script>
+    <script defer src="js/cdn.min.js"></script>
     <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
     <style>
         /* Ajusta a altura mínima da área de conteúdo para ocupar o espaço restante da tela */
@@ -38,9 +38,7 @@
                 <p class="mt-3 text-base sm:text-md  text-gray-700 dark:text-gray-300 md:text-left text-center">
                     Gerencie suas informações pessoais para manter seu perfil sempre atualizado.
                 </p>
-                <img class="mt-6 hidden md:block w-2/3 curve-image"
-                    src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line.svg"
-                    alt="Decorative curve" />
+                <img class="mt-6 hidden md:block w-2/3 curve-image" src="{{ asset('assets/curve-line.svg') }}" alt="Decorative curve" />
             </div>
 
             <div class="flex-1 bg-white dark:bg-neutral-800 p-6 sm:p-8 rounded-2xl shadow-xl w-full mb-20">
