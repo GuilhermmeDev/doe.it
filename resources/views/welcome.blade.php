@@ -91,7 +91,7 @@
 
           <div class="relative mt-12 lg:mt-20">
               <div class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
-                  <img class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg" alt="" />
+                  <img class="w-full" src="{{ asset('images/curved-dotted-line.svg') }}" alt="" />
               </div>
 
               <div class="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
