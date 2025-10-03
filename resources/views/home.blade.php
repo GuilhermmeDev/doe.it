@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="js/cdn.min.js"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="css/swiper-bundle.min.css" />
 </head>
 <body class="bg-white dark:bg-neutral-900 text-black dark:text-white overflow-x-hidden">
   @include('layouts.secondary_navbar')
@@ -73,7 +73,7 @@
     </main>
 
     <!-- SwiperJS JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
     <script>
       function calcularSlidesVisiveis() {
         if (window.innerWidth >= 1200) {

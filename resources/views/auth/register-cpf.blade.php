@@ -5,15 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="icon" href="{{asset('assets/logo1.svg')}}" type="image/x-icon"/>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <script defer src="js/cdn.min.js"></script>
+  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
   <title>DoeIt - Cadastro de CPF</title>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
     /* Estilo para garantir que o conteúdo da main preencha o espaço abaixo do navbar */
     .content-area {
         height: calc(100vh - 64px); /* Supondo que seu navbar tenha 64px (h-16) de altura */

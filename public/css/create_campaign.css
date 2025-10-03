@@ -14,6 +14,7 @@
 }
 
 body {
+    font-family: 'Poppins';
     width: 100%; /* Utiliza a largura total da tela */
     box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
     overflow-x: hidden; /* Impede rolagem horizontal */
