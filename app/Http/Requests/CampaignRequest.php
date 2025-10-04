@@ -32,7 +32,7 @@ class CampaignRequest extends FormRequest
             'Data' => 'required|date|after:now', // Data deve ser futura
             'Hour' => 'required|date_format:H:i',
             'meta' => 'required|integer|min:1|max:500',
-            'Image' => 'required|image|mimes:jpeg,jpg,png,svg| max:2048',
+            'Image' => 'required|image|mimes:jpeg,jpg,png,svg| max:15360',
             'Type' => ['required', Rule::in(['food', 'clothes'])], // 'food' ou 'clothes'
         ];
     }
@@ -59,7 +59,7 @@ class CampaignRequest extends FormRequest
             'Image.required' => 'A campanha deve possuir uma imagem.',
             'Image.image' => 'O arquivo deve ser uma imagem.',
             'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, svg.',
-            'Image.max' => 'A imagem não pode exceder 2MB.',
+            'Image.max' => 'A imagem não pode exceder 15MB.',
             'Type.required' => 'O tipo é obrigatório.',
             'Type.in' => 'O tipo deve ser Roupa ou Comida.',
         ];

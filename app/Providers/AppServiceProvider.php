@@ -24,18 +24,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('auth-donation', function (User $user, Campaign $campaign, Donation $donation) {
+        Gate::define('auth-donation', function ($user, $campaign, $donation) {
             return $campaign->user_id === $user->id || (
                 CampaignValidatorUser::where('campaign_id', $campaign->id)
-                    ->where('user_id', $user->id)
-                    ->where('status', 'accepted')
-                    ->exists() &&
-                        Donation::where([['id', $donation->id], ['user_id', '!=', $user->id], ['campaign_id', $campaign->id]])->exists()
+                ->where('user_id', $user->id)
+                ->where('status', 'accepted')
+                ->exists() &&
+                Donation::where([['id', $donation->id], ['user_id', '!=', $user->id], ['campaign_id', $campaign->id]])->exists()
             );
         });
 
-        Gate::define('verify-cpf', function (User $user) {
+        Gate::define('verify-cpf', function ($user) {
             return $user->CPF !== null;
+        });
+
+        Gate::define('owner-qrcode', function (User $user, Donation $donation) {
+            return $user->id === Donation::findOrFail($donation->id)->user_id;
         });
     }
 }
