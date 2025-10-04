@@ -2,4 +2,6 @@
 
 use Illuminate\Support\Facades\Broadcast;
 
-Broadcast::channel('donation.{donationId}', function () { return true;});
+Broadcast::channel('donation.{donationId}', function () {
+    return true;
+});

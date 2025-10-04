@@ -2,13 +2,14 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\Donation;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class InvalidateDonations extends Command
 {
     protected $signature = 'donations:invalidate';
+
     protected $description = 'Atualiza o status das doações não confirmadas para "invalid" após 2 horas';
 
     public function handle()

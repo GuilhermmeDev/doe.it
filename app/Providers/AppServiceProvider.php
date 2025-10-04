@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Campaign;
-use App\Models\User;
-use App\Models\Donation;
 use App\Models\CampaignValidatorUser;
-use Illuminate\Support\ServiceProvider;
+use App\Models\Donation;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,13 +24,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('auth-donation', function (User $user, Campaign $campaign, Donation $donation){
+        Gate::define('auth-donation', function (User $user, Campaign $campaign, Donation $donation) {
             return $campaign->user_id === $user->id || (
-            CampaignValidatorUser::where('campaign_id', $campaign->id)
-                ->where('user_id', $user->id)
-                ->where('status', 'accepted')
-                ->exists() &&
-                    Donation::where([['id', $donation->id],['user_id','!=', $user->id], ['campaign_id', $campaign->id]])->exists()
+                CampaignValidatorUser::where('campaign_id', $campaign->id)
+                    ->where('user_id', $user->id)
+                    ->where('status', 'accepted')
+                    ->exists() &&
+                        Donation::where([['id', $donation->id], ['user_id', '!=', $user->id], ['campaign_id', $campaign->id]])->exists()
             );
         });
 

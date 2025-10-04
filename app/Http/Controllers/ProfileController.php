@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class ProfileController extends Controller
 {
@@ -21,8 +19,8 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view("profile.edit", [
-            "user" => $request->user(),
+        return view('profile.edit', [
+            'user' => $request->user(),
         ]);
     }
 
@@ -34,18 +32,18 @@ class ProfileController extends Controller
         $user = $request->user();
         $user->fill($request->validated());
 
-        if ($user->isDirty("email")) {
+        if ($user->isDirty('email')) {
             $user->email_verified_at = null;
             $user->sendEmailVerificationNotification();
         }
 
         $user->save();
 
-        return Redirect::route("profile.edit")->with(
-            "status",
-            $user->wasChanged("email")
-                ? "Um e-mail de verificação foi enviado para seu novo endereço."
-                : "Perfil atualizado com sucesso!",
+        return Redirect::route('profile.edit')->with(
+            'status',
+            $user->wasChanged('email')
+                ? 'Um e-mail de verificação foi enviado para seu novo endereço.'
+                : 'Perfil atualizado com sucesso!',
         );
     }
 
@@ -55,11 +53,10 @@ class ProfileController extends Controller
     public function sendResetLink(Request $request): RedirectResponse
     {
         // Certifica-se de que o usuário está logado
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return back()->with([
-                "reset_status" => false,
-                "reset_message" =>
-                    "Você precisa estar logado para redefinir sua senha.",
+                'reset_status' => false,
+                'reset_message' => 'Você precisa estar logado para redefinir sua senha.',
             ]);
         }
 
@@ -68,13 +65,13 @@ class ProfileController extends Controller
 
         // Tenta enviar o link de redefinição
         $status = Password::sendResetLink(
-            ["email" => $email], // Passa o e-mail como um array associativo
+            ['email' => $email], // Passa o e-mail como um array associativo
         );
 
         // Retorna com a mensagem de status apropriada
         return back()->with([
-            "reset_status" => $status === Password::RESET_LINK_SENT,
-            "reset_message" => __($status),
+            'reset_status' => $status === Password::RESET_LINK_SENT,
+            'reset_message' => __($status),
         ]);
     }
 
@@ -83,8 +80,8 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag("userDeletion", [
-            "password" => ["required", "current_password"],
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
         ]);
 
         $user = $request->user();
@@ -94,9 +91,9 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to("/")->with(
-            "status",
-            "Sua conta foi excluída com sucesso.",
+        return Redirect::to('/')->with(
+            'status',
+            'Sua conta foi excluída com sucesso.',
         );
     }
 
@@ -111,6 +108,6 @@ class ProfileController extends Controller
 
         return redirect()
             ->back()
-            ->with("status", "CPF atualizado com sucesso!");
+            ->with('status', 'CPF atualizado com sucesso!');
     }
 }

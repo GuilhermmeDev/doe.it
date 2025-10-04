@@ -5,7 +5,6 @@ namespace App\Events;
 use App\Models\Donation;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -19,6 +18,7 @@ class ConfirmDonation implements ShouldBroadcast
      * Create a new event instance.
      */
     public $donation;
+
     public function __construct(Donation $donation)
     {
         $this->donation = $donation;
@@ -29,8 +29,8 @@ class ConfirmDonation implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn() : Channel
+    public function broadcastOn(): Channel
     {
-        return new PrivateChannel('donation.' . $this->donation->id);
+        return new PrivateChannel('donation.'.$this->donation->id);
     }
 }

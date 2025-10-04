@@ -49,7 +49,7 @@ class CampaignRequest extends FormRequest
             'Number.min' => 'O número deve ser positivo',
             'CEP.required' => 'O CEP é obrigatório.',
             'CEP.regex' => 'O CEP deve estar no formato 00000-000.',
-            'Data.required' => 'A data é obrigatória.', 
+            'Data.required' => 'A data é obrigatória.',
             'Data.after' => 'A data deve ser uma data futura.',
             'Hour.required' => 'A hora é obrigatória.',
             'meta.integer' => 'A meta deve ser um número inteiro.',
@@ -61,7 +61,7 @@ class CampaignRequest extends FormRequest
             'Image.mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg, svg.',
             'Image.max' => 'A imagem não pode exceder 2MB.',
             'Type.required' => 'O tipo é obrigatório.',
-            'Type.in' => 'O tipo deve ser Roupa ou Comida.'
+            'Type.in' => 'O tipo deve ser Roupa ou Comida.',
         ];
     }
 }

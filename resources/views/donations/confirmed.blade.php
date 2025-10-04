@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="transition-colors duration-500">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
 </head>
 
-<body class="bg-white font-[Poppins]">
+<body class="bg-white dark:bg-[#1e1e21] font-[Poppins] text-gray-900 dark:text-gray-100 transition-colors duration-500">
   <section class="lg:grid lg:h-screen lg:place-content-center">
     <div class="mx-auto w-screen max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8 lg:py-32">
       <div class="mx-auto max-w-prose text-center opacity-0 translate-y-8 transition-all duration-700 delay-100 animate-fade-in">
 
-        <!-- Ícone de coração SVG verde -->
         <div class="flex justify-center mb-6">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-[#2AB036] animate-pulse" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 
@@ -24,19 +23,16 @@
           </svg>
         </div>
 
-        <!-- Título -->
-        <h1 class="text-4xl font-bold text-gray-900 sm:text-5xl">
+        <h1 class="text-4xl font-bold sm:text-5xl">
           Obrigado por doar com a
           <strong class="text-[#2AB036]">DoeIt</strong>
           e fazer a diferença!
         </h1>
 
-        <!-- Subtítulo -->
-        <p class="mt-4 text-base text-gray-700 sm:text-lg/relaxed">
+        <p class="mt-4 text-base sm:text-lg/relaxed text-gray-700 dark:text-gray-300">
           Sua doação já está fazendo a diferença na vida de alguém. Obrigado por acreditar e confiar na DoeIt.
         </p>
 
-        <!-- Botão -->
         <div class="mt-6 flex justify-center">
           <a
             href="/home"
@@ -50,14 +46,32 @@
     </div>
   </section>
 
-  <!-- Animação manual se não estiver usando plugin -->
   <script>
-    // This script could also be moved to resources/js/app.js
+    const root = document.documentElement;
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+      localStorage.setItem('theme', theme);
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const el = document.querySelector(".animate-fade-in");
-      if (el) { // Good practice to check if element exists
+      if (el) {
         el.classList.remove("opacity-0", "translate-y-8");
         el.classList.add("opacity-100", "translate-y-0");
+      }
+
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') {
+        setTheme(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
       }
     });
   </script>

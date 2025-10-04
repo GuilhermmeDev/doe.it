@@ -9,26 +9,27 @@ use App\Models\Campaign;
 use App\Models\CampaignValidatorUser;
 use App\Models\Donation;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 
 class CampaignController extends Controller
 {
-    public function create() {
-        if (Gate::allows('verify-cpf', auth()->user()))
-        {
+    public function create()
+    {
+        if (Gate::allows('verify-cpf', auth()->user())) {
             return view('campaigns.create');
         }
+
         return view('auth.register-cpf');
     }
 
-    public function store(CampaignRequest $request) {
+    public function store(CampaignRequest $request)
+    {
         $validRequest = $request->validated();
         // cadastrando o endereço
 
-        $address = new Address();
+        $address = new Address;
 
         $address->State = $validRequest['State'];
 
@@ -36,7 +37,7 @@ class CampaignController extends Controller
 
         $address->Street = $validRequest['Street'];
 
-        $dateTime = $validRequest['Data'] . ' ' . $validRequest['Hour']; // concatenando data e hora
+        $dateTime = $validRequest['Data'].' '.$validRequest['Hour']; // concatenando data e hora
         $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime); // formatando com a biblioteca Carbon
 
         $address->Collection_date = $dateTime;
@@ -47,7 +48,7 @@ class CampaignController extends Controller
 
         // Cadastrando a campanha
 
-        $campaign = new Campaign();
+        $campaign = new Campaign;
 
         $campaign->user_id = auth()->user()->id;
 
@@ -61,16 +62,15 @@ class CampaignController extends Controller
 
         $extension = $requestImage->extension();
 
-        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+        $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
         $imagePath = $requestImage->storeAs('campaigns', $imageName, 'public');
-        
+
         $campaign->Image = $imagePath; // salva o caminho relativo, ex: campaigns/abc123.jpg
 
         $campaign->Type = $validRequest['Type'];
 
-        if ($validRequest['meta'])
-        {
+        if ($validRequest['meta']) {
             $campaign->meta = [
                 'target' => intval($validRequest['meta']),
                 'current' => 0,
@@ -82,7 +82,8 @@ class CampaignController extends Controller
         return redirect('/home')->with('Success', 'Campanha criada com sucesso!');
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $campaign = Campaign::findOrFail($id);
         if ($campaign->meta != null) {
             $target = $campaign->meta['target'];
@@ -106,14 +107,15 @@ class CampaignController extends Controller
 
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $campaign = Campaign::findOrFail($id)->delete();
 
         return redirect('/home')->with('Success', 'Campanha cancelada com sucesso!');
     }
 
-
-    public function edit($id) {
+    public function edit($id)
+    {
         $campaign = Campaign::where('id', $id)->first();
 
         if (auth()->user()->id === $campaign->user_id) {
@@ -123,7 +125,8 @@ class CampaignController extends Controller
         return redirect()->route('home')->with('error', 'Você não possui permissão para acessar esta página');
     }
 
-    public function update($id, Request $request) {
+    public function update($id, Request $request)
+    {
 
         $campaign = Campaign::findOrFail($id);
 
@@ -136,7 +139,7 @@ class CampaignController extends Controller
 
             $extension = $requestImage->extension();
 
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . '.' . $extension;
+            $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
             $requestImage->move(public_path('img/campaigns'), $imageName);
 
@@ -148,8 +151,8 @@ class CampaignController extends Controller
         return redirect()->route('home')->with('Success', 'Campanha editada com sucesso!');
     }
 
-
-    public function invite(Request $request){
+    public function invite(Request $request)
+    {
         $request->validate([
             'email' => 'required|email',
             'campaign_id' => 'required',
@@ -159,23 +162,21 @@ class CampaignController extends Controller
         $campaign_id = $request->campaign_id;
         $user = User::where('email', $email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json([
                 'message' => 'Usuário não encontrado. Certifique-se de que o e-mail está correto.',
             ], 404);
-        }
-        else if ($user->id === auth()->user()->id) {
+        } elseif ($user->id === auth()->user()->id) {
             return response()->json([
                 'message' => 'Você não pode convidar a si mesmo.',
             ], 400);
-        }
-        else if (CampaignValidatorUser::where([['user_id', $user->id],['campaign_id', $campaign_id]])->exists()) {
+        } elseif (CampaignValidatorUser::where([['user_id', $user->id], ['campaign_id', $campaign_id]])->exists()) {
             return response()->json([
                 'message' => 'Usuário já é um validador.',
             ], 400);
         }
 
-        $validator_user = new CampaignValidatorUser();
+        $validator_user = new CampaignValidatorUser;
         $validator_user->campaign_id = $request->campaign_id;
         $validator_user->invited_by = auth()->user()->id;
         $validator_user->user_id = $user->id;
@@ -183,22 +184,21 @@ class CampaignController extends Controller
         $validator_user->status = 'pending';
         $validator_user->save();
 
-        Mail::to($email)->send(new CampaignInviteMail(Campaign::where('id',$request->campaign_id)->first(), $user, auth()->user()->name, $validator_user->token));
+        Mail::to($email)->send(new CampaignInviteMail(Campaign::where('id', $request->campaign_id)->first(), $user, auth()->user()->name, $validator_user->token));
 
         return response()->json([
             'message' => 'Convite enviado com sucesso!',
         ], 200);
     }
 
-
-    public function accept($token) {
+    public function accept($token)
+    {
         $validator_user = CampaignValidatorUser::where('token', $token)->first();
 
-        if(auth()->user()->id !== $validator_user->user_id) {
+        if (auth()->user()->id !== $validator_user->user_id) {
             return redirect('/home')->with('error', 'Você não tem permissão para aceitar este convite.');
 
-        }
-        else if (!$validator_user) {
+        } elseif (! $validator_user) {
             return redirect('/home')->with('error', 'Convite inválido ou já aceito.');
         }
 
@@ -209,11 +209,11 @@ class CampaignController extends Controller
         return redirect('/home')->with('Success', 'Convite aceito com sucesso!');
     }
 
-
-    public function decline($token) {
+    public function decline($token)
+    {
         $validator_user = CampaignValidatorUser::where('token', $token)->first();
 
-        if (!$validator_user) {
+        if (! $validator_user) {
             return redirect('/home')->with('error', 'Convite inválido ou já aceito.');
         }
 
@@ -221,7 +221,7 @@ class CampaignController extends Controller
 
         return redirect('/home')->with('Success', 'Convite recusado com sucesso!');
     }
-    
+
     public function removeValidator(Campaign $campaign, User $user)
     {
         if (auth()->id() !== $campaign->user_id) {
@@ -238,5 +238,4 @@ class CampaignController extends Controller
 
         return redirect()->back()->with('Success', 'Validador removido com sucesso.');
     }
-
 }

@@ -9,7 +9,8 @@ class Address extends Model
 {
     use HasFactory;
 
-    public function campaigns() {
+    public function campaigns()
+    {
         return $this->hasMany(Campaign::class);
     }
 }
