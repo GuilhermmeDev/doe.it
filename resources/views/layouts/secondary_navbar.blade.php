@@ -1,4 +1,4 @@
-<header class="m-5 w-full">
+<header class="mt-5 w-full">
   <div class="px-4 mx-auto sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
