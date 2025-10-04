@@ -75,14 +75,7 @@ html {
 
 
 
-#modsecao2 {
-    @media (min-width: 0px) and (max-width: 767px) {
-        margin-top: 50px;
-        margin-left: -30px;
-        padding: 50px;
-        height: 1000px;
-    }
-}
+
 
 #doeitext {
     color: #ff5800;
