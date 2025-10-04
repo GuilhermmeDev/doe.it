@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
   </style>
 </head>
-<body class="light-theme dark:bg-neutral-900 dark:text-white duration-200 overflow-x-hidden h-fit">
+<body class="light-theme dark:bg-neutral-900 dark:text-white duration-200 overflow-x-hidden h-fit w-full">
 
     @include('layouts.secondary_navbar')
 
@@ -20,13 +20,13 @@
         <div id="secao" class="mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8 rounded-[20px] flex flex-col">
           <div class="py-10 sm:py-16 items-center justify-center">
             <div class="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-8 2xl:gap-x-20 w-full">
-              <div class="flex flex-col lg:items-start lg:justify-start items-center justify-center">
-                <h2 id="titulo" class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">DoeIT - Conectando solidariedade e esperança!</h2>
-                <p id="titulo" class="mt-4 text-base text-gray-50">Sabemos que pequenos gestos podem transformar vidas de maneira significativa. No DoeIT, conectamos pessoas dispostas a ajudar com aqueles que mais precisam, promovendo solidariedade, esperança e mudanças reais na vida de quem recebe o apoio.</p>
+              <div class="flex flex-col lg:items-start lg:justify-start items-center justify-center p-4">
+                <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">DoeIT - Conectando solidariedade e esperança!</h2>
+                <p class="mt-4 text-lg md:text-xl text-gray-50">Sabemos que pequenos gestos podem transformar vidas de maneira significativa. No DoeIT, conectamos pessoas dispostas a ajudar com aqueles que mais precisam, promovendo solidariedade, esperança e mudanças reais na vida de quem recebe o apoio.</p>
 
                 <div class="flex flex-row items-center mt-8 lg:mt-12 w-fit">
-                  <a id="vamos" href="/register" title="" class="flex w-40 h-10" role="button">
-                    <button id="buttonvamos" class="flex items-center justify-center w-full text-center rounded-[40px]">Vamos</button>
+                  <a id="vamos" href="/register" title="" class="flex w-full p-3" role="button">
+                    <button id="buttonvamos" class="flex items-center justify-center w-full h-full text-center text-lg rounded-[40px]">Crie sua conta</button>
                   </a>
                 </div>
               </div>
@@ -44,8 +44,8 @@
       </section id="secao2">
 
 
-      <section id="modsecao2" class="pt-15 mt-[60px] overflow-hidden md:pt-40 sm:pt-16 2xl:pt-16">
-        <div class="px-4 mx-auto sm:px-6 relative h-[600px] lg:px-8 max-w-7xl">
+      <section id="modsecao2" class="pt-15 mt-[60px] relative md:pt-40 sm:pt-16 2xl:pt-16 h-fit">
+        <div class="px-4 mx-auto sm:px-6 relative  lg:px-8 max-w-7xl h-fit">
             <div class="grid items-center grid-cols-1 md:grid-cols-2 justify-items-center">
                 <div>
                   <h2 class="text-3xl font-bold leading-none sm:text-4xl lg:text-[38px]">
@@ -68,7 +68,7 @@
                         cliques, você pode fazer a diferença na vida de quem mais precisa.</p>
                 </div>
 
-                <div class="relative w-2/3 translate-x-15 translate-y-5 xl:max-w-md xl:mx-auto 2xl:origin-bottom 2xl:scale-105">
+                <div class=" relative w-2/3 mt-8 md:mt-0 xl:max-w-md xl:mx-auto 2xl:origin-bottom 2xl:scale-105">
                   <img
                     class="relative z-10"
                     src="{{ asset('assets/seclogo.svg') }}"
@@ -125,10 +125,10 @@
 
 
 
-  <section id="secao4" class="text-gray-400 w-3/4 body-font relative min-h-screen flex items-center justify-center">
+  <section id="secao4" class="text-gray-400 w-full body-font relative min-h-screen flex items-center justify-center">
     <div class="container px-5 py-24 mx-auto flex flex-col items-center justify-center relative z-10">
 
-      <div class="w-full bg-[#2AB036] shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden p-8">
+      <div class="w-full bg-[#2AB036] shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden p-2">
 
         <div class="w-full md:w-1/2 p-4 flex flex-col">
           <h2 class="text-white text-2xl md:text-4xl font-bold mb-6">
@@ -155,7 +155,7 @@
 
             <div class="flex flex-col">
               <label for="titulo" class="text-gray-800 text-sm font-semibold mb-2">Título</label>
-              <input id="inpudefeituoso" type="text" id="titulo" name="titulo" readonly
+              <input type="text" id="titulo" name="titulo" readonly
                 class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out" >
             </div>
 
@@ -186,7 +186,7 @@
     </div>
   </section>
 
-  <div class="mt-10 w-3/4" x-data="footerComponent()">
+  <div class="mt-10 w-full" x-data="footerComponent()">
     <footer class=" px-4 py-5 max-w-full mx-auto md:px-8">
       <div class="gap-6 justify-between md:flex">
         <div class="flex-1">
