@@ -10,11 +10,13 @@ class Donation extends Model
 {
     use HasFactory, HasNanoids;
 
-    public function campaign() {
+    public function campaign()
+    {
         return $this->belongsTo(Campaign::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

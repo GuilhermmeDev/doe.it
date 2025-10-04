@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class GoogleLoginController extends Controller
 {
@@ -15,7 +14,8 @@ class GoogleLoginController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function handleGoogleCallback() : RedirectResponse {
+    public function handleGoogleCallback(): RedirectResponse
+    {
         $user = Socialite::driver('google')->stateless()->user();
 
         $existingUser = User::where('email', $user->email)->first();
@@ -23,7 +23,7 @@ class GoogleLoginController extends Controller
         if ($existingUser) {
             auth()->login($existingUser, true);
         } else {
-            $newUser = new User();
+            $newUser = new User;
             $newUser->name = $user->name;
             $newUser->email = $user->email;
             $newUser->google_id = $user->id;

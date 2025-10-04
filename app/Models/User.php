@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -47,11 +47,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function donations() {
+    public function donations()
+    {
         return $this->hasMany(Donation::class);
     }
 
-    public function campaigns() {
+    public function campaigns()
+    {
         return $this->hasMany(Campaign::class);
     }
 
@@ -59,5 +61,4 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
-
 }
