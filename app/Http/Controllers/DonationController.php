@@ -17,7 +17,7 @@ class DonationController extends Controller
         if (Gate::allows('verify-cpf', auth()->user())) {
             $campaign = Campaign::findOrFail($id);
             if ($campaign->meta['current'] >= $campaign->meta['target']) {
-                return redirect('/campaign/'.$campaign->id);
+                return redirect('/campaign/' . $campaign->id);
             }
 
             return view('donations.donate', compact('campaign'));
@@ -45,7 +45,7 @@ class DonationController extends Controller
 
         $donation->save();
 
-        $url = url('/confirm/'.$donation->id);
+        $url = url('/confirm/' . $donation->id);
 
         $qrcode = QrCode::format('png')->size(200)->generate($url);
 
@@ -53,13 +53,16 @@ class DonationController extends Controller
 
         $donation->save();
 
-        return redirect('/donation/'.$donation->id);
-
+        return redirect('/donation/' . $donation->id);
     }
 
     public function show($id)
     {
         $donation = Donation::findOrFail($id);
+        if (Gate::forUser(auth()->user())->denies('owner-qrcode', $donation)) {
+            return redirect('/home')->with('error', 'Você não tem permissão de acessar esta página');
+        }
+
         if ($donation->Status !== 'confirmed') {
             return view('donations.show', compact('donation'));
         }

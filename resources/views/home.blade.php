@@ -13,7 +13,7 @@
   @include('layouts.secondary_navbar')
 
     @if (session('error'))
-        {{ session('error') }}<br>
+        @include('layouts.error_popup')
     @endif
 
     @if (session('Success'))
