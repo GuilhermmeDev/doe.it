@@ -50,9 +50,6 @@ html {
     top: 45px;
 }
 
-#inputdefeituoso {
-    margin-left: 10px;
-}
 
 #fullsecao {
     @media (min-width: 900px) and (max-width: 1920px) {
@@ -76,21 +73,9 @@ html {
     background-color: #2ab036;
 }
 
-#titulo {
-    @media (min-width: 0px) and (max-width: 629px) {
-        margin-left: 10px;
-    }
 
-}
 
-#modsecao2 {
-    @media (min-width: 0px) and (max-width: 767px) {
-        margin-top: 50px;
-        margin-left: -30px;
-        padding: 50px;
-        height: 1000px;
-    }
-}
+
 
 #doeitext {
     color: #ff5800;
