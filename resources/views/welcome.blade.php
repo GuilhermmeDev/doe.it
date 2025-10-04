@@ -21,7 +21,7 @@
           <div class="py-10 sm:py-16 lg:py-24 2xl:pl-24">
             <div class="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-8 2xl:gap-x-20">
               <div>
-                <h2 id="titulo" class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">DoeIT - Conectando solidariedae e esperança!</h2>
+                <h2 id="titulo" class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">DoeIT - Conectando solidariedade e esperança!</h2>
                 <p id="titulo" class="mt-4 text-base text-gray-50">Sabemos que pequenos gestos podem transformar vidas de maneira significativa. No DoeIT, conectamos pessoas dispostas a ajudar com aqueles que mais precisam, promovendo solidariedade, esperança e mudanças reais na vida de quem recebe o apoio.</p>
 
                 <div class="flex flex-row items-center mt-8 space-x-4 lg:mt-12">
@@ -58,13 +58,13 @@
 
                     <br>
                     <h3 class="text-[18px] translate-x-10 leading-tight sm:text-4xl lg:text-[22px]">Precisa de ajuda com alimentação?</h3>
-                    <p id="textinfor" class="max-w-lg mt-3 translate-x-10 text-xl leading-relaxed md:mt-8 dark:text-gray-400">No <span id="doeitext"> <b> DoeIT</b></span>,
+                    <p id="textinfor" class="text-justify max-w-lg mt-3 translate-x-10 text-xl leading-relaxed md:mt-8 dark:text-gray-400">No <span id="doeitext"> <b> DoeIT</b></span>,
                       conectamos você a quem pode oferecer o apoio que você precisa. Nossa missão é
                       garantir que ninguém fique sem o essencial. Seja para receber doações de alimentos
                       ou para contribuir com aqueles que precisam.
                       <br>
                       <br>
-                      estamos aqui para facilitar o processo e tornar
+                      Estamos aqui para facilitar o processo e tornar
                        a solidariedade mais acessível. Com apenas alguns
                         cliques, você pode fazer a diferença na vida de quem mais precisa.</p>
                 </div>
@@ -100,7 +100,7 @@
                     <span class="text-xl font-semibold text-white">1</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Crie sua conta gratuita</h3>
-                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Cadastre-se rapidamente e personalize seu perfil. Escolha se deseja doar, criar campanhas ou receber doações. Nossa plataforma garante a segurança dos seus dados com tecnologia de ponta.</p>
+                  <p class="mt-4 text-center text-gray-600 dark:text-gray-300">Cadastre-se rapidamente e personalize seu perfil. Escolha se deseja doar, criar campanhas ou receber doações. Nossa plataforma garante a segurança dos seus dados com tecnologia de ponta.</p>
                 </div>
 
                 <div>
@@ -108,7 +108,7 @@
                     <span class="text-xl font-semibold text-white">2</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Crie campanhas ou doe diretamente</h3>
-                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Inicie uma campanha de arrecadação ou navegue pelas campanhas existentes. Cada transação gera um QR Code seguro, que valida a autenticidade da doação e conecta você diretamente à causa escolhida.</p>
+                  <p class="mt-4 text-center text-gray-600 dark:text-gray-300">Inicie uma campanha de arrecadação ou navegue pelas campanhas existentes. Cada transação gera um QR Code seguro, que valida a autenticidade da doação e conecta você diretamente à causa escolhida.</p>
                 </div>
 
                 <div>
@@ -116,7 +116,7 @@
                     <span class="text-xl font-semibold text-white">3</span>
                   </div>
                   <h3 class="mt-6 text-xl font-semibold leading-tight md:mt-10">Acompanhe e compartilhe seu impacto</h3>
-                  <p class="mt-4 text-base text-gray-600 dark:text-gray-300">Visualize seu histórico de doações e acompanhe como sua contribuição está fazendo a diferença. Receba relatórios de impacto e ajude a espalhar solidariedade de forma simples e confiável.</p>
+                  <p class="mt-4 text-center text-gray-600 dark:text-gray-300">Visualize seu histórico de doações e acompanhe como sua contribuição está fazendo a diferença. Receba relatórios de impacto e ajude a espalhar solidariedade de forma simples e confiável.</p>
                 </div>
               </div>
 
@@ -156,8 +156,8 @@
 
             <div class="flex flex-col">
               <label for="titulo" class="text-gray-800 text-sm font-semibold mb-2">Título</label>
-              <input id="inpudefeituoso" type="text" id="titulo" name="titulo"
-                class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out" readonly>
+              <input id="inpudefeituoso" type="text" id="titulo" name="titulo" readonly
+                class="w-full bg-gray-100 rounded border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 text-base outline-none text-gray-900 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out" >
             </div>
 
             <div class="flex flex-col">
@@ -192,7 +192,7 @@
       <div class="gap-6 justify-between md:flex">
         <div class="flex-1">
           <div class="max-w-xs">
-            <img src="assets/logo1.svg" class="w-20" />
+            <img src="{{ asset(assets/logo1.svg) }}" class="w-20" />
           </div>
         </div>
         <div class="flex-1 mt-10 space-y-6 items-center justify-between sm:flex md:space-y-0 md:mt-0">
