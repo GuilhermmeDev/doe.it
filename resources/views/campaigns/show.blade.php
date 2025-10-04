@@ -81,10 +81,12 @@
               <a href="/donation/{{$donation->id}}" class="text-white text-sm font-semibold bg-green-500 hover:bg-green-600 rounded-md py-2 px-4">Ver QR Code</a>
             </div>
           @elseif($campaign->user_id !== auth()->user()->id && $campaign->meta['current'] < $campaign->meta['target'])
-            <a class="help-button w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg text-lg mb-6 transition-colors block text-center"
+          <div class="flex flex-col items-center mb-6 space-y-2">
+            <a class="help-button w-full max-w-[250px] bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg text-lg mb-6 transition-colors block text-center"
                href="/donate/{{$campaign->id}}">
               Quero Ajudar
             </a>
+          </div>
           @endif
 
           <section class="border-t pt-4">
