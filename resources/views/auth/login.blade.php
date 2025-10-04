@@ -45,26 +45,28 @@
           @enderror
         </div>
         <div class="relative">
-          <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            required
-            class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
-            placeholder="Insira sua senha"
-          />
-          @error('password')
-              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-          @enderror
-          <img
-            id="eyeIcon"
-            src="{{ asset('assets/oculto.svg') }}"
-            data-visivel-src="{{ asset('assets/visivel.svg') }}"
-            data-oculto-src="{{ asset('assets/oculto.svg') }}"
-            alt="Mostrar senha"
-            class="w-5 h-5 absolute top-1/2 -translate-y-1/2 right-3 cursor-pointer mt-1"
-          />
+          <label class="font-medium text-gray-900 dark:text-gray-100" for="password">Senha</label>
+          <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+            <input
+              id="password"
+              type="password"
+              name="password"
+              required
+              class="bg-transparent outline-none border-none"
+              placeholder="Insira sua senha"
+            />
+            @error('password')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
+            <img
+              id="eyeIcon"
+              src="{{ asset('assets/oculto.svg') }}"
+              data-visivel-src="{{ asset('assets/visivel.svg') }}"
+              data-oculto-src="{{ asset('assets/oculto.svg') }}"
+              alt="Mostrar senha"
+              class="object-cover size-6 cursor-pointer"
+            />
+          </div>
           <a href="{{ route('password.request') }}" class="text-gray-500 dark:text-gray-300 text-sm mt-2 block text-right">Esqueceu sua senha?</a>
         </div>
 

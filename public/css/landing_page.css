@@ -81,9 +81,6 @@ html {
         margin-left: 10px;
     }
 
-    @media (min-width: 1536px) {
-        margin-left: -10%;
-    }
 }
 
 #modsecao2 {
@@ -114,12 +111,6 @@ html {
     color: #ffffff;
     border-radius: 8px;
     font-size: 18px;
-    @media (min-width: 0px) and (max-width: 629px) {
-        margin-left: 32%;
-    }
-    @media (min-width: 1536px) {
-        margin-left: -10%;
-    }
 }
 
 nav {

@@ -72,36 +72,39 @@
         </div>
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
-          <input
-            placeholder="Insira sua senha"
-            id="password"
-            name="password"
-            type="password"
-            required
-            class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
-          />
-          <img
-            id="eyeIcon1"
-            src="{{ asset('assets/oculto.svg') }}"
-            data-visivel-src="{{ asset('assets/visivel.svg') }}"
-            data-oculto-src="{{ asset('assets/oculto.svg') }}"
-            alt="Mostrar senha"
-            class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5"
-          />
+          <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+            <input
+              placeholder="Insira sua senha"
+              id="password"
+              name="password"
+              type="password"
+              required
+              class="bg-transparent outline-none border-none"
+            />
+            <img
+              id="eyeIcon1"
+              src="{{ asset('assets/oculto.svg') }}"
+              data-visivel-src="{{ asset('assets/visivel.svg') }}"
+              data-oculto-src="{{ asset('assets/oculto.svg') }}"
+              alt="Mostrar senha"
+              class="object-cover size-6 cursor-pointer"
+            />
           @error('password')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
+          </div>
         </div>
 
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Confirmar senha</label>
+          <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
             <input
               placeholder="Confirme sua senha"
               id="cpassword"
               name="password_confirmation"
               type="password"
               required
-              class="w-full mt-1 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-10"
+              class="bg-transparent outline-none border-none"
             />
             <img
               id="eyeIcon2"
@@ -109,11 +112,13 @@
               data-visivel-src="{{ asset('assets/visivel.svg') }}"
               data-oculto-src="{{ asset('assets/oculto.svg') }}"
               alt="Mostrar senha"
-              class="w-5 h-5 absolute top-1/2 -translate-y-1/4 right-3 cursor-pointer mt-0.5"
+              class="object-cover size-6 cursor-pointer"
+
             />
           @error('password_confirmation')
              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
+          </div>
         </div>
 
         <div class="flex justify-center">

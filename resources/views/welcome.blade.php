@@ -11,28 +11,28 @@
     @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Righteous&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
   </style>
 </head>
-<body class="light-theme dark:bg-neutral-900 dark:text-white duration-200 overflow-x-hidden">
+<body class="light-theme dark:bg-neutral-900 dark:text-white duration-200 overflow-x-hidden h-fit">
 
     @include('layouts.secondary_navbar')
 
-    <div id="fullsecao">
-      <section class="2xl:py-24 2xl:mt-[-25px] xl:mt-[50px] lg:mt-[80px] md:mt-[80px] sm:mt-[80px] mt-[80px] px-4 sm:px-6 lg:px-8">
-        <div id="secao" class="mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8 rounded-[20px]">
-          <div class="py-10 sm:py-16 lg:py-24 2xl:pl-24">
-            <div class="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-8 2xl:gap-x-20">
-              <div>
+    <div id="fullsecao" class="justify-items-center">
+      <section class="2xl:py-24 2xl:mt-[-25px] xl:mt-[50px] lg:mt-[80px] md:mt-[80px] sm:mt-[80px] mt-[80px] px-4 sm:px-6 lg:px-8 lg:text-left text-center">
+        <div id="secao" class="mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8 rounded-[20px] flex flex-col">
+          <div class="py-10 sm:py-16 items-center justify-center">
+            <div class="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-8 2xl:gap-x-20 w-full">
+              <div class="flex flex-col lg:items-start lg:justify-start items-center justify-center">
                 <h2 id="titulo" class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl lg:leading-tight">DoeIT - Conectando solidariedade e esperança!</h2>
                 <p id="titulo" class="mt-4 text-base text-gray-50">Sabemos que pequenos gestos podem transformar vidas de maneira significativa. No DoeIT, conectamos pessoas dispostas a ajudar com aqueles que mais precisam, promovendo solidariedade, esperança e mudanças reais na vida de quem recebe o apoio.</p>
 
-                <div class="flex flex-row items-center mt-8 space-x-4 lg:mt-12">
+                <div class="flex flex-row items-center mt-8 lg:mt-12 w-fit">
                   <a id="vamos" href="/register" title="" class="flex w-40 h-10" role="button">
                     <button id="buttonvamos" class="flex items-center justify-center w-full text-center rounded-[40px]">Vamos</button>
                   </a>
                 </div>
               </div>
 
-              <div class="relative px-12 ">
-                <svg class="absolute inset-x-0 bottom-0 left-1/2 -translate-x-1/2 -mb-48 lg:-mb-72 w-[460px] h-[460px] sm:w-[600px] sm:h-[600px]" viewBox="0 0 8 8">
+              <div class="relative px-12">
+                <svg class="absolute inset-x-0 bottom-0 left-1/2 -mb-48 lg:-mb-72 w-[460px] h-[460px] sm:w-[600px] sm:h-[600px]" viewBox="0 0 8 8">
                   <circle id="circle" cx="4" cy="4" r="3" fill="#FF5800" />
                 </svg>
                 <img class="relative w-full max-w-xs mx-auto -mb-60 lg:-mb-64" src="{{asset('assets/phone_doeit.png')}}" alt="" />
@@ -46,19 +46,18 @@
 
       <section id="modsecao2" class="pt-15 mt-[60px] overflow-hidden md:pt-40 sm:pt-16 2xl:pt-16">
         <div class="px-4 mx-auto sm:px-6 relative h-[600px] lg:px-8 max-w-7xl">
-            <div class="grid items-center grid-cols-1 md:grid-cols-2">
+            <div class="grid items-center grid-cols-1 md:grid-cols-2 justify-items-center">
                 <div>
-                  <h2 class="text-3xl translate-x-10 font-bold leading-none sm:text-4xl lg:text-[38px]">
+                  <h2 class="text-3xl font-bold leading-none sm:text-4xl lg:text-[38px]">
                     <span class="border-b-4" style="border-color: #FF5800;">
                       Ajuda
                     </span> ao alcance
                   </h2>
 
 
-
                     <br>
-                    <h3 class="text-[18px] translate-x-10 leading-tight sm:text-4xl lg:text-[22px]">Precisa de ajuda com alimentação?</h3>
-                    <p id="textinfor" class="text-justify max-w-lg mt-3 translate-x-10 text-xl leading-relaxed md:mt-8 dark:text-gray-400">No <span id="doeitext"> <b> DoeIT</b></span>,
+                    <h3 class="text-2xl leading-tight sm:text-xl lg:text-2xl">Precisa de ajuda com alimentação?</h3>
+                    <p id="textinfor" class="text-justify max-w-lg mt-3 text-xl leading-relaxed md:mt-8 dark:text-gray-400">No <span id="doeitext"> <b> DoeIT</b></span>,
                       conectamos você a quem pode oferecer o apoio que você precisa. Nossa missão é
                       garantir que ninguém fique sem o essencial. Seja para receber doações de alimentos
                       ou para contribuir com aqueles que precisam.
@@ -126,10 +125,10 @@
 
 
 
-  <section id="secao4" class="text-gray-400 body-font relative min-h-screen flex items-center justify-center">
+  <section id="secao4" class="text-gray-400 w-3/4 body-font relative min-h-screen flex items-center justify-center">
     <div class="container px-5 py-24 mx-auto flex flex-col items-center justify-center relative z-10">
 
-      <div class="w-full md:w-[90%] lg:w-4/5 bg-[#2AB036] shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden p-8">
+      <div class="w-full bg-[#2AB036] shadow-lg rounded-xl flex flex-col md:flex-row overflow-hidden p-8">
 
         <div class="w-full md:w-1/2 p-4 flex flex-col">
           <h2 class="text-white text-2xl md:text-4xl font-bold mb-6">
@@ -187,12 +186,12 @@
     </div>
   </section>
 
-  <div class="mt-10" x-data="footerComponent()">
+  <div class="mt-10 w-3/4" x-data="footerComponent()">
     <footer class=" px-4 py-5 max-w-full mx-auto md:px-8">
       <div class="gap-6 justify-between md:flex">
         <div class="flex-1">
-          <div class="max-w-xs">
-            <img src="{{ asset(assets/logo1.svg) }}" class="w-20" />
+          <div class="w-xs">
+            <img src="{{ asset('assets/logo1.svg') }}" class="w-20" />
           </div>
         </div>
         <div class="flex-1 mt-10 space-y-6 items-center justify-between sm:flex md:space-y-0 md:mt-0">
@@ -208,7 +207,7 @@
           </template>
         </div>
       </div>
-      <div class="mt-8 py-6 border-t items-center justify-between sm:flex w-full">
+      <div class="mt-8 py-6 border-t items-center justify-between w-full sm:flex w-full">
         <div class="mt-6 sm:mt-0 w-full">
           </div>
       </div>
