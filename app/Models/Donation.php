@@ -23,4 +23,9 @@ class Donation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function validator()
+    {
+        return $this->belongsTo(User::class, 'validator_id');
+    }
 }

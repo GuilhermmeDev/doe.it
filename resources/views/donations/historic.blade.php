@@ -21,7 +21,7 @@
                 @foreach($historic as $donation)
                     @php
                         $campaign = $donation->campaign;
-                        $owner = $campaign ? $campaign->user : null;
+                        $validator = $donation->validator_id ? $donation->validator->name : null;
                     @endphp
                     <a href="{{ $campaign ? url('/campaign/' . $campaign->id) : '#' }}" class="block rounded-xl p-5 bg-[#f0f0f0] dark:bg-neutral-800 shadow hover:bg-[#e0e0e0] dark:hover:bg-neutral-700 transition cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between">
                         <div class="flex-1">
@@ -29,8 +29,8 @@
                                 {{ $campaign->Title ?? 'Campanha removida' }}
                             </div>
                             <div class="text-sm text-gray-700 dark:text-gray-300 mb-1">
-                                <span class="font-medium">Dono:</span>
-                                {{ $owner ? $owner->name : '-' }}
+                                <span class="font-medium">Validador:</span>
+                                {{ $validator ? $validator : '-' }}
                             </div>
                             <div class="text-sm text-gray-700 dark:text-gray-300 mb-2">
                                 <span class="font-medium">Data:</span>

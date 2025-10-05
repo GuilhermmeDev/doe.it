@@ -92,13 +92,13 @@ class DonationController extends Controller
 
     public function confirm($id)
     {
-
-        // confirmando a doação no BD
         $donation = Donation::findOrFail($id);
 
         $donation->Status = 'confirmed';
 
         $donation->Confirmed_at = Carbon::now();
+
+        $donation->validator_id = auth()->user()->id;
 
         $donation->save();
 
@@ -120,7 +120,9 @@ class DonationController extends Controller
     public function historic()
     {
         $userId = auth()->user()->id;
-        $historicDonations = Donation::where('user_id', $userId)->get();
+        $historicDonations = Donation::where('user_id', $userId)
+            ->where('Status', 'confirmed')
+            ->get();
         return view('donations.historic', ['historic' => $historicDonations]);
     }
 }
