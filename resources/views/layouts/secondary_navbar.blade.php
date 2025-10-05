@@ -40,7 +40,7 @@
           <!-- perfil dropdown (desktop) -->
           <div x-data="{ open: false }" @click.away="open = false" class="relative">
             <button @click="open = !open" class="p-2 border-gray-600 border-solid border-2 rounded-lg text-gray-500 dark:text-white flex items-center space-x-2 cursor-pointer">
-              <img src="{{asset('assets/user-pen.svg')}}" alt="Ícone de Usuário" class="w-5 h-5">
+                <img :class="{'dark:invert': true}" src="{{asset('assets/user-pen.svg')}}" alt="Ícone de Usuário" class="w-5 h-5">
               <span>{{ Auth::user()->name ?? 'Usuário' }}</span>
               <svg :class="{'rotate-180': open, 'rotate-0': !open}" class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
