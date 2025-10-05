@@ -10,6 +10,10 @@ class Donation extends Model
 {
     use HasFactory, HasNanoids;
 
+    protected $casts = [
+        'Confirmed_at' => 'datetime',
+    ];
+
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
@@ -18,5 +22,10 @@ class Donation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function validator()
+    {
+        return $this->belongsTo(User::class, 'validator_id');
     }
 }
