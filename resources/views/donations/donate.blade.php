@@ -46,7 +46,7 @@
                 type="number"
                 required
                 class="w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300 bg-transparent outline-none border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg"
-                name="Quantity" id="Quantity" min="0" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"
+                name="Quantity" id="Quantity" min="1" max="{{$campaign->meta['target'] - $campaign->meta['current']}}"
               />
             </div>
 
