@@ -48,33 +48,33 @@
 
     <div class="w-full lg:w-1/2 text-center lg:text-left">
       <h2 class="text-4xl lg:text-5xl font-bold leading-tight text-gray-800 dark:text-gray-100">
-        Criando sua campanha<br> no <span class="text-green-600">doeit</span>
+        Criando sua campanha no <span class="text-[#2ab036]">doeit</span>
       </h2>
-      <p class="mt-6 text-gray-700 dark:text-gray-300 text-base max-w-md mx-auto lg:mx-0">
-        Com o <span class="text-green-600 font-semibold">doeit</span>, você pode fazer a diferença! Crie campanhas solidárias de forma simples, gratuita e segura. Compartilhe sua causa e alcance pessoas em todo lugar.
+      <p class="mt-6 text-gray-700 dark:text-gray-300 text-lg text-justify max-w-md mx-auto lg:mx-0">
+        Com o <span class="text-[#2ab036] font-semibold">doeit</span>, você pode fazer a diferença! Crie campanhas solidárias de forma simples, gratuita e segura. Compartilhe sua causa e alcance pessoas em todo lugar.
       </p>
     </div>
 
-    <div class="w-full lg:w-1/2 max-w-md bg-green-500 dark:bg-orange-500 rounded-xl p-6 shadow-xl">
+    <div class="w-full lg:w-1/2 max-w-md bg-[#2ab036] rounded-xl p-6 shadow-xl border border-[#ff5800] border-opacity-40">
       <form id="multiStepForm" action="/campaign" method="POST" enctype="multipart/form-data" class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
         @csrf
         <div id="step1" class="step flex flex-col gap-4">
           <div>
-            <label for="Title" class="block text-gray-600 dark:text-gray-300 font-medium mb-1">Título:</label>
+            <label for="Title" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Título:</label>
             <input type="text" name="Title" id="Title" value="{{ old('Title') }}" placeholder="Escreva o título da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             @error("Title")
                 <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
           <div>
-            <label for="Description" class="block text-gray-600 dark:text-gray-300 font-medium mb-1">Descrição:</label>
+            <label for="Description" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Descrição:</label>
             <textarea name="Description" id="Description" placeholder="Escreva a descrição detalhada da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 h-24 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>{{ old('Description') }}</textarea>
             @error("Description")
                  <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
           <div>
-            <label for="Image" class="block text-gray-600 dark:text-gray-300 font-medium mb-1">Imagem da Campanha:</label>
+            <label for="Image" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Imagem da Campanha:</label>
             <input type="file" name="Image" id="Image" accept=".jpeg,.png,.jpg,.svg" class="w-full text-sm text-gray-500 dark:text-gray-300 bg-white dark:bg-neutral-900 rounded-lg
               file:mr-4 file:py-2 file:px-4
               file:rounded-md file:border-0
@@ -94,7 +94,7 @@
           <div class="frame-wrapper-2">
             <div class="div-6">
                 {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
-                <label for="State" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Estado:</label>
+                <label for="State" class="block font-medium text-lg mb-1 text-gray-600 dark:text-gray-300">Estado:</label>
                 {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
                 <select id="State" name="State" required
                         class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
@@ -112,7 +112,7 @@
           <div class="frame-wrapper-3">
             <div class="div-6">
                 {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
-                <label for="City" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Cidade:</label>
+                <label for="City" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Cidade:</label>
                 {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
                 <select name="City" id="City" required
                         class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
@@ -129,28 +129,28 @@
           </div>
 
           <div>
-            <label for="Street" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Rua/Avenida:</label>
+            <label for="Street" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Rua/Avenida:</label>
             <input type="text" name="Street" id="Street" value="{{ old('Street') }}" placeholder="Ex: Av. Brasil" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             @error("Street")
                  <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
           <div>
-            <label for="Number" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Número:</label>
-            <input type="text" name="Number" id="Number" value="{{ old('Number') }}" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <label for="Number" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Número:</label>
+            <input type="text" name="Number" id="Number" maxlength="12" value="{{ old('Number') }}" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             @error("Number")
                 <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
           <div>
-            <label for="Data" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Data da Coleta:</label>
+            <label for="Data" class="block font-medium text-lg mb-1 text-gray-600 dark:text-gray-300">Data da Coleta:</label>
             <input type="date" name="Data" id="Data" value="{{ old('Data') }}" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             @error("Data")
                 <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
           <div>
-            <label for="Hour" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Hora da Coleta:</label>
+            <label for="Hour" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Hora da Coleta:</label>
             <input type="time" name="Hour" id="Hour" value="{{ old('Hour') }}" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             @error("Hour")
                 <p class="validation-error">{{ $message }}</p>
@@ -160,7 +160,7 @@
 
         <div id="step3" class="step hidden flex flex-col gap-4">
           <div>
-            <label for="Type" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Tipo da Arrecadação:</label>
+            <label for="Type" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Tipo da Arrecadação:</label>
             <select name="Type" id="tipo_arrecadacao"
                     class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
                            bg-white text-gray-800
@@ -175,7 +175,7 @@
           </div>
 
           <div>
-            <label for="meta" class="block font-medium mb-1 text-gray-600 dark:text-gray-300">Meta de Arrecadação (em kg ou unidades):</label>
+            <label for="meta" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Meta de Arrecadação (em kg ou unidades):</label>
             <input type="number" name="meta" id="meta" value="{{ old('meta') }}" placeholder="Ex: 100" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required min="1">
              @error("meta")
                  <p class="validation-error">{{ $message }}</p>
@@ -184,9 +184,22 @@
         </div>
 
         <div class="pt-4 flex justify-between">
-          <button type="button" id="prevBtn" class="bg-gray-600 dark:bg-neutral-700 text-white px-4 py-2 rounded-md font-medium hidden hover:bg-gray-700 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-neutral-600 focus:ring-opacity-50">Voltar</button>
-          <button type="button" id="nextBtn" class="bg-gray-800 dark:bg-neutral-900 text-white px-4 py-2 rounded-md font-medium hover:bg-gray-900 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-gray-700 dark:focus:ring-neutral-600 focus:ring-opacity-50">Próximo</button>
-          <button type="submit" id="submitBtn" class="bg-gray-800 dark:bg-neutral-900 text-white px-4 py-2 rounded-md font-medium hidden hover:bg-gray-900 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-gray-700 dark:focus:ring-neutral-600 focus:ring-opacity-50">Criar Campanha</button>
+          <button type="button" id="prevBtn"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hidden
+                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+            Voltar
+          </button>
+          <button type="button" id="nextBtn"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium
+                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+            Próximo
+          </button>
+          <button type="submit" id="submitBtn"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hidden
+                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+            Criar Campanha
+          </button>
+        </div>
       </form>
     </div>
   </main>
