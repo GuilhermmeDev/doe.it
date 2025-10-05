@@ -33,7 +33,7 @@
     <form action="/cpf" method="POST" class="space-y-5" onsubmit="return validateForm()">
       @csrf
       @method('PATCH')
-      <div>
+      <div class="px-4">
           <label for="cpf" class="font-medium text-gray-900 dark:text-gray-100">CPF</label>
           <input
             type="text"
