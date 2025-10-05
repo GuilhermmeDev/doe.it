@@ -116,4 +116,11 @@ class DonationController extends Controller
 
         return redirect('/home')->with('Success', 'Doação confirmada com sucesso.');
     }
+
+    public function historic()
+    {
+        $userId = auth()->user()->id;
+        $historicDonations = Donation::where('user_id', $userId)->get();
+        return view('donations.historic', ['historic' => $historicDonations]);
+    }
 }

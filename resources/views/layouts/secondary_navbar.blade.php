@@ -25,11 +25,6 @@
 
       <!-- Desktop links -->
       <div class="hidden md:flex items-center space-x-4 ml-auto">
-        @if (request()->path() != '/')
-          <a href="/home" class="text-base font-semibold text-gray-900 dark:text-white transition-all duration-100">
-            Home
-          </a>
-        @endif
 
         <a href="/campaign"
            class="px-3 py-2 text-sm rounded-lg border-2 border-gray-600 dark:border-neutral-600 text-gray-700 dark:text-white">
@@ -54,6 +49,8 @@
               style="display: none;"
             >
               <a href="/profile" class="block w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 text-center">Editar Perfil</a>
+              <a href="/history" class="block w-full px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 text-center">Histórico</a>
+              <hr class="mx-6 border-white/20">
               <form method="POST" action="/logout">
                 @csrf
                 <button type="submit" class="block w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 text-center">Sair da Conta</button>
@@ -85,9 +82,6 @@
 
         <!-- Menu Mobile -->
         <div x-show="open" x-transition class="absolute top-20 right-5 w-64 bg-white dark:bg-neutral-800 shadow-lg rounded-lg p-4 space-y-3 z-50" style="display:none;">
-          @if (request()->path() != '/')
-            <a href="/home" class="block text-gray-900 dark:text-white font-medium">Home</a>
-          @endif
 
           <a href="/campaign"
              class="block px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md">
@@ -96,6 +90,9 @@
 
           @if(auth()->check() && (!isset($hideUserProfile) || !$hideUserProfile))
             <a href="/profile" class="block px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md">Editar Perfil</a>
+            <a href="/history" class="block px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md">Histórico</a>
+            <hr class="mx-6 border-white/20">
+
             <form method="POST" action="/logout">
               @csrf
               <button type="submit" class="w-full text-left px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md">Sair da Conta</button>
