@@ -40,7 +40,7 @@
               </div>
             </div>
 
-            <div>
+            <div class="text-wrap break-words">
               <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Descrição</h2>
               <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{{$campaign->Description}}</p>
             </div>
@@ -89,7 +89,7 @@
           </div>
           @endif
 
-          <section class="border-t pt-4">
+          <section class="border-t pt-4 text-wrap break-words">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Sobre a campanha</h2>
             <div class="space-y-4">
               <ul class="text-base text-gray-700 dark:text-gray-300 space-y-3">
