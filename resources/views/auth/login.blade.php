@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  
+  <meta name="description" content="Acesse sua conta DoeIT para doar, criar campanhas e acompanhar seu impacto. Já é cadastrado? Faça login de forma rápida e segura.">
+
+  <link rel="canonical" href="https://doeit.com.br/login" />
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <script defer src="js/cdn.min.js"></script>
   <title>Login - Doeit</title>

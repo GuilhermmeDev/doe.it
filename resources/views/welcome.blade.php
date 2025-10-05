@@ -5,6 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Doeit - Sistema de Doação</title>
+
+  <meta name="description" content="DoeIT conecta quem quer ajudar com quem mais precisa. Crie campanhas, doe com QR Code seguro e acompanhe o impacto da sua solidariedade. Junte-se à nossa causa!">
+  
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://doeit.com.br" />
+
   <link rel="stylesheet" href="{{asset('css/landing_page.css')}}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon" />
