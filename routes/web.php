@@ -36,9 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/confirm/{id}', [DonationController::class, 'verify']);
     Route::post('/confirm/{id}', [DonationController::class, 'confirm']);
     Route::delete('/donation/{id}', [DonationController::class, 'delete']);
+    Route::get('/history', [DonationController::class, 'historic']);
 
     Route::patch('/cpf', [ProfileController::class, 'registerCpf']);
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

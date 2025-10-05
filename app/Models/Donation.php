@@ -10,6 +10,10 @@ class Donation extends Model
 {
     use HasFactory, HasNanoids;
 
+    protected $casts = [
+        'Confirmed_at' => 'datetime',
+    ];
+
     public function campaign()
     {
         return $this->belongsTo(Campaign::class);
