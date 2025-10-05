@@ -25,7 +25,7 @@
       <div class="w-full max-w-md space-y-8 px-4 bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
 
         <header class="flex justify-center mb-6">
-          <img src="{{ asset('assets/logo1.svg') }}" alt="Logo doeit" class="w-32 h-32 object-contain">
+          <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-32 h-32 object-contain">
         </header>
 
         <form action="{{ route('login') }}" class="space-y-5" method="POST">
