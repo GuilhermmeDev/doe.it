@@ -23,24 +23,24 @@
 <body class="bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
 <main class="w-full flex">
 
-  <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
+  <section class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{asset("assets/maodoação.svg")}}" width="347" />
+      <img src="{{asset('assets/maodoação.svg')}}" width="347" />
       <p class="text-gray-300 text-center px-10 font-bold">
         “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”
         Junte-se a nós e faça a diferença!
       </p>
     </div>
-  </div>
+  </section>
 
-  <div class="flex-[2] flex items-center justify-center h-screen py-8">
-    <div class="w-full max-w-md space-y-6 px-4 bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100 sm:px-0">
+  <section class="flex-[2] flex items-center justify-center h-screen">
+    <div class="w-full max-w-md  px-4 bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100">
 
-      <div class="flex justify-center mb-4">
+      <header class="flex justify-center">
         <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-24 h-24 object-contain">
-      </div>
+      </header>
 
-      <form action="{{ route('register') }}" class="space-y-4" method="POST">
+      <form action="{{ route('register') }}" class="space-y-3" method="POST">
         @csrf
         <div>
           <label class="font-medium text-gray-900 dark:text-gray-100">Nome</label>
@@ -148,7 +148,7 @@
 
       </form>
     </div>
-  </div>
+  </section>
 </main>
 
 <script>

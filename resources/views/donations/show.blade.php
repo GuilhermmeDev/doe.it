@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code</title>
+    <title>QR Code - {{$donation->campaign->Title}}</title>
     <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -35,12 +35,12 @@
         </section>
 
         <!-- QR CODE -->
-        <div class="flex-1 flex flex-col items-center justify-center w-full md:w-auto max-w-xs space-y-4">
+        <section class="flex-1 flex flex-col items-center justify-center w-full md:w-auto max-w-xs space-y-4">
             <div class="flex items-center justify-center w-[250px] h-[250px] bg-[#2AB036] rounded-xl shadow-md">
                 <img src="data:image/png;base64, {{$donation->qr_code}}" alt="QR CODE" class="max-h-[80%] max-w-[80%]" id="qrImage">
             </div>
             <button id="downloadBtn" class="mt-2 px-4 py-2 bg-[#ff5800] text-white rounded-md">Baixar QR Code</button>
-        </div>
+        </section>
     </main>
 
     <script>
