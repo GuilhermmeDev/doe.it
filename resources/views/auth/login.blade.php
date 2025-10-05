@@ -28,7 +28,7 @@
           <img src="{{ asset('assets/logo1.svg') }}" alt="Logo Doeit" class="w-32 h-32 object-contain">
         </header>
 
-        <form action="{{ route('login') }}" class="space-y-5" method="POST">
+        <form action="{{ route('login') }}" class="space-y-4" method="POST">
           @csrf
           <div>
             <label class="font-medium text-gray-900 dark:text-gray-100">Email</label>
@@ -77,9 +77,7 @@
             >
               Entrar
             </button>
-            <a href="{{ route('register') }}" class="text-sm text-[#575761] dark:text-gray-400 hover:underline mt-4 text-center">
-              Ainda não tem uma conta?<span class="text-[#FF5800]"> Cadastre-se</span>
-            </a>
+            
           </div>
 
           <div class="flex justify-center mt-4">
@@ -89,6 +87,11 @@
                 alt="Google"
                 class="w-6 h-6"
               />
+            </a>
+          </div>
+          <div class="text-center">
+            <a href="{{ route('register') }}" class="text-sm text-[#575761] dark:text-gray-400 hover:underline mt-4 text-center">
+                Ainda não tem uma conta?<span class="text-[#FF5800]"> Cadastre-se</span>
             </a>
           </div>
         </form>
