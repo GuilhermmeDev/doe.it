@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('Street');
-            $table->string('Number', 6);
+            $table->string('Number', 12);
             $table->string('City', 50);
             $table->string('State', 100);
             $table->dateTime('Collection_date');

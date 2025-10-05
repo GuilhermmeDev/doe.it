@@ -1,107 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon" />
   <script defer src="js/cdn.min.js"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <link rel="stylesheet" href="css/swiper-bundle.min.css" />
 </head>
+
 <body class="bg-white dark:bg-neutral-900 text-black dark:text-white overflow-x-hidden">
   @include('layouts.secondary_navbar')
+  @if (session('error'))
+  @include('layouts.error_popup')
+  @endif
+  @if (session('Success'))
+  @include('layouts.success')
+  @endif
 
-    @if (session('error'))
-        @include('layouts.error_popup')
-    @endif
-
-    @if (session('Success'))
-        @include('layouts.success')
-    @endif
-
+  <main class="container mx-auto px-4 py-8 max-w-7xl">
     @if ($search)
-        <p>Procurando campanha: {{$search}}</p>
+    <div class="mb-8">
+      <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-[#5FCB69] p-4 rounded-r-lg">
+        <p class="text-green-800 dark:text-green-300 font-medium">
+          <span class="font-semibold">Procurando por:</span> "{{$search}}"
+        </p>
+      </div>
+    </div>
     @endif
 
     @if (count($campaigns) === 0)
-        <p>Nenhuma campanha disponível</p>
-    @endif
+    <section class="flex flex-col items-center justify-center min-h-[60vh] py-12">
+      <div class="text-center max-w-md">
+        
+        <img src="{{ asset('assets/data-searching.svg') }}" alt="data searching" class="w-32 h-32 mx-auto mb-6"/>
+        @if ($search)
+        <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-200">
+          Nenhuma campanha encontrada
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          Não encontramos campanhas que correspondam à sua busca por "<span class="font-semibold">{{$search}}</span>".
+        </p>
+        <a href="/" class="inline-block px-6 py-3 bg-[#5FCB69] hover:bg-[#41ad4c] text-white font-semibold rounded-lg transition-colors duration-200">
+          Ver todas as campanhas
+        </a>
+        @else
+        <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-200">
+          Nenhuma campanha disponível
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          Ainda não há campanhas criadas. Seja o primeiro a criar uma campanha e fazer a diferença!
+        </p>
+        <a href="/campaign" class="inline-block px-6 py-3 bg-[#5FCB69] hover:bg-[#41ad4c] text-white font-semibold rounded-lg transition-colors duration-200">
+          Criar primeira campanha
+        </a>
+        @endif
+      </div>
+    </section>
+    @else
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      @foreach($campaigns as $camp)
+      <article class="rounded-xl overflow-hidden bg-[#f0f0f0] dark:bg-neutral-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
+        <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit block">
+          <div class="flex flex-col h-full">
+            <div class="w-full h-64 overflow-hidden">
+              <img src="{{ asset('storage/' . $camp->Image) }}"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                alt="Imagem da Campanha: {{ $camp->Title }}" />
+            </div>
 
-    <main class="p-5">
-      <section class="container-slide mt-8">
-        <div class="swiper mySwiper mt-4 px-2">
-          <div class="swiper-wrapper">
-            @foreach($campaigns as $camp)
-                <div class="swiper-slide rounded-xl p-4 h-[530px] bg-[#f0f0f0] dark:bg-neutral-800">
-                  <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit">
-                    <div class="flex flex-col text-black dark:text-white">
-                      <div class="w-full h-[18em] overflow-hidden rounded-xl">
-                        <img src="{{ asset('storage/' . $camp->Image) }}" class="w-full h-full object-cover rounded-xl" alt="Imagem da Campanha: {{ $camp->Title }}" />
-                      </div>
-                      <div class="flex flex-col mt-4 space-y-2">
-                        <p class="text-lg font-semibold ml-1">{{$camp->Title}}</p>      
-                        <h6 class="text-sm ml-1 line-clamp-3">
-                            {{$camp->Description}}
-                        </h6>
-                        @if(isset($camp->meta) && is_array($camp->meta) && isset($camp->meta['current']) && isset($camp->meta['target']))
-                            <div class="flex items-center ml-1 mt-2 w-full">
-                              @php
-                                  $current = $camp->meta['current'] ?? 0;
-                                  $target = $camp->meta['target'] ?? 0;
-                                  $progress = ($target > 0) ? round(100 * ($current / $target), 1) : 0;
-                                  $progress = min($progress, 100);
-                              @endphp
-                              <span class="text-sm font-bold mr-2">{{ $progress }}%</span>
-                              <div class="flex-1 bg-gray-300 dark:bg-gray-600 rounded-full h-5">
-                                <div class="bg-green-500 h-5 rounded-full" style="width: {{ $progress }}%;"></div>
-                              </div>
-                            </div>
-                        @endif
-                        <button class="mt-5 top-3 relative ml-1 w-[120px] h-[45px] text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-xl text-sm font-bold">Saiba mais</button>
-                      </div>
-                    </div>
-                  </a>
+            <div class="flex flex-col p-5 flex-grow">
+              <h3 class="text-lg font-bold mb-2 text-black dark:text-white line-clamp-2 min-h-[3.5rem]">
+                {{$camp->Title}}
+              </h3>
+
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 flex-grow">
+                {{$camp->Description}}
+              </p>
+
+              @if(isset($camp->meta) && is_array($camp->meta) && isset($camp->meta['current']) && isset($camp->meta['target']))
+              <div class="mb-4">
+                @php
+                $current = $camp->meta['current'] ?? 0;
+                $target = $camp->meta['target'] ?? 0;
+                $progress = ($target > 0) ? round(100 * ($current / $target), 1) : 0;
+                $progress = min($progress, 100);
+                @endphp
+
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                    {{ $progress }}% alcançado
+                  </span>
+                  <span class="text-xs text-gray-500 dark:text-gray-400">
+                    {{number_format($current, 0, ',', '.')}} / {{number_format($target, 0, ',', '.')}}
+                  </span>
                 </div>
-            @endforeach
+
+                <div class="w-full bg-gray-300 dark:bg-gray-600 rounded-full h-2.5 overflow-hidden">
+                  <div class="bg-gradient-to-r from-[#5FCB69] to-[#41ad4c] h-2.5 rounded-full transition-all duration-500"
+                    style="width: {{ $progress }}%;"></div>
+                </div>
+              </div>
+              @endif
+
+              <button class="w-full py-3 text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-lg text-sm font-bold transition-colors duration-200 mt-auto">
+                Saiba mais
+              </button>
+            </div>
           </div>
-
-          <!-- Paginação -->
-          <div class="swiper-pagination mt-4"></div>
-        </div>
-      </section>
-    </main>
-
-    <!-- SwiperJS JS -->
-    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
-    <script>
-      function calcularSlidesVisiveis() {
-        if (window.innerWidth >= 1200) {
-          return 3;
-        } else if (window.innerWidth >= 992) {
-          return 2;
-        } else if (window.innerWidth >= 768) {
-          return 2;
-        } else {
-          return 1;
-        }
-      }
-
-      let swiper = new Swiper(".mySwiper", {
-        slidesPerView: calcularSlidesVisiveis(),
-        spaceBetween: 20,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: false,
-        initialSlide: 0,
-      });
-
-      window.addEventListener("resize", function () {
-        swiper.params.slidesPerView = calcularSlidesVisiveis();
-        swiper.update();
-      });
-    </script>
+        </a>
+      </article>
+      @endforeach
+    </section>
+    @endif
+  </main>
 </body>
+
 </html>

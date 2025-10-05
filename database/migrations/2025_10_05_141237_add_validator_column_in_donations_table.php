@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('donations', function (Blueprint $table) {
             $table->foreignId('validator_id')
+                ->nullable() 
                 ->constrained('users')
                 ->onDelete('set null');
         });
