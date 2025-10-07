@@ -14,8 +14,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/profile/send-reset-link', [ProfileController::class, 'sendResetLink'])->name('profile.password.send');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/home', function () {$search = request('search');$campaigns = [];return view('home', ['search' => $search,'campaigns' => $campaigns,]);})
-        ->middleware(['auth', 'verified'])->name('home');
+    Route::get('/home', [MainController::class, 'home']) ->middleware(['auth', 'verified'])->name('home');
 
     Route::get('/info', [MainController::class, 'info'])->name('info');
 
