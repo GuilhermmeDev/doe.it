@@ -41,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cpf', [ProfileController::class, 'registerCpf']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
