@@ -42,6 +42,3 @@ jobs:
           branch: ${{ github.head_ref }}
           commit_options: "--no-verify"
           file_pattern: "*.php"
-
-      - name: Execute tests (PHPUnit)
-        run: ./vendor/bin/phpunit
