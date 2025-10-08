@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Campaign;
 use App\Models\CampaignValidatorUser;
 use App\Models\Donation;
 use App\Models\User;
@@ -27,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('auth-donation', function ($user, $campaign, $donation) {
             return $campaign->user_id === $user->id || (
                 CampaignValidatorUser::where('campaign_id', $campaign->id)
-                ->where('user_id', $user->id)
-                ->where('status', 'accepted')
-                ->exists() &&
+                    ->where('user_id', $user->id)
+                    ->where('status', 'accepted')
+                    ->exists() &&
                 Donation::where([['id', $donation->id], ['user_id', '!=', $user->id], ['campaign_id', $campaign->id]])->exists()
             );
         });

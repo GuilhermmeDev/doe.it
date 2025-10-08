@@ -31,10 +31,10 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
     Route::get('/login/google/callback', [GoogleLoginController::class, 'handleGoogleCallback']);
-    
+
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
         ->name('password.reset');
-    
+
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 });
