@@ -11,6 +11,7 @@ class VerifyEmailCustom extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+
     public $url;
 
     public function __construct($user, $url)
@@ -22,10 +23,10 @@ class VerifyEmailCustom extends Mailable
     public function build()
     {
         return $this->subject('Verifique seu endereço de e-mail')
-                    ->view('emails.verify')
-                    ->with([
-                        'user' => $this->user,
-                        'url' => $this->url,
-                    ]);
+            ->view('emails.verify')
+            ->with([
+                'user' => $this->user,
+                'url' => $this->url,
+            ]);
     }
 }
