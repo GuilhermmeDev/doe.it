@@ -14,8 +14,8 @@
 
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex bg-[#2AB036] dark:bg-[#2AB036]">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{ asset('assets/shield.svg') }}" width="347" />
-      <p class="text-white text-center px-10">
+      <img src="{{ asset('assets/shield.svg') }}" class="size-64" />
+      <p class="text-center px-10 font-bold text-sm text-gray-300">
         <span class="text-[#FF5800]">Verifique seu e-mail:</span> Clique no link enviado para confirmar sua conta antes de continuar.
       </p>
     </div>
