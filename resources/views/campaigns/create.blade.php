@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doe.it - Criar Campanha</title>
+  <title>Doeit - Criar Campanha</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="icon" href="{{asset('assets/logo1.svg')}}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
@@ -73,18 +73,36 @@
                  <p class="validation-error">{{ $message }}</p>
             @enderror
           </div>
-          <div>
-            <label for="Image" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Imagem da Campanha:</label>
-            <input type="file" name="Image" id="Image" accept=".jpeg,.png,.jpg,.svg" class="w-full text-sm text-gray-500 dark:text-gray-300 bg-white dark:bg-neutral-900 rounded-lg
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-md file:border-0
-              file:text-sm file:font-semibold
-              file:bg-green-50 file:text-green-700
-              hover:file:bg-green-100 cursor-pointer
-            "
-            value="{{ old('Image') }}"/>
-            @error("Image")
-                <p class="validation-error">{{ $message }}</p>
+          <div class="flex flex-col space-y-2">
+            <label for="Image" class="block text-gray-700 dark:text-gray-200 text-lg font-medium">
+              Imagem da Campanha:
+            </label>
+
+            <label 
+              for="Image"
+              class="flex items-center justify-between w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-neutral-700
+                    bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 cursor-pointer
+                    hover:bg-green-50 dark:hover:bg-neutral-800 transition-all duration-150"
+            >
+              <span id="file-name" class="truncate text-sm">
+                Nenhum arquivo selecionado
+              </span>
+              <span class="hidden sm:inline-flex bg-green-600 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-700">
+                Escolher
+              </span>
+            </label>
+
+            <input
+              type="file"
+              name="Image"
+              id="Image"
+              accept=".jpeg,.png,.jpg,.svg"
+              class="hidden"
+              onchange="document.getElementById('file-name').textContent = this.files.length ? this.files[0].name : 'Nenhum arquivo selecionado';"
+            />
+
+            @error('Image')
+              <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
           </div>
         </div>
