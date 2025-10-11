@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, follow">
-  
+
   <meta name="description" content="Acesse sua conta DoeIT para doar, criar campanhas e acompanhar seu impacto. Já é cadastrado? Faça login de forma rápida e segura.">
 
   <link rel="canonical" href="https://doeit.com.br/login" />
@@ -51,26 +51,29 @@
           </div>
           <div class="relative">
             <label class="font-medium text-gray-900 dark:text-gray-100" for="password">Senha</label>
-            <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
-              <input
-                id="password"
-                type="password"
-                name="password"
-                required
-                class="bg-transparent outline-none border-none"
-                placeholder="Insira sua senha"
-              />
+            <div class="flex flex-col w-full">
+                <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+                    <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    required
+                    class="bg-transparent outline-none border-none"
+                    placeholder="Insira sua senha"
+                    />
+
+                    <img
+                        id="eyeIcon"
+                        src="{{ asset('assets/oculto.svg') }}"
+                        data-visivel-src="{{ asset('assets/visivel.svg') }}"
+                        data-oculto-src="{{ asset('assets/oculto.svg') }}"
+                        alt="Mostrar senha"
+                        class="object-cover size-6 cursor-pointer"
+                        />
+                </div>
               @error('password')
                   <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
               @enderror
-              <img
-                id="eyeIcon"
-                src="{{ asset('assets/oculto.svg') }}"
-                data-visivel-src="{{ asset('assets/visivel.svg') }}"
-                data-oculto-src="{{ asset('assets/oculto.svg') }}"
-                alt="Mostrar senha"
-                class="object-cover size-6 cursor-pointer"
-              />
             </div>
             <a href="{{ route('password.request') }}" class="text-gray-500 dark:text-gray-300 text-sm mt-2 block text-right">Esqueceu sua senha?</a>
           </div>
@@ -82,7 +85,7 @@
             >
               Entrar
             </button>
-            
+
           </div>
 
           <div class="flex justify-center mt-4">

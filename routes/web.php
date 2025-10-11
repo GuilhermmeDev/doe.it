@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'welcome']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/send-reset-link', [ProfileController::class, 'sendResetLink'])->name('profile.password.send');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/home', [MainController::class, 'home'])->name('home');
+
     Route::get('/info', [MainController::class, 'info'])->name('info');
 
     Route::get('/campaign', [CampaignController::class, 'create'])->name('campaign.create');
@@ -41,4 +42,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cpf', [ProfileController::class, 'registerCpf']);
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

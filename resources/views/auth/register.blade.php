@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, follow">
-  
+
   <meta name="description" content="Crie sua conta gratuita no DoeIT em minutos. Junte-se à nossa comunidade para criar campanhas, doar com segurança e fazer a diferença na vida de quem precisa.">
-  
+
   <link rel="canonical" href="https://doeit.com.br/register" />
   <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
   <script defer src="js/cdn.min.js"></script>
@@ -77,23 +77,25 @@
         </div>
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
-          <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
-            <input
-              placeholder="Insira sua senha"
-              id="password"
-              name="password"
-              type="password"
-              required
-              class="bg-transparent outline-none border-none"
-            />
-            <img
-              id="eyeIcon1"
-              src="{{ asset('assets/oculto.svg') }}"
-              data-visivel-src="{{ asset('assets/visivel.svg') }}"
-              data-oculto-src="{{ asset('assets/oculto.svg') }}"
-              alt="Mostrar senha"
-              class="object-cover size-6 cursor-pointer"
-            />
+          <div class="flex flex-col w-full">
+            <div class="flex flex-row w-full mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+                <input
+                placeholder="Insira sua senha"
+                id="password"
+                name="password"
+                type="password"
+                required
+                class="bg-transparent outline-none border-none"
+                />
+                <img
+                id="eyeIcon1"
+                src="{{ asset('assets/oculto.svg') }}"
+                data-visivel-src="{{ asset('assets/visivel.svg') }}"
+                data-oculto-src="{{ asset('assets/oculto.svg') }}"
+                alt="Mostrar senha"
+                class="object-cover size-6 cursor-pointer"
+                />
+            </div>
           @error('password')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
@@ -102,24 +104,26 @@
 
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Confirmar senha</label>
-          <div class="flex flex-row w-full  mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
-            <input
-              placeholder="Confirme sua senha"
-              id="cpassword"
-              name="password_confirmation"
-              type="password"
-              required
-              class="bg-transparent outline-none border-none"
-            />
-            <img
-              id="eyeIcon2"
-              src="{{ asset('assets/oculto.svg') }}"
-              data-visivel-src="{{ asset('assets/visivel.svg') }}"
-              data-oculto-src="{{ asset('assets/oculto.svg') }}"
-              alt="Mostrar senha"
-              class="object-cover size-6 cursor-pointer"
+          <div class="flex flex-col w-full">
+            <div class="flex flex-row w-full mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+                <input
+                placeholder="Confirme sua senha"
+                id="cpassword"
+                name="password_confirmation"
+                type="password"
+                required
+                class="bg-transparent outline-none border-none"
+                />
+                <img
+                id="eyeIcon2"
+                src="{{ asset('assets/oculto.svg') }}"
+                data-visivel-src="{{ asset('assets/visivel.svg') }}"
+                data-oculto-src="{{ asset('assets/oculto.svg') }}"
+                alt="Mostrar senha"
+                class="object-cover size-6 cursor-pointer"
 
-            />
+                />
+            </div>
           @error('password_confirmation')
              <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
           @enderror
