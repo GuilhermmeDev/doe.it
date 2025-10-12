@@ -9,6 +9,9 @@ class MainController extends Controller
 
     public function welcome()
     {
+        if (auth()->check() && auth()->user()->hasVerifiedEmail()) {
+            return redirect('/home');
+        }
         return view('welcome');
     }
 
