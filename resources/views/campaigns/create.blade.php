@@ -110,7 +110,7 @@
           </div>
           <div>
             <label for="Number" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Número:</label>
-            <input type="text" name="Number" id="Number" maxlength="6" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <input type="text" name="Number" id="Number" maxlength="12" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             <p x-show="errors.Number" x-text="errors.Number" class="validation-error-alpine"></p>
           </div>
           <div>
@@ -256,10 +256,10 @@
             if (!value) this.errors[field] = 'O número é obrigatório.';
             // Verifica se não é um número inteiro positivo
             else if (!/^\d+$/.test(value) || parseInt(value) < 1) this.errors[field] = 'O número deve ser um inteiro positivo.';
-            else if (value.length > 6)
+            else if (value.length > 12)
             {
-               this.errors[field] = 'O número deve ter até 6 digitos.';
-               value.slice(0,6);
+               this.errors[field] = 'O número deve ter até 12 digitos.';
+               value.slice(0,12);
             }
             break;
           case 'Data':
