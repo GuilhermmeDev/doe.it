@@ -60,24 +60,24 @@
     @else
     <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       @foreach($campaigns as $camp)
-      <article class="rounded-xl overflow-hidden bg-[#f0f0f0] dark:bg-neutral-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl">
-        <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit block">
-          <div class="flex flex-col h-full">
-            <div class="w-full h-64 overflow-hidden">
-              <img src="{{ asset('storage/' . $camp->Image) }}"
-                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                alt="Imagem da Campanha: {{ $camp->Title }}" />
-            </div>
+      <article class="rounded-xl overflow-hidden bg-[#f0f0f0] dark:bg-neutral-800 transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl flex flex-col">
+        <a href="/campaign/{{$camp->id}}" class="no-underline text-inherit flex flex-col h-full">
+          <div class="w-full h-64 overflow-hidden flex-shrink-0">
+            <img src="{{ asset('storage/' . $camp->Image) }}"
+              class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              alt="Imagem da Campanha: {{ $camp->Title }}" />
+          </div>
 
-            <div class="flex flex-col p-5 flex-grow">
-              <h3 class="text-lg font-bold mb-2 text-black dark:text-white line-clamp-2 min-h-[3.5rem]">
-                {{$camp->Title}}
-              </h3>
+          <div class="flex flex-col p-5 flex-grow">
+            <h3 class="text-lg font-bold mb-2 text-black dark:text-white line-clamp-2 min-h-[3.5rem]">
+              {{$camp->Title}}
+            </h3>
 
-              <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 flex-grow">
-                {{$camp->Description}}
-              </p>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+              {{$camp->Description}}
+            </p>
 
+            <div class="mt-auto">
               @if(isset($camp->meta) && is_array($camp->meta) && isset($camp->meta['current']) && isset($camp->meta['target']))
               <div class="mb-4">
                 @php
@@ -103,7 +103,7 @@
               </div>
               @endif
 
-              <button class="w-full py-3 text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-lg text-sm font-bold transition-colors duration-200 mt-auto">
+              <button class="w-full py-3 text-white bg-[#5FCB69] hover:bg-[#41ad4c] rounded-lg text-sm font-bold transition-colors duration-200">
                 Saiba mais
               </button>
             </div>

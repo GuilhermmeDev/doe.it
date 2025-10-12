@@ -27,7 +27,9 @@
           </div>
 
           <div class="p-6">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">{{$campaign->Title}}</h1>
+            <div class="text-wrap break-words">
+              <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">{{$campaign->Title}}</h1>
+            </div>
 
             <div class="bg-gray-50 dark:bg-neutral-700 rounded-lg p-4 mb-6">
               <label for="share-input" class="block text-xl font-medium text-gray-700 dark:text-gray-300 mb-2">Compartilhe:</label>
