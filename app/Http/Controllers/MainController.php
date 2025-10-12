@@ -8,8 +8,8 @@ class MainController extends Controller
 {
     public function welcome()
     {
-        if (auth()->user() == true) {
-            return MainController::home();
+        if (auth()->check() && auth()->user()->hasVerifiedEmail()) {
+            return redirect('/home');
         }
 
         return view('welcome');
@@ -25,10 +25,5 @@ class MainController extends Controller
         }
 
         return view('home', compact('campaigns', 'search'));
-    }
-
-    public function info()
-    {
-        return view('info');
     }
 }

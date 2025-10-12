@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doação - {{$campaign->Title}}</title>
-    <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
     <script defer src="js/cdn.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

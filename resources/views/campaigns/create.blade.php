@@ -5,47 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doeit - Criar Campanha</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <link rel="icon" href="{{asset('assets/logo1.svg')}}" type="image/x-icon"/>
-  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
   <style>
-    .validation-error {
-      color: red;
-      background-color: #fee2e2;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      margin-top: 0.25rem;
+    /* Estilos para erro de validação (para o Alpine.js) */
+    .validation-error-alpine {
+      color: #dc2626; /* text-red-500 */
+      font-weight: 600;
+      font-size: 0.875rem; /* text-sm */
+      margin-top: 0.25rem; /* mt-1 */
     }
-    
-    .div-wrapper-2 {
-        width: 100%;
-        border-radius: 0.375rem; /* rounded-md */
-        border: 1px solid #D1D5DB; /* border-gray-300 */
-        padding: 0.5rem; /* p-2 */
-        font-size: 0.875rem; /* text-sm */
-        background-color: white; /* Fundo branco para light mode */
+    /* Estilo para inputs inválidos */
+    input.invalid, textarea.invalid, select.invalid {
+      border-color: #ef4444; /* border-red-500 */
     }
-    .div-wrapper-2:focus {
-        outline: 2px solid transparent;
-        outline-offset: 2px;
-        --tw-ring-offset-color: #fff;
-        --tw-ring-color: #34D399; /* ring-green-500 */
-        box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-        border-color: #34D399; /* border-green-500 */
-    }
-    .text-wrapper-4 { /* Para os labels dos novos selects */
-        display: block;
-        color: #4B5563; /* text-gray-600 */
-        font-weight: 500; /* font-medium */
-        margin-bottom: 0.25rem; /* mb-1 */
+    input.invalid:focus, textarea.invalid:focus, select.invalid:focus {
+      --tw-ring-color: #ef4444; /* ring-red-500 */
+      border-color: #ef4444; /* border-red-500 */
     }
   </style>
 </head>
 <body class="bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100 overflow-x-hidden">
 
   @include('layouts.secondary_navbar')
-  <main class="h-full flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-20 lg:py-8 max-w-7xl mx-auto">
 
+  <main class="h-full flex flex-col lg:flex-row items-center justify-center gap-10 px-8 py-20 lg:py-8 max-w-7xl mx-auto">
     <div class="w-full lg:w-1/2 text-center lg:text-left">
       <h2 class="text-4xl lg:text-5xl font-bold leading-tight text-gray-800 dark:text-gray-100">
         Criando sua campanha no <span class="text-[#2ab036]">doeit</span>
@@ -56,253 +39,286 @@
     </div>
 
     <div class="w-full lg:w-1/2 max-w-md bg-[#2ab036] rounded-xl p-6 shadow-xl border border-[#ff5800] border-opacity-40">
-      <form id="multiStepForm" action="/campaign" method="POST" enctype="multipart/form-data" class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+      
+      <form
+        id="multiStepForm"
+        x-data="formHandler()"
+        x-init="init()" action="/campaign"
+        method="POST"
+        enctype="multipart/form-data"
+        class="space-y-4 text-sm text-gray-700 dark:text-gray-300"
+        @submit.prevent="submitForm"
+      >
         @csrf
-        <div id="step1" class="step flex flex-col gap-4">
+
+        <div x-show="currentStep === 1" class="step flex flex-col gap-4">
           <div>
             <label for="Title" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Título:</label>
-            <input type="text" name="Title" id="Title" value="{{ old('Title') }}" placeholder="Escreva o título da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
-            @error("Title")
-                <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="text" name="Title" id="Title"
+                   maxlength="50"
+                   x-model="formData.Title"
+                   @blur="validateField('Title')"
+                   :class="{ 'invalid': errors.Title }"
+                   placeholder="Escreva o título da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <p x-show="errors.Title" x-text="errors.Title" class="validation-error-alpine"></p>
           </div>
+
           <div>
             <label for="Description" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Descrição:</label>
-            <textarea name="Description" id="Description" placeholder="Escreva a descrição detalhada da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 h-24 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>{{ old('Description') }}</textarea>
-            @error("Description")
-                 <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <textarea name="Description" id="Description"
+                      x-model="formData.Description"
+                      @blur="validateField('Description')"
+                      :class="{ 'invalid': errors.Description }"
+                      placeholder="Escreva a descrição detalhada da sua campanha" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 h-24 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required></textarea>
+            <p x-show="errors.Description" x-text="errors.Description" class="validation-error-alpine"></p>
           </div>
+
           <div class="flex flex-col space-y-2">
-            <label for="Image" class="block text-gray-700 dark:text-gray-200 text-lg font-medium">
-              Imagem da Campanha:
+            <label for="Image" class="block text-gray-700 dark:text-gray-200 text-lg font-medium">Imagem da Campanha:</label>
+            <label for="Image" class="flex items-center justify-between w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-green-50 dark:hover:bg-neutral-800 transition-all duration-150" :class="{ 'invalid': errors.Image }">
+              <span x-text="fileName" class="truncate text-sm">Nenhum arquivo selecionado</span>
+              <span class="hidden sm:inline-flex bg-green-600 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-700">Escolher</span>
             </label>
-
-            <label 
-              for="Image"
-              class="flex items-center justify-between w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-neutral-700
-                    bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 cursor-pointer
-                    hover:bg-green-50 dark:hover:bg-neutral-800 transition-all duration-150"
-            >
-              <span id="file-name" class="truncate text-sm">
-                Nenhum arquivo selecionado
-              </span>
-              <span class="hidden sm:inline-flex bg-green-600 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-green-700">
-                Escolher
-              </span>
-            </label>
-
-            <input
-              type="file"
-              name="Image"
-              id="Image"
-              accept=".jpeg,.png,.jpg,.svg"
-              class="hidden"
-              onchange="document.getElementById('file-name').textContent = this.files.length ? this.files[0].name : 'Nenhum arquivo selecionado';"
-            />
-
-            @error('Image')
-              <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
+            <input type="file" name="Image" id="Image" accept=".jpeg,.png,.jpg,.svg" class="hidden" @change="handleFileChange($event); validateField('Image')"/>
+            <p x-show="errors.Image" x-text="errors.Image" class="validation-error-alpine"></p>
           </div>
         </div>
 
-        <div id="step2" class="step hidden flex flex-col gap-4">
-          {{-- CAMPOS DE ESTADO E CIDADE --}}
-          <div class="frame-wrapper-2">
-            <div class="div-6">
-                {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
-                <label for="State" class="block font-medium text-lg mb-1 text-gray-600 dark:text-gray-300">Estado:</label>
-                {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
-                <select id="State" name="State" required
-                        class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
-                               bg-white text-gray-800
-                               dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
-                    <option value="">Selecione o Estado</option>
-                    <option value="Ceará" {{ old('State') == 'Ceará' ? 'selected' : '' }}>Ceará</option>
-                    <option value="Rio Grande do Norte" {{ old('State') == 'Rio Grande do Norte' ? 'selected' : '' }}>Rio Grande do Norte</option>
-                </select>
-                @error('State')
-                    <p class="validation-error">{{ $message }}</p>
-                @enderror
-            </div>
+        <div x-show="currentStep === 2" class="step flex flex-col gap-4">
+          <div>
+            <label for="State" class="block font-medium text-lg mb-1 text-gray-600 dark:text-gray-300">Estado:</label>
+            <select id="State" name="State" required x-model="formData.State" @change="validateField('State')" :class="{ 'invalid': errors.State }" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white text-gray-800 dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
+              <option value="">Selecione o Estado</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+            </select>
+            <p x-show="errors.State" x-text="errors.State" class="validation-error-alpine"></p>
           </div>
-          <div class="frame-wrapper-3">
-            <div class="div-6">
-                {{-- Ajuste aqui: Remova a classe text-wrapper-4 e adicione as classes Tailwind diretamente --}}
-                <label for="City" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Cidade:</label>
-                {{-- Ajuste aqui: Remova a classe div-wrapper-2 e adicione as classes Tailwind diretamente --}}
-                <select name="City" id="City" required
-                        class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
-                               bg-white text-gray-800
-                               dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
-                    <option value="">Selecione a Cidade</option>
-                    <option value="Pereiro" {{ old('City') == 'Pereiro' ? 'selected' : '' }}>Pereiro</option>
-                    <option value="São Miguel" {{ old('City') == 'São Miguel' ? 'selected' : '' }}>São Miguel</option>
-                </select>
-                @error('City')
-                    <p class="validation-error">{{ $message }}</p>
-                @enderror
-            </div>
+          <div>
+            <label for="City" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Cidade:</label>
+            <select name="City" id="City" required x-model="formData.City" @change="validateField('City')" :class="{ 'invalid': errors.City }" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white text-gray-800 dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
+              <option value="">Selecione a Cidade</option>
+              <option value="Pereiro">Pereiro</option>
+              <option value="São Miguel">São Miguel</option>
+            </select>
+            <p x-show="errors.City" x-text="errors.City" class="validation-error-alpine"></p>
           </div>
-
           <div>
             <label for="Street" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Rua/Avenida:</label>
-            <input type="text" name="Street" id="Street" value="{{ old('Street') }}" placeholder="Ex: Av. Brasil" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
-            @error("Street")
-                 <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="text" name="Street" id="Street" x-model="formData.Street" @blur="validateField('Street')" :class="{ 'invalid': errors.Street }" placeholder="Ex: Av. Brasil" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <p x-show="errors.Street" x-text="errors.Street" class="validation-error-alpine"></p>
           </div>
           <div>
             <label for="Number" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Número:</label>
-            <input type="text" name="Number" id="Number" maxlength="12" value="{{ old('Number') }}" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
-            @error("Number")
-                <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="text" name="Number" id="Number" maxlength="12" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <p x-show="errors.Number" x-text="errors.Number" class="validation-error-alpine"></p>
           </div>
           <div>
             <label for="Data" class="block font-medium text-lg mb-1 text-gray-600 dark:text-gray-300">Data da Coleta:</label>
-            <input type="date" name="Data" id="Data" value="{{ old('Data') }}" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
-            @error("Data")
-                <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="date" name="Data" id="Data" x-model="formData.Data" @change="validateField('Data')" :class="{ 'invalid': errors.Data }" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <p x-show="errors.Data" x-text="errors.Data" class="validation-error-alpine"></p>
           </div>
           <div>
             <label for="Hour" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Hora da Coleta:</label>
-            <input type="time" name="Hour" id="Hour" value="{{ old('Hour') }}" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
-            @error("Hour")
-                <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="time" name="Hour" id="Hour" x-model="formData.Hour" @change="validateField('Hour')" :class="{ 'invalid': errors.Hour }" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <p x-show="errors.Hour" x-text="errors.Hour" class="validation-error-alpine"></p>
           </div>
         </div>
 
-        <div id="step3" class="step hidden flex flex-col gap-4">
+        <div x-show="currentStep === 3" class="step flex flex-col gap-4">
           <div>
             <label for="Type" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Tipo da Arrecadação:</label>
-            <select name="Type" id="tipo_arrecadacao"
-                    class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500
-                           bg-white text-gray-800
-                           dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
-                <option value="" {{ old('Type') == '' ? 'selected' : '' }} disabled>Selecione o tipo</option>
-                <option value="food" {{ old('Type') == 'food' ? 'selected' : '' }}>Comida</option>
-                <option value="clothes" {{ old('Type') == 'clothes' ? 'selected' : '' }}>Roupa</option>
+            <select name="Type" id="tipo_arrecadacao" x-model="formData.Type" @change="validateField('Type')" :class="{ 'invalid': errors.Type }" class="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white text-gray-800 dark:bg-neutral-900 dark:border-neutral-600 dark:text-gray-100">
+              <option value="" disabled>Selecione o tipo</option>
+              <option value="food">Comida</option>
+              <option value="clothes">Roupa</option>
             </select>
-            @error("Type")
-                 <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <p x-show="errors.Type" x-text="errors.Type" class="validation-error-alpine"></p>
           </div>
 
           <div>
             <label for="meta" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Meta de Arrecadação (em kg ou unidades):</label>
-            <input type="number" name="meta" id="meta" value="{{ old('meta') }}" placeholder="Ex: 100" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required min="1">
-             @error("meta")
-                 <p class="validation-error">{{ $message }}</p>
-            @enderror
+            <input type="number" name="meta" id="meta" x-model="formData.meta" @blur="validateField('meta')" :class="{ 'invalid': errors.meta }" placeholder="Ex: 100" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required min="1">
+            <p x-show="errors.meta" x-text="errors.meta" class="validation-error-alpine"></p>
           </div>
         </div>
 
         <div class="pt-4 flex justify-between">
-          <button type="button" id="prevBtn"
-            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hidden
-                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+          <button type="button" x-show="currentStep > 1" @click="prevStep"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
             Voltar
           </button>
-          <button type="button" id="nextBtn"
-            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium
-                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+          
+          <button type="button" x-show="currentStep < 3" @click="nextStep" :disabled="!isStepValid()"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed ml-auto">
             Próximo
           </button>
-          <button type="submit" id="submitBtn"
-            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hidden
-                   hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
+          
+          <button type="submit" x-show="currentStep === 3" :disabled="!isStepValid()"
+            class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed ml-auto">
             Criar Campanha
           </button>
         </div>
       </form>
     </div>
   </main>
-
-  {{-- Script JavaScript para a lógica de múltiplos passos --}}
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const steps = document.querySelectorAll('.step');
-      const nextBtn = document.getElementById('nextBtn');
-      const prevBtn = document.getElementById('prevBtn');
-      const submitBtn = document.getElementById('submitBtn');
-      let currentStep = 0;
+  function formHandler() {
+    return {
+      currentStep: 1,
+      fileName: 'Nenhum arquivo selecionado',
+      formData: {
+        Title: '{{ old('Title', '') }}',
+        Description: '{{ old('Description', '') }}',
+        Image: null,
+        State: '{{ old('State', '') }}',
+        City: '{{ old('City', '') }}',
+        Street: '{{ old('Street', '') }}',
+        Number: '{{ old('Number', '') }}',
+        Data: '{{ old('Data', '') }}',
+        Hour: '{{ old('Hour', '') }}',
+        Type: '{{ old('Type', '') }}',
+        meta: '{{ old('meta', '') }}',
+      },
+      errors: {},
 
-      function updateButtonVisibility() {
-        steps.forEach((step, index) => {
-          step.classList.toggle('hidden', index !== currentStep);
-        });
-
-        if (prevBtn) prevBtn.classList.toggle('hidden', currentStep === 0);
-        if (nextBtn) nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
-        if (submitBtn) submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-          console.log('Botão Próximo clicado! Etapa atual:', currentStep);
-          // Adicione validação aqui se desejar que os campos sejam preenchidos antes de avançar
-          // Exemplo simples de validação (pode ser expandido):
-          let canAdvance = true;
-          const currentStepFields = steps[currentStep].querySelectorAll('input[required], textarea[required], select[required]');
-          currentStepFields.forEach(field => {
-              if (!field.value.trim()) {
-                  canAdvance = false;
-                  field.reportValidity(); // Mostra a mensagem de erro do navegador para campos obrigatórios
-              }
-          });
-
-          if (canAdvance && currentStep < steps.length - 1) {
-            currentStep++;
-            updateButtonVisibility();
-          } else if (!canAdvance) {
-              alert('Por favor, preencha todos os campos obrigatórios nesta etapa.'); // Mensagem de alerta mais amigável
+      // MODIFICAÇÃO: Adicione a função init() aqui
+      init() {
+        // Observa mudanças no campo 'State'
+        this.$watch('formData.State', (newState) => {
+          if (newState === 'Ceará' && this.formData.City !== 'Pereiro') {
+            this.formData.City = 'Pereiro';
+            this.validateField('City'); // Valida o campo Cidade após a mudança
+          } else if (newState === 'Rio Grande do Norte' && this.formData.City !== 'São Miguel') {
+            this.formData.City = 'São Miguel';
+            this.validateField('City');
           }
         });
-      }
 
-      if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-          console.log('Botão Voltar clicado! Etapa atual:', currentStep);
-          if (currentStep > 0) {
-            currentStep--;
-            updateButtonVisibility();
+        // Observa mudanças no campo 'City'
+        this.$watch('formData.City', (newCity) => {
+          if (newCity === 'Pereiro' && this.formData.State !== 'Ceará') {
+            this.formData.State = 'Ceará';
+            this.validateField('State'); // Valida o campo Estado após a mudança
+          } else if (newCity === 'São Miguel' && this.formData.State !== 'Rio Grande do Norte') {
+            this.formData.State = 'Rio Grande do Norte';
+            this.validateField('State');
           }
         });
+      },
+
+      // Lida com a mudança do arquivo de imagem
+      handleFileChange(event) {
+        if (event.target.files.length > 0) {
+          this.formData.Image = event.target.files[0];
+          this.fileName = this.formData.Image.name;
+        } else {
+          this.formData.Image = null;
+          this.fileName = 'Nenhum arquivo selecionado';
+        }
+      },
+      
+      // Valida um campo específico
+      validateField(field) {
+        // ... (resto da função de validação continua igual)
+        this.errors[field] = ''; // Limpa erro anterior
+        const value = this.formData[field];
+
+        // Replicando as regras do Laravel Request
+        switch (field) {
+          case 'Title':
+            if (!value) this.errors[field] = 'O título é obrigatório.';
+            else if (value.length > 50) this.errors[field] = 'O título não pode exceder 50 caracteres.';
+            break;
+          case 'Description':
+            if (!value) this.errors[field] = 'A descrição é obrigatória.';
+            else if (value.length > 1000) this.errors[field] = 'A descrição não pode exceder 1000 caracteres.';
+            break;
+          case 'Image':
+            if (!value) {
+                this.errors[field] = 'A imagem é obrigatória.';
+            } else {
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/svg+xml'];
+                const maxSize = 15 * 1024 * 1024; // 15MB
+                if (!allowedTypes.includes(value.type)) this.errors[field] = 'A imagem deve ser jpeg, png, jpg ou svg.';
+                if (value.size > maxSize) this.errors[field] = 'A imagem não pode exceder 15MB.';
+            }
+            break;
+          case 'State':
+          case 'City':
+          case 'Street':
+          case 'Hour':
+          case 'Type':
+            if (!value) this.errors[field] = 'Este campo é obrigatório.';
+            break;
+          case 'Number':
+            if (!value) this.errors[field] = 'O número é obrigatório.';
+            // Verifica se não é um número inteiro positivo
+            else if (!/^\d+$/.test(value) || parseInt(value) < 1) this.errors[field] = 'O número deve ser um inteiro positivo.';
+            else if (value.length > 12)
+            {
+               this.errors[field] = 'O número deve ter até 12 digitos.';
+               value.slice(0,12);
+            }
+            break;
+          case 'Data':
+            if (!value) {
+              this.errors[field] = 'A data é obrigatória.';
+            } else {
+              const today = new Date();
+              const selectedDate = new Date(value + 'T00:00:00'); // Adiciona tempo para evitar problemas de fuso horário
+              today.setHours(0, 0, 0, 0); // Zera a hora do dia atual para comparar apenas a data
+              if (selectedDate <= today) this.errors[field] = 'A data deve ser futura.';
+            }
+            break;
+          case 'meta':
+            if (!value) this.errors[field] = 'A meta é obrigatória.';
+            else if (parseInt(value) < 1) this.errors[field] = 'A meta deve ser pelo menos 1.';
+            else if (parseInt(value) > 500)
+            {
+              this.errors[field] = 'A meta não pode exceder 500.';
+            }
+            break;
+        }
+      },
+
+      // Verifica se a etapa atual é válida
+      isStepValid() {
+        // ... (resto da função continua igual)
+        let fieldsToValidate = [];
+        if (this.currentStep === 1) fieldsToValidate = ['Title', 'Description', 'Image'];
+        if (this.currentStep === 2) fieldsToValidate = ['State', 'City', 'Street', 'Number', 'Data', 'Hour'];
+        if (this.currentStep === 3) fieldsToValidate = ['Type', 'meta'];
+
+        fieldsToValidate.forEach(field => this.validateField(field));
+        
+        return fieldsToValidate.every(field => !this.errors[field]);
+      },
+
+      // Navega para a próxima etapa
+      nextStep() {
+        // ... (resto da função continua igual)
+        if (this.isStepValid()) {
+          this.currentStep++;
+        }
+      },
+
+      // Volta para a etapa anterior
+      prevStep() {
+        // ... (resto da função continua igual)
+        this.currentStep--;
+      },
+
+      // Submete o formulário
+      submitForm() {
+        // ... (resto da função continua igual)
+        if (this.isStepValid()) {
+            document.getElementById('multiStepForm').submit();
+        }
       }
-
-      // Inicializa a visibilidade dos botões e passos quando a página carrega
-      updateButtonVisibility();
-
-      // Lógica de interdependência Cidade/Estado com jQuery
-      // Certifique-se de que os selects existem no HTML antes de tentar acessá-los.
-      if (typeof $ !== 'undefined') { // Garante que jQuery está carregado
-          $(document).ready(function() {
-              $('#City').change(function() {
-                  if ($(this).val() == "São Miguel") {
-                      $('#State').val('Rio Grande do Norte');
-                  } else if ($(this).val() == "Pereiro") {
-                      $('#State').val('Ceará');
-                  }
-              });
-
-              $('#State').change(function() {
-                  if ($(this).val() == "Rio Grande do Norte") {
-                      $('#City').val('São Miguel');
-                  } else if ($(this).val() == "Ceará") {
-                      $('#City').val('Pereiro');
-                  }
-              });
-          });
-      } else {
-          console.warn('jQuery não está carregado. A lógica de cidade/estado pode não funcionar.');
-      }
-    });
-  </script>
+    }
+  }
+</script>
 </body>
 </html>

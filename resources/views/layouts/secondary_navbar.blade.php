@@ -9,7 +9,7 @@
       </div>
 
       <!-- Barra de pesquisa (fora do menu, sempre visível na home) -->
-      @if(request()->path() == 'home' || (auth()->check() == true && request()->path() == '/'))
+      @if(request()->path() == 'home' && auth()->check() == true)
         <form action="/home" method="get" 
         class="flex-1 min-w-0 max-w-lg mx-4">
           <input
@@ -31,7 +31,7 @@
           Criar Campanha
         </a>
 
-        @if(auth()->check() && (!isset($hideUserProfile) || !$hideUserProfile))
+        @if((auth()->check() && auth()->user()->hasVerifiedEmail()) && (!isset($hideUserProfile) || !$hideUserProfile))
           <!-- perfil dropdown (desktop) -->
           <div x-data="{ open: false }" @click.away="open = false" class="relative">
             <button @click="open = !open" class="p-2 border-gray-600 border-solid border-2 rounded-lg text-gray-500 dark:text-white flex items-center space-x-2 cursor-pointer text-md">
@@ -88,7 +88,7 @@
             Criar Campanha
           </a>
 
-          @if(auth()->check() && (!isset($hideUserProfile) || !$hideUserProfile))
+          @if((auth()->check() && auth()->user()->hasVerifiedEmail()) && (!isset($hideUserProfile) || !$hideUserProfile))
             <a href="/profile" class="block px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md">Editar Perfil</a>
             <a href="/history" class="block px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-neutral-700 rounded-md">Histórico</a>
             <hr class="mx-6 border-white/20">

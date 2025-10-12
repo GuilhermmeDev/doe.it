@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Doações</title>
-    <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white dark:bg-neutral-900 text-black dark:text-white min-h-screen overflow-x-hidden">

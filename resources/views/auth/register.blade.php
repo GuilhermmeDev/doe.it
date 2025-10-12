@@ -8,7 +8,7 @@
   <meta name="description" content="Crie sua conta gratuita no DoeIT em minutos. Junte-se à nossa comunidade para criar campanhas, doar com segurança e fazer a diferença na vida de quem precisa.">
 
   <link rel="canonical" href="https://doeit.com.br/register" />
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <script defer src="js/cdn.min.js"></script>
   <title>Registro - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,7 +30,7 @@
 
   <section class="relative flex-[3] hidden items-center justify-center h-screen lg:flex" style="background-color: #2AB036;">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{asset('assets/maodoação.svg')}}" width="347" />
+      <img src="{{asset('assets/maodoação.svg')}}" class="size-64" />
       <p class="text-gray-300 text-center px-10 font-bold">
         “No <span style="color: #FF5800;">Doeit</span>, cada doação é um ato de amor que pode transformar vidas.”
         Junte-se a nós e faça a diferença!

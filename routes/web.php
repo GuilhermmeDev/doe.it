@@ -16,8 +16,6 @@ Route::middleware('auth', 'verified')->group(function () {
 
     Route::get('/home', [MainController::class, 'home'])->name('home');
 
-    Route::get('/info', [MainController::class, 'info'])->name('info');
-
     Route::get('/campaign', [CampaignController::class, 'create'])->name('campaign.create');
     Route::get('/campaign/{id}', [CampaignController::class, 'show'])->name('campaign.show');
     Route::post('/campaign', [CampaignController::class, 'store']);

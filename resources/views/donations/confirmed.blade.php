@@ -6,6 +6,7 @@
   <title>Agradecimento/sucesso</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
 </head>
 
 <body class="bg-white dark:bg-[#1e1e21] font-[Poppins] text-gray-900 dark:text-gray-100 transition-colors duration-500">

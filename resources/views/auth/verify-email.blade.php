@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script defer src="js/cdn.min.js"></script>
@@ -14,7 +14,7 @@
 
   <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex bg-[#2AB036] dark:bg-[#2AB036]">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{ asset('assets/shield.svg') }}" width="347" />
+      <img src="{{ asset('assets/shield.svg') }}" class="size-64" />
       <p class="text-white text-center px-10">
         <span class="text-[#FF5800]">Verifique seu e-mail:</span> Clique no link enviado para confirmar sua conta antes de continuar.
       </p>
