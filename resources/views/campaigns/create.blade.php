@@ -43,7 +43,7 @@
       <form
         id="multiStepForm"
         x-data="formHandler()"
-        action="/campaign"
+        x-init="init()" action="/campaign"
         method="POST"
         enctype="multipart/form-data"
         class="space-y-4 text-sm text-gray-700 dark:text-gray-300"
@@ -55,6 +55,7 @@
           <div>
             <label for="Title" class="block text-gray-600 dark:text-gray-300 text-lg font-medium mb-1">Título:</label>
             <input type="text" name="Title" id="Title"
+                   maxlength="50"
                    x-model="formData.Title"
                    @blur="validateField('Title')"
                    :class="{ 'invalid': errors.Title }"
@@ -109,7 +110,7 @@
           </div>
           <div>
             <label for="Number" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Número:</label>
-            <input type="text" name="Number" id="Number" maxlength="12" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <input type="text" name="Number" id="Number" maxlength="6" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
             <p x-show="errors.Number" x-text="errors.Number" class="validation-error-alpine"></p>
           </div>
           <div>
@@ -163,126 +164,161 @@
   </main>
   
   <script>
-    function formHandler() {
-      return {
-        currentStep: 1,
-        fileName: 'Nenhum arquivo selecionado',
-        formData: {
-          Title: '{{ old('Title', '') }}',
-          Description: '{{ old('Description', '') }}',
-          Image: null,
-          State: '{{ old('State', '') }}',
-          City: '{{ old('City', '') }}',
-          Street: '{{ old('Street', '') }}',
-          Number: '{{ old('Number', '') }}',
-          Data: '{{ old('Data', '') }}',
-          Hour: '{{ old('Hour', '') }}',
-          Type: '{{ old('Type', '') }}',
-          meta: '{{ old('meta', '') }}',
-        },
-        errors: {},
+  function formHandler() {
+    return {
+      currentStep: 1,
+      fileName: 'Nenhum arquivo selecionado',
+      formData: {
+        Title: '{{ old('Title', '') }}',
+        Description: '{{ old('Description', '') }}',
+        Image: null,
+        State: '{{ old('State', '') }}',
+        City: '{{ old('City', '') }}',
+        Street: '{{ old('Street', '') }}',
+        Number: '{{ old('Number', '') }}',
+        Data: '{{ old('Data', '') }}',
+        Hour: '{{ old('Hour', '') }}',
+        Type: '{{ old('Type', '') }}',
+        meta: '{{ old('meta', '') }}',
+      },
+      errors: {},
 
-        // Lida com a mudança do arquivo de imagem
-        handleFileChange(event) {
-          if (event.target.files.length > 0) {
-            this.formData.Image = event.target.files[0];
-            this.fileName = this.formData.Image.name;
-          } else {
-            this.formData.Image = null;
-            this.fileName = 'Nenhum arquivo selecionado';
+      // MODIFICAÇÃO: Adicione a função init() aqui
+      init() {
+        // Observa mudanças no campo 'State'
+        this.$watch('formData.State', (newState) => {
+          if (newState === 'Ceará' && this.formData.City !== 'Pereiro') {
+            this.formData.City = 'Pereiro';
+            this.validateField('City'); // Valida o campo Cidade após a mudança
+          } else if (newState === 'Rio Grande do Norte' && this.formData.City !== 'São Miguel') {
+            this.formData.City = 'São Miguel';
+            this.validateField('City');
           }
-        },
-        
-        // Valida um campo específico
-        validateField(field) {
-          this.errors[field] = ''; // Limpa erro anterior
-          const value = this.formData[field];
+        });
 
-          // Replicando as regras do Laravel Request
-          switch (field) {
-            case 'Title':
-              if (!value) this.errors[field] = 'O título é obrigatório.';
-              else if (value.length > 50) this.errors[field] = 'O título não pode exceder 50 caracteres.';
-              break;
-            case 'Description':
-              if (!value) this.errors[field] = 'A descrição é obrigatória.';
-              else if (value.length > 1000) this.errors[field] = 'A descrição não pode exceder 1000 caracteres.';
-              break;
-            case 'Image':
-              if (!value) {
-                  this.errors[field] = 'A imagem é obrigatória.';
-              } else {
-                  const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/svg+xml'];
-                  const maxSize = 15 * 1024 * 1024; // 15MB
-                  if (!allowedTypes.includes(value.type)) this.errors[field] = 'A imagem deve ser jpeg, png, jpg ou svg.';
-                  if (value.size > maxSize) this.errors[field] = 'A imagem não pode exceder 15MB.';
-              }
-              break;
-            case 'State':
-            case 'City':
-            case 'Street':
-            case 'Hour':
-            case 'Type':
-              if (!value) this.errors[field] = 'Este campo é obrigatório.';
-              break;
-            case 'Number':
-              if (!value) this.errors[field] = 'O número é obrigatório.';
-              // Verifica se não é um número inteiro positivo
-              else if (!/^\d+$/.test(value) || parseInt(value) < 1) this.errors[field] = 'O número deve ser um inteiro positivo.';
-              break;
-            case 'Data':
-              if (!value) {
-                this.errors[field] = 'A data é obrigatória.';
-              } else {
-                const today = new Date();
-                const selectedDate = new Date(value + 'T00:00:00'); // Adiciona tempo para evitar problemas de fuso horário
-                today.setHours(0, 0, 0, 0); // Zera a hora do dia atual para comparar apenas a data
-                if (selectedDate <= today) this.errors[field] = 'A data deve ser futura.';
-              }
-              break;
-            case 'meta':
-              if (!value) this.errors[field] = 'A meta é obrigatória.';
-              else if (parseInt(value) < 1) this.errors[field] = 'A meta deve ser pelo menos 1.';
-              else if (parseInt(value) > 500) this.errors[field] = 'A meta não pode exceder 500.';
-              break;
+        // Observa mudanças no campo 'City'
+        this.$watch('formData.City', (newCity) => {
+          if (newCity === 'Pereiro' && this.formData.State !== 'Ceará') {
+            this.formData.State = 'Ceará';
+            this.validateField('State'); // Valida o campo Estado após a mudança
+          } else if (newCity === 'São Miguel' && this.formData.State !== 'Rio Grande do Norte') {
+            this.formData.State = 'Rio Grande do Norte';
+            this.validateField('State');
           }
-        },
+        });
+      },
 
-        // Verifica se a etapa atual é válida
-        isStepValid() {
-          let fieldsToValidate = [];
-          if (this.currentStep === 1) fieldsToValidate = ['Title', 'Description', 'Image'];
-          if (this.currentStep === 2) fieldsToValidate = ['State', 'City', 'Street', 'Number', 'Data', 'Hour'];
-          if (this.currentStep === 3) fieldsToValidate = ['Type', 'meta'];
+      // Lida com a mudança do arquivo de imagem
+      handleFileChange(event) {
+        if (event.target.files.length > 0) {
+          this.formData.Image = event.target.files[0];
+          this.fileName = this.formData.Image.name;
+        } else {
+          this.formData.Image = null;
+          this.fileName = 'Nenhum arquivo selecionado';
+        }
+      },
+      
+      // Valida um campo específico
+      validateField(field) {
+        // ... (resto da função de validação continua igual)
+        this.errors[field] = ''; // Limpa erro anterior
+        const value = this.formData[field];
 
-          // Roda a validação para todos os campos da etapa
-          fieldsToValidate.forEach(field => this.validateField(field));
-          
-          // Verifica se há algum erro nos campos da etapa
-          return fieldsToValidate.every(field => !this.errors[field]);
-        },
-
-        // Navega para a próxima etapa
-        nextStep() {
-          if (this.isStepValid()) {
-            this.currentStep++;
-          }
-        },
-
-        // Volta para a etapa anterior
-        prevStep() {
-          this.currentStep--;
-        },
-
-        // Submete o formulário
-        submitForm() {
-            if (this.isStepValid()) {
-                // Se tudo estiver válido, submete o formulário de verdade
-                document.getElementById('multiStepForm').submit();
+        // Replicando as regras do Laravel Request
+        switch (field) {
+          case 'Title':
+            if (!value) this.errors[field] = 'O título é obrigatório.';
+            else if (value.length > 50) this.errors[field] = 'O título não pode exceder 50 caracteres.';
+            break;
+          case 'Description':
+            if (!value) this.errors[field] = 'A descrição é obrigatória.';
+            else if (value.length > 1000) this.errors[field] = 'A descrição não pode exceder 1000 caracteres.';
+            break;
+          case 'Image':
+            if (!value) {
+                this.errors[field] = 'A imagem é obrigatória.';
+            } else {
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/svg+xml'];
+                const maxSize = 15 * 1024 * 1024; // 15MB
+                if (!allowedTypes.includes(value.type)) this.errors[field] = 'A imagem deve ser jpeg, png, jpg ou svg.';
+                if (value.size > maxSize) this.errors[field] = 'A imagem não pode exceder 15MB.';
             }
+            break;
+          case 'State':
+          case 'City':
+          case 'Street':
+          case 'Hour':
+          case 'Type':
+            if (!value) this.errors[field] = 'Este campo é obrigatório.';
+            break;
+          case 'Number':
+            if (!value) this.errors[field] = 'O número é obrigatório.';
+            // Verifica se não é um número inteiro positivo
+            else if (!/^\d+$/.test(value) || parseInt(value) < 1) this.errors[field] = 'O número deve ser um inteiro positivo.';
+            else if (value.length > 6)
+            {
+               this.errors[field] = 'O número deve ter até 6 digitos.';
+               value.slice(0,6);
+            }
+            break;
+          case 'Data':
+            if (!value) {
+              this.errors[field] = 'A data é obrigatória.';
+            } else {
+              const today = new Date();
+              const selectedDate = new Date(value + 'T00:00:00'); // Adiciona tempo para evitar problemas de fuso horário
+              today.setHours(0, 0, 0, 0); // Zera a hora do dia atual para comparar apenas a data
+              if (selectedDate <= today) this.errors[field] = 'A data deve ser futura.';
+            }
+            break;
+          case 'meta':
+            if (!value) this.errors[field] = 'A meta é obrigatória.';
+            else if (parseInt(value) < 1) this.errors[field] = 'A meta deve ser pelo menos 1.';
+            else if (parseInt(value) > 500)
+            {
+              this.errors[field] = 'A meta não pode exceder 500.';
+            }
+            break;
+        }
+      },
+
+      // Verifica se a etapa atual é válida
+      isStepValid() {
+        // ... (resto da função continua igual)
+        let fieldsToValidate = [];
+        if (this.currentStep === 1) fieldsToValidate = ['Title', 'Description', 'Image'];
+        if (this.currentStep === 2) fieldsToValidate = ['State', 'City', 'Street', 'Number', 'Data', 'Hour'];
+        if (this.currentStep === 3) fieldsToValidate = ['Type', 'meta'];
+
+        fieldsToValidate.forEach(field => this.validateField(field));
+        
+        return fieldsToValidate.every(field => !this.errors[field]);
+      },
+
+      // Navega para a próxima etapa
+      nextStep() {
+        // ... (resto da função continua igual)
+        if (this.isStepValid()) {
+          this.currentStep++;
+        }
+      },
+
+      // Volta para a etapa anterior
+      prevStep() {
+        // ... (resto da função continua igual)
+        this.currentStep--;
+      },
+
+      // Submete o formulário
+      submitForm() {
+        // ... (resto da função continua igual)
+        if (this.isStepValid()) {
+            document.getElementById('multiStepForm').submit();
         }
       }
     }
-  </script>
+  }
+</script>
 </body>
 </html>

@@ -12,10 +12,10 @@
 <main class="w-full flex">
 
   <!-- Lado esquerdo -->
-  <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex bg-[#2AB036] dark:bg-green-800">
+  <div class="relative flex-[3] hidden items-center justify-center h-screen lg:flex bg-[#2AB036]">
     <div class="relative w-full max-w-md flex flex-col items-center space-y-6">
-      <img src="{{asset('assets/shield.svg')}}" width="347" />
-      <p class="text-gray-300 text-center px-10 dark:text-gray-400">
+      <img src="{{asset('assets/shield.svg')}}" class="size-64" />
+      <p class="text-gray-300 text-center px-10">
         <span class="text-[#FF5800]">Use uma senha forte:</span> Combine letras maiúsculas, minúsculas, números e caracteres especiais.
       </p>
     </div>
