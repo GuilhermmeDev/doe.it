@@ -6,12 +6,9 @@ use App\Models\Campaign;
 
 class MainController extends Controller
 {
+
     public function welcome()
     {
-        if (auth()->user() == true) {
-            return MainController::home();
-        }
-
         return view('welcome');
     }
 
@@ -19,7 +16,7 @@ class MainController extends Controller
     {
         $search = request('q');
         if ($search) {
-            $campaigns = Campaign::where([['Title', 'like', '%'.$search.'%']])->get();
+            $campaigns = Campaign::where([['Title', 'like', '%' . $search . '%']])->get();
         } else {
             $campaigns = Campaign::all();
         }
