@@ -9,6 +9,7 @@ Alpine.start();
 
 import "swiper/swiper-bundle.css";
 import Swiper from "swiper/bundle";
+import 'flowbite';
 
 // Lógica para o botão de copiar URL
 document.addEventListener("DOMContentLoaded", () => {
