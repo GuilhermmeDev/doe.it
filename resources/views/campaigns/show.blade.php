@@ -167,6 +167,10 @@
                   <path d="M22 13H20V7.23792L12.0718 14.338L4 7.21594V19H14V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V13ZM4.51146 5L12.0619 11.662L19.501 5H4.51146ZM21 18H24V20H21V23H19V20H16V18H19V15H21V18Z"></path>
                 </svg>
               </button>
+              <!-- Botão para abrir/fechar scanner (apenas para testes) -->
+              <button type="button" id="toggleScannerBtn" class="w-full max-w-sm mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors block text-center mt-2">
+                Abrir Scanner QR
+              </button>
             </div>
             @endif
         </aside>
@@ -207,8 +211,31 @@
         </form>
       </div>
     </div>
+    <!-- Scanner overlay absoluto -->
+    <div id="scannerContainer" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50" style="display:none;">
+      <div class="relative w-[400px] h-[300px] bg-white dark:bg-neutral-900 rounded-lg shadow-lg flex items-center justify-center">
+        <video id="preview" class="w-full h-full rounded-lg shadow-sm"></video>
+        <button type="button" id="closeScannerBtn" class="absolute top-2 right-2 bg-red-500 hover:bg-red-600 text-white rounded-full px-3 py-1 text-xs font-bold shadow">Fechar</button>
+      </div>
+    </div>
   </main>
 
+  <script type="module" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script type="module">
+    // Lógica para abrir/fechar scanner
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggleScannerBtn');
+      const scannerContainer = document.getElementById('scannerContainer');
+      const closeBtn = document.getElementById('closeScannerBtn');
+      if (toggleBtn && scannerContainer && closeBtn) {
+        toggleBtn.addEventListener('click', () => {
+          scannerContainer.style.display = 'flex';
+        });
+        closeBtn.addEventListener('click', () => {
+          scannerContainer.style.display = 'none';
+        });
+      }
+    });
+  </script>
 </body>
-
 </html>
