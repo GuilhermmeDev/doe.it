@@ -26,9 +26,4 @@ class MainController extends Controller
 
         return view('home', compact('campaigns', 'search'));
     }
-
-    public function info()
-    {
-        return view('info');
-    }
 }

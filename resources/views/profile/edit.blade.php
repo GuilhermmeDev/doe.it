@@ -6,7 +6,7 @@
     <title>Atualizar Perfil</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="js/cdn.min.js"></script>
-    <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
     <style>
         /* Ajusta a altura mínima da área de conteúdo para ocupar o espaço restante da tela */
         main.content-area {

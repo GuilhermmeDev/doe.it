@@ -7,7 +7,7 @@
     {{-- Vite cuida do CSS (incluindo Tailwind) e JS (incluindo Alpine.js) --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     {{-- Alpine.js CDN removido: <script src="https://unpkg.com/alpinejs" defer></script> --}}
-    <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
 </head>
 <body class="w-full overflow-x-hidden light-theme duration-200 bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
     @include('layouts.secondary_navbar')

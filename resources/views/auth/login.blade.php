@@ -8,7 +8,7 @@
   <meta name="description" content="Acesse sua conta DoeIT para doar, criar campanhas e acompanhar seu impacto. Já é cadastrado? Faça login de forma rápida e segura.">
 
   <link rel="canonical" href="https://doeit.com.br/login" />
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <script defer src="js/cdn.min.js"></script>
   <title>Login - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])

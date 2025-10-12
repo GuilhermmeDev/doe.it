@@ -8,7 +8,7 @@
   <meta name="description" content="Crie sua conta gratuita no DoeIT em minutos. Junte-se à nossa comunidade para criar campanhas, doar com segurança e fazer a diferença na vida de quem precisa.">
 
   <link rel="canonical" href="https://doeit.com.br/register" />
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <script defer src="js/cdn.min.js"></script>
   <title>Registro - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])

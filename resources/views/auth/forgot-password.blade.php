@@ -10,7 +10,7 @@
   <meta name="description" content="Recupere sua senha do DoeIT de forma segura. Insira seu e-mail e siga as instruções para redefinir o acesso à sua conta.">
 
   <link rel="canonical" href="https://doeit.com.br/password/request" />
-  <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon" />
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <title>Esqueceu a Senha? - Doeit</title>
   <script>

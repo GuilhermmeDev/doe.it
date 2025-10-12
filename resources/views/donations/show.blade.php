@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code - {{$donation->campaign->Title}}</title>
-    <link rel="icon" href="{{ asset('assets/logo1.svg') }}" type="image/x-icon"/>
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white dark:bg-[#1E1E21] text-[#1E1E21] dark:text-[#E0E0E0] flex flex-col items-center min-h-screen">
