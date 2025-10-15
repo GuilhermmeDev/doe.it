@@ -2,7 +2,8 @@
 
 import "./bootstrap";
 import "./echo";
-import "./instascan";
+
+import "instascan";
 
 import Alpine from "alpinejs";
 window.Alpine = Alpine;
@@ -10,7 +11,6 @@ Alpine.start();
 
 import "swiper/swiper-bundle.css";
 import Swiper from "swiper/bundle";
-import 'flowbite';
 
 // Lógica para o botão de copiar URL
 document.addEventListener("DOMContentLoaded", () => {
