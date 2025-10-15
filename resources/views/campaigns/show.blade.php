@@ -169,6 +169,14 @@
                   <path d="M22 13H20V7.23792L12.0718 14.338L4 7.21594V19H14V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V13ZM4.51146 5L12.0619 11.662L19.501 5H4.51146ZM21 18H24V20H21V23H19V20H16V18H19V15H21V18Z"></path>
                 </svg>
               </button>
+              {{-- Botão para abrir o scanner --}}
+              <button
+                  id="openScannerBtn"
+                  class="w-full max-w-sm mx-auto text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
+                  style="background-color: #FF5800;"
+                  >
+                  Ler QR Code
+              </button>
             </div>
             @endif
         </aside>
@@ -209,8 +217,197 @@
         </form>
       </div>
     </div>
+    {{-- Modal do scanner --}}
+    <div id="scannerModal" class="fixed inset-0 hidden z-50">
+        <!-- Fundo escuro com blur -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+        <!-- Conteúdo do modal: scanner e botão abrir link -->
+        <div class="relative z-10 flex flex-col items-center justify-center min-h-screen">
+            <div class="flex flex-col items-center space-y-4 bg-gray-100 dark:bg-neutral-800 border border-black rounded-lg p-4 md:p-6 shadow-lg">
+                <!-- Container da linha do título e botão -->
+                <div class="w-full flex justify-between items-center px-2 pt-2 pb-2">
+                    <!-- Título do scanner -->
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-0">Scanner QR Code</h3>
+
+                    <!-- Botão de fechar -->
+                    <button 
+                        id="closeScannerBtnInside" 
+                        class="w-8 h-8 flex items-center justify-center bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors z-10"
+                        aria-label="Fechar scanner"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Scanner quadrado com tamanho responsivo -->
+                <video id="scannerCam" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden bg-white border border-black"></video>
+                
+                <!-- Instrução para o usuário -->
+                <p id="scannerInstructions" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">
+                    Posicione o QR Code no centro da câmera
+                </p>
+                
+                <!-- Botão abrir link (dentro do container do scanner) -->
+                <button
+                    id="openLinkBtn"
+                    class="px-6 py-2 bg-[#2AB036] dark:bg-[#2AB036] border border-black rounded-md text-black dark:text-white font-semibold shadow-md transition-colors mt-2"
+                    style="display: none;"
+                    >
+                    Abrir Link
+                </button>
+                <!-- Parágrafo com o link -->
+                <p id="linkPreview" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2 break-all" style="display: none;">
+                </p>
+            </div>
+        </div>
+    </div>
   </main>
+  
+  <script type="module">
+    // Lógica para abrir/fechar scanner
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('toggleScannerBtn');
+      const scannerContainer = document.getElementById('scannerContainer');
+      const closeBtn = document.getElementById('closeScannerBtn');
+      if (toggleBtn && scannerContainer && closeBtn) {
+        toggleBtn.addEventListener('click', () => {
+          scannerContainer.style.display = 'flex';
+        });
+        closeBtn.addEventListener('click', () => {
+          scannerContainer.style.display = 'none';
+        });
+      }
+      
+      // Controle de scroll quando o modal estiver aberto/fechado
+      const scannerModal = document.getElementById('scannerModal');
+      const openScannerBtn = document.getElementById('openScannerBtn');
+      const closeScannerBtn = document.getElementById('closeScannerBtn');
+      const closeScannerBtnInside = document.getElementById('closeScannerBtnInside');
+      
+      // Função para desativar o scroll da página
+      function disableScroll() {
+        document.body.style.overflow = 'hidden';
+      }
+      
+      // Função para reativar o scroll da página
+      function enableScroll() {
+        document.body.style.overflow = '';
+      }
+      
+      // Função para fechar o scanner
+      function closeScanner() {
+        enableScroll();
+        scannerModal.classList.add('hidden');
+      }
+      
+      // Adicionar eventos para controlar o scroll
+      if (openScannerBtn) {
+        openScannerBtn.addEventListener('click', () => {
+          disableScroll();
+          scannerModal.classList.remove('hidden');
+        });
+      }
+      
+      // Adicionar evento ao botão de fechar externo
+      if (closeScannerBtn) {
+        closeScannerBtn.addEventListener('click', closeScanner);
+      }
+      
+      // Adicionar evento ao botão de fechar interno
+      if (closeScannerBtnInside) {
+        closeScannerBtnInside.addEventListener('click', closeScanner);
+      }
+      
+      // Configuração do scanner QR Code
+      document.addEventListener('DOMContentLoaded', function() {
+        const scanner = new Instascan.Scanner({ 
+          video: document.getElementById('scannerCam'),
+          mirror: false
+        });
+        
+        const scannerInstructions = document.getElementById('scannerInstructions');
+        const openLinkBtn = document.getElementById('openLinkBtn');
+        
+        scanner.addListener('scan', function(content) {
+          // Quando um QR code é lido com sucesso
+          console.log('QR Code lido:', content);
+          
+          // Ocultar instruções e mostrar botão e preview do link
+          if (scannerInstructions) scannerInstructions.style.display = 'none';
+          
+          const linkPreview = document.getElementById('linkPreview');
+          if (linkPreview) {
+            linkPreview.textContent = content;
+            linkPreview.style.display = 'block';
+          }
+          
+          if (openLinkBtn) {
+            openLinkBtn.style.display = 'block';
+            openLinkBtn.setAttribute('data-url', content);
+            
+            // Adicionar evento de clique ao botão para abrir o link
+            openLinkBtn.addEventListener('click', function() {
+              const url = this.getAttribute('data-url');
+              if (url) {
+                window.open(url, '_blank');
+              }
+            });
+          }
+        });
+        
+        // Iniciar o scanner quando o modal for aberto
+        if (openScannerBtn) {
+          openScannerBtn.addEventListener('click', function() {
+            // Resetar estado: mostrar instruções e ocultar botão e preview do link
+            if (scannerInstructions) scannerInstructions.style.display = 'block';
+            if (openLinkBtn) openLinkBtn.style.display = 'none';
+            const linkPreview = document.getElementById('linkPreview');
+            if (linkPreview) linkPreview.style.display = 'none';
+            
+            // Iniciar câmera
+            Instascan.Camera.getCameras().then(function(cameras) {
+              if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+              } else {
+                console.error('Nenhuma câmera encontrada.');
+                alert('Erro: Nenhuma câmera encontrada!');
+              }
+            }).catch(function(e) {
+              console.error(e);
+              alert('Erro ao acessar a câmera: ' + e);
+            });
+          });
+        }
+        
+        // Parar o scanner quando o modal for fechado
+        const stopScanner = function() {
+          scanner.stop();
+        };
+        
+        if (closeScannerBtn) {
+          closeScannerBtn.addEventListener('click', stopScanner);
+        }
+        
+        if (closeScannerBtnInside) {
+          closeScannerBtnInside.addEventListener('click', stopScanner);
+        }
+      });
+    });
 
+    // Mostrar botão abrir link se leitura for válida
+    function onQrCodeRead(isValid, url) {
+        const btn = document.getElementById('openLinkBtn');
+        if (isValid) {
+            btn.style.display = '';
+            btn.onclick = function() {
+                window.open(url, '_blank');
+            };
+        } else {
+            btn.style.display = 'none';
+        }
+    }
+  </script>
 </body>
-
 </html>

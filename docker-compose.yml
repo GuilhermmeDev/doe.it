@@ -26,7 +26,6 @@ services:
             pgsql:
                 condition: service_healthy
         command: sh -c "./docker/init.sh"
-
     pgsql:
         image: "postgres:17"
         ports:
