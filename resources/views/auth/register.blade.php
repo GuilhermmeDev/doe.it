@@ -78,7 +78,7 @@
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Senha</label>
           <div class="flex flex-col w-full">
-            <div class="flex flex-row w-full mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+            <div class="flex flex-row w-full px-3 py-2 mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
                 <input
                 placeholder="Insira sua senha"
                 id="password"
@@ -105,7 +105,7 @@
         <div class="relative">
           <label class="font-medium text-gray-900 dark:text-gray-100">Confirmar senha</label>
           <div class="flex flex-col w-full">
-            <div class="flex flex-row w-full mt-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
+            <div class="flex flex-row w-full mt-2 px-3 py-2 text-gray-500 dark:text-gray-300  border border-gray-300 dark:border-neutral-600 focus:border-indigo-600 shadow-sm rounded-lg pr-5 items-center justify-between">
                 <input
                 placeholder="Confirme sua senha"
                 id="cpassword"
