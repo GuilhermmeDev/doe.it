@@ -394,8 +394,7 @@
       });
     });
 
-    // Simulação: mostrar botão abrir link se leitura for válida
-    // Substitua por sua lógica de leitura do QR code
+    // Mostrar botão abrir link se leitura for válida
     function onQrCodeRead(isValid, url) {
         const btn = document.getElementById('openLinkBtn');
         if (isValid) {
