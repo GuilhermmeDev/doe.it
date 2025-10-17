@@ -9,7 +9,6 @@
 
   <link rel="canonical" href="https://doeit.com.br/register" />
   <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
-  <script defer src="js/cdn.min.js"></script>
   <title>Registro - Doeit</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 

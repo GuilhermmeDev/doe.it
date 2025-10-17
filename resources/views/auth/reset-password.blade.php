@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <script defer src="js/cdn.min.js"></script>
   <title>DoeIt - Redefinir Senha</title>
 </head>
 <body class="bg-white text-gray-600 dark:bg-neutral-900 dark:text-gray-400">
