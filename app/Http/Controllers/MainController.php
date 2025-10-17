@@ -22,7 +22,7 @@ class MainController extends Controller
         $query = Campaign::orderBy('created_at', 'desc');
 
         if ($search) {
-            $query->where('Title', 'like', '%' . $search . '%');
+            $query->where('Title', 'like', '%'.$search.'%');
         }
 
         $campaigns = $query->get();
