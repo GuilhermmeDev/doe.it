@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ...(document.querySelector('meta[name="csrf-token"]')
                         ? {
                               "X-CSRF-TOKEN": document.querySelector(
-                                  'meta[name="csrf-token"]',
+                                  'meta[name="csrf-token"]'
                               ).content,
                           }
                         : {}),
@@ -45,9 +45,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 .catch((error) => {
                     console.error("Erro:", error);
                     alert(
-                        "Ocorreu um erro ao enviar o convite. Tente novamente.",
+                        "Ocorreu um erro ao enviar o convite. Tente novamente."
                     );
                 });
+        });
+    }
+
+    const buttonCopy = document.querySelector("#copy");
+    if (buttonCopy) {
+        buttonCopy.addEventListener("click", (e) => {
+            const input = document.querySelector("#share-input");
+            input.select();
+            document.execCommand("copy");
+
+            buttonCopy.innerText = "Copiado!";
+            setTimeout(() => {
+                buttonCopy.innerText = "Copiar";
+            }, 2000);
         });
     }
 });

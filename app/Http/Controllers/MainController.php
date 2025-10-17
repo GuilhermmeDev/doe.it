@@ -18,11 +18,14 @@ class MainController extends Controller
     public function home()
     {
         $search = request('q');
+
+        $query = Campaign::orderBy('created_at', 'desc');
+
         if ($search) {
-            $campaigns = Campaign::where([['Title', 'like', '%'.$search.'%']])->get();
-        } else {
-            $campaigns = Campaign::all();
+            $query->where('Title', 'like', '%' . $search . '%');
         }
+
+        $campaigns = $query->get();
 
         return view('home', compact('campaigns', 'search'));
     }

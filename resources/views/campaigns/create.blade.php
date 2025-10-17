@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doeit - Criar Campanha</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
- <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+ <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
+ <link rel="stylesheet" href="{{ asset('css/fonts.css') }}" />
   <style>
     /* Estilos para erro de validação (para o Alpine.js) */
     .validation-error-alpine {
@@ -39,7 +40,7 @@
     </div>
 
     <div class="w-full lg:w-1/2 max-w-md bg-[#2ab036] rounded-xl p-6 shadow-xl border border-[#ff5800] border-opacity-40">
-      
+
       <form
         id="multiStepForm"
         x-data="formHandler()"
@@ -148,12 +149,12 @@
             class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50">
             Voltar
           </button>
-          
+
           <button type="button" x-show="currentStep < 3" @click="nextStep" :disabled="!isStepValid()"
             class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed ml-auto">
             Próximo
           </button>
-          
+
           <button type="submit" x-show="currentStep === 3" :disabled="!isStepValid()"
             class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed ml-auto">
             Criar Campanha
@@ -162,7 +163,7 @@
       </form>
     </div>
   </main>
-  
+
   <script>
   function formHandler() {
     return {
@@ -218,7 +219,7 @@
           this.fileName = 'Nenhum arquivo selecionado';
         }
       },
-      
+
       // Valida um campo específico
       validateField(field) {
         // ... (resto da função de validação continua igual)
@@ -292,7 +293,7 @@
         if (this.currentStep === 3) fieldsToValidate = ['Type', 'meta'];
 
         fieldsToValidate.forEach(field => this.validateField(field));
-        
+
         return fieldsToValidate.every(field => !this.errors[field]);
       },
 

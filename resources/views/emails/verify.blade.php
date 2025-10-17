@@ -16,14 +16,14 @@
         <p style="color: #73737F; font-size: 16px; line-height: 1.5;">
             Bem-vindo(a)! Para ativar sua conta, confirme seu endereço de e-mail clicando no botão abaixo:
         </p>
-        
+
         <p style="text-align: center; margin: 25px 0;">
-            <a href="{{$url}}" 
+            <a href="{!! $url !!}"
                style="background-color: #2AB036; color: #E0E0E0; padding: 14px 25px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold; font-size: 16px;">
                Verificar E-mail
             </a>
         </p>
-        
+
         <p style="color: #73737F; font-size: 14px;">
             Se você não criou uma conta, ignore esta mensagem.
         </p>
