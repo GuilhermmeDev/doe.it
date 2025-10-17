@@ -27,15 +27,17 @@
 
 <body class="h-screen bg-white dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
   <div class="absolute top-0 left-0 z-50 pt-4 pl-4">
-    <a href="{{ route('login') }}"
+    <a href="{{ redirect()->back()->getTargetUrl()}}"
        class="flex items-center gap-2 px-4 py-2 rounded-lg text-black dark:text-white text-base font-semibold focus:outline-none">
       <svg class="w-5 h-5 text-black dark:text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
       Voltar
     </a>
   </div>
   <main class="h-full flex flex-col justify-center items-center">
-    <img src="{{ asset('assets/logo1.svg') }}" alt="logo doeit" class="w-24 h-24 mb-6">
-    <section class="max-w-3xl min-h-[520px] px-6 py-16 mx-auto text-center bg-white dark:bg-neutral-800 rounded-lg shadow-lg relative flex flex-col justify-start" id="forgotPasswordSection">
+    <a href="{{redirect()->back()->getTargetUrl()}}">
+        <img src="{{ asset('assets/logo1.svg') }}" alt="logo doeit" class="w-24 h-24 mb-6">
+    </a>
+    <section class="max-w-3xl min-h-[520px] px-6 py-16 mx-auto text-center bg-white dark:bg-neutral-800 rounded-lg shadow-lg relative flex flex-col justify-center" id="forgotPasswordSection">
       <h1 class="text-3xl font-semibold text-gray-900 dark:text-gray-100">Perdeu a Senha?</h1>
       <p class="max-w-md mx-auto mt-5 text-gray-700 dark:text-gray-300">Não se preocupe. Nós iremos te mandar um e-mail de recupação de senha.</p>
 

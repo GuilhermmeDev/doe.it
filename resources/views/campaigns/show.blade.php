@@ -230,8 +230,8 @@
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-0">Scanner QR Code</h3>
 
                     <!-- Botão de fechar -->
-                    <button 
-                        id="closeScannerBtnInside" 
+                    <button
+                        id="closeScannerBtnInside"
                         class="w-8 h-8 flex items-center justify-center bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors z-10"
                         aria-label="Fechar scanner"
                     >
@@ -243,12 +243,12 @@
 
                 <!-- Scanner quadrado com tamanho responsivo -->
                 <video id="scannerCam" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden bg-white border border-black"></video>
-                
+
                 <!-- Instrução para o usuário -->
                 <p id="scannerInstructions" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">
                     Posicione o QR Code no centro da câmera
                 </p>
-                
+
                 <!-- Botão abrir link (dentro do container do scanner) -->
                 <button
                     id="openLinkBtn"
@@ -264,7 +264,7 @@
         </div>
     </div>
   </main>
-  
+
   <script type="module">
     // Lógica para abrir/fechar scanner
     document.addEventListener('DOMContentLoaded', () => {
@@ -279,29 +279,29 @@
           scannerContainer.style.display = 'none';
         });
       }
-      
+
       // Controle de scroll quando o modal estiver aberto/fechado
       const scannerModal = document.getElementById('scannerModal');
       const openScannerBtn = document.getElementById('openScannerBtn');
       const closeScannerBtn = document.getElementById('closeScannerBtn');
       const closeScannerBtnInside = document.getElementById('closeScannerBtnInside');
-      
+
       // Função para desativar o scroll da página
       function disableScroll() {
         document.body.style.overflow = 'hidden';
       }
-      
+
       // Função para reativar o scroll da página
       function enableScroll() {
         document.body.style.overflow = '';
       }
-      
+
       // Função para fechar o scanner
       function closeScanner() {
         enableScroll();
         scannerModal.classList.add('hidden');
       }
-      
+
       // Adicionar eventos para controlar o scroll
       if (openScannerBtn) {
         openScannerBtn.addEventListener('click', () => {
@@ -309,44 +309,44 @@
           scannerModal.classList.remove('hidden');
         });
       }
-      
+
       // Adicionar evento ao botão de fechar externo
       if (closeScannerBtn) {
         closeScannerBtn.addEventListener('click', closeScanner);
       }
-      
+
       // Adicionar evento ao botão de fechar interno
       if (closeScannerBtnInside) {
         closeScannerBtnInside.addEventListener('click', closeScanner);
       }
-      
+
       // Configuração do scanner QR Code
       document.addEventListener('DOMContentLoaded', function() {
-        const scanner = new Instascan.Scanner({ 
+        const scanner = new Instascan.Scanner({
           video: document.getElementById('scannerCam'),
           mirror: false
         });
-        
+
         const scannerInstructions = document.getElementById('scannerInstructions');
         const openLinkBtn = document.getElementById('openLinkBtn');
-        
+
         scanner.addListener('scan', function(content) {
           // Quando um QR code é lido com sucesso
           console.log('QR Code lido:', content);
-          
+
           // Ocultar instruções e mostrar botão e preview do link
           if (scannerInstructions) scannerInstructions.style.display = 'none';
-          
+
           const linkPreview = document.getElementById('linkPreview');
           if (linkPreview) {
             linkPreview.textContent = content;
             linkPreview.style.display = 'block';
           }
-          
+
           if (openLinkBtn) {
             openLinkBtn.style.display = 'block';
             openLinkBtn.setAttribute('data-url', content);
-            
+
             // Adicionar evento de clique ao botão para abrir o link
             openLinkBtn.addEventListener('click', function() {
               const url = this.getAttribute('data-url');
@@ -356,7 +356,7 @@
             });
           }
         });
-        
+
         // Iniciar o scanner quando o modal for aberto
         if (openScannerBtn) {
           openScannerBtn.addEventListener('click', function() {
@@ -365,7 +365,7 @@
             if (openLinkBtn) openLinkBtn.style.display = 'none';
             const linkPreview = document.getElementById('linkPreview');
             if (linkPreview) linkPreview.style.display = 'none';
-            
+
             // Iniciar câmera
             Instascan.Camera.getCameras().then(function(cameras) {
               if (cameras.length > 0) {
@@ -380,16 +380,16 @@
             });
           });
         }
-        
+
         // Parar o scanner quando o modal for fechado
         const stopScanner = function() {
           scanner.stop();
         };
-        
+
         if (closeScannerBtn) {
           closeScannerBtn.addEventListener('click', stopScanner);
         }
-        
+
         if (closeScannerBtnInside) {
           closeScannerBtnInside.addEventListener('click', stopScanner);
         }

@@ -6,7 +6,6 @@
   <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <script defer src="js/cdn.min.js"></script>
   <title>DoeIt - Verificação de E-mail</title>
 </head>
 <body class="bg-[#E0E0E0] text-[#73737F] dark:bg-[#1E1E21] dark:text-[#FFFFFF]">

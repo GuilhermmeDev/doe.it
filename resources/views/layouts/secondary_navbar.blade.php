@@ -10,13 +10,13 @@
 
       <!-- Barra de pesquisa (fora do menu, sempre visível na home) -->
       @if(request()->path() == 'home' && auth()->check() == true)
-        <form action="/home" method="get" 
+        <form action="/home" method="get"
         class="flex-1 min-w-0 max-w-lg mx-4">
           <input
             type="text"
             name="q"
             placeholder="Buscar..."
-            class="w-full px-4 py-2 text-sm border border-gray-300 dark:border-neutral-600 rounded-lg 
+            class="w-full px-4 py-2 text-sm border border-gray-300 dark:border-neutral-600 rounded-lg
                   focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent
                   bg-white dark:bg-neutral-800 text-gray-900 dark:text-white transition-all duration-300"
           />
@@ -29,6 +29,7 @@
         <a href="/campaign"
            class="px-3 py-2 text-md rounded-lg border-2 border-gray-600 dark:border-neutral-600 text-gray-700 dark:text-white">
           Criar Campanha
+
         </a>
 
         @if((auth()->check() && auth()->user()->hasVerifiedEmail()) && (!isset($hideUserProfile) || !$hideUserProfile))

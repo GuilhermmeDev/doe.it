@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="js/cdn.min.js"></script>
   <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon"/>
   <title>Confirmar Doação</title>
   @vite(['resources/css/app.css', 'resources/js/app.js']) {{-- Vite directive added here --}}
