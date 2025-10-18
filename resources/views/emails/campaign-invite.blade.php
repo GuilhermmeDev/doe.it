@@ -8,7 +8,7 @@
     <table align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
         <tr>
             <td align="center" style="padding-bottom: 20px;">
-                <h1 style="color: #333;">Olá {{ $user->name }}!</h1>
+                <h1 style="color: #333;">Olá, {{ $user->name }}!</h1>
             </td>
         </tr>
         <tr>
@@ -31,7 +31,7 @@
                     </a>
                 </p>
 
-                <p style="margin-top: 30px;">Obrigado por usar o <strong>Doe.it</strong>! 💚</p>
+                <p style="margin-top: 30px;">Obrigado por usar o <strong style="color: #4caf50">Doeit</strong>! ❤️</p>
             </td>
         </tr>
     </table>
