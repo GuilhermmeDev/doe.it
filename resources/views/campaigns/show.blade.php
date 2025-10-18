@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   @vite(['resources/css/app.css', 'resources/js/app.js'])
- <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
+  <link rel="icon" href="{{ asset('assets/favicon.svg') }}" type="image/x-icon" />
 
   <title>{{$campaign->Title}}</title>
 </head>
@@ -171,11 +171,10 @@
               </button>
               {{-- Botão para abrir o scanner --}}
               <button
-                  id="openScannerBtn"
-                  class="w-full max-w-sm mx-auto text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
-                  style="background-color: #FF5800;"
-                  >
-                  Ler QR Code
+                id="openScannerBtn"
+                class="w-full max-w-sm mx-auto text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
+                style="background-color: #FF5800;">
+                Ler QR Code
               </button>
             </div>
             @endif
@@ -219,195 +218,179 @@
     </div>
     {{-- Modal do scanner --}}
     <div id="scannerModal" class="fixed inset-0 hidden z-50">
-        <!-- Fundo escuro com blur -->
-        <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
-        <!-- Conteúdo do modal: scanner e botão abrir link -->
-        <div class="relative z-10 flex flex-col items-center justify-center min-h-screen">
-            <div class="flex flex-col items-center space-y-4 bg-gray-100 dark:bg-neutral-800 border border-black rounded-lg p-4 md:p-6 shadow-lg">
-                <!-- Container da linha do título e botão -->
-                <div class="w-full flex justify-between items-center px-2 pt-2 pb-2">
-                    <!-- Título do scanner -->
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-0">Scanner QR Code</h3>
+      <!-- Fundo escuro com blur -->
+      <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+      <!-- Conteúdo do modal: scanner e botão abrir link -->
+      <div class="relative z-10 flex flex-col items-center justify-center min-h-screen">
+        <div class="flex flex-col items-center space-y-4 bg-gray-100 dark:bg-neutral-800 border border-black rounded-lg p-4 md:p-6 shadow-lg">
+          <!-- Container da linha do título e botão -->
+          <div class="w-full flex justify-between items-center px-2 pt-2 pb-2">
+            <!-- Título do scanner -->
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-0">Scanner QR Code</h3>
 
-                    <!-- Botão de fechar -->
-                    <button
-                        id="closeScannerBtnInside"
-                        class="w-8 h-8 flex items-center justify-center bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors z-10"
-                        aria-label="Fechar scanner"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
+            <!-- Botão de fechar -->
+            <button
+              id="closeScannerBtnInside"
+              class="w-8 h-8 flex items-center justify-center bg-white dark:bg-neutral-700 text-gray-700 dark:text-gray-300 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-neutral-600 transition-colors z-10"
+              aria-label="Fechar scanner">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
 
-                <!-- Scanner quadrado com tamanho responsivo -->
-                <video id="scannerCam" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden bg-white border border-black"></video>
+          <!-- Scanner quadrado com tamanho responsivo -->
+          <div id="qr-reader" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden bg-white border border-black"></div>
 
-                <!-- Instrução para o usuário -->
-                <p id="scannerInstructions" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">
-                    Posicione o QR Code no centro da câmera
-                </p>
+          <!-- Instrução para o usuário -->
+          <p id="scannerInstructions" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">
+            Posicione o QR Code no centro da câmera
+          </p>
 
-                <!-- Botão abrir link (dentro do container do scanner) -->
-                <button
-                    id="openLinkBtn"
-                    class="px-6 py-2 bg-[#2AB036] dark:bg-[#2AB036] border border-black rounded-md text-black dark:text-white font-semibold shadow-md transition-colors mt-2"
-                    style="display: none;"
-                    >
-                    Abrir Link
-                </button>
-                <!-- Parágrafo com o link -->
-                <p id="linkPreview" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2 break-all" style="display: none;">
-                </p>
-            </div>
+          <!-- Botão abrir link (dentro do container do scanner) -->
+          <button
+            id="openLinkBtn"
+            class="px-6 py-2 bg-[#2AB036] dark:bg-[#2AB036] border border-black rounded-md text-black dark:text-white font-semibold shadow-md transition-colors mt-2"
+            style="display: none;">
+            Abrir Link
+          </button>
+          <!-- Parágrafo com o link -->
+          <p id="linkPreview" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2 break-all" style="display: none;">
+          </p>
         </div>
+      </div>
     </div>
   </main>
 
-  <script type="module">
-    // Lógica para abrir/fechar scanner
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toggleBtn = document.getElementById('toggleScannerBtn');
-      const scannerContainer = document.getElementById('scannerContainer');
-      const closeBtn = document.getElementById('closeScannerBtn');
-      if (toggleBtn && scannerContainer && closeBtn) {
-        toggleBtn.addEventListener('click', () => {
-          scannerContainer.style.display = 'flex';
-        });
-        closeBtn.addEventListener('click', () => {
-          scannerContainer.style.display = 'none';
-        });
-      }
-
-      // Controle de scroll quando o modal estiver aberto/fechado
+      // --- Elementos do DOM ---
       const scannerModal = document.getElementById('scannerModal');
       const openScannerBtn = document.getElementById('openScannerBtn');
-      const closeScannerBtn = document.getElementById('closeScannerBtn');
       const closeScannerBtnInside = document.getElementById('closeScannerBtnInside');
+      const scannerInstructions = document.getElementById('scannerInstructions');
+      const openLinkBtn = document.getElementById('openLinkBtn');
+      const linkPreview = document.getElementById('linkPreview');
 
-      // Função para desativar o scroll da página
-      function disableScroll() {
-        document.body.style.overflow = 'hidden';
-      }
+      // Instância do leitor de QR Code
+      // O ID "qr-reader" é o ID da <div> que criamos no HTML
+      const html5QrCode = new Html5Qrcode("qr-reader");
 
-      // Função para reativar o scroll da página
-      function enableScroll() {
-        document.body.style.overflow = '';
-      }
+      // --- Funções de Controle do Modal e Câmera ---
 
-      // Função para fechar o scanner
-      function closeScanner() {
+      const disableScroll = () => document.body.style.overflow = 'hidden';
+      const enableScroll = () => document.body.style.overflow = '';
+
+      // Função para ABRIR o modal e INICIAR a câmera
+      const showScanner = () => {
+        disableScroll();
+        scannerModal.classList.remove('hidden');
+        startScanner();
+      };
+
+      // Função para FECHAR o modal e PARAR a câmera
+      const hideScanner = () => {
         enableScroll();
         scannerModal.classList.add('hidden');
-      }
+        stopScanner();
+      };
 
-      // Adicionar eventos para controlar o scroll
-      if (openScannerBtn) {
-        openScannerBtn.addEventListener('click', () => {
-          disableScroll();
-          scannerModal.classList.remove('hidden');
-        });
-      }
+      // --- Funções de Controle do Scanner ---
 
-      // Adicionar evento ao botão de fechar externo
-      if (closeScannerBtn) {
-        closeScannerBtn.addEventListener('click', closeScanner);
-      }
+      const startScanner = () => {
+        // Reseta a UI para o estado inicial
+        scannerInstructions.style.display = 'block';
+        linkPreview.style.display = 'none';
+        openLinkBtn.style.display = 'none';
 
-      // Adicionar evento ao botão de fechar interno
-      if (closeScannerBtnInside) {
-        closeScannerBtnInside.addEventListener('click', closeScanner);
-      }
-
-      // Configuração do scanner QR Code
-      document.addEventListener('DOMContentLoaded', function() {
-        const scanner = new Instascan.Scanner({
-          video: document.getElementById('scannerCam'),
-          mirror: false
-        });
-
-        const scannerInstructions = document.getElementById('scannerInstructions');
-        const openLinkBtn = document.getElementById('openLinkBtn');
-
-        scanner.addListener('scan', function(content) {
-          // Quando um QR code é lido com sucesso
-          console.log('QR Code lido:', content);
-
-          // Ocultar instruções e mostrar botão e preview do link
-          if (scannerInstructions) scannerInstructions.style.display = 'none';
-
-          const linkPreview = document.getElementById('linkPreview');
-          if (linkPreview) {
-            linkPreview.textContent = content;
-            linkPreview.style.display = 'block';
+        const config = {
+          fps: 10,
+          qrbox: {
+            width: 250,
+            height: 250
           }
-
-          if (openLinkBtn) {
-            openLinkBtn.style.display = 'block';
-            openLinkBtn.setAttribute('data-url', content);
-
-            // Adicionar evento de clique ao botão para abrir o link
-            openLinkBtn.addEventListener('click', function() {
-              const url = this.getAttribute('data-url');
-              if (url) {
-                window.open(url, '_blank');
-              }
-            });
-          }
-        });
-
-        // Iniciar o scanner quando o modal for aberto
-        if (openScannerBtn) {
-          openScannerBtn.addEventListener('click', function() {
-            // Resetar estado: mostrar instruções e ocultar botão e preview do link
-            if (scannerInstructions) scannerInstructions.style.display = 'block';
-            if (openLinkBtn) openLinkBtn.style.display = 'none';
-            const linkPreview = document.getElementById('linkPreview');
-            if (linkPreview) linkPreview.style.display = 'none';
-
-            // Iniciar câmera
-            Instascan.Camera.getCameras().then(function(cameras) {
-              if (cameras.length > 0) {
-                scanner.start(cameras[0]);
-              } else {
-                console.error('Nenhuma câmera encontrada.');
-                alert('Erro: Nenhuma câmera encontrada!');
-              }
-            }).catch(function(e) {
-              console.error(e);
-              alert('Erro ao acessar a câmera: ' + e);
-            });
-          });
-        }
-
-        // Parar o scanner quando o modal for fechado
-        const stopScanner = function() {
-          scanner.stop();
         };
 
-        if (closeScannerBtn) {
-          closeScannerBtn.addEventListener('click', stopScanner);
-        }
+        // Função de callback para quando um QR code for lido com sucesso
+        const onScanSuccess = (decodedText, decodedResult) => {
+          console.log(`QR Code lido: ${decodedText}`);
 
-        if (closeScannerBtnInside) {
-          closeScannerBtnInside.addEventListener('click', stopScanner);
+          // Atualiza a UI com o resultado
+          scannerInstructions.style.display = 'none';
+          linkPreview.textContent = decodedText;
+          linkPreview.style.display = 'block';
+          openLinkBtn.style.display = 'block';
+
+          // Define a ação do botão para abrir o link
+          openLinkBtn.onclick = () => {
+            window.open(decodedText, '_blank');
+          };
+
+          // Para o scanner após uma leitura bem-sucedida para economizar recursos
+          stopScanner();
+        };
+
+        // Inicia o scanner
+        html5QrCode.start({
+            facingMode: "environment"
+          }, config, onScanSuccess)
+          .catch(err => {
+            console.error("Erro ao iniciar a câmera.", err);
+            alert("Não foi possível acessar a câmera. Verifique as permissões.");
+            hideScanner();
+          });
+      };
+
+      const stopScanner = () => {
+        // O `getState()` verifica se o scanner está rodando
+        if (html5QrCode.getState() === 2) { // 2 = SCANNING
+          html5QrCode.stop()
+            .then(() => console.log("Scanner parado com sucesso."))
+            .catch(err => console.error("Erro ao parar o scanner.", err));
         }
-      });
+      };
+
+      // --- Adiciona os Event Listeners ---
+
+      if (openScannerBtn) {
+        openScannerBtn.addEventListener('click', async () => {
+          // Mostra um feedback visual de que algo está acontecendo (opcional, mas bom para UX)
+          openScannerBtn.disabled = true;
+          openScannerBtn.textContent = 'Aguardando permissão...';
+
+          try {
+            // 1. Pede a permissão para listar as câmeras.
+            // Esta linha é o que aciona o prompt do navegador.
+            const cameras = await Html5Qrcode.getCameras();
+
+            // 2. Se o usuário permitir e houver câmeras, continue.
+            if (cameras && cameras.length) {
+              console.log("Permissão da câmera concedida.");
+              // Agora que temos a permissão, chame a função para mostrar o modal e iniciar o scanner.
+              showScanner();
+            } else {
+              // Caso raro onde a permissão é dada, mas nenhuma câmera é encontrada.
+              alert("Nenhuma câmera foi encontrada neste dispositivo.");
+            }
+
+          } catch (error) {
+            // 3. Se o usuário negar a permissão, o 'await' falha e o código entra no 'catch'.
+            console.error("Erro ao obter permissão da câmera:", error);
+            alert("Você precisa permitir o acesso à câmera para ler um QR Code.");
+
+          } finally {
+            // Restaura o estado do botão, seja com sucesso ou erro.
+            openScannerBtn.disabled = false;
+            openScannerBtn.textContent = 'Ler QR Code';
+          }
+        });
+      }
+
+      if (closeScannerBtnInside) {
+        closeScannerBtnInside.addEventListener('click', hideScanner);
+      }
     });
-
-    // Mostrar botão abrir link se leitura for válida
-    function onQrCodeRead(isValid, url) {
-        const btn = document.getElementById('openLinkBtn');
-        if (isValid) {
-            btn.style.display = '';
-            btn.onclick = function() {
-                window.open(url, '_blank');
-            };
-        } else {
-            btn.style.display = 'none';
-        }
-    }
   </script>
 </body>
+
 </html>
