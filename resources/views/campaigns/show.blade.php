@@ -146,9 +146,15 @@
 
             </section>
 
-            @if($campaign->user_id === auth()->user()->id)
             <div class="border-t pt-6 space-y-3 items-center mt-4">
-              <form action="/campaign/{{$campaign->id}}" method="post">
+              @php
+              $user = auth()->user();
+              $isOwner = $campaign->user_id === $user->id;
+              $isValidator = $validators->contains('id', $user->id);
+              @endphp
+
+              @if ($isOwner)
+              <form action="/campaign/{{ $campaign->id }}" method="post">
                 @csrf
                 @method('DELETE')
                 <button type="submit"
@@ -157,27 +163,33 @@
                 </button>
               </form>
 
-              <a href="/campaign/edit/{{$campaign->id}}"
+              <a href="/campaign/edit/{{ $campaign->id }}"
                 class="update_button w-full max-w-sm mx-auto bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors block text-center">
-                Editar campanha
+                Editar Campanha
               </a>
 
-              <button class="validator_button w-full max-w-sm mx-auto bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
+              <button
+                class="validator_button w-full max-w-sm mx-auto bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
                 onclick="openInviteModal()">
-                Convidar para campanha
+                Convidar para Campanha
                 <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M22 13H20V7.23792L12.0718 14.338L4 7.21594V19H14V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V13ZM4.51146 5L12.0619 11.662L19.501 5H4.51146ZM21 18H24V20H21V23H19V20H16V18H19V15H21V18Z"></path>
+                  <path
+                    d="M22 13H20V7.23792L12.0718 14.338L4 7.21594V19H14V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V13ZM4.51146 5L12.0619 11.662L19.501 5H4.51146ZM21 18H24V20H21V23H19V20H16V18H19V15H21V18Z">
+                  </path>
                 </svg>
               </button>
-              {{-- Botão para abrir o scanner --}}
+              @endif
+
+              @if ($isOwner || $isValidator)
               <button
                 id="openScannerBtn"
                 class="w-full max-w-sm mx-auto text-white py-2 px-4 rounded-md text-sm font-medium transition-colors flex items-center justify-center"
                 style="background-color: #FF5800;">
                 Ler QR Code
               </button>
+              @endif
             </div>
-            @endif
+
         </aside>
       </div>
     </div>
