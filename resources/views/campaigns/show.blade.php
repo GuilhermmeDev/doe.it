@@ -252,7 +252,14 @@
           </div>
 
           <!-- Scanner quadrado com tamanho responsivo -->
-          <div id="qr-reader" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden bg-white border border-black"></div>
+          <div id="qr-reader" class="w-64 h-64 md:w-80 md:h-80 rounded-md overflow-hidden border border-black 
+                        bg-gray-200 dark:bg-neutral-700 
+                        flex items-center justify-center">
+            <svg class="w-24 h-24 text-gray-400 dark:text-neutral-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 14.625a1.125 1.125 0 011.125-1.125h4.5a1.125 1.125 0 011.125 1.125v4.5a1.125 1.125 0 01-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5z" />
+            </svg>
+          </div>
 
           <!-- Instrução para o usuário -->
           <p id="scannerInstructions" class="text-sm text-gray-600 dark:text-gray-400 text-center mt-2">
@@ -283,24 +290,20 @@
       const scannerInstructions = document.getElementById('scannerInstructions');
       const openLinkBtn = document.getElementById('openLinkBtn');
       const linkPreview = document.getElementById('linkPreview');
+      const qrReaderContainer = document.getElementById('qr-reader');
 
-      // Instância do leitor de QR Code
-      // O ID "qr-reader" é o ID da <div> que criamos no HTML
       const html5QrCode = new Html5Qrcode("qr-reader");
 
       // --- Funções de Controle do Modal e Câmera ---
-
       const disableScroll = () => document.body.style.overflow = 'hidden';
       const enableScroll = () => document.body.style.overflow = '';
 
-      // Função para ABRIR o modal e INICIAR a câmera
       const showScanner = () => {
         disableScroll();
         scannerModal.classList.remove('hidden');
         startScanner();
       };
 
-      // Função para FECHAR o modal e PARAR a câmera
       const hideScanner = () => {
         enableScroll();
         scannerModal.classList.add('hidden');
@@ -308,9 +311,9 @@
       };
 
       // --- Funções de Controle do Scanner ---
-
       const startScanner = () => {
-        // Reseta a UI para o estado inicial
+        qrReaderContainer.style.display = 'flex';
+        scannerInstructions.innerHTML = 'Posicione o QR Code no centro da câmera'; // Reseta o texto
         scannerInstructions.style.display = 'block';
         linkPreview.style.display = 'none';
         openLinkBtn.style.display = 'none';
@@ -323,38 +326,36 @@
           }
         };
 
-        // Função de callback para quando um QR code for lido com sucesso
         const onScanSuccess = (decodedText, decodedResult) => {
-          console.log(`QR Code lido: ${decodedText}`);
+          const siteOrigin = window.location.origin;
 
-          // Atualiza a UI com o resultado
-          scannerInstructions.style.display = 'none';
-          linkPreview.textContent = decodedText;
-          linkPreview.style.display = 'block';
-          openLinkBtn.style.display = 'block';
-
-          // Define a ação do botão para abrir o link
-          openLinkBtn.onclick = () => {
-            window.open(decodedText, '_blank');
-          };
-
-          // Para o scanner após uma leitura bem-sucedida para economizar recursos
-          stopScanner();
+          if (decodedText.startsWith(siteOrigin)) {
+            scannerInstructions.style.display = 'none';
+            linkPreview.textContent = decodedText;
+            linkPreview.className = 'text-sm text-gray-600 dark:text-gray-400 text-center mt-2 break-all';
+            linkPreview.style.display = 'block';
+            openLinkBtn.style.display = 'block';
+            openLinkBtn.onclick = () => window.open(decodedText, '_blank');
+            stopScanner();
+          } else {
+            openLinkBtn.style.display = 'none';
+            linkPreview.textContent = 'QR Code inválido ou não pertence a este site.';
+            linkPreview.className = 'text-sm text-red-600 dark:text-red-500 font-semibold text-center mt-2 break-all';
+            linkPreview.style.display = 'block';
+          }
         };
 
-        // Inicia o scanner
         html5QrCode.start({
             facingMode: "environment"
           }, config, onScanSuccess)
           .catch(err => {
             console.error("Erro ao iniciar a câmera.", err);
-            alert("Não foi possível acessar a câmera. Verifique as permissões.");
-            hideScanner();
+            // Erro genérico caso o start() falhe por outros motivos
+            handleScannerError("Não foi possível iniciar a câmera. Tente novamente.", 'generic');
           });
       };
 
       const stopScanner = () => {
-        // O `getState()` verifica se o scanner está rodando
         if (html5QrCode.getState() === 2) { // 2 = SCANNING
           html5QrCode.stop()
             .then(() => console.log("Scanner parado com sucesso."))
@@ -362,36 +363,54 @@
         }
       };
 
-      // --- Adiciona os Event Listeners ---
+      // ALTERADO: Função de erro mais inteligente com tipos
+      const handleScannerError = (message, type = 'generic') => {
+        disableScroll();
+        scannerModal.classList.remove('hidden');
+        qrReaderContainer.style.display = 'none';
+        linkPreview.style.display = 'none';
+        openLinkBtn.style.display = 'none';
 
+        let errorTitle = 'Ocorreu um Erro';
+        let errorInstructions = `<p class="mt-2">${message}</p>`;
+
+        if (type === 'permission_denied') {
+          errorTitle = 'Acesso à câmera bloqueado';
+          errorInstructions = `
+            <p class="mt-2">${message}</p>
+            <p class="mt-1 text-xs">Você precisa permitir o acesso nas configurações do seu navegador para este site.</p>
+          `;
+        } else if (type === 'no_camera') {
+          errorTitle = 'Nenhuma câmera detectada';
+          errorInstructions = `<p class="mt-2">${message}</p>`;
+        }
+
+        scannerInstructions.innerHTML = `
+          <strong class="text-red-600 dark:text-red-500">${errorTitle}</strong>
+          ${errorInstructions}
+        `;
+        scannerInstructions.style.display = 'block';
+      };
+
+      // --- Adiciona os Event Listeners ---
       if (openScannerBtn) {
         openScannerBtn.addEventListener('click', async () => {
-          // Mostra um feedback visual de que algo está acontecendo (opcional, mas bom para UX)
           openScannerBtn.disabled = true;
           openScannerBtn.textContent = 'Aguardando permissão...';
 
           try {
-            // 1. Pede a permissão para listar as câmeras.
-            // Esta linha é o que aciona o prompt do navegador.
             const cameras = await Html5Qrcode.getCameras();
-
-            // 2. Se o usuário permitir e houver câmeras, continue.
             if (cameras && cameras.length) {
-              console.log("Permissão da câmera concedida.");
-              // Agora que temos a permissão, chame a função para mostrar o modal e iniciar o scanner.
               showScanner();
             } else {
-              // Caso raro onde a permissão é dada, mas nenhuma câmera é encontrada.
-              alert("Nenhuma câmera foi encontrada neste dispositivo.");
+              // ALTERADO: Chama o handler com o tipo correto
+              handleScannerError("Nenhuma câmera foi encontrada neste dispositivo.", 'no_camera');
             }
-
           } catch (error) {
-            // 3. Se o usuário negar a permissão, o 'await' falha e o código entra no 'catch'.
             console.error("Erro ao obter permissão da câmera:", error);
-            alert("Você precisa permitir o acesso à câmera para ler um QR Code.");
-
+            // ALTERADO: Chama o handler com o tipo correto
+            handleScannerError("Você negou a permissão de acesso à câmera.", 'permission_denied');
           } finally {
-            // Restaura o estado do botão, seja com sucesso ou erro.
             openScannerBtn.disabled = false;
             openScannerBtn.textContent = 'Ler QR Code';
           }
