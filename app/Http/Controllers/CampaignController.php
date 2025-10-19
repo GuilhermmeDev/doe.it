@@ -39,7 +39,7 @@ class CampaignController extends Controller
 
         $address->Street = $validRequest['Street'];
 
-        $dateTime = $validRequest['Data'] . ' ' . $validRequest['Hour']; // concatenando data e hora
+        $dateTime = $validRequest['Data'].' '.$validRequest['Hour']; // concatenando data e hora
         $dateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i', $dateTime); // formatando com a biblioteca Carbon
 
         $address->Collection_date = $dateTime;
@@ -64,7 +64,7 @@ class CampaignController extends Controller
 
         $extension = $requestImage->extension();
 
-        $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+        $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
         $imagePath = $requestImage->storeAs('campaigns', $imageName, 'public');
 
@@ -140,7 +140,7 @@ class CampaignController extends Controller
 
             $extension = $requestImage->extension();
 
-            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now')) . '.' . $extension;
+            $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
             $requestImage->move(public_path('img/campaigns'), $imageName);
 
@@ -180,7 +180,7 @@ class CampaignController extends Controller
         $campaign_id = $data['campaign_id'];
         $user = User::where('email', $email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json([
                 'message' => 'Nenhum usuário encontrado com este e-mail.',
             ], 404);
