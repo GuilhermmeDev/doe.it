@@ -216,11 +216,22 @@
             </template>
           </div>
         </div>
+        
         <div class="mt-8 py-6 border-t items-center justify-between w-full sm:flex w-full">
-          <div class="mt-6 sm:mt-0 w-full">
+          <div class="mt-6 sm:mt-0 w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center text-sm text-gray-500 dark:text-gray-400">
+            
+            <p class="order-2 sm:order-1 mt-4 sm:mt-0 text-center sm:text-left">
+                &copy; {{ date('Y') }} DoeIt. Todos os direitos reservados.
+            </p>
+
+            <p class="order-1 sm:order-2 text-center sm:text-right">
+                Ao utilizar nossa plataforma, você concorda com nossos 
+                <a href="{{ route('politica.pdf') }}" target="_blank" class="hover:underline text-indigo-500 dark:text-indigo-400">Termos de Uso e Política de Privacidade</a>.
+            </p>
           </div>
         </div>
-      </footer>
+        </footer>
+    </div>
   </main>
 </body>
 
