@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CampaignRequest;
+use App\Http\Requests\InviteValidatorRequest;
 use App\Mail\CampaignInviteMail;
 use App\Models\Address;
 use App\Models\Campaign;
 use App\Models\CampaignValidatorUser;
 use App\Models\Donation;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
@@ -104,7 +106,6 @@ class CampaignController extends Controller
         if ($campaign && $address) {
             return view('campaigns.show', compact('campaign', 'progress', 'address', 'donation', 'donation_count', 'validators'));
         }
-
     }
 
     public function delete($id)
@@ -151,40 +152,88 @@ class CampaignController extends Controller
         return redirect()->route('home')->with('Success', 'Campanha editada com sucesso!');
     }
 
-    public function invite(Request $request)
+    private function resendInvite(CampaignValidatorUser $validator)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'campaign_id' => 'required',
-        ]);
+        $campaign = $validator->campaign;
+        $user = $validator->user;
+        $inviter = $validator->invitedBy;
+        $inviterName = $inviter ? $inviter->name : auth()->user()->name;
 
-        $email = $request->email;
-        $campaign_id = $request->campaign_id;
+        Mail::to($user->email)->send(new CampaignInviteMail(
+            $campaign,
+            $user,
+            $inviterName,
+            $validator->token
+        ));
+
+        $validator->touch(); // Atualiza o timestamp 'updated_at'
+
+        return response()->json([
+            'message' => 'Convite reenviado com sucesso!',
+        ], 200);
+    }
+
+    public function invite(InviteValidatorRequest $request)
+    {
+        $data = $request->validated();
+        $email = $data['email'];
+        $campaign_id = $data['campaign_id'];
         $user = User::where('email', $email)->first();
 
         if (! $user) {
             return response()->json([
-                'message' => 'Usuário não encontrado. Certifique-se de que o e-mail está correto.',
+                'message' => 'Nenhum usuário encontrado com este e-mail.',
             ], 404);
-        } elseif ($user->id === auth()->user()->id) {
+        }
+
+        if ($user->id === auth()->user()->id) {
             return response()->json([
                 'message' => 'Você não pode convidar a si mesmo.',
             ], 400);
-        } elseif (CampaignValidatorUser::where([['user_id', $user->id], ['campaign_id', $campaign_id]])->exists()) {
-            return response()->json([
-                'message' => 'Usuário já é um validador.',
-            ], 400);
+        }
+
+        $existingValidator = CampaignValidatorUser::where('user_id', $user->id)
+            ->where('campaign_id', $campaign_id)
+            ->first();
+
+        if ($existingValidator) {
+            if ($existingValidator->status === 'accepted') {
+                return response()->json([
+                    'message' => 'Usuário já é um validador.',
+                ], 400);
+            }
+
+            if ($existingValidator->status === 'pending') {
+                $canResendAt = $existingValidator->updated_at->addMinutes(2);
+
+                if (Carbon::now()->lt($canResendAt)) {
+                    return response()->json([
+                        'message' => 'Um convite pendente já foi enviado recentemente. Aguarde antes de reenviar.',
+                    ], 429);
+                }
+
+                return $this->resendInvite($existingValidator);
+            }
         }
 
         $validator_user = new CampaignValidatorUser;
-        $validator_user->campaign_id = $request->campaign_id;
+        $validator_user->campaign_id = $campaign_id;
         $validator_user->invited_by = auth()->user()->id;
         $validator_user->user_id = $user->id;
         $validator_user->invite_email = $email;
         $validator_user->status = 'pending';
         $validator_user->save();
 
-        Mail::to($email)->send(new CampaignInviteMail(Campaign::where('id', $request->campaign_id)->first(), $user, auth()->user()->name, $validator_user->token));
+        $campaign = Campaign::find($campaign_id);
+
+        Mail::to($email)->send(
+            new CampaignInviteMail(
+                $campaign,
+                $user,
+                auth()->user()->name,
+                $validator_user->token
+            )
+        );
 
         return response()->json([
             'message' => 'Convite enviado com sucesso!',
@@ -197,7 +246,6 @@ class CampaignController extends Controller
 
         if (auth()->user()->id !== $validator_user->user_id) {
             return redirect('/home')->with('error', 'Você não tem permissão para aceitar este convite.');
-
         } elseif (! $validator_user) {
             return redirect('/home')->with('error', 'Convite inválido ou já aceito.');
         }
