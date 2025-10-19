@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             fetch(actionUrl, {
                 method: "POST",
                 headers: {
-                    // Só adiciona o header se o meta existir
                     ...(document.querySelector('meta[name="csrf-token"]')
                         ? {
                               "X-CSRF-TOKEN": document.querySelector(
@@ -34,18 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
                               ).content,
                           }
                         : {}),
+                    "Accept": "application/json",
                 },
                 body: formData,
             })
-                .then((response) => response.json())
-                .then((data) => {
-                    alert(data.message);
-                    closeModal();
+                .then((response) => {
+                    const isSuccess = response.ok;
+
+                    return response.json().then((data) => ({
+                        ok: isSuccess,
+                        data: data,
+                    }));
+                })
+                .then((result) => {
+                    alert(result.data.message);
+
+                    if (result.ok) {
+                        closeModal();
+                    }
                 })
                 .catch((error) => {
+                    
                     console.error("Erro:", error);
                     alert(
-                        "Ocorreu um erro ao enviar o convite. Tente novamente."
+                        "Ocorreu um erro de comunicação. A resposta não pôde ser processada."
                     );
                 });
         });
