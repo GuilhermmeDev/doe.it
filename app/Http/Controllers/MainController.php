@@ -24,7 +24,7 @@ class MainController extends Controller
         $query = Campaign::orderBy('created_at', 'desc');
 
         if ($search) {
-            $query->where('Title', 'like', '%' . $search . '%');
+            $query->where('Title', 'like', '%'.$search.'%');
         }
 
         $campaigns = $query->get();
@@ -35,11 +35,11 @@ class MainController extends Controller
     public function terms()
     {
         $filename = 'termos_de_uso_e_privacidade.pdf';
-        $path = 'terms/' . $filename;
+        $path = 'terms/'.$filename;
 
         $disk = Storage::disk('public');
 
-        if (!$disk->exists($path)) {
+        if (! $disk->exists($path)) {
             abort(404, 'O arquivo não existe ou não foi encontrado.');
         }
 
@@ -49,8 +49,8 @@ class MainController extends Controller
 
         return new Response($fileContents, 200, [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $filename . '"',
-            'Cache-Control' => 'no-cache, must-revalidate'
+            'Content-Disposition' => 'inline; filename="'.$filename.'"',
+            'Cache-Control' => 'no-cache, must-revalidate',
         ]);
     }
 }
