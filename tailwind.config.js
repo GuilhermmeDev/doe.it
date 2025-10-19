@@ -5,10 +5,9 @@ import forms from "@tailwindcss/forms";
 export default {
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-        "./storage/framework/views/*.php", // O Laravel usa isso para o JIT em desenvolvimento, pode manter
+        "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
-        "./resources/js/**/*.js", // Para Vue/React/Alpine ou JS puro
-        "./node_modules/flowbite/**/*.js", // Adicionar para Flowbite'
+        "./resources/js/**/*.js",
     ],
 
     theme: {
@@ -19,6 +18,6 @@ export default {
         },
     },
 
-    darkMode: "class", // Usar 'class' para dark mode
+    darkMode: "class",
 
 };

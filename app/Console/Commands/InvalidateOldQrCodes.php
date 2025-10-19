@@ -6,7 +6,7 @@ use App\Models\Donation;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class InvalidateDonations extends Command
+class InvalidateOldQrCodes extends Command
 {
     protected $signature = 'donations:invalidate';
 

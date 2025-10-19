@@ -8,18 +8,15 @@
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
   <title>DoeIt - Cadastro de CPF</title>
   <style>
-    /* Estilo para garantir que o conteúdo da main preencha o espaço abaixo do navbar */
     .content-area {
-        height: calc(100vh - 64px); /* Supondo que seu navbar tenha 64px (h-16) de altura */
-        /* Ajuste 64px se o seu secondary_navbar tiver uma altura diferente */
+        height: calc(100vh - 64px);
     }
   </style>
 </head>
-<body class="h-full bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100 flex flex-col"> {{-- Adicionado flex flex-col aqui --}}
+<body class="h-full bg-white dark:bg-neutral-900 text-gray-600 dark:text-gray-100 flex flex-col">
     @include('layouts.secondary_navbar')
 
-{{-- Alterado main para ser um flex container que ocupa a altura restante --}}
-<main class="w-full flex-grow flex flex-col items-center justify-center p-4 content-area"> {{-- Adicionado content-area --}}
+<main class="w-full flex-grow flex flex-col items-center justify-center p-4 content-area">
   <div class="w-full max-w-md space-y-8 px-4 bg-white dark:bg-neutral-800 text-gray-600 dark:text-gray-100 sm:px-0 py-8 rounded-lg shadow-lg">
 
       <div class="flex justify-center mb-2">
@@ -60,8 +57,9 @@
           Salvar CPF
         </button>
 
-        <p class="text-sm text-[#575761] dark:text-gray-400 mt-4 text-center">
-          Para continuar é necessário seu CPF.
+        <p class="text-xs text-gray-600 dark:text-gray-400 mt-4 text-center px-4 leading-relaxed">
+          Ao inserir seu CPF, você concorda com nossos 
+          <a href="{{ route('politica.pdf') }}" target="_blank" class="font-medium text-[#2AB036] hover:text-[#FF5800] underline">termos de uso e política de privacidade</a>.
         </p>
       </div>
     </form>
