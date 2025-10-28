@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('Status')->default('pending');
             $table->timestamps();
 
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

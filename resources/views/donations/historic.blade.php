@@ -26,8 +26,11 @@
                     <article>
                         <a href="{{ $campaign ? url('/campaign/' . $campaign->id) : '#' }}" class="block rounded-xl p-5 bg-[#f0f0f0] dark:bg-neutral-800 shadow hover:bg-[#e0e0e0] dark:hover:bg-neutral-700 transition cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between">
                             <div class="flex-1">
-                                <div class="text-lg font-semibold text-[#5FCB69] dark:text-[#5FCB69] mb-1">
-                                    {{ $campaign->Title ?? 'Campanha removida' }}
+                                <div class="mb-1 flex flex-row gap-4 items-center ">
+                                    <p class="text-2xl font-semibold text-[#5FCB69] dark:text-[#5FCB69]">{{ $campaign->Title ?? 'Campanha removida' }}</p>
+                                    @if($campaign->deleted_at)
+                                        <span class="bg-orange-200 text-orange-800 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full dark:bg-orange-900 dark:text-orange-300">Campanha Desativada</span>
+                                    @endif
                                 </div>
                                 <div class="text-sm text-gray-700 dark:text-gray-300 mb-1">
                                     <span class="font-medium">Validador:</span>

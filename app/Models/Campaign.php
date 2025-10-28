@@ -4,11 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Malico\LaravelNanoid\HasNanoids;
 
 class Campaign extends Model
 {
-    use HasFactory, HasNanoids;
+    use HasFactory, HasNanoids, SoftDeletes;
+
+    protected $fillable = [
+        'id',
+        'Title',
+        'Description',
+        'meta',
+        'user_id',
+        'address_id'
+    ];
 
     protected $casts = [
         'meta' => 'array',
