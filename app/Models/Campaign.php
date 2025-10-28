@@ -17,7 +17,7 @@ class Campaign extends Model
         'Description',
         'meta',
         'user_id',
-        'address_id'
+        'address_id',
     ];
 
     protected $casts = [
