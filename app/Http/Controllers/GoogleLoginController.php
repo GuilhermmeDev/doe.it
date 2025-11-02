@@ -28,6 +28,7 @@ class GoogleLoginController extends Controller
             $newUser->email = $user->email;
             $newUser->google_id = $user->id;
             $newUser->password = bcrypt(request(Str::random()));
+            $newUser->markEmailAsVerified();
             $newUser->save();
 
             // logar com novo usuario
