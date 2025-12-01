@@ -138,7 +138,7 @@
                     <li><strong class="font-semibold">Estado:</strong> {{$address->State}}</li>
                     <li><strong class="font-semibold">Rua:</strong> {{$address->Street}}</li>
                     <li><strong class="font-semibold">Cidade:</strong> {{$address->City}}</li>
-                    <li><strong class="font-semibold">Número:</strong> {{$address->Number}}</li>
+                    <li><strong class="font-semibold">Número:</strong> @if ($address->Number == 0) S/N @else {{ $address->Number }} @endif</li>
                     <li><strong class="font-semibold">Dia e hora da coleta:</strong> {{\Carbon\Carbon::parse($address->Collection_date)->format('d/m/Y \à\s H:i')}}</li>
                   </ul>
                 </div>
