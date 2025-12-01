@@ -28,7 +28,7 @@ class CampaignRequest extends FormRequest
             'State' => 'required|string',
             'City' => 'required|string',
             'Street' => 'required|string',
-            'Number' => 'required|integer|min:1',
+            'Number' => 'required|integer|min:0',
             'Data' => 'required|date|after:now', // Data deve ser futura
             'Hour' => 'required|date_format:H:i',
             'meta' => 'required|integer|min:1|max:500',

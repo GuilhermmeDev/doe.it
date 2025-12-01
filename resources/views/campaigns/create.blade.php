@@ -111,7 +111,19 @@
           </div>
           <div>
             <label for="Number" class="block font-medium mb-1 text-lg text-gray-600 dark:text-gray-300">Número:</label>
-            <input type="text" name="Number" id="Number" maxlength="12" x-model="formData.Number" @blur="validateField('Number')" :class="{ 'invalid': errors.Number }" placeholder="Ex: 123 ou S/N" class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100" required>
+            <input
+              type="text"
+              name="Number"
+              id="Number"
+              maxlength="12"
+              x-model="formData.Number"
+              @input="onNumberInput"
+              @blur="validateField('Number')"
+              :class="{ 'invalid': errors.Number }"
+              placeholder="Ex: 123 ou S/N"
+              class="w-full rounded-md border border-gray-300 dark:border-neutral-600 p-2 text-sm focus:ring-green-500 focus:border-green-500 bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-100"
+              required
+            />
             <p x-show="errors.Number" x-text="errors.Number" class="validation-error-alpine"></p>
           </div>
           <div>
@@ -155,7 +167,7 @@
             Próximo
           </button>
 
-          <button type="submit" x-show="currentStep === 3" :disabled="!isStepValid()"
+          <button type="submit" x-show="currentStep === 3" :disabled="!isFormValid()"
             class="bg-[#ff5800] text-white px-4 py-2 rounded-md font-medium hover:bg-[#d94c00] focus:outline-none focus:ring-2 focus:ring-[#ff5800] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed ml-auto">
             Criar Campanha
           </button>
@@ -184,24 +196,21 @@
       },
       errors: {},
 
-      // MODIFICAÇÃO: Adicione a função init() aqui
       init() {
-        // Observa mudanças no campo 'State'
         this.$watch('formData.State', (newState) => {
           if (newState === 'Ceará' && this.formData.City !== 'Pereiro') {
             this.formData.City = 'Pereiro';
-            this.validateField('City'); // Valida o campo Cidade após a mudança
+            this.validateField('City');
           } else if (newState === 'Rio Grande do Norte' && this.formData.City !== 'São Miguel') {
             this.formData.City = 'São Miguel';
             this.validateField('City');
           }
         });
 
-        // Observa mudanças no campo 'City'
         this.$watch('formData.City', (newCity) => {
           if (newCity === 'Pereiro' && this.formData.State !== 'Ceará') {
             this.formData.State = 'Ceará';
-            this.validateField('State'); // Valida o campo Estado após a mudança
+            this.validateField('State'); 
           } else if (newCity === 'São Miguel' && this.formData.State !== 'Rio Grande do Norte') {
             this.formData.State = 'Rio Grande do Norte';
             this.validateField('State');
@@ -209,7 +218,6 @@
         });
       },
 
-      // Lida com a mudança do arquivo de imagem
       handleFileChange(event) {
         if (event.target.files.length > 0) {
           this.formData.Image = event.target.files[0];
@@ -220,13 +228,28 @@
         }
       },
 
-      // Valida um campo específico
+      onNumberInput() {
+        if (!this.formData.Number) return;
+        let v = String(this.formData.Number).trim();
+        const snLike = v.replace(/\s+/g, '').toUpperCase();
+        if (/^S\/?N$/.test(snLike)) {
+          this.formData.Number = 'S/N';
+          return;
+        }
+
+          const cleaned = v.replace(/[^0-9sSnN\/\s]/g, '');
+          this.formData.Number = cleaned.replace(/^\s+/, '');
+      },
+
+
+      isSNDisplay(val) {
+        return /^\s*S\/?N\s*$/i.test(String(val || ''));
+      },
+
       validateField(field) {
-        // ... (resto da função de validação continua igual)
-        this.errors[field] = ''; // Limpa erro anterior
+        this.errors[field] = ''; 
         const value = this.formData[field];
 
-        // Replicando as regras do Laravel Request
         switch (field) {
           case 'Title':
             if (!value) this.errors[field] = 'O título é obrigatório.';
@@ -254,13 +277,22 @@
             if (!value) this.errors[field] = 'Este campo é obrigatório.';
             break;
           case 'Number':
-            if (!value) this.errors[field] = 'O número é obrigatório.';
-            // Verifica se não é um número inteiro positivo
-            else if (!/^\d+$/.test(value) || parseInt(value) < 1) this.errors[field] = 'O número deve ser um inteiro positivo.';
-            else if (value.length > 12)
-            {
-               this.errors[field] = 'O número deve ter até 12 digitos.';
-               value.slice(0,12);
+            if (!value) {
+              this.errors[field] = 'O número é obrigatório.';
+            } else {
+              const trimmed = String(value).trim();
+              if (/^\s*S\/?N\s*$/i.test(trimmed)) {
+                this.errors[field] = '';
+                break;
+              }
+
+              if (!/^\d+$/.test(trimmed) || parseInt(trimmed, 10) < 0) {
+                this.errors[field] = 'O número deve ser um inteiro positivo ou o termo exato "S/N".';
+              } else if (trimmed.length > 12) {
+                this.errors[field] = 'O número deve ter até 12 dígitos.';
+              } else {
+                this.errors[field] = '';
+              }
             }
             break;
           case 'Data':
@@ -268,8 +300,8 @@
               this.errors[field] = 'A data é obrigatória.';
             } else {
               const today = new Date();
-              const selectedDate = new Date(value + 'T00:00:00'); // Adiciona tempo para evitar problemas de fuso horário
-              today.setHours(0, 0, 0, 0); // Zera a hora do dia atual para comparar apenas a data
+              const selectedDate = new Date(value + 'T00:00:00');
+              today.setHours(0, 0, 0, 0); 
               if (selectedDate <= today) this.errors[field] = 'A data deve ser futura.';
             }
             break;
@@ -284,38 +316,46 @@
         }
       },
 
-      // Verifica se a etapa atual é válida
-      isStepValid() {
-        // ... (resto da função continua igual)
+      isStepValid(step = this.currentStep) {
         let fieldsToValidate = [];
-        if (this.currentStep === 1) fieldsToValidate = ['Title', 'Description', 'Image'];
-        if (this.currentStep === 2) fieldsToValidate = ['State', 'City', 'Street', 'Number', 'Data', 'Hour'];
-        if (this.currentStep === 3) fieldsToValidate = ['Type', 'meta'];
+        // respect the `step` argument so callers can check any step explicitly
+        if (step === 1) fieldsToValidate = ['Title', 'Description', 'Image'];
+        if (step === 2) fieldsToValidate = ['State', 'City', 'Street', 'Number', 'Data', 'Hour'];
+        if (step === 3) fieldsToValidate = ['Type', 'meta'];
 
         fieldsToValidate.forEach(field => this.validateField(field));
 
         return fieldsToValidate.every(field => !this.errors[field]);
       },
 
-      // Navega para a próxima etapa
+      isFormValid() {
+        const allFields = ['Title', 'Description', 'Image', 'State', 'City', 'Street', 'Number', 'Data', 'Hour', 'Type', 'meta'];
+        allFields.forEach(field => this.validateField(field));
+        return allFields.every(field => !this.errors[field]);
+      },
+
       nextStep() {
-        // ... (resto da função continua igual)
-        if (this.isStepValid()) {
+        // only advance if the CURRENT step is valid
+        if (this.isStepValid(this.currentStep)) {
           this.currentStep++;
         }
       },
 
-      // Volta para a etapa anterior
       prevStep() {
-        // ... (resto da função continua igual)
         this.currentStep--;
       },
 
-      // Submete o formulário
       submitForm() {
-        // ... (resto da função continua igual)
         if (this.isStepValid()) {
-            document.getElementById('multiStepForm').submit();
+          const numField = document.getElementById('Number');
+          const val = String(this.formData.Number || '').trim();
+          if (/^\s*S\/?N\s*$/i.test(val)) {
+            if (numField) numField.value = '0';
+          } else if (/^\d+$/.test(val)) {
+            if (numField) numField.value = String(parseInt(val, 10));
+          }
+
+          document.getElementById('multiStepForm').submit();
         }
       }
     }
