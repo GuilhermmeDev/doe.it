@@ -56,7 +56,7 @@
                         <p style="color: red; font-size: 0.8rem; margin-top: 0.2rem;">{{ $message }}</p>
                     @enderror
                 </div>
-              
+
                 <div class="mt-4">
                     <label for="Image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagem da Campanha <span class="text-xs text-gray-500 dark:text-gray-400">(Opcional: envie apenas se quiser alterar a atual)</span></label>
                     <div class="mt-1">
@@ -77,10 +77,10 @@
                     <div class="mt-4">
                         <p class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Imagem Atual:</p>
                         {{-- Ajuste no caminho da imagem: use asset() para storage se for o caso, ou img/campaigns --}}
-                        <img src="{{asset('img/campaigns/' . $campaign->Image)}}" class="rounded-md w-full object-cover" alt="Imagem atual da campanha: {{ $campaign->Title }}" style="max-height: 200px;">
+                        <img src="{{asset('storage/' . $campaign->Image)}}" class="rounded-md w-full object-cover" alt="Imagem atual da campanha: {{ $campaign->Title }}" style="max-height: 200px;">
                     </div>
                 @endif
-                
+
                 <div class="pt-6"> {{-- Aumentado padding top para espaçamento --}}
                     <button
                     type="submit"

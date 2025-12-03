@@ -17,7 +17,7 @@ class ConfirmDonation implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $donation;
+    protected $donation;
 
     public function __construct(Donation $donation)
     {
@@ -32,5 +32,14 @@ class ConfirmDonation implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
         return new PrivateChannel('donation.'.$this->donation->id);
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'id' => $this->donation->id,
+            'status' => $this->donation->Status,
+            'confirmed_at' => $this->donation->Confirmed_at->toIso8601String(),
+        ];
     }
 }

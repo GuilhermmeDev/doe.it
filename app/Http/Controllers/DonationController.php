@@ -112,7 +112,7 @@ class DonationController extends Controller
         $campaign->meta = $meta;
 
         $campaign->save();
-        ConfirmDonation::dispatch($donation);
+        event(new ConfirmDonation($donation));
 
         return redirect()->route('campaign.show', $campaign->id)->with('Success', 'Doação confirmada com sucesso.');
     }

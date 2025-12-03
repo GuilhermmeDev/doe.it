@@ -142,9 +142,9 @@ class CampaignController extends Controller
 
             $imageName = md5($requestImage->getClientOriginalName().strtotime('now')).'.'.$extension;
 
-            $requestImage->move(public_path('img/campaigns'), $imageName);
+            $imagePath = $requestImage->storeAs('campaigns', $imageName, 'public');
 
-            $campaign->Image = $imageName;
+            $campaign->Image = $imagePath;
         }
 
         $campaign->save();
