@@ -93,6 +93,9 @@ class DonationController extends Controller
     public function confirm($id)
     {
         $donation = Donation::findOrFail($id);
+        if ($donation->Status === 'confirmed') {
+            return redirect()->route('campaign.show', $donation->campaign_id);
+        }
 
         $donation->Status = 'confirmed';
 
