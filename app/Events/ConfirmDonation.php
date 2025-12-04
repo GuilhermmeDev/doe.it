@@ -7,7 +7,6 @@ use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
@@ -32,7 +31,7 @@ class ConfirmDonation implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new PrivateChannel('donation.' . $this->donation->id);
+        return new PrivateChannel('donation.'.$this->donation->id);
     }
 
     public function broadcastWith(): array
@@ -40,7 +39,7 @@ class ConfirmDonation implements ShouldBroadcast
         return [
             'id' => $this->donation->id,
             'status' => $this->donation->Status,
-            'confirmed_at' => $this->donation->Confirmed_at->toIso8601String()
+            'confirmed_at' => $this->donation->Confirmed_at->toIso8601String(),
         ];
     }
 }
