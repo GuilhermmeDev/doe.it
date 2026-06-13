@@ -1,6 +1,6 @@
-# doe.it
+# Doeit
 
-**doe.it** é um sistema de doações web que conecta doadores e donatários de forma ágil e segura. O sistema permite a validação de cada doação por meio de QR Codes e utiliza tecnologias modernas para garantir uma experiência fluida e intuitiva.
+**Doeit** é um sistema de doações web que conecta doadores e donatários de forma ágil e segura. O sistema permite a validação de cada doação por meio de QR Codes e utiliza tecnologias modernas para garantir uma experiência fluida e intuitiva.
 
 ## 🚀 Começando
 
@@ -40,13 +40,21 @@ php artisan key:generate
 
 Atualize as configurações do banco de dados no arquivo `.env`.
 
-3. Inicie o servidor de desenvolvimento:
+3. Realize as migrações
 
 ```
-php artisan serve
+php artisan migrate
+```
+4. Inicie o servidor de desenvolvimento:
+
+```
+php artisan serve &
+php artisan reverb:start &
+php artisan queue:work &
+php artisan schedule:work
 ```
 
-4. (Opcional) Utilize o Docker com o Laravel Sail:
+5. (Opcional) Utilize o Docker com o Laravel Sail:
 
 ```
 ./vendor/bin/sail up -d
@@ -72,6 +80,7 @@ Para implantar o projeto em um ambiente de produção:
 ## ✒️ Autores
 
 -   **Guilherme Morais** - Back-End - @GuilhermmeDev
+-   **Gustavo Chaves** - Back-End - @Gustavo7327
 -   Equipe de designers e front-end:
     -   Willian Alves - Front-End - (@willzky23)
     -   Francisco Kauan - Designer - (@kauansiii)
@@ -83,9 +92,3 @@ Para implantar o projeto em um ambiente de produção:
 ## 📄 Licença
 
 Este projeto está sob a licença Creative Commons (CC BY-NC-SA 4.0) - veja o arquivo [LICENSE.md](https://github.com/GuilhermmeDev/doe.it/blob/main/LICENSE) para detalhes.
-
-## 🎁 Expressões de gratidão
-
-Compartilhe o projeto com seus amigos 📢
-Contribua com melhorias no repositório 🤝
-Um agradecimento especial à comunidade Laravel ❤️
