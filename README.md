@@ -76,3 +76,19 @@ Para implantar o projeto em um ambiente de produção:
 -   Laravel Reverb - WebSockets para validação em tempo real
 -   Laravel Breeze - Autenticação e UI simples
 -   Laravel Sail - Ambiente de desenvolvimento com Docker
+
+## ✒️ Autores
+
+-   **Guilherme Morais** - Back-End - @GuilhermmeDev
+-   **Gustavo Chaves** - Back-End - @Gustavo7327
+-   Equipe de designers e front-end:
+    -   Willian Alves - Front-End - (@willzky23)
+    -   Francisco Kauan - Designer - (@kauansiii)
+    -   Gustavo Sousa - Front-End - (@gustatxk)
+    -   Kauã Silva - Front-End - (@KauaSilvad)
+    -   André Vasconcellos - Front-End - (@adrznx)
+    -   Nicollas Ryan - Designer
+
+## 📄 Licença
+
+Este projeto está sob a licença Creative Commons (CC BY-NC-SA 4.0) - veja o arquivo [LICENSE.md](https://github.com/GuilhermmeDev/doe.it/blob/main/LICENSE) para detalhes.
